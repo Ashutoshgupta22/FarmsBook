@@ -63,7 +63,7 @@ class EnterNumberFragment : Fragment() {
 
         backBtn.setOnClickListener {
 
-            startActivity(Intent(context,LoginActivity::class.java))
+            startActivity(Intent(context, LoginActivity::class.java))
             finishAffinity(requireActivity())
 
         }

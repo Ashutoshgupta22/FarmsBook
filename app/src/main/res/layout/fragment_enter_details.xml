@@ -24,7 +24,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="Enter your Details"
+        android:text="@string/enter_your_details"
         android:textColor="@color/green"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -37,20 +37,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Name"
+        android:text="@string/name"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" * "
+        android:textColor="#C90707"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Email id"
+        android:text="@string/email_id"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto"
         android:textSize="16sp"
@@ -63,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Password"
+        android:text="@string/city"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto"
         android:textSize="16sp"
@@ -72,17 +83,40 @@
         app:layout_constraintTop_toBottomOf="@+id/editText_Email" />
 
     <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" * "
+        android:textColor="#C90707"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Confirm Password"
+        android:text="@string/state"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:fontFamily="@font/roboto"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editText_Password"
-        app:layout_constraintTop_toBottomOf="@+id/editText_Password" />
+        app:layout_constraintStart_toStartOf="@+id/editText_City"
+        app:layout_constraintTop_toBottomOf="@+id/editText_City" />
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" * "
+        android:textColor="#C90707"
+        android:fontFamily="@font/roboto"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editText_Name"
@@ -92,8 +126,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:fontFamily="@font/roboto"
-        android:hint="Name"
-        android:background="@drawable/edtxt_background_rounded"
+        android:hint="@string/name"
+        android:background="@drawable/edtxt_background_rounded3"
         android:padding="10dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,8 +142,8 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:fontFamily="@font/roboto"
-        android:hint="Email id"
-        android:background="@drawable/edtxt_background_rounded"
+        android:hint="@string/email_id"
+        android:background="@drawable/edtxt_background_rounded3"
         android:padding="10dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,15 +151,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editText_Password"
+        android:id="@+id/editText_City"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Password"
+        android:inputType="textPersonName"
+        android:hint="@string/city"
         android:fontFamily="@font/roboto"
-        android:background="@drawable/edtxt_background_rounded"
+        android:background="@drawable/edtxt_background_rounded3"
         android:padding="10dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,15 +167,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editText_ConfirmPassword"
+        android:id="@+id/editText_State"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Confirm Password"
+        android:inputType="textPersonName"
+        android:hint="@string/state"
         android:fontFamily="@font/roboto"
-        android:background="@drawable/edtxt_background_rounded"
+        android:background="@drawable/edtxt_background_rounded3"
         android:padding="10dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,17 +188,17 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="48dp"
-        android:background="@drawable/button_background_rounded"
+        android:background="@drawable/button_background_rounded_3"
         android:fontFamily="@font/roboto"
         android:gravity="center"
         android:padding="12dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_ConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_State" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

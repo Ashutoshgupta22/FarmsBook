@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/navigation_home2">
+
+    <fragment
+        android:id="@+id/navigation_home2"
+        android:name="com.farmsbook.farmsbook.seller.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_seller_home" />
+
+    <fragment
+        android:id="@+id/navigation_listings"
+        android:name="com.farmsbook.farmsbook.seller.ui.listings.ListingsFragment"
+        android:label="Listings"
+        tools:layout="@layout/fragment_listings" />
+
+    <fragment
+        android:id="@+id/navigation_buyers"
+        android:name="com.farmsbook.farmsbook.seller.ui.buyers.BuyersFragment"
+        android:label="Buyers"
+        tools:layout="@layout/fragment_suppliers" />
+
+    <fragment
+        android:id="@+id/navigation_profile2"
+        android:name="com.farmsbook.farmsbook.seller.ui.profile.SellerProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

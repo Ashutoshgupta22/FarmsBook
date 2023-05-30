@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp">
+
+    <ImageView
+        android:id="@+id/requirementCropImage"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/crop_img" />
+
+    <TextView
+        android:id="@+id/requirementName_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Rice"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/postedOn_tv"
+        app:layout_constraintStart_toEndOf="@+id/requirementCropImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/postedOn_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posted on : 02 may 2023"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/requirement_price_tv"
+        app:layout_constraintStart_toStartOf="@+id/requirementName_tv"
+        app:layout_constraintTop_toBottomOf="@+id/requirementName_tv" />
+
+    <TextView
+        android:id="@+id/requirement_price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price : 100/kg-110/kg  "
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/requirement_status_tv"
+        app:layout_constraintStart_toStartOf="@+id/postedOn_tv"
+        app:layout_constraintTop_toBottomOf="@+id/postedOn_tv" />
+
+    <TextView
+        android:id="@+id/requirement_status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 4 suppliers shown interest"
+        android:padding="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/green2"
+        android:background="@drawable/button_background_rounded_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/requirement_price_tv"
+        app:layout_constraintTop_toBottomOf="@+id/requirement_price_tv" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:tint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/outline_cancel_24" />
+</androidx.constraintlayout.widget.ConstraintLayout>

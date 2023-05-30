@@ -2,4 +2,37 @@
     <string name="app_name">Farmsbook</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_requirements">Requirements</string>
+    <string name="title_orders">Suppliers</string>
+    <string name="title_profile">Profile</string>
+    <string name="change_language">Change Language</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="welcome">Welcome to</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="phone">Phone</string>
+    <string name="disclaimer">By entering your number , you agree to our</string>
+    <string name="terms_and_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="and">and</string>
+    <string name="send_verification_code">Send verification code</string>
+    <string name="waiting_to_automatically_detect_on_sms_sent_to">Waiting to automatically detect on SMS sent to</string>
+    <string name="get_code_through_call">Get Code through Call</string>
+    <string name="resend_the_code_in_25_seconds">Resend the Code (in 25 seconds)</string>
+    <string name="verify">Verify</string>
+    <string name="verify_your_number">Verify your \nNumber</string>
+    <string name="enter_your_details">Enter your Details</string>
+    <string name="name">Name</string>
+    <string name="email_id">Email id</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="confirm">Confirm</string>
+    <string name="farms">Farms</string>
+    <string name="book">Book</string>
+    <string name="farmsbook">FarmsBook</string>
+    <string name="recommended">Farmer\'s Offers</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
 </resources>

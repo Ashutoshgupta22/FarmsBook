@@ -9,24 +9,80 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Farmsbook"
         tools:targetApi="31">
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".buyer.ui.requirements.AddRequirementActivity"
             android:exported="false" />
         <activity
+            android:name=".seller.ui.profile.SellerManageCropsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".seller.ui.home.HomeSearchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".seller.SellerMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+
+        <activity
+            android:name=".seller.ui.profile.SellerPrivacyPolicyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".seller.ui.profile.SellerTnCActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".seller.ui.profile.SellerViewProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".buyer.ui.profile.ManageCropsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+
+        <activity
+            android:name=".buyer.ui.requirements.fragments.requirements_child.ViewRequirementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".buyer.ui.suppliers.ViewSupplierActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".buyer.ui.home.HomeSearchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".buyer.ui.profile.SellerTnCActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".buyer.ui.profile.SellerPrivacyPolicyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".buyer.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Farmsbook.MainActivity">
+
+        </activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook" />
+        <activity
             android:name=".login.SplashActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.Farmsbook">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false">
-
         </activity>
 
         <meta-data

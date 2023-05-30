@@ -1,17 +1,13 @@
 package com.farmsbook.farmsbook.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.finishAffinity
-import com.farmsbook.farmsbook.MainActivity
 import com.farmsbook.farmsbook.R
 import com.google.android.material.textfield.TextInputEditText
 
@@ -27,8 +23,8 @@ class EnterDetailsFragment : Fragment() {
 
         val name  = view.findViewById<TextInputEditText>(R.id.editText_Name)
         val email  = view.findViewById<TextInputEditText>(R.id.editText_Email)
-        val password = view.findViewById<TextInputEditText>(R.id.editText_Password)
-        val confirmPassword  = view.findViewById<TextInputEditText>(R.id.editText_ConfirmPassword)
+        val city = view.findViewById<TextInputEditText>(R.id.editText_City)
+        val state  = view.findViewById<TextInputEditText>(R.id.editText_State)
 
 
 
@@ -43,17 +39,23 @@ class EnterDetailsFragment : Fragment() {
                 name.error = "Enter a valid Email id"
                 name.requestFocus()
             }
-            else if(TextUtils.isEmpty(password.text)){
+            else if(TextUtils.isEmpty(city.text)){
                 name.error = "Enter a valid Password"
                 name.requestFocus()
             }
-            else if(confirmPassword.text!!.equals(password.text)){
+            else if(TextUtils.isEmpty(state.text)){
                 name.error = "Passwords don't match"
                 name.requestFocus()
             }
             else{
-                startActivity(Intent(context,MainActivity::class.java))
-                finishAffinity(requireActivity())
+                val fragmentManager = activity?.supportFragmentManager
+                val fragmentTransaction = fragmentManager?.beginTransaction()
+                fragmentTransaction?.replace(R.id.fragmentContainerView,
+                    ChooseRoleFragment()
+                )
+                fragmentTransaction?.commit()
+//                startActivity(Intent(context, MainActivity::class.java))
+//                finishAffinity(requireActivity())
             }
 
         }
@@ -62,7 +64,7 @@ class EnterDetailsFragment : Fragment() {
 
             val fragmentManager = activity?.supportFragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragmentContainerView,EnterNumberFragment())
+            fragmentTransaction?.replace(R.id.fragmentContainerView, EnterNumberFragment())
             fragmentTransaction?.commit()
 
         }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Farmsbook</string>
+    <!--Login Screen-->
+    <string name="sign_up">साइन अप करें</string>
+    <string name="sign_in">साइन इन करें</string>
+    <string name="welcome">आपका स्वागत है</string>
+    <string name="farms">फ़ार्म्स</string>
+    <string name="book">बुक</string>
+    <string name="change_language">भाषा बदलें</string>
+
+    <!--    Enter Number Fragment-->
+    <string name="enter_your_phone_number">अपना फ़ोन नंबर दर्ज करें</string>
+    <string name="disclaimer">अपना नंबर दर्ज करके, आप सहमत हैं हमारे</string>
+    <string name="and">और</string>
+    <string name="send_verification_code">सत्यापन कोड भेजें</string>
+    <string name="phone">फ़ोन</string>
+    <string name="terms_and_conditions"><![CDATA[नियम और शर्तें]]></string>
+    <string name="privacy_policy">प्राइवेसी पालिसी</string>
+
+    <!--    Enter Otp Fragment-->
+    <string name="waiting_to_automatically_detect_on_sms_sent_to">भेजे गए एसएमएस पर स्वतः पता लगने की प्रतीक्षा की जा रही है</string>
+    <string name="get_code_through_call">कॉल द्वारा कोड प्राप्त करें</string>
+    <string name="resend_the_code_in_25_seconds">कोड फिर से भेजें (25 सेकंड में)</string>
+    <string name="verify">सत्यापित करें</string>
+    <string name="verify_your_number">अपना नंबर \nसत्यापित करें</string>
+
+    <!--    Enter Details Screen-->
+    <string name="enter_your_details">अपना विवरण दर्ज करें</string>
+    <string name="name">नाम</string>
+    <string name="email_id">ईमेल आईडी</string>
+    <string name="city">शहर</string>
+    <string name="state">राज्य</string>
+    <string name="confirm">पुष्टि करें</string>
+
+    <string name="hello_blank_fragment">hello blank</string>
+
+    <string name="title_activity_main">MainActivity</string>
+
+    <!--    Home Screen-->
+    <string name="title_home">होम</string>
+    <string name="farmsbook">फ़ार्म्सबुक</string>
+    <string name="recommended">अनुशंसित</string>
+    <string name="sort">सॉर्ट</string>
+    <string name="filter">फ़िल्टर</string>
+
+
+    <!--    Requirements Screen-->
+    <string name="title_requirements">आवश्यकताएं</string>
+
+    <!--    Orders Screen-->
+    <string name="title_orders">ऑर्डर</string>
+
+    <!--    Profile Screen-->
+    <string name="title_profile">प्रोफ़ाइल</string>
+
+
+
+</resources>

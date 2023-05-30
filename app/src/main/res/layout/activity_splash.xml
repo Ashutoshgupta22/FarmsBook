@@ -17,6 +17,7 @@
         app:srcCompat="@drawable/farmsbooklogo" />
 
     <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -29,19 +30,20 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
+            android:text="Farms"
             android:textColor="@color/green"
-            android:textStyle="bold"
-            android:text="Farms" />
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
+            android:text="Book"
             android:textColor="@color/yellow"
-            android:textStyle="bold"
-            android:text="Book" />
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

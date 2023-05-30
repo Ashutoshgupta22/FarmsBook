@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.requirements.RequirementsFragment">
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="@color/yellow2"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_vertical"
+        android:paddingStart="32dp"
+        android:text="My Profile"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="7dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:scaleType="fitXY"
+                        android:src="@color/green2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                    <TextView
+                        android:id="@+id/name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Aayush Tayagi "
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+                    <TextView
+                        android:id="@+id/phone_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:drawableStart="@drawable/baseline_phone_24"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="1234567890"
+                        android:textColor="@color/gray"
+                        android:textSize="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+
+                    <TextView
+                        android:id="@+id/address_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:drawableStart="@drawable/location_on"
+                        android:drawablePadding="5dp"
+                        android:drawableTint="@color/gray"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Lajpat Nagar, Delhi"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/phone_tv" />
+
+                    <TextView
+                        android:id="@+id/role_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:drawableStart="@drawable/baseline_person_24"
+                        android:drawablePadding="3dp"
+                        android:drawableTint="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="Trader"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        app:layout_constraintEnd_toStartOf="@+id/company_tv"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/address_tv" />
+
+                    <TextView
+                        android:id="@+id/company_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_add_business_24"
+                        android:drawablePadding="4dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="Xyz Company"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/role_tv"
+                        app:layout_constraintTop_toTopOf="@+id/role_tv" />
+
+                    <TextView
+                        android:id="@+id/viewSupplierBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/button_background_rounded_5"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="View Profile"
+                        android:textColor="#00853C"
+                        android:textSize="16dp"
+                        app:layout_constraintEnd_toStartOf="@+id/editProfileBtn"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/role_tv" />
+
+                    <TextView
+                        android:id="@+id/editProfileBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/button_background_rounded_5"
+                        android:drawableEnd="@drawable/outline_edit_24"
+                        android:drawableTint="#00853C"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="5dp"
+                        android:text="Edit"
+                        android:textColor="#00853C"
+                        android:textSize="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/viewSupplierBtn"
+                        app:layout_constraintTop_toTopOf="@+id/viewSupplierBtn" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/crop_icon"
+                android:drawablePadding="18dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="My Crops"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <TextView
+                android:id="@+id/manageCropBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/outline_edit_24"
+                android:drawablePadding="3dp"
+                android:drawableTint="#00853C"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Manage"
+                android:textColor="#00853C"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="@+id/textView35" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="7dp"
+                app:layout_constraintEnd_toEndOf="@+id/manageCropBtn"
+                app:layout_constraintStart_toStartOf="@+id/textView35"
+                app:layout_constraintTop_toBottomOf="@+id/textView35">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/crop1_IV"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/crop_img"
+                        app:layout_constraintEnd_toStartOf="@+id/crop2_IV"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/crop2_IV"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/crop_img"
+                        app:layout_constraintEnd_toStartOf="@+id/crop3_iV"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/crop1_IV"
+                        app:layout_constraintTop_toTopOf="@+id/crop1_IV"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/crop3_iV"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/crop_img"
+                        app:layout_constraintEnd_toStartOf="@+id/crop4_IV"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/crop2_IV"
+                        app:layout_constraintTop_toTopOf="@+id/crop2_IV"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/crop4_IV"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/crop_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/crop3_iV"
+                        app:layout_constraintTop_toTopOf="@+id/crop3_iV"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+                    <TextView
+                        android:id="@+id/crop1_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Wheat"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/crop1_IV"
+                        app:layout_constraintStart_toStartOf="@+id/crop1_IV"
+                        app:layout_constraintTop_toBottomOf="@+id/crop1_IV" />
+
+                    <TextView
+                        android:id="@+id/crop2_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Soya beans"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/crop2_IV"
+                        app:layout_constraintStart_toStartOf="@+id/crop2_IV"
+                        app:layout_constraintTop_toTopOf="@+id/crop1_name" />
+
+                    <TextView
+                        android:id="@+id/crop3_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Wheat"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/crop3_iV"
+                        app:layout_constraintStart_toStartOf="@+id/crop3_iV"
+                        app:layout_constraintTop_toTopOf="@+id/crop2_name" />
+
+                    <TextView
+                        android:id="@+id/crop4_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Wheat"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/crop4_IV"
+                        app:layout_constraintStart_toStartOf="@+id/crop4_IV"
+                        app:layout_constraintTop_toTopOf="@+id/crop3_name" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/languageBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:drawableStart="@drawable/baseline_g_translate_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="Language"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+            <TextView
+                android:id="@+id/privacyPolicyBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
+
+                android:drawableStart="@drawable/outline_add_moderator_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="Privacy Policy"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/languageBtn"
+                app:layout_constraintStart_toStartOf="@+id/languageBtn"
+                app:layout_constraintTop_toBottomOf="@+id/languageBtn" />
+
+            <TextView
+                android:id="@+id/tncBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:drawableStart="@drawable/outline_gavel_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="Terms &amp; Conditions"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/privacyPolicyBtn"
+                app:layout_constraintStart_toStartOf="@+id/privacyPolicyBtn"
+                app:layout_constraintTop_toBottomOf="@+id/privacyPolicyBtn" />
+
+            <TextView
+                android:id="@+id/shareBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:drawableStart="@drawable/outline_share_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="Share the app"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/tncBtn"
+                app:layout_constraintStart_toStartOf="@+id/tncBtn"
+                app:layout_constraintTop_toBottomOf="@+id/tncBtn" />
+
+            <TextView
+                android:id="@+id/logoutBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:drawableStart="@drawable/baseline_logout_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="12dp"
+                android:paddingHorizontal="24dp"
+                android:text="Logout"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/shareBtn"
+                app:layout_constraintStart_toStartOf="@+id/shareBtn"
+                app:layout_constraintTop_toBottomOf="@+id/shareBtn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
