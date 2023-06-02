@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.farmsbook.farmsbook.databinding.FragmentRequirementsBinding
-import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.OffersFragment
+import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.offers.OffersFragment
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.RequirementsChildFragment
 import com.farmsbook.farmsbook.buyer.utility.VPAdapter
 

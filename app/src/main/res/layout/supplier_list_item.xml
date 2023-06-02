@@ -39,7 +39,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background_rounded_3"
-        android:drawableEnd="@drawable/outline_edit_24"
+        android:drawableEnd="@drawable/baseline_add_24"
         android:drawableTint="@color/white"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center"

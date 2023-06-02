@@ -1,16 +1,14 @@
-package com.farmsbook.farmsbook.seller.ui.home.adapters
+package com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters
 
-import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
 
-class CropAdapter (private val plantList : ArrayList<CropData>, val context: Context):RecyclerView.Adapter<CropAdapter.Myviewholder> () {
+class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, val context: Context):RecyclerView.Adapter<LatestOffersAdapter.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 
@@ -27,7 +25,7 @@ class CropAdapter (private val plantList : ArrayList<CropData>, val context: Con
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Myviewholder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.seller_home_crop_item,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.latest_offers_list_item,parent,false)
 
         return Myviewholder(itemView,mListener)//,mListener
     }
@@ -40,8 +38,8 @@ class CropAdapter (private val plantList : ArrayList<CropData>, val context: Con
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = "Rice"
         holder.plantPrice.text = "Min 2/ton - Max 4/ton"
-        holder.plantLocation.text = "Nalanda, Bihar"
-        holder.plantWeight.text = "64 Ton"
+        holder.plantRateType.text = "Fixed Rate"
+
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
@@ -56,10 +54,9 @@ class CropAdapter (private val plantList : ArrayList<CropData>, val context: Con
 
 
 //        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
-        val plantName: TextView = itemView.findViewById(R.id.cropNameTv)
-        val plantPrice: TextView = itemView.findViewById(R.id.costTv)
-        val plantLocation: TextView = itemView.findViewById(R.id.locationTv)
-        val plantWeight : TextView = itemView.findViewById(R.id.weightTv)
+        val plantName: TextView = itemView.findViewById(R.id.crop_name_tv)
+        val plantPrice: TextView = itemView.findViewById(R.id.price_offered_tv)
+        val plantRateType: TextView = itemView.findViewById(R.id.rate_type_tv)
 
         init {
             itemView.setOnClickListener{

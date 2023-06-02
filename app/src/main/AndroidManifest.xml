@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
+            android:name=".buyer.ui.home.ViewHomeCropActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity"/>
+        <activity
             android:name=".buyer.ui.requirements.AddRequirementActivity"
             android:exported="false" />
         <activity
@@ -25,7 +29,6 @@
             android:name=".seller.SellerMainActivity"
             android:exported="false"
             android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
-
         <activity
             android:name=".seller.ui.profile.SellerPrivacyPolicyActivity"
             android:exported="false"
@@ -42,7 +45,6 @@
             android:name=".buyer.ui.profile.ManageCropsActivity"
             android:exported="false"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
-
         <activity
             android:name=".buyer.ui.requirements.fragments.requirements_child.ViewRequirementActivity"
             android:exported="false"
@@ -67,9 +69,7 @@
             android:name=".buyer.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Farmsbook.MainActivity">
-
-        </activity>
+            android:theme="@style/Theme.Farmsbook.MainActivity"></activity>
         <activity
             android:name=".login.LoginActivity"
             android:exported="false"

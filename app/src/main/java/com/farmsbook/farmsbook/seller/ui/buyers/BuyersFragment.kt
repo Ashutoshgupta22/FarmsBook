@@ -1,5 +1,6 @@
 package com.farmsbook.farmsbook.seller.ui.buyers
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.farmsbook.farmsbook.databinding.FragmentDashboardBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.farmsbook.farmsbook.buyer.ui.suppliers.ViewSupplierActivity
+import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersAdapter
+import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersData
+import com.farmsbook.farmsbook.databinding.FragmentBuyersBinding
 
 class BuyersFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private lateinit var plantList: ArrayList<SuppliersData>
+    private lateinit var tempArrayList :ArrayList<SuppliersData>
+    private var _binding: FragmentBuyersBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,13 +32,31 @@ class BuyersFragment : Fragment() {
         val dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentBuyersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        binding.suppliersRv.layoutManager = LinearLayoutManager(context)
+        plantList = arrayListOf<SuppliersData>()
+        val adapter = context?.let { SuppliersAdapter(plantList, it) }
+        binding.suppliersRv.adapter = adapter
+
+        adapter?.setOnItemClickListener(object : SuppliersAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+
+                //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
+
+                startActivity(Intent(context, ViewSupplierActivity::class.java))
+//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
+//                intent.putExtra("Name",plantList[position].Name)
+//                intent.putExtra("Location",plantList[position].Location)
+//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
+//                intent.putExtra("Availability",plantList[position].Availability)
+//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
+//                intent.putExtra("Quality",plantList[position].Quality)
+//                startActivity(intent)
+            }
+        })
+
         return root
     }
 

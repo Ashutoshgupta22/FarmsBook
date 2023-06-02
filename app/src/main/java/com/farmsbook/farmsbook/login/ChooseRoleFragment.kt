@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.core.app.ActivityCompat.finishAffinity
@@ -24,6 +25,24 @@ class ChooseRoleFragment : Fragment() {
         val confirmBtn = view.findViewById<TextView>(R.id.confirmBtn)
         val radio1 = view.findViewById<RadioButton>(R.id.radio1)
         val radio2 = view.findViewById<RadioButton>(R.id.radio2)
+
+        val linear1 = view.findViewById<LinearLayout>(R.id.linearLayout)
+        val linear2 = view.findViewById<LinearLayout>(R.id.linearLayout2)
+
+        linear1.setOnClickListener {
+            radio1.isChecked = true
+            if (radio2.isChecked) {
+                radio2.isChecked = false
+            }
+        }
+
+        linear2.setOnClickListener {
+            radio2.isChecked = true
+            if (radio1.isChecked) {
+                radio1.isChecked = false
+            }
+        }
+
         confirmBtn.setOnClickListener {
 
             if (radio1.isChecked) {

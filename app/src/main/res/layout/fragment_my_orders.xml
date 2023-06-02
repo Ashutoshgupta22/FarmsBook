@@ -28,7 +28,7 @@
             app:srcCompat="@drawable/crop_img" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/crop_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -40,15 +40,15 @@
             app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/price_offered_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
             android:text="By: Ranjit Kumar"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toTopOf="@+id/textView31"
-            app:layout_constraintStart_toStartOf="@+id/textView19"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintStart_toStartOf="@+id/crop_name_tv"
+            app:layout_constraintTop_toBottomOf="@+id/crop_name_tv" />
 
         <TextView
             android:id="@+id/textView31"
@@ -58,8 +58,8 @@
             android:text="02/05/2023"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toTopOf="@+id/textView32"
-            app:layout_constraintStart_toStartOf="@+id/textView26"
-            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+            app:layout_constraintStart_toStartOf="@+id/price_offered_tv"
+            app:layout_constraintTop_toBottomOf="@+id/price_offered_tv" />
 
         <TextView
             android:id="@+id/textView32"
