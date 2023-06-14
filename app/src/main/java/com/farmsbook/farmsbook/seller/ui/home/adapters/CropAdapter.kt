@@ -35,21 +35,20 @@ class CropAdapter (private val plantList : ArrayList<CropData>, val context: Con
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       // val currentItem =plantList[position]
+       val currentItem =plantList[position]
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
-        holder.plantName.text = "Rice"
-        holder.plantPrice.text = "Min 2/ton - Max 4/ton"
-        holder.plantLocation.text = "Nalanda, Bihar"
-        holder.plantWeight.text = "64 Ton"
-
+        holder.plantName.text = currentItem.crop_name
+        holder.plantPrice.text = "2/ton - 4/ton"
+        holder.plantLocation.text = currentItem.crop_location
+        holder.plantWeight.text = currentItem.quantity.toString()
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
 //        }
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return plantList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener

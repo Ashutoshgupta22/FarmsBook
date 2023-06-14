@@ -75,7 +75,7 @@ class EnterOtpFragment : Fragment() {
                     progressDialog.dismiss()
                     val fragmentManager = activity?.supportFragmentManager
                     val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragmentContainerView, EnterDetailsFragment())
+                    fragmentTransaction?.replace(R.id.fragmentContainerView, ChooseRoleFragment())
                     fragmentTransaction?.commit()
                 },1500)
 

@@ -1,4 +1,4 @@
-package com.farmsbook.farmsbook.buyer.utility
+package com.farmsbook.farmsbook.utility
 
 import android.content.Context
 import android.util.AttributeSet

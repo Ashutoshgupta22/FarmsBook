@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="477dp"
-            app:layout_constraintGuide_percent="0.65" />
+            app:layout_constraintGuide_percent="0.62" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -113,30 +113,13 @@
             android:text="@string/sign_in"
             android:textColor="@color/white"
             android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/signupBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView3"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/signupBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/button_background_rounded_2"
-            android:gravity="center"
-            android:padding="15dp"
-            android:text="@string/sign_up"
-            android:textColor="@color/green"
-            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signinBtn" />
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.7" />
+
 
         <TextView
             android:id="@+id/changeLangBtn"

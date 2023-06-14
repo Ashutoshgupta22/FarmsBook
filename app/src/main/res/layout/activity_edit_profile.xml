@@ -21,6 +21,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
+            android:tint="@color/black"
             android:layout_gravity="center"
             app:srcCompat="@drawable/keyboard_backspace" />
 
@@ -53,7 +54,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="1400dp"
-            android:padding="12dp">
+            android:padding="24dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profileImage"
@@ -67,30 +68,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Role"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileImage" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Farmer Group"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="Trader"
-                app:layout_constraintStart_toEndOf="@+id/radioButton3"
-                app:layout_constraintTop_toTopOf="@+id/radioButton3" />
 
             <TextView
                 android:id="@+id/textView22_1"
@@ -98,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="Name"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioButton3" />
+                app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
             <EditText
                 android:id="@+id/nameEdt"
@@ -107,6 +84,8 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Name"
+                android:padding="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +95,8 @@
                 android:id="@+id/textView22_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone"
+                android:text="Mobile Number"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameEdt" />
 
@@ -126,7 +106,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Phone"
+                android:hint="Mobile Number"
+                android:padding="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="E-mail ID"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phoneEdt" />
 
@@ -147,8 +130,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
+                android:background="@drawable/edtxt_background_rounded3"
                 android:hint="E-mail ID"
-                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView22_3" />
@@ -159,20 +144,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailEdt" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/locationEdt"
-                android:layout_width="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="Location"
-                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22_4" />
+                app:layout_constraintTop_toBottomOf="@+id/textView22_4">
+
+                <!-- Inside text input layout add
+                      an auto complete text view
+                        and make its input type to none-->
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:text="Select Your State"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--            <EditText-->
+            <!--                -->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:ems="10"-->
+            <!--                android:hint="Location"-->
+            <!--                android:inputType="textPersonName"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/textView22_4" />-->
 
 
             <TextView
@@ -180,6 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Business Name"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/locationEdt" />
 
@@ -190,6 +200,8 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Business Name"
+                android:padding="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -201,6 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Business Turnover"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/businessNameEdt" />
 
@@ -211,8 +224,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
+                android:padding="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
                 android:hint="Business Turnover"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView22_6" />
@@ -222,6 +237,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Foundation Date"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/businessTurnoverEdt" />
 
@@ -232,8 +248,11 @@
                 android:layout_marginTop="8dp"
                 android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:ems="10"
+                android:padding="12dp"
                 android:hint="Foundation Date"
-                android:inputType="textPersonName"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:inputType="none"
+                android:editable="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView22_7" />

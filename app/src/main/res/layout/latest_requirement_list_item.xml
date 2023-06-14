@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="5dp"
-    android:layout_marginHorizontal="7dp">
+    android:layout_marginVertical="8dp"
+    android:background="@color/white"
+    android:layout_marginHorizontal="8dp">
 
     <ImageView
         android:id="@+id/requirementCropImage"
@@ -34,10 +35,12 @@
         android:id="@+id/postedOn_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Posted on : 02 may 2023"
         android:fontFamily="@font/roboto_medium"
+        android:text="Posted on : 02 may 2023"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/requirement_price_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/requirementName_tv"
         app:layout_constraintTop_toBottomOf="@+id/requirementName_tv" />
 
@@ -45,10 +48,12 @@
         android:id="@+id/requirement_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price : 100/kg-110/kg  "
         android:fontFamily="@font/roboto_medium"
+        android:text="Price : 100/kg-110/kg"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/requirement_status_tv"
+        app:layout_constraintEnd_toEndOf="@+id/postedOn_tv"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/postedOn_tv"
         app:layout_constraintTop_toBottomOf="@+id/postedOn_tv" />
 
@@ -56,12 +61,14 @@
         android:id="@+id/requirement_status_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" 4 suppliers shown interest"
-        android:padding="8dp"
-        android:textSize="18sp"
-        android:textColor="@color/green2"
         android:background="@drawable/button_background_rounded_5"
+        android:padding="8dp"
+        android:text=" 4 suppliers shown interest"
+        android:textColor="@color/green2"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/requirement_price_tv"
         app:layout_constraintTop_toBottomOf="@+id/requirement_price_tv" />
 

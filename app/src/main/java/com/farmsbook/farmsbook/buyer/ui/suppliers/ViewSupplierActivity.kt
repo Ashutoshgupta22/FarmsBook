@@ -3,6 +3,7 @@ package com.farmsbook.farmsbook.buyer.ui.suppliers
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
 import com.farmsbook.farmsbook.databinding.ActivityViewSupplierBinding
 import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersCropAdapter
@@ -20,6 +21,7 @@ class ViewSupplierActivity : AppCompatActivity() {
         binding = ActivityViewSupplierBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
         binding.backBtn.setOnClickListener {
             finish()

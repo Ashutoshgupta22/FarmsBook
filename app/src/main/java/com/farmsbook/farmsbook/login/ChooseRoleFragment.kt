@@ -1,13 +1,16 @@
 package com.farmsbook.farmsbook.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import com.farmsbook.farmsbook.R
@@ -23,14 +26,18 @@ class ChooseRoleFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_choose_role, container, false)
 
         val confirmBtn = view.findViewById<TextView>(R.id.confirmBtn)
+        val backBtn = view.findViewById<ImageView>(R.id.backBtn)
         val radio1 = view.findViewById<RadioButton>(R.id.radio1)
         val radio2 = view.findViewById<RadioButton>(R.id.radio2)
 
         val linear1 = view.findViewById<LinearLayout>(R.id.linearLayout)
         val linear2 = view.findViewById<LinearLayout>(R.id.linearLayout2)
 
+        var role:Boolean = false
         linear1.setOnClickListener {
             radio1.isChecked = true
+            role = false
+            Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
             if (radio2.isChecked) {
                 radio2.isChecked = false
             }
@@ -38,22 +45,34 @@ class ChooseRoleFragment : Fragment() {
 
         linear2.setOnClickListener {
             radio2.isChecked = true
+            role = true
+            Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
             if (radio1.isChecked) {
                 radio1.isChecked = false
             }
         }
 
+        backBtn.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragmentContainerView, EnterNumberFragment())
+            fragmentTransaction?.commit()
+        }
+
         confirmBtn.setOnClickListener {
 
-            if (radio1.isChecked) {
-                startActivity(Intent(context, MainActivity::class.java))
-                finishAffinity(requireActivity())
-            }
-            if (radio2.isChecked) {
-                startActivity(Intent(context, SellerMainActivity::class.java))
-                finishAffinity(requireActivity())
-            }
+            val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            var editor = sharedPreference?.edit()
+            editor?.putBoolean("USER_ROLE",role)
+            editor?.commit()
+
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragmentContainerView, EnterDetailsFragment())
+            fragmentTransaction?.commit()
+
         }
+
         radio1.setOnClickListener {
 
             if (radio2.isChecked) {

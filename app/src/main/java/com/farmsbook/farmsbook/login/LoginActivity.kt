@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View.GONE
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityLoginBinding
@@ -20,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
 
         binding.changeLangBtn.setOnClickListener {
@@ -31,10 +33,7 @@ class LoginActivity : AppCompatActivity() {
             replaceFragment(EnterNumberFragment())
 
         }
-        binding.signupBtn.setOnClickListener {
-            binding.loginLayout.visibility = GONE
-            replaceFragment(EnterNumberFragment())
-        }
+
 
     }
 

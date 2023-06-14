@@ -1,4 +1,4 @@
-package com.farmsbook.farmsbook.buyer.utility
+package com.farmsbook.farmsbook.utility
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

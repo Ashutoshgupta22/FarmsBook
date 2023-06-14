@@ -35,4 +35,62 @@
     <string name="recommended">Farmer\'s Offers</string>
     <string name="sort">Sort</string>
     <string name="filter">Filter</string>
+
+
+    <string-array name="States">
+        <item>Andhra Pradesh</item>
+        <item> Arunachal Pradesh</item>
+        <item> Assam</item>
+        <item> Bihar</item>
+        <item> Chhattisgarh</item>
+        <item> Goa</item>
+        <item> Gujarat</item>
+        <item> Haryana</item>
+        <item> Himachal Pradesh</item>
+        <item> Jharkhand</item>
+        <item> Karnataka</item>
+        <item> Kerala</item>
+        <item> Madhya Pradesh</item>
+        <item> Maharashtra</item>
+        <item> Manipur</item>
+        <item> Meghalaya</item>
+        <item> Mizoram</item>
+        <item> Nagaland</item>
+        <item> Odisha</item>
+        <item> Punjab</item>
+        <item> Rajasthan</item>
+        <item> Sikkim</item>
+        <item> Tamil Nadu</item>
+        <item> Telangana</item>
+        <item> Tripura</item>
+        <item> Uttar Pradesh</item>
+        <item> Uttarakhand</item>
+        <item> West Bengal</item>
+
+    </string-array>
+
+    <string-array name="Metrics">
+        <item>ton</item>
+        <item>kg</item>
+        <item>quintal</item>
+
+
+    </string-array>
+
+    <string-array name="Months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>February</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>November</item>
+        <item>December</item>
+
+    </string-array>
+
 </resources>

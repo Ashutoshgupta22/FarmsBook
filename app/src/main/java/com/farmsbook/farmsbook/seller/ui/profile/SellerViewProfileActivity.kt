@@ -3,6 +3,7 @@ package com.farmsbook.farmsbook.seller.ui.profile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
 import com.farmsbook.farmsbook.databinding.ActivityViewProfileBinding
 import com.farmsbook.farmsbook.databinding.SellerProfileViewActivityBinding
@@ -20,6 +21,7 @@ class SellerViewProfileActivity : AppCompatActivity() {
         binding = SellerProfileViewActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
         binding.backBtn.setOnClickListener {
             finish()

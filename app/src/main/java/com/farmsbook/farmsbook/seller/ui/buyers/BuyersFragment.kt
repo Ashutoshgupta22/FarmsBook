@@ -5,19 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.farmsbook.farmsbook.buyer.ui.suppliers.ViewSupplierActivity
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersAdapter
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersData
 import com.farmsbook.farmsbook.databinding.FragmentBuyersBinding
+import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersAdapter
+import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersData
 
 class BuyersFragment : Fragment() {
 
-    private lateinit var plantList: ArrayList<SuppliersData>
-    private lateinit var tempArrayList :ArrayList<SuppliersData>
+    private lateinit var plantList: ArrayList<BuyersData>
+    private lateinit var tempArrayList :ArrayList<BuyersData>
     private var _binding: FragmentBuyersBinding? = null
 
     // This property is only valid between onCreateView and
@@ -36,11 +35,11 @@ class BuyersFragment : Fragment() {
         val root: View = binding.root
 
         binding.suppliersRv.layoutManager = LinearLayoutManager(context)
-        plantList = arrayListOf<SuppliersData>()
-        val adapter = context?.let { SuppliersAdapter(plantList, it) }
+        plantList = arrayListOf<BuyersData>()
+        val adapter = context?.let { BuyersAdapter(plantList, it) }
         binding.suppliersRv.adapter = adapter
 
-        adapter?.setOnItemClickListener(object : SuppliersAdapter.onItemClickListener {
+        adapter?.setOnItemClickListener(object : BuyersAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
 
                 //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
@@ -59,6 +58,8 @@ class BuyersFragment : Fragment() {
 
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

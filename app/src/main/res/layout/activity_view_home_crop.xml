@@ -7,10 +7,12 @@
     tools:context=".buyer.ui.home.ViewHomeCropActivity">
 
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-260dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -23,215 +25,221 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/crop_img" />
+                app:srcCompat="@drawable/button_background_rounded_3" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Posted on 02/05/2023"
-        android:padding="2dp"
-        android:textColor="@color/green"
-        android:background="@drawable/button_background_rounded_4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView26" />
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background_rounded_4"
+                android:padding="2dp"
+                android:text="Posted on 02/05/2023"
+                android:textColor="@color/green"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView26" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Rice"
-        android:fontFamily="@font/roboto_medium"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Rice"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <TextView
-        android:id="@+id/textView73"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Variety 2"
-        app:layout_constraintBottom_toBottomOf="@+id/textView10"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/textView10"
-        app:layout_constraintVertical_bias="1.0" />
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Variety 2"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="@+id/textView10"
+                app:layout_constraintVertical_bias="0.5" />
 
-    <TextView
-        android:id="@+id/textView74"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="30 Ton"
-        android:textColor="@color/black"
-        android:drawableStart="@drawable/inventory_2"
-        android:drawablePadding="5dp"
-        android:fontFamily="@font/roboto_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView73"
-        app:layout_constraintTop_toTopOf="@+id/textView73" />
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:drawableStart="@drawable/inventory_2"
+                android:drawablePadding="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="30 Ton"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textView73"
+                app:layout_constraintTop_toTopOf="@+id/textView73" />
 
-    <TextView
-        android:id="@+id/textView77"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Amit Kumar"
-        android:drawableStart="@drawable/baseline_person_24"
-        android:drawablePadding="3dp"
-        android:textColor="@color/gray"
-        android:gravity="center_vertical"
-        android:fontFamily="@font/roboto"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="3dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center_vertical"
+                android:text="Amit Kumar"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-    <TextView
-        android:id="@+id/textView78"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Nalanda , Bihar"
-        android:drawablePadding="4dp"
-        android:drawableStart="@drawable/location_on"
-        app:layout_constraintStart_toStartOf="@+id/textView77"
-        app:layout_constraintTop_toBottomOf="@+id/textView77" />
+            <TextView
+                android:id="@+id/textView78"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/location_on"
+                android:drawablePadding="4dp"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/roboto"
+                android:text="Nalanda , Bihar"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textView77"
+                app:layout_constraintTop_toBottomOf="@+id/textView77" />
 
-    <TextView
-        android:id="@+id/textView79"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Price Range : Min 20/kg to Max 25/kg"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:fontFamily="@font/roboto_medium"
-        app:layout_constraintStart_toStartOf="@+id/textView78"
-        app:layout_constraintTop_toBottomOf="@+id/textView78" />
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Price Range : Min 20/kg to Max 25/kg"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textView78"
+                app:layout_constraintTop_toBottomOf="@+id/textView78" />
 
-    <TextView
-        android:id="@+id/textView80"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Product Details"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:fontFamily="@font/roboto_medium"
-        app:layout_constraintStart_toStartOf="@+id/textView79"
-        app:layout_constraintTop_toBottomOf="@+id/textView79" />
+            <TextView
+                android:id="@+id/textView80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Product Details"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textView79"
+                app:layout_constraintTop_toBottomOf="@+id/textView79" />
 
 
+            <TextView
+                android:id="@+id/textView81"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Variety"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView80"
+                app:layout_constraintTop_toBottomOf="@+id/textView80" />
 
-    <TextView
-        android:id="@+id/textView81"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Variety"
-        android:textColor="@color/black"
-        android:fontFamily="@font/roboto_medium"
-        app:layout_constraintStart_toStartOf="@+id/textView80"
-        app:layout_constraintTop_toBottomOf="@+id/textView80" />
+            <TextView
+                android:id="@+id/textView83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Time of sowing"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView81"
+                app:layout_constraintTop_toBottomOf="@+id/textView81" />
 
-    <TextView
-        android:id="@+id/textView83"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Time of sowing"
-        android:fontFamily="@font/roboto_medium"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/textView81"
-        app:layout_constraintTop_toBottomOf="@+id/textView81" />
+            <TextView
+                android:id="@+id/textView84"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Time of farming"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView83"
+                app:layout_constraintTop_toBottomOf="@+id/textView83" />
 
-    <TextView
-        android:id="@+id/textView84"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Time of farming"
-        android:fontFamily="@font/roboto_medium"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/textView83"
-        app:layout_constraintTop_toBottomOf="@+id/textView83" />
+            <TextView
+                android:id="@+id/textView85"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.73"
+                app:layout_constraintStart_toEndOf="@+id/textView81"
+                app:layout_constraintTop_toTopOf="@+id/textView81" />
 
-    <TextView
-        android:id="@+id/textView85"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.73"
-        app:layout_constraintStart_toEndOf="@+id/textView81"
-        app:layout_constraintTop_toTopOf="@+id/textView81" />
+            <TextView
+                android:id="@+id/textView86"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/textView85"
+                app:layout_constraintTop_toTopOf="@+id/textView83" />
 
-    <TextView
-        android:id="@+id/textView86"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView85"
-        app:layout_constraintTop_toTopOf="@+id/textView83" />
+            <TextView
+                android:id="@+id/textView87"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/textView86"
+                app:layout_constraintTop_toTopOf="@+id/textView84" />
 
-    <TextView
-        android:id="@+id/textView87"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView86"
-        app:layout_constraintTop_toTopOf="@+id/textView84" />
+            <TextView
+                android:id="@+id/textView88"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Type of sale available"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textView84"
+                app:layout_constraintTop_toBottomOf="@+id/textView84" />
 
-    <TextView
-        android:id="@+id/textView88"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Type of sale available"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/textView84"
-        app:layout_constraintTop_toBottomOf="@+id/textView84" />
+            <TextView
+                android:id="@+id/textView89"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:padding="5dp"
+                android:text="On Commision"
+                app:layout_constraintStart_toStartOf="@+id/textView88"
+                app:layout_constraintTop_toBottomOf="@+id/textView88" />
 
-    <TextView
-        android:id="@+id/textView89"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="On Commision"
-        android:background="@drawable/edtxt_background_rounded3"
-        android:padding="5dp"
-        app:layout_constraintStart_toStartOf="@+id/textView88"
-        app:layout_constraintTop_toBottomOf="@+id/textView88" />
+            <TextView
+                android:id="@+id/textView90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:padding="5dp"
+                android:text="Fixed Rate"
+                app:layout_constraintStart_toEndOf="@+id/textView89"
+                app:layout_constraintTop_toTopOf="@+id/textView89" />
 
-    <TextView
-        android:id="@+id/textView90"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="Fixed Rate"
-        android:background="@drawable/edtxt_background_rounded3"
-        android:padding="5dp"
-        app:layout_constraintStart_toEndOf="@+id/textView89"
-        app:layout_constraintTop_toTopOf="@+id/textView89" />
-
-    <TextView
-        android:id="@+id/textView91"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Other Services Available"
-        android:textColor="@color/black"
-        android:fontFamily="@font/roboto_medium"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/textView89"
-        app:layout_constraintTop_toBottomOf="@+id/textView89" />
+            <TextView
+                android:id="@+id/textView91"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Other Services Available"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textView89"
+                app:layout_constraintTop_toBottomOf="@+id/textView89" />
 
             <TextView
                 android:id="@+id/textView92"
@@ -239,6 +247,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:drawableTop="@drawable/outline_local_shipping_24"
+                android:drawableTint="@color/gray"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Transportation"
                 android:textColor="@color/gray"
@@ -290,17 +299,79 @@
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="@+id/textView94"
                 app:layout_constraintTop_toBottomOf="@+id/textView95" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="Add  +"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textView96"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView94" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView28">
+
+                <TextView
+                    android:id="@+id/viewSupplierBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_background_rounded_5"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:maxWidth="100dp"
+                    android:padding="8dp"
+                    android:text="Add Supplier"
+                    android:textColor="#00853C"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/addSupplierBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_background_rounded_3"
+                    android:drawableTint="@color/white"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:maxWidth="100dp"
+                    android:paddingVertical="8dp"
+                    android:text="Post Offer"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <ImageView
-        android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
+        android:clickable="true"
+        app:fabCustomSize="40dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/keyboard_backspace" />
+        app:srcCompat="@drawable/baseline_arrow_back_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

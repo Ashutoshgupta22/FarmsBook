@@ -1,140 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:padding="16dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/suppliers_iv"
         android:layout_width="0dp"
-        android:layout_height="110dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
         app:srcCompat="@drawable/button_background_rounded_3" />
 
-    <TextView
-        android:id="@+id/viewSupplierBtn"
-        android:layout_width="120dp"
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_background_rounded_5"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="View"
-        android:textColor="#00853C"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/addSupplierBtn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suppliers_iv" />
-
-    <TextView
-        android:id="@+id/addSupplierBtn"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background_rounded_3"
-        android:drawableEnd="@drawable/baseline_add_24"
-        android:drawableTint="@color/white"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:paddingHorizontal="30dp"
-        android:paddingVertical="8dp"
-        android:text="Add"
-        android:textColor="@color/white"
-        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/viewSupplierBtn"
-        app:layout_constraintTop_toTopOf="@+id/viewSupplierBtn" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/suppliers_iv">
+
+        <TextView
+            android:id="@+id/viewSupplierBtn"
+            android:layout_width="match_parent"
+            android:maxWidth="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_rounded_5"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="View"
+            android:textColor="#00853C"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/addSupplierBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:maxWidth="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_rounded_3"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:paddingVertical="8dp"
+            android:text="Add  +"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/group_name_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Chandigarh Kishan Dal"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/supplier_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/suppliers_iv"
         app:layout_constraintTop_toTopOf="@+id/suppliers_iv"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <TextView
         android:id="@+id/supplier_name_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:text="Arun Sharma"
         android:textColor="@color/gray"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/supplier_location_tv"
+        app:layout_constraintEnd_toEndOf="@+id/group_name_tv"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/group_name_tv"
         app:layout_constraintTop_toBottomOf="@+id/group_name_tv" />
 
     <TextView
         android:id="@+id/supplier_location_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:text="Chandigarh, Punjab"
         android:textColor="@color/gray"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/crop1_tv"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/supplier_name_tv"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/supplier_name_tv"
         app:layout_constraintTop_toBottomOf="@+id/supplier_name_tv" />
 
-    <TextView
-        android:id="@+id/crop1_tv"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_marginTop="6dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edtxt_background_rounded"
-        android:fontFamily="@font/roboto_medium"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="2dp"
-        android:text="Rice"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/suppliers_iv"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/supplier_location_tv"
-        app:layout_constraintTop_toBottomOf="@+id/supplier_location_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/supplier_location_tv">
 
-    <TextView
-        android:id="@+id/crop2_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:background="@drawable/edtxt_background_rounded"
-        android:fontFamily="@font/roboto_medium"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="2dp"
-        android:text="Wheat"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/crop1_tv"
-        app:layout_constraintTop_toTopOf="@+id/crop1_tv" />
+        <TextView
+            android:id="@+id/crop1_tv"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edtxt_background_rounded"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:text="Rice"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/crop3_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:background="@drawable/edtxt_background_rounded"
-        android:fontFamily="@font/roboto_medium"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="2dp"
-        android:text="Apple"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/crop2_tv"
-        app:layout_constraintTop_toTopOf="@+id/crop2_tv" />
+        <TextView
+            android:id="@+id/crop2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/edtxt_background_rounded"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:text="Wheat"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/crop1_tv"
+            app:layout_constraintTop_toTopOf="@+id/crop1_tv" />
+
+        <TextView
+            android:id="@+id/crop3_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edtxt_background_rounded"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="Apple"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/supplier_location_tv"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/crop2_tv"
+            app:layout_constraintTop_toTopOf="@+id/crop2_tv" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

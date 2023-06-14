@@ -33,13 +33,13 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       // val currentItem =plantList[position]
+        val currentItem = plantList[position]
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
-        holder.plantName.text = "Rice"
-        holder.plantPrice.text = "Min 2/ton - Max 4/ton"
-        holder.plantDate.text = "Posted on : 5 min ago"
-        holder.plantStatus.text = "4 Suppliers shown interest"
+        holder.plantName.text = currentItem.crop_name
+        holder.plantPrice.text = "${currentItem.min_price}/${currentItem.quantity_unit} - ${currentItem.max_price}/${currentItem.quantity_unit}"
+        holder.plantDate.text = "Posted on : ${currentItem.timestamp}"
+        holder.plantStatus.text = "${currentItem.interested_suppliers} Suppliers shown interest"
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
@@ -47,7 +47,7 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return plantList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener

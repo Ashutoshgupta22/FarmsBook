@@ -2,6 +2,7 @@ package com.farmsbook.farmsbook.buyer.ui.home
 
 import android.app.Dialog
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,18 +15,28 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.FragmentHomeBinding
 import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropAdapter
 import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
+import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import org.json.JSONArray
+import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding:FragmentHomeBinding
 
     private lateinit var plantList: ArrayList<CropData>
     private lateinit var tempArrayList :ArrayList<CropData>
@@ -40,7 +51,7 @@ class HomeFragment : Fragment() {
 
         plantList = arrayListOf<CropData>()
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         binding.searchEdt.setOnClickListener {
@@ -52,34 +63,10 @@ class HomeFragment : Fragment() {
             showDialog()
 
         }
+        getDataUsingVolley()
 
-        binding.cropRecyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = context?.let { CropAdapter(plantList, it) }
-        binding.cropRecyclerView.adapter = adapter
-
-        adapter?.setOnItemClickListener(object : CropAdapter.onItemClickListener {
-            override fun onItemClick(position: Int) {
-
-                 //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-
-                startActivity(Intent(context, ViewHomeCropActivity::class.java))
-//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
-//                intent.putExtra("Name",plantList[position].Name)
-//                intent.putExtra("Location",plantList[position].Location)
-//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
-//                intent.putExtra("Availability",plantList[position].Availability)
-//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
-//                intent.putExtra("Quality",plantList[position].Quality)
-//                startActivity(intent)
-            }
-        })
 
         return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun showDialog() {
@@ -127,5 +114,73 @@ class HomeFragment : Fragment() {
         dialog.getWindow()?.setGravity(Gravity.BOTTOM)
 
     }
+    private fun getDataUsingVolley() {
+
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val url = "$baseAddressUrl/home_buyer"
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonArrayRequest(Request.Method.GET, url, null, {response:JSONArray->
+
+            for(i in 0 until response.length())
+            {
+               try {
+
+               var cropObject = response.getJSONObject(i)
+                var crop = CropData()
+                crop.crop_name = cropObject.getString("crop_name")
+                crop.crop_image = cropObject.getString("crop_image")
+                crop.crop_location = cropObject.getString("crop_location")
+                crop.user = cropObject.getString("user")
+                crop.offer = cropObject.getBoolean("offer").toString()
+                crop.quantity = cropObject.getInt("quantity").toString()
+                crop.id = cropObject.getInt("id").toString()
+                crop.parent_id = cropObject.getInt("parent_id").toString()
+
+                plantList.add(crop)
+               }catch(e:Exception)
+               {
+                   e.printStackTrace()
+               }
+            }
+
+            binding.cropRecyclerView.layoutManager = LinearLayoutManager(context)
+            val adapter = context?.let { CropAdapter(plantList, it) }
+            binding.cropRecyclerView.adapter = adapter
+
+            adapter?.setOnItemClickListener(object : CropAdapter.onItemClickListener {
+                override fun onItemClick(position: Int) {
+
+                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
+
+                    startActivity(Intent(context, ViewHomeCropActivity::class.java))
+//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
+//                intent.putExtra("Name",plantList[position].Name)
+//                intent.putExtra("Location",plantList[position].Location)
+//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
+//                intent.putExtra("Availability",plantList[position].Availability)
+//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
+//                intent.putExtra("Quality",plantList[position].Quality)
+//                startActivity(intent)
+                }
+            })
+
+//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
+//                .show()
+        }, { error -> // method to handle errors.
+            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
+    }
+
+
+
 }
 

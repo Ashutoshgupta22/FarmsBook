@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.requirements.RequirementsFragment">
+    android:background="#f2f2f2"
+    tools:context=".buyer.ui.requirements.RequirementsFragment">
 
     <TextView
         android:id="@+id/textView16"
@@ -30,6 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView16"
         app:tabGravity="start"
+        android:background="#f2f2f2"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         app:tabIndicatorFullWidth="false"
@@ -50,7 +52,7 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <com.farmsbook.farmsbook.buyer.utility.CustomViewPager
+    <com.farmsbook.farmsbook.utility.CustomViewPager
         android:id="@+id/Viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"

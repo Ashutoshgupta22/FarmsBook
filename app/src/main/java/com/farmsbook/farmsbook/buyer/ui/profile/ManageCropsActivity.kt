@@ -2,6 +2,7 @@ package com.farmsbook.farmsbook.buyer.ui.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.farmsbook.farmsbook.databinding.ActivityManageCropsBinding
 
 class ManageCropsActivity : AppCompatActivity() {
@@ -12,6 +13,7 @@ class ManageCropsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         binding.backBtn.setOnClickListener {
             finish()
         }

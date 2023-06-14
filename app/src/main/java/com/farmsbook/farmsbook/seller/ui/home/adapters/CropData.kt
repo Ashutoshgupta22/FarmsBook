@@ -1,11 +1,13 @@
 package com.farmsbook.farmsbook.seller.ui.home.adapters
 
 data class CropData(
-    var Name: String? = null,
-    var Location: String? = null,
-    var Image : String? = null,
-    var FarmerName : String ?= null,
-    var Availability : String? = null,
-    var Quality : String? = null,
-    var PricePerKg : String? = null
+    var crop_name: String? = null,
+    var crop_image: String? = null,
+    var crop_location : String? = null,
+    var timestamp : String? = null,
+    var user : String? = null,
+    var quantity : String? = null,
+    var id : String? = null,
+    var parent_id : String? = null,
+    var offer : String? = null
 )

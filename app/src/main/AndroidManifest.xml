@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -9,82 +12,129 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity android:name=".seller.ui.profile.SellerEditProfileActivity"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+        <activity
+            android:name=".seller.ui.listings.AddListingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".buyer.ui.home.ViewHomeCropActivity"
             android:exported="false"
-            android:theme="@style/Theme.Farmsbook.MainActivity"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".buyer.ui.requirements.AddRequirementActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".seller.ui.profile.SellerManageCropsActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".seller.ui.home.HomeSearchActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".seller.SellerMainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity">
+
+
+
+
+        </activity>
         <activity
             android:name=".seller.ui.profile.SellerPrivacyPolicyActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".seller.ui.profile.SellerTnCActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".seller.ui.profile.SellerViewProfileActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".buyer.ui.profile.ManageCropsActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".buyer.ui.requirements.fragments.requirements_child.ViewRequirementActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".buyer.ui.suppliers.ViewSupplierActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".buyer.ui.home.HomeSearchActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
-            android:name=".buyer.ui.profile.SellerTnCActivity"
+            android:name=".buyer.ui.profile.TnCActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
-            android:name=".buyer.ui.profile.SellerPrivacyPolicyActivity"
+            android:name=".buyer.ui.profile.PrivacyPolicyActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".buyer.ui.profile.ViewProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".buyer.ui.profile.EditProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".buyer.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Farmsbook.MainActivity"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.MainActivity">
+
+        </activity>
         <activity
             android:name=".login.LoginActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook" />
         <activity
             android:name=".login.SplashActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
