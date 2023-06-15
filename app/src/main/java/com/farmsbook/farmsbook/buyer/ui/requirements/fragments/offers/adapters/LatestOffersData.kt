@@ -1,11 +1,19 @@
 package com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters
 
 data class LatestOffersData(
-    var Name: String? = null,
-    var Location: String? = null,
-    var Image : String? = null,
-    var FarmerName : String ?= null,
-    var Availability : String? = null,
-    var Quality : String? = null,
-    var PricePerKg : String? = null
+    var offerId: String? = null,
+    var offer_by_id: String? = null,
+    var offer_to_crop_id : String? = null,
+    var purchased_on : String ?= null,
+    var rate_of_commission : String? = null,
+    var offering_quantity_unit : String? = null,
+    val offering_price : String? = null,
+    var offering_quantity: String? = null,
+    var transportation : String? = null,
+    var delivery_place : String ?= null,
+    var offer_status : String? = null,
+    var user : String? = null,
+    var listings : String? = null
 )
+
+

@@ -1,6 +1,7 @@
 package com.farmsbook.farmsbook.seller.ui.listings
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -13,6 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityAddListingBinding
+import com.farmsbook.farmsbook.seller.ui.listings.fragments.ListingConfirmationActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -108,6 +110,7 @@ class AddListingActivity : AppCompatActivity() {
 
         binding.confirmBtn.setOnClickListener {
             postDataUsingVolley(type_of_sale, transportation, type_of_farming)
+            startActivity(Intent(this@AddListingActivity,ListingConfirmationActivity::class.java))
             finish()
         }
 

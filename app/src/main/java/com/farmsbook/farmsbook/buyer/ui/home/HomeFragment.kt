@@ -160,7 +160,7 @@ class HomeFragment : Fragment() {
 
                     //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
 
-                    startActivity(Intent(context, ViewHomeCropActivity::class.java))
+                    startActivity(Intent(context, ViewHomeCropActivity::class.java).putExtra("LISTED_ID",plantList[position].id).putExtra("PARENT_ID",plantList[position].parent_id))
 //                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
 //                intent.putExtra("Name",plantList[position].Name)
 //                intent.putExtra("Location",plantList[position].Location)

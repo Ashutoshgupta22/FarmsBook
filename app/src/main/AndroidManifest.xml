@@ -14,11 +14,26 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-        <activity android:name=".seller.ui.profile.SellerEditProfileActivity"
-            android:theme="@style/Theme.Farmsbook.SellerMainActivity"
+        <activity
+            android:name=".OfferConfirmationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".buyer.ui.home.PostOfferActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".seller.ui.listings.fragments.ListingConfirmationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".buyer.ui.requirements.fragments.requirements_child.RequirementConfirmationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".seller.ui.profile.SellerEditProfileActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false"/>
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".seller.ui.listings.AddListingActivity"
             android:exported="false"
@@ -48,12 +63,7 @@
             android:name=".seller.SellerMainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Farmsbook.SellerMainActivity">
-
-
-
-
-        </activity>
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".seller.ui.profile.SellerPrivacyPolicyActivity"
             android:exported="false"
@@ -114,9 +124,7 @@
             android:exported="true"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Farmsbook.MainActivity">
-
-        </activity>
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".login.LoginActivity"
             android:exported="false"
@@ -127,14 +135,13 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

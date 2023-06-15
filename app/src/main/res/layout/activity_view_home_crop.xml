@@ -341,7 +341,7 @@
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/addSupplierBtn"
+                    android:id="@+id/postOfferBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
