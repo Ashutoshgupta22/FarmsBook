@@ -10,6 +10,7 @@ class OfferConfirmationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_offer_confirmation)
 
+        supportActionBar?.hide()
         val close = findViewById<TextView>(R.id.closeBtn)
 
         close.setOnClickListener {

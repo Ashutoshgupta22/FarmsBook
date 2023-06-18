@@ -28,7 +28,7 @@
                 app:srcCompat="@drawable/button_background_rounded_3" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/posted_onTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView26" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/crop_nameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -49,24 +49,24 @@
                 android:text="Rice"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintStart_toStartOf="@+id/posted_onTV"
+                app:layout_constraintTop_toBottomOf="@+id/posted_onTV" />
 
             <TextView
-                android:id="@+id/textView73"
+                android:id="@+id/varietyTV2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Variety 2"
                 android:textColor="@color/gray"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
+                app:layout_constraintBottom_toBottomOf="@+id/crop_nameTV"
+                app:layout_constraintStart_toEndOf="@+id/crop_nameTV"
+                app:layout_constraintTop_toTopOf="@+id/crop_nameTV"
                 app:layout_constraintVertical_bias="0.5" />
 
             <TextView
-                android:id="@+id/textView74"
+                android:id="@+id/quantityTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -77,11 +77,11 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView73"
-                app:layout_constraintTop_toTopOf="@+id/textView73" />
+                app:layout_constraintStart_toEndOf="@+id/varietyTV2"
+                app:layout_constraintTop_toTopOf="@+id/varietyTV2" />
 
             <TextView
-                android:id="@+id/textView77"
+                android:id="@+id/farmer_nameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -92,11 +92,11 @@
                 android:text="Amit Kumar"
                 android:textColor="@color/gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintStart_toStartOf="@+id/crop_nameTV"
+                app:layout_constraintTop_toBottomOf="@+id/crop_nameTV" />
 
             <TextView
-                android:id="@+id/textView78"
+                android:id="@+id/locationTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -107,11 +107,11 @@
                 android:text="Nalanda , Bihar"
                 android:textColor="@color/gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView77"
-                app:layout_constraintTop_toBottomOf="@+id/textView77" />
+                app:layout_constraintStart_toStartOf="@+id/farmer_nameTV"
+                app:layout_constraintTop_toBottomOf="@+id/farmer_nameTV" />
 
             <TextView
-                android:id="@+id/textView79"
+                android:id="@+id/price_rangeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -119,8 +119,8 @@
                 android:text="Price Range : Min 20/kg to Max 25/kg"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/textView78"
-                app:layout_constraintTop_toBottomOf="@+id/textView78" />
+                app:layout_constraintStart_toStartOf="@+id/locationTV"
+                app:layout_constraintTop_toBottomOf="@+id/locationTV" />
 
             <TextView
                 android:id="@+id/textView80"
@@ -131,8 +131,8 @@
                 android:text="Product Details"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/textView79"
-                app:layout_constraintTop_toBottomOf="@+id/textView79" />
+                app:layout_constraintStart_toStartOf="@+id/price_rangeTV"
+                app:layout_constraintTop_toBottomOf="@+id/price_rangeTV" />
 
 
             <TextView
@@ -163,13 +163,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Time of farming"
+                android:text="Type of farming"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView83"
                 app:layout_constraintTop_toBottomOf="@+id/textView83" />
 
             <TextView
-                android:id="@+id/textView85"
+                android:id="@+id/varietyTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -180,19 +180,19 @@
                 app:layout_constraintTop_toTopOf="@+id/textView81" />
 
             <TextView
-                android:id="@+id/textView86"
+                android:id="@+id/time_of_sowingTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/textView85"
+                app:layout_constraintStart_toStartOf="@+id/varietyTV"
                 app:layout_constraintTop_toTopOf="@+id/textView83" />
 
             <TextView
-                android:id="@+id/textView87"
+                android:id="@+id/time_of_farmingTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/textView86"
+                app:layout_constraintStart_toStartOf="@+id/time_of_sowingTV"
                 app:layout_constraintTop_toTopOf="@+id/textView84" />
 
             <TextView
@@ -208,7 +208,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView84" />
 
             <TextView
-                android:id="@+id/textView89"
+                android:id="@+id/type_of_saleTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -219,17 +219,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView88" />
 
             <TextView
-                android:id="@+id/textView90"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:background="@drawable/edtxt_background_rounded3"
-                android:padding="5dp"
-                android:text="Fixed Rate"
-                app:layout_constraintStart_toEndOf="@+id/textView89"
-                app:layout_constraintTop_toTopOf="@+id/textView89" />
-
-            <TextView
                 android:id="@+id/textView91"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -238,17 +227,18 @@
                 android:text="Other Services Available"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/textView89"
-                app:layout_constraintTop_toBottomOf="@+id/textView89" />
+                app:layout_constraintStart_toStartOf="@+id/type_of_saleTV"
+                app:layout_constraintTop_toBottomOf="@+id/type_of_saleTV" />
 
             <TextView
-                android:id="@+id/textView92"
+                android:id="@+id/transportaionTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:drawableTop="@drawable/outline_local_shipping_24"
                 android:drawableTint="@color/gray"
                 android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
                 android:text="Transportation"
                 android:textColor="@color/gray"
                 app:layout_constraintStart_toStartOf="@+id/textView91"
@@ -263,8 +253,8 @@
                 android:text="Farmer's Info"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/textView92"
-                app:layout_constraintTop_toBottomOf="@+id/textView92" />
+                app:layout_constraintStart_toStartOf="@+id/transportaionTV"
+                app:layout_constraintTop_toBottomOf="@+id/transportaionTV" />
 
             <ImageView
                 android:id="@+id/imageView28"
@@ -273,43 +263,49 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="@+id/textView93"
                 app:layout_constraintTop_toBottomOf="@+id/textView93"
-                app:srcCompat="@drawable/crop_img" />
+                app:srcCompat="@drawable/button_background_rounded" />
 
             <TextView
-                android:id="@+id/textView94"
+                android:id="@+id/NameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
                 android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/farmer_locationTV"
                 app:layout_constraintStart_toEndOf="@+id/imageView28"
-                app:layout_constraintTop_toTopOf="@+id/imageView28" />
+                app:layout_constraintTop_toBottomOf="@+id/textView93"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <TextView
-                android:id="@+id/textView95"
+                android:id="@+id/farmer_locationTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/textView94"
-                app:layout_constraintTop_toBottomOf="@+id/textView94" />
+                app:layout_constraintBottom_toTopOf="@+id/farmer_phoneTV"
+                app:layout_constraintStart_toStartOf="@+id/NameTV"
+                app:layout_constraintTop_toBottomOf="@+id/NameTV" />
 
             <TextView
-                android:id="@+id/textView96"
+                android:id="@+id/farmer_phoneTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/textView94"
-                app:layout_constraintTop_toBottomOf="@+id/textView95" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView28"
+                app:layout_constraintStart_toStartOf="@+id/NameTV"
+                app:layout_constraintTop_toBottomOf="@+id/farmer_locationTV" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/add_farmerBTN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:text="Add  +"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/textView96"
+                app:layout_constraintBottom_toBottomOf="@+id/farmer_phoneTV"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView94" />
+                app:layout_constraintTop_toTopOf="@+id/NameTV" />
 
             <LinearLayout
                 android:id="@+id/linearLayout8"
@@ -326,7 +322,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView28">
 
                 <TextView
-                    android:id="@+id/viewSupplierBtn"
+                    android:id="@+id/AddSupplierBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"

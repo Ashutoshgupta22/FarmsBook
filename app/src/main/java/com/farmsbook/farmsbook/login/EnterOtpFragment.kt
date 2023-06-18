@@ -2,9 +2,11 @@ package com.farmsbook.farmsbook.login
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +16,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import org.json.JSONObject
+
 
 class EnterOtpFragment : Fragment() {
 
@@ -58,6 +69,17 @@ class EnterOtpFragment : Fragment() {
         editText5.setOnKeyListener(GenericKeyEvent(editText5, editText4))
         editText6.setOnKeyListener(GenericKeyEvent(editText6, editText5))
 
+        val timer = object: CountDownTimer(25000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val timerText = view.findViewById<TextView>(R.id.textView9)
+                timerText.setText("Resend the Code (in ${(millisUntilFinished)/1000} seconds)")
+            }
+            override fun onFinish() {
+
+            }
+        }
+        timer.start()
+
         val value = requireArguments().getString("PhoneNumber")
         number.text = value
         verifyBtn.setOnClickListener {
@@ -71,13 +93,12 @@ class EnterOtpFragment : Fragment() {
                 progressDialog.setMessage("Verifying")
                 progressDialog.show()
 
+
                 Handler().postDelayed({
                     progressDialog.dismiss()
-                    val fragmentManager = activity?.supportFragmentManager
-                    val fragmentTransaction = fragmentManager?.beginTransaction()
-                    fragmentTransaction?.replace(R.id.fragmentContainerView, ChooseRoleFragment())
-                    fragmentTransaction?.commit()
-                },1500)
+                    validateOtp(typedOTP)
+
+                },1000)
 
             }
             else {
@@ -106,6 +127,7 @@ class EnterOtpFragment : Fragment() {
                 previousView!!.text = null
                 previousView.requestFocus()
                 return true
+
             }
             return false
         }
@@ -130,6 +152,9 @@ class EnterOtpFragment : Fragment() {
             }
         }
 
+
+
+
         override fun beforeTextChanged(
             arg0: CharSequence,
             arg1: Int,
@@ -146,5 +171,44 @@ class EnterOtpFragment : Fragment() {
         ) { // TODO Auto-generated method stub
         }
 
+    }
+
+    private fun validateOtp(phone:String) {
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val url = "$baseAddressUrl/otp/validate"
+
+        val jsonBody = JSONObject()
+        jsonBody.put("otpCode", phone)
+        // creating a new variable for our request queue
+        val queue = Volley.newRequestQueue(context)
+        val request = object : StringRequest(Method.POST, url, Response.Listener { response ->
+            // Handle the response here
+
+           Log.d("OTP", response)
+            val value = requireArguments().getString("PhoneNumber")
+            val frag = ChooseRoleFragment()
+            val args = Bundle()
+            args.putString("PhoneNumber", value)
+            frag.arguments = args
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragmentContainerView, frag)
+            fragmentTransaction?.commit()
+
+
+        }, Response.ErrorListener { error ->
+            Toast.makeText(context,"Invalid OTP",Toast.LENGTH_SHORT).show()
+        }) {
+            override fun getBodyContentType(): String {
+                return "application/json"
+            }
+
+            override fun getBody(): ByteArray {
+                return jsonBody.toString().toByteArray()
+            }
+        }
+
+        queue.add(request)
     }
 }

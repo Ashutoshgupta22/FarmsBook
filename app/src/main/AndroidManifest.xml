@@ -15,19 +15,49 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".OfferConfirmationActivity"
+            android:name=".seller.ui.buyers.ViewBuyerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity"
             android:exported="false" />
+        <activity
+            android:name=".seller.ui.buyers.AddBuyerActivity"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".seller.ui.listings.ViewListingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".buyer.ui.suppliers.AddSupplierActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
+        <activity
+            android:name=".seller.ui.home.ViewSellerHomeCropActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
+        <activity
+            android:name=".buyer.ui.home.OfferConfirmationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".buyer.ui.home.PostOfferActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".seller.ui.listings.fragments.ListingConfirmationActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.SellerMainActivity" />
         <activity
             android:name=".buyer.ui.requirements.fragments.requirements_child.RequirementConfirmationActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".seller.ui.profile.SellerEditProfileActivity"

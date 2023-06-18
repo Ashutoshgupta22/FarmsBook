@@ -39,7 +39,7 @@ class CropAdapter (private val plantList : ArrayList<CropData>, val context: Con
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
-        holder.plantPrice.text = "Min 2/ton - Max 4/ton"
+        holder.plantPrice.text = "2/ton - 4/ton"
         holder.plantLocation.text = currentItem.crop_location
         holder.plantWeight.text = currentItem.quantity.toString()
 

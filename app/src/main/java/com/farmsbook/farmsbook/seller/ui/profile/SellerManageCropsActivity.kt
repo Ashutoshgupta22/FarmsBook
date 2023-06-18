@@ -4,14 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.farmsbook.farmsbook.databinding.ActivityManageCropsBinding
+import com.farmsbook.farmsbook.databinding.ActivitySellerManageCropsBinding
 
 class SellerManageCropsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityManageCropsBinding
+    private lateinit var binding: ActivitySellerManageCropsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityManageCropsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivitySellerManageCropsBinding.inflate(layoutInflater)
 
+        setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
         binding.backBtn.setOnClickListener {

@@ -85,6 +85,7 @@ class RequirementsChildFragment : Fragment() {
                     crop.max_price = cropObject.getInt("max_range").toString()
                     crop.min_price = cropObject.getInt("min_range").toString()
                     crop.timestamp = cropObject.getString("timestamp").toString()
+                    crop.quantity_unit = cropObject.getString("quantity_unit").toString()
                     crop.interested_suppliers = cropObject.getString("interested_supplier").toString()
 
                     plantList.add(crop)
@@ -110,7 +111,7 @@ class RequirementsChildFragment : Fragment() {
             adapter?.setOnItemClickListener(object : LatestRequirementsAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
 
-                    startActivity(Intent(context, ViewRequirementActivity::class.java))
+                    startActivity(Intent(context, ViewRequirementActivity::class.java).putExtra("REQ_ID",plantList[position].req_id))
 //                Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
 //                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
 //                intent.putExtra("Name",plantList[position].Name)

@@ -99,14 +99,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameEdt" />
 
-            <EditText
+            <TextView
                 android:id="@+id/phoneEdt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Mobile Number"
+                android:editable="false"
+                android:clickable="false"
                 android:padding="12dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="parent"

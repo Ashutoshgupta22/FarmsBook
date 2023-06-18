@@ -34,13 +34,13 @@ class SuppliersAdapter (private val plantList : ArrayList<SuppliersData>, val co
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       // val currentItem =plantList[position]
+       val currentItem =plantList[position]
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
 
-        holder.groupName.text = "Chandigarh Kishan Dal"
-        holder.suppliersName.text= "Arun Sharma"
-        holder.suppliersLocation.text= "Chandigarh, Punjab"
+        holder.groupName.text = currentItem.GroupName
+        holder.suppliersName.text= currentItem.FarmerName
+        holder.suppliersLocation.text= currentItem.Location
         holder.crop1.text = "Rice"
         holder.crop2.text = "Wheat"
         holder. crop3.text = "Apple"
@@ -51,7 +51,7 @@ class SuppliersAdapter (private val plantList : ArrayList<SuppliersData>, val co
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return plantList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener

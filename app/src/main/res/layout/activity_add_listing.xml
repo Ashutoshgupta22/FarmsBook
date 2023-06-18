@@ -35,7 +35,7 @@
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="20dp"
-            android:text="Add Listing"
+            android:text="@string/add_listing"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
-                android:text="Type of Buy"
+                android:text="@string/type_of_buy"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/varietyEdt" />
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text="On Commission"
+                android:text="@string/on_commission"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:fontFamily="@font/roboto"
-                android:text="Fixed Rate"
+                android:text="@string/fixed_rate"
                 app:layout_constraintStart_toEndOf="@+id/oc_rb"
                 app:layout_constraintTop_toTopOf="@+id/oc_rb" />
 
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text="Crop Name"
+                android:text="@string/crop_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,7 +102,7 @@
                 android:background="@drawable/edtxt_background_rounded3"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
-                android:hint="Crop Name"
+                android:hint="@string/crop_name"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
-                android:text="Variety"
+                android:text="@string/variety"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameEdt" />
 
@@ -127,7 +127,7 @@
                 android:background="@drawable/edtxt_background_rounded3"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
-                android:hint="Variety"
+                android:hint="@string/variety"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text="Rate %"
+                android:text="@string/rate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/oc_rb" />
 
@@ -151,7 +151,7 @@
                 android:background="@drawable/edtxt_background_rounded3"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
-                android:hint="Rate"
+                android:hint="@string/rate"
                 android:inputType="number"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
-                android:text="Price Range"
+                android:text="@string/price_range"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rateEdt" />
 
@@ -174,7 +174,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:fontFamily="@font/roboto"
-                android:hint="Min Amount"
+                android:hint="@string/min_amount"
                 android:inputType="number"
                 android:padding="12dp"
                 app:layout_constraintEnd_toStartOf="@+id/maxEdt"
@@ -191,7 +191,7 @@
                 android:background="@drawable/edtxt_background_rounded3"
                 android:ems="10"
                 android:fontFamily="@font/roboto"
-                android:hint="Max Amount"
+                android:hint="@string/max_amount"
                 android:inputType="number"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -205,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/minEdt" />
 
@@ -224,7 +224,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edtxt_background_rounded3"
                     android:fontFamily="@font/roboto"
-                    android:hint="Quantity"
+                    android:hint="@string/quantity"
                     android:inputType="number"
                     android:padding="12dp"
                     app:layout_constraintEnd_toStartOf="@+id/maxEdt"
@@ -254,7 +254,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Location"
+                android:text="@string/location"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linear2" />
 
@@ -277,7 +277,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
-                    android:text="Select Your State" />
+                    android:text="@string/select_your_state" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -286,7 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Transportation"
+                android:text="@string/transportation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/locationEdt" />
 
@@ -294,7 +294,7 @@
                 android:id="@+id/req_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Available"
+                android:text="@string/available"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17_2" />
 
@@ -303,7 +303,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="Not Available"
+                android:text="@string/not_available"
                 app:layout_constraintStart_toEndOf="@+id/req_rb"
                 app:layout_constraintTop_toTopOf="@+id/req_rb" />
 
@@ -313,7 +313,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Type of Farming"
+                android:text="@string/type_of_farming"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/req_rb" />
 
@@ -321,7 +321,7 @@
                 android:id="@+id/uo_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UnOrganic"
+                android:text="@string/unorganic"
                 android:fontFamily="@font/roboto"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17_3" />
@@ -331,7 +331,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="Organic"
+                android:text="@string/organic"
                 android:fontFamily="@font/roboto"
                 app:layout_constraintStart_toEndOf="@+id/uo_rb"
                 app:layout_constraintTop_toTopOf="@+id/uo_rb" />
@@ -341,7 +341,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Time of sowing"
+                android:text="@string/time_of_sowing"
                 android:fontFamily="@font/roboto"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/uo_rb" />
@@ -367,7 +367,7 @@
                     android:inputType="none"
                     android:editable="false"
                     android:fontFamily="@font/roboto"
-                    android:text="Select month" />
+                    android:text="@string/select_month" />
 
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
@@ -381,7 +381,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="30dp"
                 android:paddingVertical="12dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"

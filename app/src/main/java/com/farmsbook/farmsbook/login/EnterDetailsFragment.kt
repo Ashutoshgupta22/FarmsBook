@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.os.UserHandle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -27,7 +28,7 @@ import java.util.*
 open class EnterDetailsFragment : Fragment() {
 
     private lateinit var name: EditText
-    private lateinit var phone: EditText
+    private lateinit var phone: TextView
     private lateinit var email: EditText
     private lateinit var location: AutoCompleteTextView
     private lateinit var businessName: EditText
@@ -43,7 +44,7 @@ open class EnterDetailsFragment : Fragment() {
 
         val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val role = sharedPreference?.getBoolean("USER_ROLE",false)
-        Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
 
         val states = resources.getStringArray(R.array.States)
         // create an array adapter and pass the required parameter
@@ -61,6 +62,9 @@ open class EnterDetailsFragment : Fragment() {
         businessName = view.findViewById(R.id.businessNameEdt)
         businessTurnOver = view.findViewById(R.id.businessTurnoverEdt)
         foundationDate = view.findViewById(R.id.foundationDateEdt)
+
+        val value = requireArguments().getString("PhoneNumber")
+phone.setText(value)
 
         val locale = Locale("en", "IN")
         Locale.setDefault(locale)

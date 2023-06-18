@@ -17,6 +17,7 @@ import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.ViewRequirementActivity
 import com.farmsbook.farmsbook.databinding.FragmentCropsListingBinding
 import com.farmsbook.farmsbook.seller.ui.listings.AddListingActivity
+import com.farmsbook.farmsbook.seller.ui.listings.ViewListingActivity
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ListingsAdapter
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ListingsData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
@@ -78,6 +79,7 @@ class CropsListingFragment : Fragment() {
                     crop.min_price = cropObject.getInt("min_price").toString()
                     crop.timestamp = cropObject.getString("timestamp").toString()
                     crop.quantity_unit = cropObject.getString("quantity_unit")
+                    crop.list_id= cropObject.getInt("list_id").toString()
                     crop.receive_offer_status = cropObject.getString("receive_offer_status").toString()
 
                     plantList.add(crop)
@@ -103,7 +105,7 @@ class CropsListingFragment : Fragment() {
             adapter?.setOnItemClickListener(object : ListingsAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
 
-                    startActivity(Intent(context, ViewRequirementActivity::class.java))
+                    startActivity(Intent(context, ViewListingActivity::class.java).putExtra("LIST_ID",plantList[position].list_id))
 //                Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
 //                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
 //                intent.putExtra("Name",plantList[position].Name)

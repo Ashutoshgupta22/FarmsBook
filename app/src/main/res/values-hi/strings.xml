@@ -55,5 +55,58 @@
     <string name="title_profile">प्रोफ़ाइल</string>
 
 
+<!--    Add Listing Screen-->
+    <string name="add_listing">Add Listing</string>
+    <string name="type_of_buy">Type of Buy</string>
+    <string name="on_commission">On Commission</string>
+    <string name="fixed_rate">Fixed Rate</string>
+    <string name="crop_name">Crop Name</string>
+    <string name="rate">Rate %</string>
+    <string name="min_amount">Min Amount</string>
+    <string name="max_amount">Max Amount</string>
+    <string name="quantity">Quantity</string>
+    <string name="location">Location</string>
+    <string name="select_your_state">Select Your State</string>
+    <string name="transportation">Transportation</string>
+    <string name="available">Available</string>
+    <string name="not_available">Not Available</string>
+    <string name="type_of_farming">Type of Farming</string>
+    <string name="unorganic">UnOrganic</string>
+    <string name="organic">Organic</string>
+    <string name="time_of_sowing">Time of sowing</string>
+    <string name="select_month">Select month</string>
+
+
+<!--    Add Requirement Screen -->
+    <string name="add_requirement">Add Requirement</string>
+    <string name="required">Required</string>
+    <string name="not_required">Not Required</string>
+    <string name="search_product_farmer_etc">Search Product farmer etc</string>
+
+<!--    Edit Profile Screen-->
+    <string name="edit_your_profile">Edit your profile</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="e_mail_id">E-mail ID</string>
+    <string name="business_name">Business Name</string>
+    <string name="business_turnover">Business Turnover</string>
+    <string name="foundation_date">Foundation Date</string>
+    <string name="search">Search</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="you_have_successfully_listed_nyour_crop">You have successfully listed \nyour crop</string>
+    <string name="close">Close</string>
+    <string name="my_crops">My Crops</string>
+    <string name="manage">Manage</string>
+    <string name="you_have_successfully_posted_nyour_offer">You have successfully posted \nyour offer</string>
+    <string name="your_offer_details">Your Offer details</string>
+    <string name="purchase_on">Purchase on</string>
+    <string name="rate_of_commission">Rate of commission</string>
+    <string name="price_you_offering">Price you offering</string>
+    <string name="price">Price</string>
+    <string name="per_kg">per kg</string>
+    <string name="quantity_you_want">Quantity you want</string>
+    <string name="delivery_place">Delivery place</string>
+    <string name="delivery_date">Delivery Date</string>
+    <string name="you_have_successfully_posted_nyour_requirement">You have successfully posted \nyour requirement</string>
+
 
 </resources>

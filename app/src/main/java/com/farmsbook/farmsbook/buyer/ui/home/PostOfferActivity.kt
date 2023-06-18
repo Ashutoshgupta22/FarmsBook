@@ -84,6 +84,10 @@ class PostOfferActivity : AppCompatActivity() {
         metrics = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         metrics.setAdapter(arrayAdapter2)
 
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
+
         binding.deliveryDateEdt.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)

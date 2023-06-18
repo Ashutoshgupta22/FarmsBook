@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp"
+    android:background="@drawable/edtxt_background_rounded3"
+    android:padding="20dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView8"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+        app:srcCompat="@drawable/crop_img" />
+
+    <TextView
+        android:id="@+id/crop_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Rice"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/price_offered_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Price offered :  64/kg"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="@+id/crop_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/crop_name_tv" />
+
+    <TextView
+        android:id="@+id/rate_type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Fixed rate"
+        android:background="@drawable/edtxt_background_rounded3"
+        android:textColor="@color/gray"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="@+id/price_offered_tv"
+        app:layout_constraintTop_toBottomOf="@+id/price_offered_tv" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="10 Ton"
+        android:textColor="@color/gray"
+
+        app:layout_constraintBottom_toBottomOf="@+id/crop_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/crop_name_tv"
+        app:layout_constraintTop_toTopOf="@+id/crop_name_tv" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Requirement posted by Amit Kumar"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/textView76"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Cancel"
+        android:gravity="center"
+        android:textColor="#646464"
+        android:paddingVertical="7dp"
+        android:fontFamily="@font/roboto_medium"
+        android:background="@drawable/edtxt_background_rounded3"
+        app:layout_constraintEnd_toStartOf="@+id/textView82"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+    <TextView
+        android:id="@+id/textView82"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Call"
+        android:paddingHorizontal="20dp"
+        android:drawableTint="@color/white"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_medium"
+        android:drawableEnd="@drawable/baseline_call_24"
+        android:background="@drawable/button_background_rounded_3"
+        android:paddingVertical="5dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView76"
+        app:layout_constraintTop_toTopOf="@+id/textView76" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

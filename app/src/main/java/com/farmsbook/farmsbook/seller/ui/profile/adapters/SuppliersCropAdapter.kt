@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
 
-class SuppliersCropAdapter (private val plantList : ArrayList<SuppliersCropData>, val context: Context):RecyclerView.Adapter<SuppliersCropAdapter.Myviewholder> () {
+class SuppliersCropAdapter (private val plantList : ArrayList<ProfileCropData>, val context: Context):RecyclerView.Adapter<SuppliersCropAdapter.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 

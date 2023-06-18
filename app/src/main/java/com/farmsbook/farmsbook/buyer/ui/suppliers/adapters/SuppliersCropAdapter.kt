@@ -34,12 +34,12 @@ class SuppliersCropAdapter (private val plantList : ArrayList<SuppliersCropData>
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       // val currentItem =plantList[position]
+        val currentItem =plantList[position]
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
 
-        holder.cropName.text = "Cucumber"
-        holder.cropPrice.text= "100-150/10 kg"
+        holder.cropName.text = currentItem.Name
+        holder.cropPrice.text= currentItem.PricePerKg
 
 
 //        holder.itemView.setOnClickListener {
@@ -48,7 +48,7 @@ class SuppliersCropAdapter (private val plantList : ArrayList<SuppliersCropData>
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return plantList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
@@ -61,7 +61,6 @@ class SuppliersCropAdapter (private val plantList : ArrayList<SuppliersCropData>
 
         init {
             itemView.setOnClickListener{
-
                 listener.onItemClick(adapterPosition)
             }
         }

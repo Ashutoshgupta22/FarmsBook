@@ -36,51 +36,61 @@
 
     <TextView
         android:id="@+id/top_seller"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Top seller"
+        android:paddingVertical="6dp"
         android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView70"
         app:layout_constraintTop_toBottomOf="@+id/textView70" />
 
     <TextView
         android:id="@+id/price_low_to_high"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Price Low to High"
         android:textColor="@color/gray"
+        android:paddingVertical="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/top_seller"
         app:layout_constraintTop_toBottomOf="@+id/top_seller" />
 
     <TextView
         android:id="@+id/price_high_to_low"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Price High to Low"
         android:textColor="@color/gray"
+        android:paddingVertical="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/price_low_to_high"
         app:layout_constraintTop_toBottomOf="@+id/price_low_to_high" />
 
     <TextView
         android:id="@+id/product_atoz"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Product Name A-Z"
+        android:paddingVertical="6dp"
         android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/price_high_to_low"
         app:layout_constraintTop_toBottomOf="@+id/price_high_to_low" />
 
     <TextView
         android:id="@+id/product_ztoa"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Product Name Z-A"
         android:textColor="@color/gray"
+        android:paddingVertical="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/product_atoz"
         app:layout_constraintTop_toBottomOf="@+id/product_atoz" />
 

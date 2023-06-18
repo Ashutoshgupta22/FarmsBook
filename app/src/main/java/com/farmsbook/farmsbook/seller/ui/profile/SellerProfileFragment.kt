@@ -47,6 +47,7 @@ class SellerProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val notificationsViewModel = ViewModelProvider(this)[SellerProfileViewModel::class.java]
 
         _binding = FragmentSellerProfileBinding.inflate(inflater, container, false)
@@ -71,8 +72,7 @@ class SellerProfileFragment : Fragment() {
 
         }
         no.setOnClickListener {
-            //logoutDialog.dismiss()
-
+            logoutDialog.dismiss()
         }
         builder.setView(view)
         logoutDialog = builder.create()
@@ -110,6 +110,7 @@ class SellerProfileFragment : Fragment() {
         binding.viewSupplierBtn.setOnClickListener {
             startActivity(Intent(context, SellerViewProfileActivity::class.java))
         }
+
         binding.editProfileBtn.setOnClickListener {
             startActivity(Intent(context, SellerEditProfileActivity::class.java))
         }

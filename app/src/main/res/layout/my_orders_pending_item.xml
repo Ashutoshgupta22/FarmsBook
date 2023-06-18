@@ -10,82 +10,65 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView8"
-        android:layout_width="120dp"
-        android:layout_height="140dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
         app:srcCompat="@drawable/crop_img" />
 
     <TextView
-        android:id="@+id/crop_name_tv"
+        android:id="@+id/name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Rice"
+        android:text="Arun Sharma"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
     <TextView
-        android:id="@+id/price_offered_tv"
+        android:id="@+id/location_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:text="By: Ranjit Kumar"
         android:textColor="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/textView31"
-        app:layout_constraintStart_toStartOf="@+id/crop_name_tv"
-        app:layout_constraintTop_toBottomOf="@+id/crop_name_tv" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:text="02/05/2023"
-        android:textColor="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/textView32"
-        app:layout_constraintStart_toStartOf="@+id/price_offered_tv"
-        app:layout_constraintTop_toBottomOf="@+id/price_offered_tv" />
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Order Id: 3456767"
-        android:textColor="@color/gray"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView33"
-        app:layout_constraintStart_toStartOf="@+id/textView31"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Pending Order"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintStart_toStartOf="@+id/textView32"/>
+        app:layout_constraintStart_toStartOf="@+id/name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/name_tv" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/declineBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Active Now"
-        android:textColor="@color/green2"
-        android:textSize="16sp"
+        android:background="@drawable/edtxt_background_rounded3"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="8dp"
+        android:text="Decline"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/acceptBtn"
+        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintStart_toEndOf="@+id/location_tv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/acceptBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background_rounded_3"
+        android:fontFamily="@font/roboto_medium"
         android:paddingHorizontal="8dp"
         android:paddingVertical="5dp"
-        android:fontFamily="@font/roboto_medium"
-        android:background="@drawable/button_background_rounded_4"
+        android:text="Accept"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

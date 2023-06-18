@@ -10,6 +10,7 @@ class ListingConfirmationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listing_confirmation)
 
+        supportActionBar?.hide()
         val close = findViewById<TextView>(R.id.closeBtn)
 
         close.setOnClickListener {
