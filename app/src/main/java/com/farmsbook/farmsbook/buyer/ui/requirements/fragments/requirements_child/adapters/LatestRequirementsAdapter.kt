@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
@@ -15,6 +16,8 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+
+        fun deleteClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -63,6 +66,9 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
             itemView.setOnClickListener{
 
                 listener.onItemClick(adapterPosition)
+            }
+            itemView.findViewById<ImageView>(R.id.deleteBtn).setOnClickListener {
+                listener.deleteClick(adapterPosition)
             }
         }
 

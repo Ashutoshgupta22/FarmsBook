@@ -34,10 +34,11 @@ class ChooseRoleFragment : Fragment() {
         val linear2 = view.findViewById<LinearLayout>(R.id.linearLayout2)
 
         var role:Boolean = false
+
         linear1.setOnClickListener {
             radio1.isChecked = true
             role = false
-            //Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
+           Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
             if (radio2.isChecked) {
                 radio2.isChecked = false
             }
@@ -46,7 +47,7 @@ class ChooseRoleFragment : Fragment() {
         linear2.setOnClickListener {
             radio2.isChecked = true
             role = true
-            //Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
             if (radio1.isChecked) {
                 radio1.isChecked = false
             }
@@ -69,7 +70,6 @@ class ChooseRoleFragment : Fragment() {
             val value = requireArguments().getString("PhoneNumber")
             val frag = EnterDetailsFragment()
             val args = Bundle()
-            //validateOtp(typedOTP)
             args.putString("PhoneNumber", value)
             frag.arguments = args
             val fragmentManager = activity?.supportFragmentManager
@@ -78,13 +78,10 @@ class ChooseRoleFragment : Fragment() {
             fragmentTransaction?.commit()
 
         }
-
         radio1.setOnClickListener {
-
             if (radio2.isChecked) {
                 radio2.isChecked = false
             }
-
         }
 
         radio2.setOnClickListener {
@@ -93,7 +90,5 @@ class ChooseRoleFragment : Fragment() {
             }
         }
         return view
-
     }
-
 }

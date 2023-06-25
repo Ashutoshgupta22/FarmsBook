@@ -1,6 +1,7 @@
 package com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+
+        fun callBtnClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -33,12 +36,19 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       // val currentItem =plantList[position]
+       val currentItem =plantList[position]
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = "Rice"
-        holder.plantPrice.text = "Min 2/ton - Max 4/ton"
-        holder.plantRateType.text = "Fixed Rate"
+        holder.plantPrice.text = "Price Offered : ${currentItem.offering_price}/kg"
+        holder.plantWeight.text = currentItem.offering_quantity+" "+currentItem.offering_quantity_unit
+        holder.plantRateType.text = currentItem.purchased_on
+        if(currentItem.offer_status == "true")
+        holder.plantStatus.text = "Offer Accepted by ${currentItem.buyer_name}"
+        else{
+            holder.plantStatus.text = "Offer Rejected by ${currentItem.buyer_name}"
+            holder.plantStatus.setTextColor(Color.parseColor("#B80000"))
+        }
 
 
 //        holder.itemView.setOnClickListener {
@@ -47,7 +57,7 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return plantList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
@@ -56,12 +66,17 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
 //        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
         val plantName: TextView = itemView.findViewById(R.id.crop_name_tv)
         val plantPrice: TextView = itemView.findViewById(R.id.price_offered_tv)
+        val plantWeight: TextView = itemView.findViewById(R.id.weightTV)
+        val plantStatus: TextView = itemView.findViewById(R.id.postedByTV)
         val plantRateType: TextView = itemView.findViewById(R.id.rate_type_tv)
 
         init {
             itemView.setOnClickListener{
 
                 listener.onItemClick(adapterPosition)
+            }
+            itemView.findViewById<TextView>(R.id.callBtn).setOnClickListener {
+                listener.callBtnClick(adapterPosition)
             }
         }
 

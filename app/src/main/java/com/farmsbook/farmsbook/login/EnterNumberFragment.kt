@@ -64,11 +64,12 @@ class EnterNumberFragment : Fragment() {
 
             val frag = EnterOtpFragment()
             val args = Bundle()
+            val number = ccp.fullNumber.subSequence(2, ccp.fullNumber.length)
             sendOtp(ccp.fullNumber)
-
             Handler().postDelayed(
             {
-                args.putString("PhoneNumber", ccp.formattedFullNumber)
+
+                args.putString("PhoneNumber", number.toString())
                 frag.arguments = args
                 val fragmentManager = activity?.supportFragmentManager
                 val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -102,7 +103,7 @@ class EnterNumberFragment : Fragment() {
             // in this we are calling a post method.
             val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
-                Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
                 //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
 
             }, { error -> // method to handle errors.

@@ -170,7 +170,7 @@ class AddRequirementActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
-            Toast.makeText(this, "Profile Created", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "Requirement Added", Toast.LENGTH_SHORT)
                 .show()
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()

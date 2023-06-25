@@ -1,25 +1,22 @@
 package com.farmsbook.farmsbook.buyer.ui.home
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageView
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropAdapter
-import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.databinding.ActivityViewHomeCropBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.json.JSONArray
 import org.json.JSONObject
 
 class ViewHomeCropActivity : AppCompatActivity() {
@@ -40,6 +37,15 @@ class ViewHomeCropActivity : AppCompatActivity() {
             startActivity(Intent(this,PostOfferActivity::class.java).putExtra("LISTED_ID",intent.getStringExtra("LISTED_ID")).putExtra("PARENT_ID",intent.getStringExtra("PARENT_ID")))
         }
 
+        binding.callBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${binding.farmerPhoneTV.text}")
+            startActivity(intent)
+        }
+
+        binding.AddSupplierBtn.setOnClickListener {
+            postDataUsingVolley(intent.getStringExtra("PARENT_ID").toString())
+        }
 
         backBtn.setOnClickListener {
             finish()
@@ -47,6 +53,36 @@ class ViewHomeCropActivity : AppCompatActivity() {
 
     }
 
+    private fun postDataUsingVolley(receiverId: String) {
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+        val url = "$baseAddressUrl/user/$userId/sendToFarmer/$receiverId"
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+        val respObj = JSONObject()
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
+
+            Toast.makeText(this@ViewHomeCropActivity, "Added Supplier", Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
+            finish()
+
+        }, { error -> // method to handle errors.
+            Log.d("Suppliers",error.toString())
+            Toast.makeText(
+                this@ViewHomeCropActivity,
+                "You have already added the supplier",
+                Toast.LENGTH_LONG
+            ).show()
+        })
+        queue.add(request)
+    }
 
     private fun getDataUsingVolley() {
 

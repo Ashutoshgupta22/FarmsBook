@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="buyer.ui.requirements.AddRequirementActivity">
+    android:background="#f7f7f7"
+    tools:context="buyer.ui.requirements
+    .AddRequirementActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -142,7 +144,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:hint="@string/min_amount"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:padding="12dp"
                 app:layout_constraintEnd_toStartOf="@+id/maxEdt"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -158,7 +160,7 @@
                 android:background="@drawable/edtxt_background_rounded3"
                 android:ems="10"
                 android:hint="@string/max_amount"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

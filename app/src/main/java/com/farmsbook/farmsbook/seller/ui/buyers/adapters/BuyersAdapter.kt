@@ -24,6 +24,8 @@ class BuyersAdapter (private val plantList : ArrayList<BuyersData>, val context:
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+
+        fun onAddButtonClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -77,6 +79,9 @@ class BuyersAdapter (private val plantList : ArrayList<BuyersData>, val context:
             itemView.setOnClickListener{
 
                 listener.onItemClick(adapterPosition)
+            }
+            itemView.findViewById<TextView>(R.id.addSupplierBtn).setOnClickListener {
+                listener.onAddButtonClick(adapterPosition)
             }
         }
 

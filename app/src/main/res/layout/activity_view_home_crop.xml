@@ -272,6 +272,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:text="TextView"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
                 app:layout_constraintBottom_toTopOf="@+id/farmer_locationTV"
                 app:layout_constraintStart_toEndOf="@+id/imageView28"
                 app:layout_constraintTop_toBottomOf="@+id/textView93"
@@ -297,11 +299,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/farmer_locationTV" />
 
             <Button
-                android:id="@+id/add_farmerBTN"
+                android:id="@+id/callBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="Add  +"
+                android:drawableTint="@color/white"
+                android:drawableEnd="@drawable/baseline_call_24"
+                android:paddingHorizontal="12dp"
+                android:text="Call"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/farmer_phoneTV"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,8 @@ class SuppliersAdapter (private val plantList : ArrayList<SuppliersData>, val co
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+
+        fun onAddButtonClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -69,6 +72,11 @@ class SuppliersAdapter (private val plantList : ArrayList<SuppliersData>, val co
             itemView.setOnClickListener{
 
                 listener.onItemClick(adapterPosition)
+
+
+            }
+            itemView.findViewById<TextView>(R.id.addSupplierBtn).setOnClickListener {
+                listener.onAddButtonClick(adapterPosition)
             }
         }
 

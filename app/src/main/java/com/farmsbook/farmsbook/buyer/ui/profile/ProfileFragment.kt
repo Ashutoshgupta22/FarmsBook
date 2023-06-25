@@ -41,6 +41,10 @@ class ProfileFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    override fun onResume() {
+        super.onResume()
+        getDataUsingVolley()
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,7 +55,7 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        getDataUsingVolley()
+        //getDataUsingVolley()
         val builder = AlertDialog.Builder(requireContext())
 
         val view = layoutInflater.inflate(R.layout.logout_dialog, null)
@@ -197,14 +201,10 @@ class ProfileFragment : Fragment() {
             binding.companyTv.text = response.getString("business_name")
             binding.phoneTv.text = response.getString("phone")
             binding.addressTv.text = response.getString("location")
-
         }, { error -> // method to handle errors.
             Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
             Log.d("Profile Data", "Fail to get response = $error")
         })
         queue.add(request)
     }
-
-
-
 }

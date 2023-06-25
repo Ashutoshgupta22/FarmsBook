@@ -10,14 +10,14 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView8"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="0dp"
-        android:scaleType="fitXY"
         android:layout_marginBottom="-8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/companyNameTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-        app:layout_constraintBottom_toBottomOf="@+id/companyNameTV"
         app:srcCompat="@drawable/crop_img" />
 
     <TextView
@@ -29,7 +29,9 @@
         android:fontFamily="@font/roboto_medium"
         android:text="Arun Sharma"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/callBtn"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
@@ -40,23 +42,42 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Agrigoods Pvt. Ltd"
-        android:textSize="16sp"
         android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/callBtn"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/name_tv"
         app:layout_constraintTop_toBottomOf="@+id/name_tv" />
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/postedByTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Crops are available for sale"
         android:textColor="@color/green"
 
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/callBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background_rounded_3"
+        android:drawableEnd="@drawable/baseline_call_24"
+        android:drawableTint="@color/white"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="Call "
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/companyNameTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/name_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

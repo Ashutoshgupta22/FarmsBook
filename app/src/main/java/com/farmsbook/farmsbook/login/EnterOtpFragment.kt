@@ -1,6 +1,9 @@
 package com.farmsbook.farmsbook.login
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -15,20 +18,28 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.buyer.MainActivity
+import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersCropAdapter
+import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersCropData
+import com.farmsbook.farmsbook.seller.SellerMainActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import org.json.JSONArray
 import org.json.JSONObject
 
 
 class EnterOtpFragment : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +51,6 @@ class EnterOtpFragment : Fragment() {
         val verifyBtn = view.findViewById<TextView>(R.id.verifyOtp_btn)
         val backBtn = view.findViewById<ImageView>(R.id.backBtn)
         val number = view.findViewById<TextView>(R.id.number_tv)
-
         val editText1 = view.findViewById<EditText>(R.id.otpEditText1)
         val editText2 = view.findViewById<EditText>(R.id.otpEditText2)
         val editText3 = view.findViewById<EditText>(R.id.otpEditText3)
@@ -68,20 +78,33 @@ class EnterOtpFragment : Fragment() {
         editText4.setOnKeyListener(GenericKeyEvent(editText4, editText3))
         editText5.setOnKeyListener(GenericKeyEvent(editText5, editText4))
         editText6.setOnKeyListener(GenericKeyEvent(editText6, editText5))
+        val value = requireArguments().getString("PhoneNumber")
+        number.text = value
 
+        val timerText = view.findViewById<TextView>(R.id.textView9)
+        timerText.isEnabled = false
         val timer = object: CountDownTimer(25000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val timerText = view.findViewById<TextView>(R.id.textView9)
-                timerText.setText("Resend the Code (in ${(millisUntilFinished)/1000} seconds)")
-            }
-            override fun onFinish() {
 
+                timerText.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+                timerText.isEnabled = false
+                timerText.setText("Resend the Code (in ${(millisUntilFinished)/1000} seconds)")
+
+            }
+            @SuppressLint("SetTextI18n")
+            override fun onFinish() {
+                timerText.setText("Resend the Code")
+                timerText.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+                timerText.isEnabled = true
             }
         }
         timer.start()
 
-        val value = requireArguments().getString("PhoneNumber")
-        number.text = value
+        timerText.setOnClickListener {
+            timer.start()
+            sendOtp(value.toString())
+        }
+
         verifyBtn.setOnClickListener {
 
             val typedOTP =
@@ -93,11 +116,19 @@ class EnterOtpFragment : Fragment() {
                 progressDialog.setMessage("Verifying")
                 progressDialog.show()
 
+                timer.cancel()
 
                 Handler().postDelayed({
                     progressDialog.dismiss()
                     validateOtp(typedOTP)
-
+//                    val frag = ChooseRoleFragment()
+//                    val args = Bundle()
+//                    args.putString("PhoneNumber", value)
+//                    frag.arguments = args
+//                    val fragmentManager = activity?.supportFragmentManager
+//                    val fragmentTransaction = fragmentManager?.beginTransaction()
+//                    fragmentTransaction?.replace(R.id.fragmentContainerView, frag)
+//                    fragmentTransaction?.commit()
                 },1000)
 
             }
@@ -185,16 +216,10 @@ class EnterOtpFragment : Fragment() {
         val request = object : StringRequest(Method.POST, url, Response.Listener { response ->
             // Handle the response here
 
+
            Log.d("OTP", response)
             val value = requireArguments().getString("PhoneNumber")
-            val frag = ChooseRoleFragment()
-            val args = Bundle()
-            args.putString("PhoneNumber", value)
-            frag.arguments = args
-            val fragmentManager = activity?.supportFragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragmentContainerView, frag)
-            fragmentTransaction?.commit()
+            getDataUsingVolley(value.toString())
 
 
         }, Response.ErrorListener { error ->
@@ -209,6 +234,86 @@ class EnterOtpFragment : Fragment() {
             }
         }
 
+        queue.add(request)
+    }
+
+    private fun getDataUsingVolley(phone: String) {
+
+        // url to post our data
+       val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+//        val userId = intent.getStringExtra("FARMER_ID")
+
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method
+
+        val url2 = "$baseAddressUrl/check_exist/$phone"
+        val request2 = JsonObjectRequest(Request.Method.GET, url2, null, { response: JSONObject ->
+
+            if(response["active"]== true)
+            {
+                val value = requireArguments().getString("PhoneNumber")
+                val frag = ChooseRoleFragment()
+                val args = Bundle()
+                args.putString("PhoneNumber", value)
+                frag.arguments = args
+                val fragmentManager = activity?.supportFragmentManager
+                val fragmentTransaction = fragmentManager?.beginTransaction()
+                fragmentTransaction?.replace(R.id.fragmentContainerView, frag)
+                fragmentTransaction?.commit()
+            }
+            else{
+                val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+                var editor = sharedPreference?.edit()
+                editor?.putInt("USER_ID",response["id"].toString().toInt())
+                editor?.putBoolean("USER_ROLE",response["role"].toString().toBoolean())
+                editor?.commit()
+
+                if(response["role"] == true)
+                {
+                    startActivity(Intent(context,MainActivity::class.java))
+                    finishAffinity(LoginActivity())
+                }
+                else
+                {
+                    startActivity(Intent(context, SellerMainActivity::class.java))
+                    finishAffinity(LoginActivity())
+                }
+            }
+
+        }, { error -> // method to handle errors.
+            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request2)
+    }
+
+    private fun sendOtp(phone:String) {
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val url = "$baseAddressUrl/otp"
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+        val respObj = JSONObject()
+
+        respObj.put("phoneNumber", phone)
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
+
+            //Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
+
+        }, { error -> // method to handle errors.
+            Log.d("OTP Validation",error.toString())
+            //Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
         queue.add(request)
     }
 }

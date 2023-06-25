@@ -127,35 +127,43 @@
                 app:layout_constraintTop_toTopOf="@+id/textView81" />
 
             <TextView
-                android:id="@+id/time_of_sowingTV"
+                android:id="@+id/locationTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/varietyTV"
                 app:layout_constraintTop_toTopOf="@+id/textView83" />
 
             <TextView
-                android:id="@+id/time_of_farmingTV"
-                android:layout_width="wrap_content"
+                android:id="@+id/priceTV"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/time_of_sowingTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/locationTV"
                 app:layout_constraintTop_toTopOf="@+id/textView84" />
 
             <TextView
-                android:id="@+id/textView86_2"
+                android:id="@+id/quantityTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/varietyTV"
                 app:layout_constraintTop_toTopOf="@+id/textView83_2" />
 
             <TextView
-                android:id="@+id/textView87_2"
+                android:id="@+id/transportationTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/time_of_sowingTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/locationTV"
                 app:layout_constraintTop_toTopOf="@+id/textView84_2" />
 
             <TextView
@@ -185,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Farmer Name"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView28"
                 app:layout_constraintTop_toTopOf="@+id/imageView28" />
 
@@ -194,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company Name"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/farmerNameTV"
                 app:layout_constraintTop_toBottomOf="@+id/farmerNameTV" />
 
@@ -203,11 +211,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/farmerNameTV"
                 app:layout_constraintTop_toBottomOf="@+id/farmer_locationTV" />
 
             <Button
-                android:id="@+id/add_farmerBTN"
+                android:id="@+id/addBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
@@ -232,7 +242,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView28">
 
                 <TextView
-                    android:id="@+id/viewSupplierBtn"
+                    android:id="@+id/interestedBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
@@ -247,13 +257,14 @@
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/postOfferBtn"
+                    android:id="@+id/callBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_background_rounded_3"
                     android:drawableEnd="@drawable/baseline_phone_24"
+                    android:paddingHorizontal="57dp"
                     android:drawableTint="@color/white"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"

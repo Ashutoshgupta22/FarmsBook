@@ -3,6 +3,7 @@ package com.farmsbook.farmsbook.seller.ui.listings
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
@@ -49,12 +50,14 @@ class AddListingActivity : AppCompatActivity() {
 
         var type_of_sale = false
         rb1.setOnClickListener {
+            binding.rateEdt.isEnabled = true
             if (rb2.isChecked) {
                 rb2.isChecked = false
                 type_of_sale = false
             }
         }
         rb2.setOnClickListener {
+            binding.rateEdt.isEnabled = false
             if (rb1.isChecked) {
                 rb1.isChecked = false
                 type_of_sale = true
@@ -109,9 +112,43 @@ class AddListingActivity : AppCompatActivity() {
 
 
         binding.confirmBtn.setOnClickListener {
-            postDataUsingVolley(type_of_sale, transportation, type_of_farming)
-            startActivity(Intent(this@AddListingActivity,ListingConfirmationActivity::class.java))
-            finish()
+
+            if (type_of_sale == false) {
+
+                if (TextUtils.isEmpty(binding.rateEdt.text)) {
+                    binding.rateEdt.error = "Enter a value for rate"
+                    binding.rateEdt.requestFocus()
+                }
+            } else if (TextUtils.isEmpty(binding.minEdt.text)) {
+                binding.minEdt.error = "Select a valid price"
+                binding.minEdt.requestFocus()
+            }else if (TextUtils.isEmpty(binding.maxEdt.text)) {
+                binding.maxEdt.error = "Select a valid price"
+                binding.maxEdt.requestFocus()
+            } else if (TextUtils.isEmpty(binding.amountEdt.text)) {
+                binding.amountEdt.error = "Enter a valid quantity"
+                binding.amountEdt.requestFocus()
+            } else if (TextUtils.isEmpty(binding.autoCompleteTextView.text)) {
+                binding.autoCompleteTextView.error = "Enter a valid unit"
+                binding.autoCompleteTextView.requestFocus()
+            } else if (TextUtils.isEmpty(binding.autoCompleteTextView2.text)) {
+                binding.autoCompleteTextView2.error = "Select a state"
+                binding.autoCompleteTextView2.requestFocus()
+            }else if (TextUtils.isEmpty(binding.autoCompleteTextView3.text)) {
+                binding.minEdt.error = "Select a valid time of sowing"
+                binding.minEdt.requestFocus()
+            }
+            else {
+
+                postDataUsingVolley(type_of_sale, transportation, type_of_farming)
+                startActivity(
+                    Intent(
+                        this@AddListingActivity,
+                        ListingConfirmationActivity::class.java
+                    )
+                )
+                finish()
+            }
         }
 
     }
@@ -138,7 +175,15 @@ class AddListingActivity : AppCompatActivity() {
         respObj.put("crop_name", binding.nameEdt.text.toString())
         respObj.put("variety", binding.varietyEdt.text.toString())
         respObj.put("type_of_sale", type_of_sale)
-        respObj.put("rate", binding.rateEdt.text.toString().toInt())
+        if(TextUtils.isEmpty(binding.rateEdt.text))
+        {
+            respObj.put("rate", 0)
+        }
+        else
+        {
+            respObj.put("rate", binding.rateEdt.text.toString().toInt())
+        }
+        //respObj.put("rate", binding.rateEdt.text.toString().toInt())
         respObj.put("min_price", binding.minEdt.text.toString().toInt())
         respObj.put("max_price", binding.maxEdt.text.toString().toInt())
         respObj.put("quantity", binding.amountEdt.text.toString().toInt())
@@ -162,5 +207,4 @@ class AddListingActivity : AppCompatActivity() {
         })
         queue.add(request)
     }
-
 }

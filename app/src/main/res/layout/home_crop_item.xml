@@ -17,7 +17,6 @@
             android:id="@+id/img_cardView"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            app:cardCornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/crop_img" />
+                app:srcCompat="@color/green" />
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline

@@ -1,13 +1,16 @@
 package com.farmsbook.farmsbook.seller.ui.buyers
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.ui.suppliers.ViewSupplierActivity
@@ -19,6 +22,7 @@ import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersAdapter
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
+import org.json.JSONObject
 
 class AddBuyerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddBuyerBinding
@@ -36,12 +40,39 @@ class AddBuyerActivity : AppCompatActivity() {
 
 
     }
+    private fun postDataUsingVolley(receiverId : String ) {
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference =getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+        val url = "$baseAddressUrl/user/$userId/sendToBuyer/$receiverId"
 
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+        val respObj = JSONObject()
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonObjectRequest(Request.Method.POST, url, null, {
+
+            Toast.makeText(this@AddBuyerActivity,"Added Buyer",Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
+            finish()
+
+        }, { error -> // method to handle errors.
+            Log.d("Buyers",error.toString())
+            Toast.makeText(this@AddBuyerActivity, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
+    }
     private fun getDataUsingVolley() {
 
         // url to post our data
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
-        val url = "$baseAddressUrl/user/home_farmer"
+        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+        val url = "$baseAddressUrl/user/$userId/home_farmer"
 
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
@@ -90,13 +121,22 @@ class AddBuyerActivity : AppCompatActivity() {
 //                intent.putExtra("Quality",plantList[position].Quality)
 //                startActivity(intent)
                 }
+                override fun onAddButtonClick(position: Int) {
+
+                    postDataUsingVolley(plantList[position].FarmerID.toString())
+                    adapter.notifyDataSetChanged()
+
+                }
             })
 
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.
+            Log.d("Buyers",error.toString())
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
+
         queue.add(request)
+
     }
 }

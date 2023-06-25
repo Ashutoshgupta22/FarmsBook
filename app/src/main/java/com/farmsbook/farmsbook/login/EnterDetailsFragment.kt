@@ -1,13 +1,12 @@
 package com.farmsbook.farmsbook.login
 
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
-import android.os.UserHandle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,18 +21,26 @@ import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.MainActivity
 import com.farmsbook.farmsbook.seller.SellerMainActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.google.android.material.imageview.ShapeableImageView
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.util.*
 
 open class EnterDetailsFragment : Fragment() {
 
     private lateinit var name: EditText
+    private lateinit var profileImage: ShapeableImageView
     private lateinit var phone: TextView
     private lateinit var email: EditText
     private lateinit var location: AutoCompleteTextView
     private lateinit var businessName: EditText
     private lateinit var businessTurnOver: EditText
     private lateinit var foundationDate: EditText
+    companion object{
+        val IMAGE_REQUEST_CODE = 100
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +62,7 @@ open class EnterDetailsFragment : Fragment() {
         // set adapter to the autocomplete tv to the arrayAdapter
         location.setAdapter(arrayAdapter)
 
-
+        profileImage = view.findViewById(R.id.profileImage)
         name = view.findViewById(R.id.nameEdt)
         phone = view.findViewById(R.id.phoneEdt)
         email = view.findViewById(R.id.emailEdt)
@@ -72,6 +79,12 @@ phone.setText(value)
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
+
+        profileImage.setOnClickListener {
+
+            pickImageGallery()
+
+        }
 
 
         foundationDate.setOnClickListener {
@@ -114,14 +127,14 @@ phone.setText(value)
             } else {
 
                 postDataUsingVolley(
-                    name.text.toString(),
+                    name.text.trim().toString(),
                     role.toString().toBoolean(),
-                    phone.text.toString(),
-                    email.text.toString(),
-                    location.text.toString(),
-                    businessName.text.toString(),
-                    businessTurnOver.text.toString(),
-                    foundationDate.text.toString(),
+                    phone.text.trim().toString(),
+                    email.text.trim().toString(),
+                    location.text.trim().toString(),
+                    businessName.text.trim().toString(),
+                    businessTurnOver.text.trim().toString(),
+                    foundationDate.text.trim().toString(),
                 )
 
 //                startActivity(Intent(context, MainActivity::class.java))
@@ -140,6 +153,40 @@ phone.setText(value)
         }
 
         return view
+    }
+
+    private fun pickImageGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent,IMAGE_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK)
+        {
+            profileImage.setImageURI(data?.data)
+            val imageUri = data?.data
+            val inputStream: InputStream? = imageUri?.let {
+                activity?.getContentResolver()?.openInputStream(
+                    it
+                )
+            }
+            val outputStream = ByteArrayOutputStream()
+
+            val buffer = ByteArray(1024)
+            var bytesRead: Int = 0
+            while (inputStream?.read(buffer).also {
+                    if (it != null) {
+                        bytesRead = it
+                    }
+                } != -1) {
+                outputStream.write(buffer, 0, bytesRead)
+            }
+
+            val imageBytes: ByteArray = outputStream.toByteArray()
+            Log.d("Image","$imageBytes")
+        }
     }
 
     private fun postDataUsingVolley(
@@ -191,7 +238,6 @@ phone.setText(value)
                 finishAffinity(requireActivity())
             }
 
-
             val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
             var editor = sharedPreference?.edit()
             editor?.putInt("USER_ID",it["id"].toString().toInt())
@@ -205,5 +251,4 @@ phone.setText(value)
         })
         queue.add(request)
     }
-
 }

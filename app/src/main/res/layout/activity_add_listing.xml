@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fdfdfd"
     tools:context=".seller.ui.listings.AddListingActivity">
 
     <LinearLayout
@@ -54,6 +55,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="1400dp"
+            android:background="#f4f4f4"
             android:padding="24dp">
 
             <TextView

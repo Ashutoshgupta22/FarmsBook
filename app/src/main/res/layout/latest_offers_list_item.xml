@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/price_offered_tv" />
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/weightTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toTopOf="@+id/crop_name_tv" />
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/postedByTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -82,37 +82,21 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <TextView
-        android:id="@+id/textView76"
+        android:id="@+id/callBtn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Cancel"
-        android:gravity="center"
-        android:textColor="@color/gray"
-        android:paddingVertical="7dp"
-        android:fontFamily="@font/roboto_medium"
-        android:background="@drawable/edtxt_background_rounded3"
-        app:layout_constraintEnd_toStartOf="@+id/textView82"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-    <TextView
-        android:id="@+id/textView82"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Call"
-        android:paddingHorizontal="20dp"
-        android:drawableTint="@color/white"
-        android:textColor="@color/white"
-        android:fontFamily="@font/roboto_medium"
-        android:drawableEnd="@drawable/baseline_call_24"
+        android:layout_marginTop="24dp"
         android:background="@drawable/button_background_rounded_3"
-        android:paddingVertical="5dp"
+        android:drawableEnd="@drawable/baseline_call_24"
+        android:drawableTint="@color/white"
+        android:fontFamily="@font/roboto_medium"
         android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="5dp"
+        android:text="Call"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView76"
-        app:layout_constraintTop_toTopOf="@+id/textView76" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postedByTV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

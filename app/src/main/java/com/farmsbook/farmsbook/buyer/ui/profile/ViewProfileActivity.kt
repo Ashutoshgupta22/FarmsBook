@@ -62,12 +62,10 @@ class ViewProfileActivity : AppCompatActivity() {
 
         val url = "$baseAddressUrl/user/$userId/requirements"
 
-
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
             for (i in 0 until response.length()) {
                 try {
-
                     var cropObject = response.getJSONObject(i)
                     var crop = ProfileCropData()
                     crop.Name = cropObject.getString("crop_name")

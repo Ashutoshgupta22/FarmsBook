@@ -15,6 +15,8 @@ class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val 
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+        fun callClick(position: Int)
+        fun deleteClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -33,12 +35,12 @@ class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val 
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       // val currentItem =plantList[position]
+       val currentItem =plantList[position]
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
-        holder.plantName.text = "Rice"
-        holder.plantPrice.text = "Min 2/ton - Max 4/ton"
-        holder.plantRateType.text = "Fixed Rate"
+        holder.plantName.text = currentItem.crop_name
+        holder.plantRateType.text = currentItem.purchased_on
+        holder.postedBy.text = "Requirement Posted by ${currentItem.buyer_name}"
 
 
 //        holder.itemView.setOnClickListener {
@@ -47,7 +49,7 @@ class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val 
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return plantList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
@@ -55,13 +57,21 @@ class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val 
 
 //        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
         val plantName: TextView = itemView.findViewById(R.id.crop_name_tv)
-        val plantPrice: TextView = itemView.findViewById(R.id.price_offered_tv)
         val plantRateType: TextView = itemView.findViewById(R.id.rate_type_tv)
+        val postedBy: TextView = itemView.findViewById(R.id.postedByTV)
 
         init {
             itemView.setOnClickListener{
 
                 listener.onItemClick(adapterPosition)
+            }
+            itemView.findViewById<TextView>(R.id.deleteBtn).setOnClickListener{
+
+                listener.deleteClick(adapterPosition)
+            }
+            itemView.findViewById<TextView>(R.id.callBtn).setOnClickListener{
+
+                listener.callClick(adapterPosition)
             }
         }
 

@@ -4,6 +4,8 @@ data class CropData(
     var crop_name: String? = null,
     var crop_image: String? = null,
     var crop_location : String? = null,
+    var max_price : String?= null,
+    var min_price : String?= null,
     var timestamp : String? = null,
     var user : String? = null,
     var quantity : String? = null,

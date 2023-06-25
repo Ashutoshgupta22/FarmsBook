@@ -31,10 +31,7 @@ class LoginActivity : AppCompatActivity() {
         binding.signinBtn.setOnClickListener {
             binding.loginLayout.visibility = GONE
             replaceFragment(EnterNumberFragment())
-
         }
-
-
     }
 
     private fun replaceFragment(fragment : Fragment) {
@@ -63,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
         val mDialog = mBuilder.create()
         mDialog.show()
     }
+
     private fun setLocale(lang: String?) {
         val locale = Locale(lang)
         Locale.setDefault(locale)
@@ -79,5 +77,4 @@ class LoginActivity : AppCompatActivity() {
         val lang = sharedPreferences.getString("My_lang", "")
         setLocale(lang)
     }
-
 }

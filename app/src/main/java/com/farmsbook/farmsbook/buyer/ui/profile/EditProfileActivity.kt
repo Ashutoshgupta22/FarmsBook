@@ -45,6 +45,7 @@ class EditProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        getDataUsingVolley()
 
         val states = resources.getStringArray(R.array.States)
         // create an array adapter and pass the required parameter
@@ -55,6 +56,8 @@ class EditProfileActivity : AppCompatActivity() {
         // set adapter to the autocomplete tv to the arrayAdapter
         location.setAdapter(arrayAdapter)
 
+        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val role = sharedPreference?.getBoolean("USER_ROLE",false)
 
 
         name = findViewById(R.id.nameEdt)
@@ -88,7 +91,7 @@ class EditProfileActivity : AppCompatActivity() {
             dpd.show()
         }
 
-        getDataUsingVolley()
+
 
        binding.confirmBtn.setOnClickListener {
 
@@ -111,9 +114,19 @@ class EditProfileActivity : AppCompatActivity() {
                foundationDate.error = "Enter a valid Foundation Date"
                foundationDate.requestFocus()
            } else {
+               postDataUsingVolley(
+                   name.text.toString(),
+                   role.toString().toBoolean(),
+                   phone.text.toString(),
+                   email.text.toString(),
+                   location.text.toString(),
+                   businessName.text.toString(),
+                   businessTurnOver.text.toString(),
+                   foundationDate.text.toString(),
+               )
 
 
-               Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
+               //Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
                finish()
 //                startActivity(Intent(context, MainActivity::class.java))
 //                finishAffinity(requireActivity())
@@ -143,7 +156,7 @@ class EditProfileActivity : AppCompatActivity() {
                 name.setText(response["name"].toString())
                 phone.setText(response["phone"].toString())
                 email.setText(response["email"].toString())
-                location.setText(response["location"].toString())
+                //location.setText(response["location"].toString())
                 businessName.setText(response["business_name"].toString())
                 businessTurnOver.setText(response["business_turnovers"].toString())
                 foundationDate.setText(response["foundation_date"].toString())
@@ -156,52 +169,53 @@ class EditProfileActivity : AppCompatActivity() {
             queue.add(request)
         }
 
-        private fun postDataUsingVolley(
-            name: String,
-            phone: String,
-            email: String,
-            location: String,
-            businessName: String,
-            businessTurnovers: String,
-            foundationDate: String
-        ) {
-            // url to post our data
-            val baseAddressUrl = BaseAddressUrl().baseAddressUrl
-            val url = "$baseAddressUrl/user"
+    private fun postDataUsingVolley(
+        name: String,
+        role: Boolean,
+        phone: String,
+        email: String,
+        location: String,
+        businessName: String,
+        businessTurnovers: String,
+        foundationDate: String
+    ) {
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference =  getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId =  sharedPreference?.getInt("USER_ID",0)
+        val url = "$baseAddressUrl/user/$userId"
 
-            // creating a new variable for our request queue
-            val queue: RequestQueue = Volley.newRequestQueue(this)
-            val respObj = JSONObject()
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+        val respObj = JSONObject()
 
-            respObj.put("display_image", "https://example.com/display_image.jpg")
-            respObj.put("background_image", "https://example.com/background_image.jpg")
-            respObj.put("name", name)
-            respObj.put("phone", phone)
-            respObj.put("email", email)
-            respObj.put("business_members", 500)
-            respObj.put("business_name", businessName)
-            respObj.put("business_turnovers", businessTurnovers.toInt())
-            respObj.put("crop_count", 50)
-            respObj.put("location", location)
-            respObj.put("foundation_date", foundationDate)
-
-
-            // on below line we are calling a string
-            // request method to post the data to our API
-            // in this we are calling a post method.
-            val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
+        respObj.put("display_image", "https://example.com/display_image.jpg")
+        respObj.put("background_image", "https://example.com/background_image.jpg")
+        respObj.put("name", name)
+        respObj.put("phone", phone)
+        respObj.put("email", email)
+        respObj.put("role", role)
+        respObj.put("business_members", 500)
+        respObj.put("business_name", businessName)
+        respObj.put("business_turnovers", businessTurnovers.toInt())
+        respObj.put("crop_count", 50)
+        respObj.put("location", location)
+        respObj.put("foundation_date", foundationDate)
 
 
-                val sharedPreference2 = getSharedPreferences("pref", Context.MODE_PRIVATE)
-                val userROLE = sharedPreference2.getBoolean("USER_ROLE",false)
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonObjectRequest(Request.Method.PUT, url, respObj, {
 
 
-                Toast.makeText(this, "Profile Created", Toast.LENGTH_SHORT).show()
-                //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
 
-            }, { error -> // method to handle errors.
-                Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            })
-            queue.add(request)
-        }
+            Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
+
+        }, { error -> // method to handle errors.
+            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
+    }
 }

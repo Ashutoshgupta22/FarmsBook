@@ -1,10 +1,14 @@
 package com.farmsbook.farmsbook.buyer.ui.home
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -24,16 +28,22 @@ import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.databinding.FragmentHomeBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+    private lateinit var adapter : CropAdapter
     private lateinit var binding: FragmentHomeBinding
-
+    private lateinit var sharedPreference: SharedPreferences
+    private var userId: Int = 0
     private lateinit var plantList: ArrayList<CropData>
     private lateinit var tempArrayList: ArrayList<CropData>
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,22 +55,49 @@ class HomeFragment : Fragment() {
 
 
 
+        sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)!!
+        userId = sharedPreference.getInt("USER_ID", 0)
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.searchEdt.setOnClickListener {
-            startActivity(Intent(context, HomeSearchActivity::class.java))
-        }
+        getDataUsingVolley("/user/$userId/home_buyer_main")
+
+        binding.searchEdt.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filter(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
 
         binding.sortBtn.setOnClickListener {
 
             showDialog()
 
         }
-        getDataUsingVolley("/home_buyer")
 
 
         return root
+    }
+
+    private fun filter(text: String) {
+        //new array list that will hold the filtered data
+        val filteredNames = ArrayList<CropData>()
+        //looping through existing elements and adding the element to filtered list
+        plantList.filterTo(filteredNames) {
+            //if the existing elements contains the search input
+            it.crop_name?.toLowerCase(Locale.ROOT)!!.contains(text.toLowerCase(Locale.ROOT))
+        }
+        //calling a method of the adapter class and passing the filtered list
+        adapter.filterList(filteredNames)
     }
 
     private fun showDialog() {
@@ -69,18 +106,20 @@ class HomeFragment : Fragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.sort_bottom_sheet_layout)
 
+        val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+
         val topSeller = dialog.findViewById<TextView>(R.id.top_seller)
         val pricelh = dialog.findViewById<TextView>(R.id.price_low_to_high)
         val pricehl = dialog.findViewById<TextView>(R.id.price_high_to_low)
         val product_atoz = dialog.findViewById<TextView>(R.id.product_atoz)
         val product_ztoa = dialog.findViewById<TextView>(R.id.product_ztoa)
 
-        var extension ="/home_buyer"
+        var extension = "/home_buyer"
         val button = dialog.findViewById<Button>(R.id.button2)
         button.setOnClickListener {
 
             getDataUsingVolley(extension)
-
             dialog.dismiss()
         }
         val closeBtn = dialog.findViewById<ImageView>(R.id.closeBtn)
@@ -88,22 +127,44 @@ class HomeFragment : Fragment() {
 
         topSeller.setOnClickListener {
             topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
 
         pricelh.setOnClickListener {
+            extension = "/user/$userId/home_buyer01"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
 
         pricehl.setOnClickListener {
+            extension = "/user/$userId/home_buyer10"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
 
         product_atoz.setOnClickListener {
-            extension = "/home_buyerAZ"
+            extension = "/user/$userId/home_buyerAZ"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
         product_ztoa.setOnClickListener {
-            extension = "/home_buyerZA"
+            extension = "/user/$userId/home_buyerZA"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
         }
 
@@ -116,7 +177,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun getDataUsingVolley(extension:String) {
+    private fun getDataUsingVolley(extension: String) {
 
         // url to post our data
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
@@ -137,12 +198,14 @@ class HomeFragment : Fragment() {
 
                     var cropObject = response.getJSONObject(i)
                     var crop = CropData()
-                    crop.crop_name = cropObject.getString("crop_name")
+                    crop.crop_name = cropObject.getString("cropName")
                     crop.crop_image = cropObject.getString("crop_image")
                     crop.crop_location = cropObject.getString("crop_location")
                     crop.user = cropObject.getString("user")
                     crop.offer = cropObject.getBoolean("offer").toString()
                     crop.quantity = cropObject.getInt("quantity").toString()
+                    crop.min_price = cropObject.getInt("crop_min_price").toString()
+                    crop.max_price = cropObject.getInt("crop_max_price").toString()
                     crop.id = cropObject.getInt("id").toString()
                     crop.parent_id = cropObject.getInt("parent_id").toString()
 
@@ -153,8 +216,9 @@ class HomeFragment : Fragment() {
             }
 
             binding.cropRecyclerView.layoutManager = LinearLayoutManager(context)
-            val adapter = context?.let { CropAdapter(plantList, it) }
+            adapter = context?.let { CropAdapter(plantList, it) }!!
             binding.cropRecyclerView.adapter = adapter
+
 
             adapter?.setOnItemClickListener(object : CropAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
@@ -176,6 +240,11 @@ class HomeFragment : Fragment() {
 //                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
 //                intent.putExtra("Quality",plantList[position].Quality)
 //                startActivity(intent)
+                }
+
+                override fun offerPrice(position: Int) {
+                    startActivity(Intent(context,PostOfferActivity::class.java).putExtra("LISTED_ID", plantList[position].id)
+                        .putExtra("PARENT_ID", plantList[position].parent_id))
                 }
             })
 

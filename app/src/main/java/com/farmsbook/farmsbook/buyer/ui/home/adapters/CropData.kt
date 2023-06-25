@@ -7,6 +7,8 @@ data class CropData(
     var user : String? = null,
     var quantity : String? = null,
     var id : String?= null,
+    var max_price : String?= null,
+    var min_price : String?= null,
     var parent_id : String?=null,
     var offer : String?=null
 )

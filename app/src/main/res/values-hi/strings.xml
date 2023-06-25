@@ -62,6 +62,7 @@
     <string name="fixed_rate">Fixed Rate</string>
     <string name="crop_name">Crop Name</string>
     <string name="rate">Rate %</string>
+    <string name="variety">Variety</string>
     <string name="min_amount">Min Amount</string>
     <string name="max_amount">Max Amount</string>
     <string name="quantity">Quantity</string>
@@ -78,9 +79,11 @@
 
 
 <!--    Add Requirement Screen -->
+    <string name="submit">Submit</string>
     <string name="add_requirement">Add Requirement</string>
     <string name="required">Required</string>
     <string name="not_required">Not Required</string>
+    <string name="price_range">Price Range</string>
     <string name="search_product_farmer_etc">Search Product farmer etc</string>
 
 <!--    Edit Profile Screen-->

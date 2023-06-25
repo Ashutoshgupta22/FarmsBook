@@ -1,10 +1,13 @@
 package com.farmsbook.farmsbook.seller.ui.home
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.Button
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.FragmentSellerHomeBinding
@@ -25,16 +29,19 @@ import com.farmsbook.farmsbook.seller.ui.home.adapters.CropAdapter
 import com.farmsbook.farmsbook.seller.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
+import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
-
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private lateinit var binding: FragmentSellerHomeBinding
-
     private lateinit var plantList: ArrayList<CropData>
     private lateinit var tempArrayList :ArrayList<CropData>
+    private lateinit var adapter:CropAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,20 +55,47 @@ class HomeFragment : Fragment() {
         binding = FragmentSellerHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.searchEdt.setOnClickListener {
-            startActivity(Intent(context,HomeSearchActivity::class.java))
-        }
+        val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+        getDataUsingVolley("/user/$userId/home_farmer_main")
+
+        binding.searchEdt.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filter(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
         binding.sortBtn.setOnClickListener {
 
             showDialog()
 
         }
-        getDataUsingVolley("/home_farmer")
+        //getDataUsingVolley("/user/$userId/home_farmer_main")
 
 
         return root
     }
 
+    private fun filter(text: String) {
+        //new array list that will hold the filtered data
+        val filteredNames = ArrayList<CropData>()
+        //looping through existing elements and adding the element to filtered list
+        plantList.filterTo(filteredNames) {
+            //if the existing elements contains the search input
+            it.crop_name?.toLowerCase(Locale.ROOT)!!.contains(text.toLowerCase(Locale.ROOT))
+        }
+        //calling a method of the adapter class and passing the filtered list
+        adapter.filterList(filteredNames)
+    }
     private fun getDataUsingVolley(extension:String) {
 
         // url to post our data
@@ -90,6 +124,8 @@ class HomeFragment : Fragment() {
                     crop.timestamp = cropObject.getString("timestamp")
                     crop.user = cropObject.getString("user")
                     crop.offer = cropObject.getBoolean("buyer_interest_status").toString()
+                    crop.min_price = cropObject.getInt("buyer_min_price").toString()
+                    crop.max_price = cropObject.getInt("buyer_max_price").toString()
                     crop.quantity = cropObject.getInt("buyer_quantity").toString()
                     crop.id = cropObject.getString("buyer_id").toString()
                     crop.parent_id = cropObject.getInt("parent_id").toString()
@@ -102,14 +138,14 @@ class HomeFragment : Fragment() {
                 }
             }
             binding.cropRecyclerView.layoutManager = LinearLayoutManager(context)
-            val adapter = context?.let { CropAdapter(plantList, it) }
+            adapter = context?.let { CropAdapter(plantList, it) }!!
             binding.cropRecyclerView.adapter = adapter
 
             adapter?.setOnItemClickListener(object : CropAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
 
                    // Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-                    startActivity(Intent(context,ViewSellerHomeCropActivity::class.java))
+                    startActivity(Intent(context,ViewSellerHomeCropActivity::class.java).putExtra("req_id",plantList[position].id).putExtra("PARENT_ID",plantList[position].parent_id))
 //                intent.putExtra("Name",plantList[position].Name)
 //                intent.putExtra("Location",plantList[position].Location)
 //                intent.putExtra("Farmer Name",plantList[position].FarmerName)
@@ -117,6 +153,14 @@ class HomeFragment : Fragment() {
 //                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
 //                intent.putExtra("Quality",plantList[position].Quality)
 //
+                }
+
+                override fun interestedClick(position: Int) {
+                    postDataUsingVolley(plantList[position].id.toString(),plantList[position].parent_id.toString())
+                    adapter.notifyDataSetChanged()
+                    val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+                    val userId = sharedPreference?.getInt("USER_ID", 0)
+                    getDataUsingVolley("/user/$userId/home_farmer_main")
                 }
             })
 
@@ -127,11 +171,51 @@ class HomeFragment : Fragment() {
         })
         queue.add(request)
     }
+    private fun postDataUsingVolley(listed_id:String , parent_id:String) {
+
+//        {
+//            "offerId": 1,
+//            "purchased_on": true,
+//            "rate_of_commission": 5,
+//            "offering_price": 10,
+//            "offering_quantity_unit": "kg",
+//            "offering_quantity": 100,
+//            "transportation": false,
+//            "delivery_place": "New York",
+//            "offer_status": "active"
+//        }
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+        val url = "$baseAddressUrl/user/$parent_id/requirements/$listed_id/value/1/$userId"
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+        val respObj = JSONObject()
+
+
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
+
+            Toast.makeText(context, "Posted Interest", Toast.LENGTH_SHORT)
+                .show()
+        }, { error -> // method to handle errors.
+            Toast.makeText(getContext(), "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
+    }
     private fun showDialog() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.sort_bottom_sheet_layout)
+
+        val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
 
         val topSeller = dialog.findViewById<TextView>(R.id.top_seller)
         val pricelh = dialog.findViewById<TextView>(R.id.price_low_to_high)
@@ -152,22 +236,44 @@ class HomeFragment : Fragment() {
 
         topSeller.setOnClickListener {
             topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
 
         pricelh.setOnClickListener {
+            extension = "/user/$userId/home_farmer01"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
 
         pricehl.setOnClickListener {
+            extension = "/user/$userId/home_farmer10"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
 
         product_atoz.setOnClickListener {
-            extension = "/home_farmerAZ"
+            extension = "/user/$userId/home_farmerAZ"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
         }
         product_ztoa.setOnClickListener {
-            extension = "/home_farmerZA"
+            extension = "/user/$userId/home_farmerZA"
+            topSeller.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricelh.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            pricehl.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            product_atoz.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             product_ztoa.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
         }
 

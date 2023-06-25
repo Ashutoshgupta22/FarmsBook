@@ -10,13 +10,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
 
-class CropAdapter (private val plantList : ArrayList<CropData>, val context: Context):RecyclerView.Adapter<CropAdapter.Myviewholder> () {
+class CropAdapter (private var plantList : ArrayList<CropData>, val context: Context):RecyclerView.Adapter<CropAdapter.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+        fun interestedClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -39,7 +40,7 @@ class CropAdapter (private val plantList : ArrayList<CropData>, val context: Con
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
-        holder.plantPrice.text = "2/ton - 4/ton"
+        holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
         holder.plantLocation.text = currentItem.crop_location
         holder.plantWeight.text = currentItem.quantity.toString()
 //        holder.itemView.setOnClickListener {
@@ -65,7 +66,16 @@ class CropAdapter (private val plantList : ArrayList<CropData>, val context: Con
 
                 listener.onItemClick(adapterPosition)
             }
+            itemView.findViewById<TextView>(R.id.offerPriceBtn).setOnClickListener {
+                listener.interestedClick(adapterPosition)
+            }
         }
 
+
+
+    }
+    fun filterList(filteredNames: ArrayList<CropData>) {
+        this.plantList = filteredNames
+        notifyDataSetChanged()
     }
 }

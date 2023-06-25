@@ -16,6 +16,9 @@ class BuyersAdapter2 (private val plantList : ArrayList<BuyersData>, val context
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+
+
+
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -26,7 +29,7 @@ class BuyersAdapter2 (private val plantList : ArrayList<BuyersData>, val context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Myviewholder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.supplier_main_screen_item,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.supplier_pending_main_screen_item,parent,false)
 
         return Myviewholder(itemView,mListener)//,mListener
     }
@@ -61,8 +64,8 @@ class BuyersAdapter2 (private val plantList : ArrayList<BuyersData>, val context
             itemView.setOnClickListener{
 
                 listener.onItemClick(adapterPosition)
+
             }
         }
-
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
@@ -15,6 +16,7 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
+        fun deleteClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -36,7 +38,7 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
         //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
-        holder.plantPrice.text = "${currentItem.min_price}/${currentItem.quantity_unit} - ${currentItem.max_price}/${currentItem.quantity_unit}"
+        holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
         holder.plantDate.text = "Posted on : ${currentItem.timestamp}"
         holder.plantStatus.text = "${currentItem.receive_offer_status} Suppliers shown interest"
 
@@ -62,6 +64,9 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
             itemView.setOnClickListener{
 
                 listener.onItemClick(adapterPosition)
+            }
+            itemView.findViewById<ImageView>(R.id.deleteBtn).setOnClickListener {
+                listener.deleteClick(adapterPosition)
             }
         }
 

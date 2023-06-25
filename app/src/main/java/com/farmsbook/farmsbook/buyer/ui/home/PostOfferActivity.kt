@@ -3,19 +3,20 @@ package com.farmsbook.farmsbook.buyer.ui.home
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityPostOfferBinding
-import com.farmsbook.farmsbook.seller.ui.listings.fragments.ListingConfirmationActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -30,12 +31,12 @@ class PostOfferActivity : AppCompatActivity() {
     private lateinit var location: AutoCompleteTextView
     private lateinit var metrics: AutoCompleteTextView
 
-    private lateinit var binding : ActivityPostOfferBinding
+    private lateinit var binding: ActivityPostOfferBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostOfferBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
 
         rb1 = findViewById<RadioButton>(R.id.oc_rb)
@@ -43,23 +44,29 @@ class PostOfferActivity : AppCompatActivity() {
         rb3 = findViewById<RadioButton>(R.id.req_rb)
         rb4 = findViewById<RadioButton>(R.id.nreq_rb)
 
+        getDataUsingVolley()
         var type_of_buy = false
+        rb1.isChecked = true
         rb1.setOnClickListener {
+            binding.rateEdt.isEnabled = true
             if (rb2.isChecked) {
                 rb2.isChecked = false
+                type_of_buy = true
+            }
+        }
+
+        rb2.setOnClickListener {
+
+            binding.rateEdt.isEnabled = false
+            //binding.rateEdt.isActivated = false
+            if (rb1.isChecked) {
+                rb1.isChecked = false
                 type_of_buy = false
             }
         }
-        rb2.setOnClickListener {
-            if (rb1.isChecked) {
-                rb1.isChecked = false
-                type_of_buy = true
-
-            }
-        }
-
 
         var transportation = false
+        rb3.isChecked = true
         rb3.setOnClickListener {
             if (rb4.isChecked) {
                 rb4.isChecked = false
@@ -80,7 +87,7 @@ class PostOfferActivity : AppCompatActivity() {
         location.setAdapter(arrayAdapter)
 
         val metric = resources.getStringArray(R.array.Metrics)
-        val arrayAdapter2 = ArrayAdapter(this, R.layout.dropdown_item , metric)
+        val arrayAdapter2 = ArrayAdapter(this, R.layout.dropdown_item, metric)
         metrics = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         metrics.setAdapter(arrayAdapter2)
 
@@ -100,7 +107,7 @@ class PostOfferActivity : AppCompatActivity() {
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
                     // Display Selected date in textbox
-                    binding.deliveryDateEdt.setText("" + dayOfMonth + " / " + monthOfYear + 1 + " / " + year)
+                    binding.deliveryDateEdt.setText("" + dayOfMonth + " / " + (monthOfYear + 1) + " / " + year)
 
                 },
                 year,
@@ -111,12 +118,68 @@ class PostOfferActivity : AppCompatActivity() {
             dpd.show()
         }
         binding.confirmBtn.setOnClickListener {
-            postDataUsingVolley(type_of_buy, transportation)
-            startActivity(Intent(this, ListingConfirmationActivity::class.java))
-            finish()
+
+            if (type_of_buy == true) {
+
+                if (TextUtils.isEmpty(binding.rateEdt.text)) {
+                    binding.rateEdt.error = "Enter a value for rate"
+                    binding.rateEdt.requestFocus()
+                }
+            } else if (TextUtils.isEmpty(binding.minEdt.text)) {
+                binding.minEdt.error = "Select a valid price"
+                binding.minEdt.requestFocus()
+            } else if (TextUtils.isEmpty(binding.amountEdt.text)) {
+                binding.amountEdt.error = "Enter a valid quantity"
+                binding.amountEdt.requestFocus()
+            } else if (TextUtils.isEmpty(binding.autoCompleteTextView.text)) {
+                binding.autoCompleteTextView.error = "Enter a valid unit"
+                binding.autoCompleteTextView.requestFocus()
+            } else if (TextUtils.isEmpty(binding.deliveryDateEdt.text)) {
+                binding.deliveryDateEdt.error = "Enter a valid Delivery Date"
+                binding.deliveryDateEdt.requestFocus()
+            } else if (TextUtils.isEmpty(binding.autoCompleteTextView2.text)) {
+                binding.autoCompleteTextView2.error = "Select a state"
+                binding.autoCompleteTextView2.requestFocus()
+            } else {
+
+
+                postDataUsingVolley(type_of_buy, transportation)
+                startActivity(Intent(this, OfferConfirmationActivity::class.java))
+                finish()
+            }
+
+
         }
+    }
+
+    private fun getDataUsingVolley() {
+
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val id = intent.getStringExtra("LISTED_ID")
+        val parent_id   = intent.getStringExtra("PARENT_ID")
+        val url = "$baseAddressUrl/user/$parent_id/listings/$id"
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(this)
 
 
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
+
+            binding.cropNameTv.text = response["crop_name"].toString()
+            binding.locationTv.text = response["location"].toString()
+            binding.costTv.text = "Price Range : ₹"+response["min_price"].toString()+"/kg to ₹"+response["max_price"].toString()+"/kg"
+            binding.weightTv.text = response["quantity"].toString()+" "+response["quantity_unit"].toString()
+
+//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
+//                .show()
+        }, { error -> // method to handle errors.
+            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
     }
 
     private fun postDataUsingVolley(
@@ -151,15 +214,23 @@ class PostOfferActivity : AppCompatActivity() {
         val current = formatter.format(time)
 
 
-        respObj.put("offer_id", null)
         respObj.put("purchased_on", type_of_sale)
-        respObj.put("rate_of_commission", binding.rateEdt.text.toString().toInt())
+
+        if(TextUtils.isEmpty(binding.rateEdt.text))
+        {
+            respObj.put("rate_of_commission", 0)
+        }
+        else
+        {
+            respObj.put("rate_of_commission", binding.rateEdt.text.toString().toInt())
+        }
+
         respObj.put("offering_price", binding.minEdt.text.toString().toInt())
         respObj.put("offering_quantity", binding.amountEdt.text.toString().toInt())
         respObj.put("offering_quantity_unit", metrics.text.toString())
         respObj.put("delivery_place", location.text.toString())
         respObj.put("transportation", transportation)
-        respObj.put("offer_status", "active")
+        respObj.put("offer_status", false)
 
 
         // on below line we are calling a string
@@ -167,16 +238,14 @@ class PostOfferActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
-//            Toast.makeText(this, "Profile Created", Toast.LENGTH_SHORT)
+
+//            Toast.makeText(this, "Posted Offer", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
     }
-
-
-
 
 
 }
