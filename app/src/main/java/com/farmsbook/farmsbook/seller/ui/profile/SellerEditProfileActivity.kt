@@ -5,16 +5,14 @@ import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivitySellerEditProfileBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
@@ -23,12 +21,15 @@ import java.util.*
 
 class SellerEditProfileActivity : AppCompatActivity() {
 
+    private lateinit var image: String
+    private lateinit var background_image: String
     private lateinit var name: EditText
-    private lateinit var phone: EditText
+    private lateinit var phone: TextView
     private lateinit var email: EditText
-    private lateinit var location: AutoCompleteTextView
+    private lateinit var location: TextView
     private lateinit var businessName: EditText
     private lateinit var businessTurnOver: EditText
+    private lateinit var businessMembers: EditText
     private lateinit var foundationDate: EditText
     private lateinit var binding: ActivitySellerEditProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,25 +47,22 @@ class SellerEditProfileActivity : AppCompatActivity() {
         email = findViewById(R.id.emailEdt)
         businessName = findViewById(R.id.businessNameEdt)
         businessTurnOver = findViewById(R.id.businessTurnoverEdt)
+        businessMembers = findViewById(R.id.businessMembersEdt)
         foundationDate = findViewById(R.id.foundationDateEdt)
 
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
 
-        val states = resources.getStringArray(R.array.States)
-        // create an array adapter and pass the required parameter
-        // in our case pass the context, drop down layout , and array.
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, states)
-        // get reference to the autocomplete text view
-        location = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+        location = findViewById<TextView>(R.id.locationEdt)
         // set adapter to the autocomplete tv to the arrayAdapter
-        location.setAdapter(arrayAdapter)
 
         val locale = Locale("en", "IN")
         Locale.setDefault(locale)
-        val c = Calendar.getInstance(locale)
+        val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-
 
         foundationDate.setOnClickListener {
             val dpd = DatePickerDialog(
@@ -84,35 +82,6 @@ class SellerEditProfileActivity : AppCompatActivity() {
 
         getDataUsingVolley()
 
-        binding.confirmBtn.setOnClickListener {
-
-            if (TextUtils.isEmpty(name.text)) {
-                name.error = "Enter a valid Name"
-                name.requestFocus()
-            } else if (TextUtils.isEmpty(location.text)) {
-                location.error = "Select a valid State"
-                location.requestFocus()
-            } else if (TextUtils.isEmpty(phone.text)) {
-                phone.error = "Enter a valid Mobile Number"
-                phone.requestFocus()
-            } else if (TextUtils.isEmpty(businessName.text)) {
-                businessName.error = "Enter a valid Business Name"
-                businessName.requestFocus()
-            } else if (TextUtils.isEmpty(businessTurnOver.text)) {
-                businessTurnOver.error = "Enter a valid Business TurnOver"
-                businessTurnOver.requestFocus()
-            } else if (TextUtils.isEmpty(foundationDate.text)) {
-                foundationDate.error = "Enter a valid Foundation Date"
-                foundationDate.requestFocus()
-            } else {
-
-
-                Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
-                finish()
-//                startActivity(Intent(context, MainActivity::class.java))
-//                finishAffinity(requireActivity())
-            }
-        }
 
         binding.confirmBtn.setOnClickListener {
 
@@ -143,6 +112,7 @@ class SellerEditProfileActivity : AppCompatActivity() {
                     location.text.toString(),
                     businessName.text.toString(),
                     businessTurnOver.text.toString(),
+                    businessMembers.text.toString(),
                     foundationDate.text.toString(),
                 )
 
@@ -153,9 +123,6 @@ class SellerEditProfileActivity : AppCompatActivity() {
 //                finishAffinity(requireActivity())
             }
 
-            binding.backBtn.setOnClickListener {
-                finish()
-            }
         }
     }
         private fun getDataUsingVolley() {
@@ -169,17 +136,21 @@ class SellerEditProfileActivity : AppCompatActivity() {
             // creating a new variable for our request queue
             val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
             // on below line we are calling a string
             // request method to post the data to our API
             // in this we are calling a post method.
             val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
 
+                image = response["imagePath"].toString()
+                Glide.with(this).load(image).into(binding.profileImage)
+                background_image = response["imagePath"].toString()
                 name.setText(response["name"].toString())
                 phone.setText(response["phone"].toString())
                 email.setText(response["email"].toString())
+                location.setText(response["location"].toString())
                 businessName.setText(response["business_name"].toString())
                 businessTurnOver.setText(response["business_turnovers"].toString())
+                businessMembers.setText(response["business_members"].toString())
                 foundationDate.setText(response["foundation_date"].toString())
 
 
@@ -198,6 +169,7 @@ class SellerEditProfileActivity : AppCompatActivity() {
         location: String,
         businessName: String,
         businessTurnovers: String,
+        businessMembers: String,
         foundationDate: String
     ) {
         // url to post our data
@@ -210,13 +182,13 @@ class SellerEditProfileActivity : AppCompatActivity() {
         val queue: RequestQueue = Volley.newRequestQueue(this)
         val respObj = JSONObject()
 
-        respObj.put("display_image", "https://example.com/display_image.jpg")
-        respObj.put("background_image", "https://example.com/background_image.jpg")
+        respObj.put("imagePath", image)
+        respObj.put("background_imagePath", background_image)
         respObj.put("name", name)
         respObj.put("phone", phone)
         respObj.put("email", email)
         respObj.put("role", role)
-        respObj.put("business_members", 500)
+        respObj.put("business_members", businessMembers.toInt())
         respObj.put("business_name", businessName)
         respObj.put("business_turnovers", businessTurnovers.toInt())
         respObj.put("crop_count", 50)
@@ -228,7 +200,6 @@ class SellerEditProfileActivity : AppCompatActivity() {
         // request method to post the data to our API
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.PUT, url, respObj, {
-
 
             Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
             //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()

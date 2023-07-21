@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
 class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequirementsData>, val context: Context):RecyclerView.Adapter<LatestRequirementsAdapter.Myviewholder> () {
@@ -37,7 +38,7 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
 
 
         val currentItem = plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantPrice.text = "${currentItem.min_price}/${currentItem.quantity_unit} - ${currentItem.max_price}/${currentItem.quantity_unit}"
@@ -56,7 +57,7 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
 
 
-//        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
+        val plantImage: ImageView = itemView.findViewById(R.id.requirementCropImage)
         val plantName: TextView = itemView.findViewById(R.id.requirementName_tv)
         val plantPrice: TextView = itemView.findViewById(R.id.requirement_price_tv)
         val plantDate: TextView = itemView.findViewById(R.id.postedOn_tv)

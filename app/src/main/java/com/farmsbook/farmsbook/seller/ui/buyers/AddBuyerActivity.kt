@@ -89,7 +89,7 @@ class AddBuyerActivity : AppCompatActivity() {
                     var cropObject = response.getJSONObject(i)
                     var crop = BuyersData()
                     crop.GroupName = cropObject.getString("group_name")
-                    crop.Image = cropObject.getString("image")
+                    crop.Image = cropObject.getString("imagePath")
                     crop.Location = cropObject.getString("location")
                     crop.FarmerName = cropObject.getString("name")
                     crop.FarmerID = cropObject.getString("buyer_id").toString()

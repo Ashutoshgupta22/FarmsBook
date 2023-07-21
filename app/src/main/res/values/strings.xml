@@ -84,6 +84,51 @@
     <string name="delivery_place">Delivery place</string>
     <string name="delivery_date">Delivery Date</string>
     <string name="you_have_successfully_posted_nyour_requirement">You have successfully posted \nyour requirement</string>
+    <string name="buyers">Buyers</string>
+    <string name="search_buyers">Search Buyers</string>
+    <string name="add_crops">Add Crops</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="search_suppliers">Search Suppliers</string>
+    <string name="done">Done</string>
+    <string name="well_done">Well Done</string>
+    <string name="counter_offer">Counter Offer</string>
+    <string name="date">Date</string>
+    <string name="post_your_offer">Post your Offer</string>
+    <string name="founded">Founded</string>
+    <string name="turnover">Turnover</string>
+    <string name="crops">Crops</string>
+    <string name="contact_person">Contact person</string>
+    <string name="add">Add</string>
+    <string name="offers">Offers</string>
+    <string name="delivery_location">Delivery Location</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="product_details">Product Details</string>
+    <string name="type_of_sale_available">Type of sale available</string>
+    <string name="other_services_available">Other Services Available</string>
+    <string name="farmer_s_info">Farmer\'s Info</string>
+    <string name="call">Call</string>
+    <string name="add_supplier">Add Supplier</string>
+    <string name="post_offer">Post Offer</string>
+    <string name="interest">Interest</string>
+    <string name="requirement_posted_by">Requirement posted by</string>
+    <string name="you_have_posted_your_interest_for_this_demand">You have posted your interest for this demand</string>
+    <string name="listing">Listing</string>
+    <string name="offers_from_buyers_right_now">Offers from Buyers right now</string>
+    <string name="offers_from_suppliers_right_now">Offers From Suppliers right now</string>
+    <string name="edit">Edit</string>
+    <string name="add2">Add +</string>
+    <string name="interested">Interested</string>
+    <string name="members">Members</string>
+    <string name="crops_offered">Crops Offered</string>
+    <string name="delete_listing">Delete Listing ?</string>
+    <string name="this_listing_will_be_deleted_from_your_your_naccount_are_you_still_want_to_continue">This listing will be deleted from your your \naccount. Are you still want to continue?</string>
+    <string name="delete">Delete</string>
+    <string name="delete_requirement">Delete Requirement ?</string>
+    <string name="this_requirement_will_be_deleted_from_your_your_naccount_are_you_still_want_to_continue">This requirement will be deleted from your your \naccount. Are you still want to continue?</string>
+    <string name="filter_by">Filter By</string>
+    <string name="select_your_crops">Select your crops</string>
+    <string name="select">Select</string>
 
 
     <string-array name="States">
@@ -141,14 +186,55 @@
         <item>March</item>
         <item>April</item>
         <item>May</item>
-        <item>February</item>
         <item>June</item>
         <item>July</item>
         <item>August</item>
         <item>September</item>
+        <item>October</item>
         <item>November</item>
         <item>December</item>
 
     </string-array>
 
+    <string-array name="Crops">
+        <item>Bajara</item>
+        <item>Barley</item>
+        <item>Basmati Paddy</item>
+        <item>Black Pepper</item>
+        <item>Cashew</item>
+        <item>Caster Seeds</item>
+        <item>Chana</item>
+        <item>Chilli</item>
+        <item>Coffee</item>
+        <item>Coriander Seeds</item>
+        <item>Cotton</item>
+        <item>Groundnuts</item>
+        <item>Guar Gum Refined Splits</item>
+        <item>Guar Seeds</item>
+        <item>Jaggery</item>
+        <item>Jeera</item>
+        <item>Jowar White</item>
+        <item>Jower Yellow</item>
+        <item>Jower</item>
+        <item>Kapas</item>
+        <item>Maize Kharif</item>
+        <item>Masoor Bold</item>
+        <item>Maize</item>
+        <item>Moong Dal</item>
+        <item>Mustard Oil</item>
+        <item>Mustard Seed</item>
+        <item>Basmati Paddy 1121</item>
+        <item>Polished Turmeric</item>
+        <item>Refined Soy Oil</item>
+        <item>Rice</item>
+        <item>Sesameseseeds</item>
+        <item>Soyabean Meal</item>
+        <item>Soyabean</item>
+        <item>Toor Daal</item>
+        <item>Turmarice Farmer Unpolished</item>
+        <item>Turmaric</item>
+        <item>Wheat</item>
+        <item>Yellow Peas</item>
+
+    </string-array>
 </resources>

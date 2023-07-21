@@ -35,7 +35,7 @@
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="20dp"
-            android:text="Post your Offer"
+            android:text="@string/post_your_offer"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"

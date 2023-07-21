@@ -13,6 +13,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityViewHomeCropBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
@@ -101,6 +102,7 @@ class ViewHomeCropActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
 
+            Glide.with(this).load(response.getString("imageUrl0")).into( binding.imageView26)
             binding.cropNameTV.text = response["crop_name"].toString()
             binding.postedOnTV.text = "Posted on "+response["timestamp"].toString()
             binding.locationTV.text = response["location"].toString()
@@ -133,7 +135,7 @@ class ViewHomeCropActivity : AppCompatActivity() {
 
         val url2 = "$baseAddressUrl/user/$parent_id"
         val request2 = JsonObjectRequest(Request.Method.GET, url2, null, { response: JSONObject ->
-
+            Glide.with(this).load(response.getString("imagePath")).into( binding.imageView28)
             binding.farmerLocationTV.text = response["location"].toString()
             binding.farmerNameTV.text = response["name"].toString()
             binding.NameTV.text = response["name"].toString()
@@ -142,7 +144,6 @@ class ViewHomeCropActivity : AppCompatActivity() {
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
-
         queue.add(request2)
     }
 }

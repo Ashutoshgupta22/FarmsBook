@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Product Details"
+                android:text="@string/product_details"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/price_rangeTV"
@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Type of sale available"
+                android:text="@string/type_of_sale_available"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView84"
@@ -224,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Other Services Available"
+                android:text="@string/other_services_available"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/type_of_saleTV"
@@ -250,17 +250,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Farmer's Info"
+                android:text="@string/farmer_s_info"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/transportaionTV"
                 app:layout_constraintTop_toBottomOf="@+id/transportaionTV" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView28"
                 android:layout_width="70dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 android:layout_height="70dp"
                 android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="@+id/textView93"
                 app:layout_constraintTop_toBottomOf="@+id/textView93"
                 app:srcCompat="@drawable/button_background_rounded" />
@@ -306,7 +308,7 @@
                 android:drawableTint="@color/white"
                 android:drawableEnd="@drawable/baseline_call_24"
                 android:paddingHorizontal="12dp"
-                android:text="Call"
+                android:text="@string/call"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/farmer_phoneTV"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -337,7 +339,7 @@
                     android:gravity="center"
                     android:maxWidth="100dp"
                     android:padding="8dp"
-                    android:text="Add Supplier"
+                    android:text="@string/add_supplier"
                     android:textColor="#00853C"
                     android:textSize="16dp" />
 
@@ -353,7 +355,7 @@
                     android:gravity="center"
                     android:maxWidth="100dp"
                     android:paddingVertical="8dp"
-                    android:text="Post Offer"
+                    android:text="@string/post_offer"
                     android:textColor="@color/white"
                     android:textSize="16dp" />
             </LinearLayout>

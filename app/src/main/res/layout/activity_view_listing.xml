@@ -35,7 +35,7 @@
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="20dp"
-            android:text="Listing"
+            android:text="@string/listing"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +54,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16">
@@ -98,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Variety"
+                android:text="@string/variety"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/varietyTV"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -111,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Price"
+                android:text="@string/price"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView55"
@@ -122,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView57"
@@ -133,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="100dp"
+                android:layout_marginEnd="150dp"
                 android:text="BS 4067"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -162,26 +161,42 @@
                 app:layout_constraintTop_toBottomOf="@+id/PriceTV" />
 
             <TextView
-                android:id="@+id/textView66"
+                android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Offers from Buyers right now"
+                android:text="@string/offers_from_buyers_right_now"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:visibility="gone"
+                android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="@+id/textView59"
                 app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sentRequestRV"
                 android:layout_width="0dp"
-                android:layout_height="164dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:nestedScrollingEnabled="false"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView66" />
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <TextView
+                android:id="@+id/textView63"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="No Offers right Now"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

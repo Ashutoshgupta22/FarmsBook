@@ -7,7 +7,7 @@ data class InterestedData(
     var interest_to_buyer_id: String? = null,
     var crop_name: String? = null,
     var phone: String? = null,
-    var crop_image: String? = null,
+    var crop_image:Int = 0 ,
     var purchased_on : String ?= null,
     var rate_of_commission : String? = null,
     var offering_quantity_unit : String? = null,

@@ -35,6 +35,7 @@ class CropsListingFragment : Fragment() {
 
     private lateinit var binding : FragmentCropsListingBinding
 
+    private lateinit var adapter:ListingsAdapter
     private lateinit var logoutDialog: AlertDialog
     private lateinit var cropId : String
 
@@ -63,7 +64,6 @@ class CropsListingFragment : Fragment() {
 
             logoutDialog.dismiss()
             deleteRequirement()
-            getDataUsingVolley()
 
         }
         no.setOnClickListener {
@@ -83,19 +83,20 @@ class CropsListingFragment : Fragment() {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
-        val url = "$baseAddressUrl/user/$userId/requirements/${cropId}"
+        val url = "$baseAddressUrl/user/$userId/listings/${cropId}"
 
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
+
 
 
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
-
+           getDataUsingVolley()
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
             Log.d("Requirements", "Fail to get response = $error")
         })
         queue.add(request)
@@ -126,11 +127,13 @@ class CropsListingFragment : Fragment() {
                     var cropObject = response.getJSONObject(i)
                     var crop = ListingsData()
                     crop.crop_name = cropObject.getString("crop_name")
+                    crop.crop_image = cropObject.getString("imageUrl0")
                     crop.max_price = cropObject.getInt("max_price").toString()
                     crop.min_price = cropObject.getInt("min_price").toString()
                     crop.timestamp = cropObject.getString("timestamp").toString()
                     crop.quantity_unit = cropObject.getString("quantity_unit")
                     crop.list_id= cropObject.getInt("list_id").toString()
+                    crop.no_of_offers = cropObject.getJSONArray("listedOffer").length().toString()
                     crop.receive_offer_status = cropObject.getString("receive_offer_status").toString()
 
                     plantList.add(crop)
@@ -151,7 +154,7 @@ class CropsListingFragment : Fragment() {
                 binding.textView51.visibility = View.VISIBLE
             }
             binding.latestRequirementsRv.layoutManager = LinearLayoutManager(context)
-            val adapter = context?.let { ListingsAdapter(plantList, it) }
+            adapter = context?.let { ListingsAdapter(plantList, it) }!!
             binding.latestRequirementsRv.adapter = adapter
             adapter?.setOnItemClickListener(object : ListingsAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
@@ -170,6 +173,7 @@ class CropsListingFragment : Fragment() {
                 override fun deleteClick(position: Int) {
                     logoutDialog.show()
                     cropId = plantList[position].list_id.toString()
+
                 }
             })
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)

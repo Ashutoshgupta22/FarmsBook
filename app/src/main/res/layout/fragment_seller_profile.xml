@@ -24,10 +24,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -55,12 +55,30 @@
                         android:id="@+id/profileImage"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@color/green2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@color/gray"
+                        app:cardCornerRadius="25dp" app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+                        app:layout_constraintEnd_toEndOf="@+id/profileImage">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/editPictureBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+android:layout_gravity="center"
+
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/outline_edit_24"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/name_tv"
@@ -116,6 +134,7 @@
                         android:drawableTint="@color/black"
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
+                        android:maxWidth="150dp"
                         android:text="Trader"
                         android:textColor="@color/black"
                         android:textSize="18dp"
@@ -132,6 +151,7 @@
                         android:drawablePadding="4dp"
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
+                        android:maxWidth="180dp"
                         android:text="Xyz Company"
                         android:textColor="@color/black"
                         android:textSize="18dp"
@@ -157,7 +177,7 @@
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/role_tv" />
+                        app:layout_constraintTop_toBottomOf="@+id/company_tv" />
 
                     <TextView
                         android:id="@+id/editProfileBtn"
@@ -178,6 +198,7 @@
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/viewSupplierBtn"
                         app:layout_constraintTop_toTopOf="@+id/viewSupplierBtn" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -228,106 +249,14 @@
                     android:layout_height="match_parent"
                     android:paddingVertical="12dp">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/crop1_IV"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/crop_img"
-                        app:layout_constraintEnd_toStartOf="@+id/crop2_IV"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/crop2_IV"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/crop_img"
-                        app:layout_constraintEnd_toStartOf="@+id/crop3_iV"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/crop1_IV"
-                        app:layout_constraintTop_toTopOf="@+id/crop1_IV"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/crop3_iV"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/crop_img"
-                        app:layout_constraintEnd_toStartOf="@+id/crop4_IV"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/crop2_IV"
-                        app:layout_constraintTop_toTopOf="@+id/crop2_IV"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/crop4_IV"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/crop_img"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cropsRV"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/crop3_iV"
-                        app:layout_constraintTop_toTopOf="@+id/crop3_iV"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
-
-                    <TextView
-                        android:id="@+id/crop1_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:text="Wheat"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/crop1_IV"
-                        app:layout_constraintStart_toStartOf="@+id/crop1_IV"
-                        app:layout_constraintTop_toBottomOf="@+id/crop1_IV" />
-
-                    <TextView
-                        android:id="@+id/crop2_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:text="Soya beans"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/crop2_IV"
-                        app:layout_constraintStart_toStartOf="@+id/crop2_IV"
-                        app:layout_constraintTop_toTopOf="@+id/crop1_name" />
-
-                    <TextView
-                        android:id="@+id/crop3_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:text="Wheat"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/crop3_iV"
-                        app:layout_constraintStart_toStartOf="@+id/crop3_iV"
-                        app:layout_constraintTop_toTopOf="@+id/crop2_name" />
-
-                    <TextView
-                        android:id="@+id/crop4_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:text="Wheat"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/crop4_IV"
-                        app:layout_constraintStart_toStartOf="@+id/crop4_IV"
-                        app:layout_constraintTop_toTopOf="@+id/crop3_name" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -431,7 +360,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/shareBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

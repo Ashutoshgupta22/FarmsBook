@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.ui.suppliers.ViewSupplierActivity
 import com.farmsbook.farmsbook.seller.SellerMainActivity
@@ -45,7 +46,7 @@ class BuyersAdapter (private val plantList : ArrayList<BuyersData>, val context:
 
 
         val currentItem =plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
 
         holder.groupName.text = currentItem.GroupName

@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.RadioButton
@@ -15,6 +18,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityPostOfferBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
@@ -36,6 +40,7 @@ class PostOfferActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPostOfferBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
 
@@ -49,6 +54,8 @@ class PostOfferActivity : AppCompatActivity() {
         rb1.isChecked = true
         rb1.setOnClickListener {
             binding.rateEdt.isEnabled = true
+            binding.rateEdt.visibility = VISIBLE
+            binding.textView227.visibility = VISIBLE
             if (rb2.isChecked) {
                 rb2.isChecked = false
                 type_of_buy = true
@@ -58,7 +65,8 @@ class PostOfferActivity : AppCompatActivity() {
         rb2.setOnClickListener {
 
             binding.rateEdt.isEnabled = false
-            //binding.rateEdt.isActivated = false
+            binding.rateEdt.visibility = GONE
+            binding.textView227.visibility = GONE
             if (rb1.isChecked) {
                 rb1.isChecked = false
                 type_of_buy = false
@@ -169,6 +177,7 @@ class PostOfferActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
 
+            Glide.with(this).load(response.getString("imageUrl0")).into( binding.imageView7)
             binding.cropNameTv.text = response["crop_name"].toString()
             binding.locationTv.text = response["location"].toString()
             binding.costTv.text = "Price Range : ₹"+response["min_price"].toString()+"/kg to ₹"+response["max_price"].toString()+"/kg"
@@ -230,6 +239,7 @@ class PostOfferActivity : AppCompatActivity() {
         respObj.put("offering_quantity_unit", metrics.text.toString())
         respObj.put("delivery_place", location.text.toString())
         respObj.put("transportation", transportation)
+        respObj.put("timestamp", current)
         respObj.put("offer_status", false)
 
 
@@ -246,6 +256,4 @@ class PostOfferActivity : AppCompatActivity() {
         })
         queue.add(request)
     }
-
-
 }

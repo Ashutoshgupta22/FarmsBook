@@ -5,8 +5,10 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
 class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, val context: Context):RecyclerView.Adapter<LatestOffersAdapter.Myviewholder> () {
@@ -37,19 +39,25 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
 
 
        val currentItem =plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        Glide.with(context).load(plantList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
-        holder.plantName.text = "Rice"
+        holder.plantName.text = currentItem.crop_name
         holder.plantPrice.text = "Price Offered : ${currentItem.offering_price}/kg"
         holder.plantWeight.text = currentItem.offering_quantity+" "+currentItem.offering_quantity_unit
         holder.plantRateType.text = currentItem.purchased_on
+
+        if(currentItem.replied == "false" ){
+            holder.plantStatus.text = "Response pending by ${currentItem.buyer_name}"
+            holder.plantStatus.setTextColor(Color.parseColor("#FF8A00"))
+        }else{
+
         if(currentItem.offer_status == "true")
         holder.plantStatus.text = "Offer Accepted by ${currentItem.buyer_name}"
         else{
             holder.plantStatus.text = "Offer Rejected by ${currentItem.buyer_name}"
             holder.plantStatus.setTextColor(Color.parseColor("#B80000"))
         }
-
+        }
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
@@ -63,7 +71,7 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
 
 
-//        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
+        val plantImage: ImageView = itemView.findViewById(R.id.imageView8)
         val plantName: TextView = itemView.findViewById(R.id.crop_name_tv)
         val plantPrice: TextView = itemView.findViewById(R.id.price_offered_tv)
         val plantWeight: TextView = itemView.findViewById(R.id.weightTV)
@@ -79,6 +87,5 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
                 listener.callBtnClick(adapterPosition)
             }
         }
-
     }
 }

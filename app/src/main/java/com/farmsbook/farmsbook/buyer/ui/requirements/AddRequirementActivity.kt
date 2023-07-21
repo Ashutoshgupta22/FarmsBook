@@ -3,27 +3,34 @@ package com.farmsbook.farmsbook.buyer.ui.requirements
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropData
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.RequirementConfirmationActivity
+import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters.CropData
 import com.farmsbook.farmsbook.databinding.ActivityAddRequirementBinding
 import com.farmsbook.farmsbook.login.EnterDetailsFragment
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.ListingConfirmationActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
 class AddRequirementActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddRequirementBinding
-
-    private lateinit var name: EditText
+    private lateinit var cropList: ArrayList<ManageCropData>
+    private lateinit var cropName: ArrayList<String>
+    private var cropId: Int = 0
+    private lateinit var name: AutoCompleteTextView
     private lateinit var variety: EditText
     private lateinit var minPrice: EditText
     private lateinit var maxPrice: EditText
@@ -42,7 +49,6 @@ class AddRequirementActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        name = findViewById(R.id.nameEdt)
         variety = findViewById(R.id.varietyEdt)
         minPrice = findViewById(R.id.minEdt)
         maxPrice = findViewById(R.id.maxEdt)
@@ -63,10 +69,8 @@ class AddRequirementActivity : AppCompatActivity() {
             if (rb1.isChecked) {
                 rb1.isChecked = false
                 type_of_buy = true
-
             }
         }
-
 
         var transportation = false
         rb3.setOnClickListener {
@@ -79,9 +83,18 @@ class AddRequirementActivity : AppCompatActivity() {
             if (rb3.isChecked) {
                 rb3.isChecked = false
                 transportation = true
-
             }
         }
+        addData()
+
+        val arrayAdapter4 = ArrayAdapter(this, R.layout.dropdown_item, cropName)
+        name = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView4)
+        name.setAdapter(arrayAdapter4)
+
+        //Log.d("Crop List","Hello")
+
+
+//        Log.d("Crop List","$cropName")
 
         val states = resources.getStringArray(R.array.States)
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, states)
@@ -152,7 +165,18 @@ class AddRequirementActivity : AppCompatActivity() {
         val current = formatter.format(time)
 
         respObj.put("crop_name", name)
+        for(i in cropList.indices)
+        {
+            if(cropList[i].Name == name.toString())
+            {
+                //Log.d("Crop List","${cropList}")
+                //Log.d("Crop List","$i")
+                cropId = cropList[i].crop_id
+            }
+        }
+        Log.d("Crop List","$cropId")
         respObj.put("variety", variety)
+        respObj.put("manageCropId", cropId)
         respObj.put("type_of_buy", type_of_buy)
         respObj.put( "min_range", minPrice)
         respObj.put("max_range", maxPrice)
@@ -174,6 +198,53 @@ class AddRequirementActivity : AppCompatActivity() {
                 .show()
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
+    }
+
+    private fun addData() {
+
+//        for (i in cropNames.indices) {
+//            cropList.add(i, ManageCropData(cropNames[i], cropImages[i], cropId[i]))
+//        }
+
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+        val url = "$baseAddressUrl/user/$userId/manageCrops"
+
+        cropList = arrayListOf<ManageCropData>()
+        cropName = arrayListOf()
+        Log.d("Crop List","${cropList}")
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
+
+            for (i in 0 until response.length()) {
+                try {
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
+                    crop.Name = cropObject.getString("cropName")
+                    crop.id = cropObject.getInt("id")
+                    crop.crop_id = cropObject.getInt("cropId")
+                    cropName.add(cropObject.getString("cropName"))
+
+                    cropList.add(crop)
+                    Log.d("Crop List","${cropList}")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+           // Log.d("Crop List","${cropList}")
+        }, { error -> // method to handle errors.
+            Log.d("Crop List","${cropList}")
+            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+
         })
         queue.add(request)
     }

@@ -32,6 +32,7 @@ class InterestedFragment : Fragment() {
     private var _binding: FragmentInterestedBinding? = null
 
     private val binding get() = _binding!!
+    private lateinit var cropImages: java.util.ArrayList<Int>
     private lateinit var cropId : String
     private lateinit var plantList: ArrayList<InterestedData>
 
@@ -48,6 +49,45 @@ class InterestedFragment : Fragment() {
 
         _binding = FragmentInterestedBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        cropImages = arrayListOf()
+        cropImages.add(R.drawable.bajra)
+        cropImages.add(R.drawable.barley)
+        cropImages.add(R.drawable.basmati_paddy)
+        cropImages.add(R.drawable.black_pepper)
+        cropImages.add(R.drawable.cashew)
+        cropImages.add(R.drawable.castor_seeds)
+        cropImages.add(R.drawable.chana)
+        cropImages.add(R.drawable.chilli)
+        cropImages.add(R.drawable.coffee)
+        cropImages.add(R.drawable.coriander_seeds)
+        cropImages.add(R.drawable.cotton)
+        cropImages.add(R.drawable.groundnut)
+        cropImages.add(R.drawable.guar_gum_refind_splits)
+        cropImages.add(R.drawable.guarseed)
+        cropImages.add(R.drawable.jaggery)
+        cropImages.add(R.drawable.jeera)
+        cropImages.add(R.drawable.jowar_white)
+        cropImages.add(R.drawable.jowar_yellow)
+        cropImages.add(R.drawable.jowar)
+        cropImages.add(R.drawable.kapas)
+        cropImages.add(R.drawable.maize_kharif)
+        cropImages.add(R.drawable.masoor_bold)
+        cropImages.add(R.drawable.mazie)
+        cropImages.add(R.drawable.moong_dal)
+        cropImages.add(R.drawable.mustard_oil)
+        cropImages.add(R.drawable.mustard_seed)
+        cropImages.add(R.drawable.paddy_basmati_1121)
+        cropImages.add(R.drawable.polished_turmeric)
+        cropImages.add(R.drawable.refined_soy_oil)
+        cropImages.add(R.drawable.rice)
+        cropImages.add(R.drawable.sesameseeds)
+        cropImages.add(R.drawable.soyabean_meal)
+        cropImages.add(R.drawable.soyabean)
+        cropImages.add(R.drawable.toor_daal)
+        cropImages.add(R.drawable.turmarice_farmer_unpolished)
+        cropImages.add(R.drawable.turmeric)
+        cropImages.add(R.drawable.wheat)
+        cropImages.add(R.drawable.yellow_peas)
         getDataUsingVolley()
 
         return root
@@ -76,8 +116,9 @@ class InterestedFragment : Fragment() {
 
                     var cropObject = response.getJSONObject(i)
                     var crop = InterestedData()
-                    // crop.crop_name = cropObject.getString("crop_name")
+                    //crop.crop_Image = cropObject.getString("crop_name")
                     crop.crop_name = cropObject.getString("name").toString()
+                    crop.crop_image = cropImages[cropObject.getString("cropId").toString().toInt()-1]
                     crop.interest_id = cropObject.getString("interest_id").toString()
                     crop.phone = cropObject.getString("phone").toString()
                     crop.buyer_name = cropObject.getString("interest_farmer").toString()

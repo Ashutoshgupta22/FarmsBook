@@ -3,7 +3,9 @@ package com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_chi
 data class LatestRequirementsData(
     var req_id: String? = null,
     var crop_name : String? = null,
+    var crop_id : String? = null,
     var variety : String ?= null,
+    var Image : Int  = 0,
     var type_of_buy : String? = null,
     var min_price : String? = null,
     var max_price : String? = null,

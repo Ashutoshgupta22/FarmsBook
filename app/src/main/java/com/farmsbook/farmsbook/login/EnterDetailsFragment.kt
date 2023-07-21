@@ -1,17 +1,25 @@
 package com.farmsbook.farmsbook.login
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.database.Cursor
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -23,23 +31,19 @@ import com.farmsbook.farmsbook.seller.SellerMainActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import com.google.android.material.imageview.ShapeableImageView
 import org.json.JSONObject
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
+import java.io.File
 import java.util.*
 
 open class EnterDetailsFragment : Fragment() {
 
     private lateinit var name: EditText
-    private lateinit var profileImage: ShapeableImageView
     private lateinit var phone: TextView
     private lateinit var email: EditText
     private lateinit var location: AutoCompleteTextView
     private lateinit var businessName: EditText
     private lateinit var businessTurnOver: EditText
     private lateinit var foundationDate: EditText
-    companion object{
-        val IMAGE_REQUEST_CODE = 100
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +52,7 @@ open class EnterDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_enter_details, container, false)
         val backBtn = view.findViewById<ImageView>(R.id.backBtn)
+
 
         val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val role = sharedPreference?.getBoolean("USER_ROLE",false)
@@ -62,7 +67,6 @@ open class EnterDetailsFragment : Fragment() {
         // set adapter to the autocomplete tv to the arrayAdapter
         location.setAdapter(arrayAdapter)
 
-        profileImage = view.findViewById(R.id.profileImage)
         name = view.findViewById(R.id.nameEdt)
         phone = view.findViewById(R.id.phoneEdt)
         email = view.findViewById(R.id.emailEdt)
@@ -73,39 +77,37 @@ open class EnterDetailsFragment : Fragment() {
         val value = requireArguments().getString("PhoneNumber")
 phone.setText(value)
 
-        val locale = Locale("en", "IN")
-        Locale.setDefault(locale)
-        val c = Calendar.getInstance(locale)
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
+//        val locale = Locale("en", "IN")
+//        Locale.setDefault(locale)
+//        val c = Calendar.getInstance()
+//        val year = c.get(Calendar.YEAR)
+//        val month = c.get(Calendar.MONTH)
+//        val day = c.get(Calendar.DAY_OF_MONTH)
 
-        profileImage.setOnClickListener {
-
-            pickImageGallery()
-
-        }
-
+//
+//
+//        }
 
         foundationDate.setOnClickListener {
+            val c = Calendar.getInstance(Locale.getDefault())
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
             val dpd = context?.let {
                 DatePickerDialog(
                     it, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                         // Display Selected date in textbox
                         foundationDate.setText("" + dayOfMonth + " / " + (month+1) + " / " + year)
-
                     },
                     year,
                     month,
                     day
                 )
-
             }
             dpd?.datePicker?.maxDate = System.currentTimeMillis();
             dpd?.show()
         }
         view.findViewById<TextView>(R.id.confirmBtn).setOnClickListener {
-
             if (TextUtils.isEmpty(name.text)) {
                 name.error = "Enter a valid Name"
                 name.requestFocus()
@@ -136,11 +138,9 @@ phone.setText(value)
                     businessTurnOver.text.trim().toString(),
                     foundationDate.text.trim().toString(),
                 )
-
 //                startActivity(Intent(context, MainActivity::class.java))
 //                finishAffinity(requireActivity())
             }
-
         }
 
         backBtn.setOnClickListener {
@@ -155,39 +155,77 @@ phone.setText(value)
         return view
     }
 
-    private fun pickImageGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent,IMAGE_REQUEST_CODE)
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK)
-        {
-            profileImage.setImageURI(data?.data)
-            val imageUri = data?.data
-            val inputStream: InputStream? = imageUri?.let {
-                activity?.getContentResolver()?.openInputStream(
-                    it
-                )
-            }
-            val outputStream = ByteArrayOutputStream()
-
-            val buffer = ByteArray(1024)
-            var bytesRead: Int = 0
-            while (inputStream?.read(buffer).also {
-                    if (it != null) {
-                        bytesRead = it
-                    }
-                } != -1) {
-                outputStream.write(buffer, 0, bytesRead)
-            }
-
-            val imageBytes: ByteArray = outputStream.toByteArray()
-            Log.d("Image","$imageBytes")
-        }
-    }
+//    private fun pickImageGallery() {
+//        val intent = Intent(Intent.ACTION_PICK)
+//        intent.type = "image/*"
+//        startActivityForResult(intent,IMAGE_REQUEST_CODE)
+//    }
+//    private  fun requestPermissions(permission: String) {
+//        ActivityCompat.requestPermissions(
+//            requireActivity(), arrayOf<String>(permission),
+//            REQUEST_PERMISSION
+//        )
+//    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        if (requestCode == REQUEST_PERMISSION) {
+//            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                requestPermissions(permissions.toString())
+//            } else {
+//                Toast.makeText(context, "Storage permission required", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK)
+//        {
+////            profileImage.setImageURI(data?.data)
+//            val imageUri = data?.data
+//            uritext = imageUri
+////            val inputStream: InputStream? = imageUri?.let {
+////                activity?.getContentResolver()?.openInputStream(
+////                    it
+////                )
+////            }
+////            val outputStream = ByteArrayOutputStream()
+////
+////            val buffer = ByteArray(1024)
+////            var bytesRead: Int = 0
+////            while (inputStream?.read(buffer).also {
+////                    if (it != null) {
+////                        bytesRead = it
+////                    }
+////                } != -1) {
+////                outputStream.write(buffer, 0, bytesRead)
+////            }
+////
+////            val imageBytes: ByteArray = outputStream.toByteArray()
+////            Log.d("Image","$imageBytes")
+//        }
+//    }
+//
+//
+//    private fun getImageFilePath(uri: Uri): String? {
+//        var imagePath: String? = null
+//        val projection = arrayOf(MediaStore.Images.Media.DATA)
+//        val cursor: Cursor? = activity?.getContentResolver()?.query(uri, projection, null, null, null)
+//        if (cursor != null) {
+//            val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+//            if (cursor.moveToFirst()) {
+//                imagePath = cursor.getString(columnIndex)
+//            }
+//            cursor.close()
+//        }
+//        return imagePath
+//    }
 
     private fun postDataUsingVolley(
         name: String,
@@ -203,12 +241,23 @@ phone.setText(value)
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val url = "$baseAddressUrl/user"
 
+
+        // Replace with the actual image file path on the device
+//        File imageFile = new File("/path/to/image.jpg");
+//        val imagePath = uritext?.let { getImageFilePath(it) }
+//
+//        Log.w("IMAGE Path", imagePath!!)
+//
+//        val imageFile = File(imagePath)
+//        uploadManager?.uploadFormData(url, name, phone, email, location, role,"500",businessName,businessTurnovers,foundationDate,imageFile)
+//
+//        print("Exit")
+        //getDataUsingVolley(phone)
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
         val respObj = JSONObject()
 
-        respObj.put("display_image", "https://example.com/display_image.jpg")
-        respObj.put("background_image", "https://example.com/background_image.jpg")
+        respObj.put("imagePath", null)
         respObj.put("name", name)
         respObj.put("phone", phone)
         respObj.put("email", email)
@@ -218,6 +267,7 @@ phone.setText(value)
         respObj.put("business_turnovers", businessTurnovers.toInt())
         respObj.put("crop_count", 50)
         respObj.put("location", location)
+        respObj.put("active", true)
         respObj.put("foundation_date", foundationDate)
 
 
@@ -227,22 +277,16 @@ phone.setText(value)
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
 
-            val sharedPreference2 =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-            val userROLE = sharedPreference2?.getBoolean("USER_ROLE",false)
-            if (!userROLE!!) {
-                startActivity(Intent(context, SellerMainActivity::class.java))
-                finishAffinity(requireActivity())
-            }
-            else {
-                startActivity(Intent(context, MainActivity::class.java))
-                finishAffinity(requireActivity())
-            }
-
             val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
             var editor = sharedPreference?.edit()
             editor?.putInt("USER_ID",it["id"].toString().toInt())
            // editor?.putBoolean("USER_ROLE",it["role"].toString().toBoolean())
             editor?.commit()
+            val frag = UploadImageFragment()
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragmentContainerView, frag)
+            fragmentTransaction?.commit()
             Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT).show()
             //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
 
@@ -250,5 +294,51 @@ phone.setText(value)
             Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
+    }
+
+    private fun getDataUsingVolley(phone: String) {
+
+        // url to post our data
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+//        val userId = intent.getStringExtra("FARMER_ID")
+
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method
+
+        val url2 = "$baseAddressUrl/check_exist/$phone"
+        val request2 = JsonObjectRequest(Request.Method.GET, url2, null, { response: JSONObject ->
+
+            if(response["active"]== true)
+            {
+                Toast.makeText(context,"An Error occurred",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+                var editor = sharedPreference?.edit()
+                editor?.putInt("USER_ID",response["id"].toString().toInt())
+                editor?.putBoolean("USER_ROLE",response["role"].toString().toBoolean())
+                editor?.commit()
+
+                if(response["role"] == true)
+                {
+                    startActivity(Intent(context, MainActivity::class.java))
+                    ActivityCompat.finishAffinity(LoginActivity())
+                }
+                else
+                {
+                    startActivity(Intent(context, SellerMainActivity::class.java))
+                    ActivityCompat.finishAffinity(LoginActivity())
+                }
+            }
+
+        }, { error -> // method to handle errors.
+            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request2)
     }
 }

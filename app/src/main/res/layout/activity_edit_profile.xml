@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/name"
                 android:padding="12dp"
                 android:background="@drawable/edtxt_background_rounded3"
@@ -100,13 +101,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameEdt" />
 
-            <EditText
+            <TextView
                 android:id="@+id/phoneEdt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
+                android:textSize="16sp"
                 android:hint="@string/mobile_number"
+                android:editable="false"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto"
                 android:padding="12dp"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="phone"
@@ -132,6 +137,7 @@
                 android:ems="10"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:hint="@string/email_id"
+                android:fontFamily="@font/roboto"
                 android:padding="12dp"
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -148,29 +154,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailEdt" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/locationEdt"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:background="@drawable/edtxt_background_rounded3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:text="London"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto"
+                android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22_4">
+                app:layout_constraintTop_toBottomOf="@+id/textView22_4"/>
 
                 <!-- Inside text input layout add
                       an auto complete text view
                         and make its input type to none-->
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="none"
-                    android:text="@string/select_your_state"
-                    />
 
-            </com.google.android.material.textfield.TextInputLayout>
+
+
             <!--            <EditText-->
             <!--                -->
             <!--                android:layout_width="0dp"-->
@@ -201,6 +205,7 @@
                 android:ems="10"
                 android:hint="@string/business_name"
                 android:padding="12dp"
+                android:fontFamily="@font/roboto"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -226,6 +231,7 @@
                 android:ems="10"
                 android:padding="12dp"
                 android:background="@drawable/edtxt_background_rounded3"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/business_turnover"
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -249,6 +255,7 @@
                 android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:ems="10"
                 android:padding="12dp"
+                android:fontFamily="@font/roboto"
                 android:hint="@string/foundation_date"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="none"

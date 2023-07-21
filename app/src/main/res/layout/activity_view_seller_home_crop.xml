@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Variety"
+                android:text="@string/variety"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/crop_nameTV"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Delivery Location"
+                android:text="@string/delivery_location"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView81"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Price"
+                android:text="@string/price"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView83"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView84"
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Transportation"
+                android:text="@string/transportation"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView83_2"
@@ -172,17 +172,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Requirement posted by"
+                android:text="@string/requirement_posted_by"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView84_2"
                 app:layout_constraintTop_toBottomOf="@+id/textView84_2" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 android:id="@+id/imageView28"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="@+id/textView93"
                 app:layout_constraintTop_toBottomOf="@+id/textView93"
                 app:srcCompat="@drawable/button_background_rounded" />
@@ -221,7 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="Add  +"
+                android:text="@string/add2"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/farmer_phoneTV"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -252,7 +254,7 @@
                     android:gravity="center"
                     android:maxWidth="100dp"
                     android:padding="8dp"
-                    android:text="Interested"
+                    android:text="@string/interested"
                     android:textColor="#00853C"
                     android:textSize="16dp" />
 
@@ -270,7 +272,7 @@
                     android:gravity="center"
                     android:maxWidth="100dp"
                     android:paddingVertical="8dp"
-                    android:text="Call"
+                    android:text="@string/call"
                     android:textColor="@color/white"
                     android:textSize="16dp" />
             </LinearLayout>

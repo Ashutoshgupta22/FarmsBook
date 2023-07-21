@@ -90,7 +90,7 @@ class AddSupplierActivity : AppCompatActivity() {
                     var cropObject = response.getJSONObject(i)
                     var crop = SuppliersData()
                     crop.GroupName = cropObject.getString("group_name")
-                    crop.Image = cropObject.getString("image")
+                    crop.Image = cropObject.getString("imagePath")
                     crop.Location = cropObject.getString("location")
                     crop.FarmerName = cropObject.getString("name")
                     crop.FarmerID = cropObject.getString("farmer_id").toString()

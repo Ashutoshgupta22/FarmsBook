@@ -18,6 +18,7 @@
                 android:id="@+id/imageView11"
                 android:layout_width="0dp"
                 android:layout_height="170dp"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -27,6 +28,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView12"
                 android:layout_width="75dp"
+                android:scaleType="centerCrop"
                 android:layout_height="75dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="-37dp"
@@ -306,133 +308,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto_medium"
                 android:text="All Crops"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView47">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/crop1_IV"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/crop_img"
-                    app:layout_constraintEnd_toStartOf="@+id/crop2_IV"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/crop2_IV"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/crop_img"
-                    app:layout_constraintEnd_toStartOf="@+id/crop3_iV"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/crop1_IV"
-                    app:layout_constraintTop_toTopOf="@+id/crop1_IV"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/crop3_iV"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/crop_img"
-                    app:layout_constraintEnd_toStartOf="@+id/crop4_IV"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/crop2_IV"
-                    app:layout_constraintTop_toTopOf="@+id/crop2_IV"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/crop4_IV"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/crop_img"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/crop3_iV"
-                    app:layout_constraintTop_toTopOf="@+id/crop3_iV"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-                <TextView
-                    android:id="@+id/crop1_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:text="Wheat"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/crop1_IV"
-                    app:layout_constraintStart_toStartOf="@+id/crop1_IV"
-                    app:layout_constraintTop_toBottomOf="@+id/crop1_IV" />
-
-                <TextView
-                    android:id="@+id/crop2_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:text="Soya beans"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/crop2_IV"
-                    app:layout_constraintStart_toStartOf="@+id/crop2_IV"
-                    app:layout_constraintTop_toTopOf="@+id/crop1_name" />
-
-                <TextView
-                    android:id="@+id/crop3_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:text="Wheat"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/crop3_iV"
-                    app:layout_constraintStart_toStartOf="@+id/crop3_iV"
-                    app:layout_constraintTop_toTopOf="@+id/crop2_name" />
-
-                <TextView
-                    android:id="@+id/crop4_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:text="Wheat"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/crop4_IV"
-                    app:layout_constraintStart_toStartOf="@+id/crop4_IV"
-                    app:layout_constraintTop_toTopOf="@+id/crop3_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cropsRv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView47" />
 
             <TextView
                 android:id="@+id/textView47_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Crops Offered"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/cropsRv" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/suppliersCrops_RV"
@@ -458,6 +363,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView15"
                 android:layout_width="50dp"
+                android:scaleType="centerCrop"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
@@ -507,16 +413,19 @@
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/farmer_NameTV" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/keyboard_backspace" />

@@ -91,13 +91,17 @@ class BuyersFragment : Fragment() {
                     var cropObject = response.getJSONObject(i)
                     var crop = BuyersData()
                     crop.GroupName = cropObject.getString("group_name")
-                    crop.Image = cropObject.getString("image")
+                    crop.Image = cropObject.getString("imagePath")
                     crop.phone = cropObject.getString("phone")
                     crop.Location = cropObject.getString("location")
                     crop.FarmerName = cropObject.getString("name")
                     crop.FarmerID = cropObject.getString("parent_id").toString()
 
-                    plantList.add(crop)
+                    if(cropObject.getBoolean("add_response_status") == false)
+                        plantList.add(crop)
+                    else{
+                        addedList.add(crop)
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -131,7 +135,7 @@ class BuyersFragment : Fragment() {
                 override fun onItemClick(position: Int) {
 
                     //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-                    startActivity(Intent(context,ViewSupplierActivity::class.java).putExtra("FARMER_ID",plantList[position].FarmerID))
+                    startActivity(Intent(context,ViewBuyerActivity::class.java).putExtra("ID",plantList[position].FarmerID))
 //                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
 //                intent.putExtra("Name",plantList[position].Name)
 //                intent.putExtra("Location",plantList[position].Location)
@@ -151,7 +155,7 @@ class BuyersFragment : Fragment() {
                 override fun onItemClick(position: Int) {
 
                     //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-                    startActivity(Intent(context,ViewSupplierActivity::class.java).putExtra("FARMER_ID",addedList[position].FarmerID))
+                    startActivity(Intent(context,ViewBuyerActivity::class.java).putExtra("ID",addedList[position].FarmerID))
 //                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
 //                intent.putExtra("Name",plantList[position].Name)
 //                intent.putExtra("Location",plantList[position].Location)
@@ -185,7 +189,7 @@ class BuyersFragment : Fragment() {
                     var cropObject = response.getJSONObject(i)
                     var crop = BuyersData()
                     crop.GroupName = cropObject.getString("company_name")
-                    crop.Image = cropObject.getString("image")
+                    crop.Image = cropObject.getString("imagePath")
                     crop.FarmerName = cropObject.getString("name")
                     crop.id = cropObject.getInt("id").toString()
                     crop.FarmerID = cropObject.getString("sender_id").toString()

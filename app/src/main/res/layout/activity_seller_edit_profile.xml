@@ -85,6 +85,8 @@
                 android:ems="10"
                 android:hint="@string/name"
                 android:padding="12dp"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,16 +102,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameEdt" />
 
-            <EditText
+            <TextView
                 android:id="@+id/phoneEdt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
+                android:editable="false"
                 android:hint="@string/mobile_number"
+                android:textColor="@color/black"
                 android:padding="12dp"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
                 android:background="@drawable/edtxt_background_rounded3"
-                android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView22_2" />
@@ -132,6 +137,8 @@
                 android:ems="10"
                 android:background="@drawable/edtxt_background_rounded3"
                 android:hint="@string/e_mail_id"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
                 android:padding="12dp"
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -148,29 +155,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailEdt" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/locationEdt"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:padding="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:fontFamily="@font/roboto"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22_4">
+                app:layout_constraintTop_toBottomOf="@+id/textView22_4"/>
 
                 <!-- Inside text input layout add
                       an auto complete text view
                         and make its input type to none-->
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="none"
-                    android:text="@string/select_your_state"
-                    />
 
-            </com.google.android.material.textfield.TextInputLayout>
+
             <!--            <EditText-->
             <!--                -->
             <!--                android:layout_width="0dp"-->
@@ -233,13 +236,37 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView22_6" />
 
             <TextView
+                android:id="@+id/textView22_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Business Members"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/businessTurnoverEdt" />
+
+
+            <EditText
+                android:id="@+id/businessMembersEdt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:padding="12dp"
+                android:background="@drawable/edtxt_background_rounded3"
+                android:hint="Business Members"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22_8" />
+
+            <TextView
                 android:id="@+id/textView22_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/foundation_date"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/businessTurnoverEdt" />
+                app:layout_constraintTop_toBottomOf="@+id/businessMembersEdt" />
 
             <EditText
                 android:id="@+id/foundationDateEdt"

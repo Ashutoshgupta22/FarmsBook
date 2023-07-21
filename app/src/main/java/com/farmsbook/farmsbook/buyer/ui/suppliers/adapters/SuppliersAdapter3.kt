@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
 class SuppliersAdapter3 (private val plantList : ArrayList<SuppliersData>, val context: Context):RecyclerView.Adapter<SuppliersAdapter3.Myviewholder> () {
@@ -37,7 +38,7 @@ class SuppliersAdapter3 (private val plantList : ArrayList<SuppliersData>, val c
 
 
        val currentItem =plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
 
         holder.groupName.text = currentItem.GroupName

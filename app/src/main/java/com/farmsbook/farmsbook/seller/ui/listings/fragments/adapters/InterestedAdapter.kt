@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
 class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val context: Context):RecyclerView.Adapter<InterestedAdapter.Myviewholder> () {
@@ -36,7 +38,7 @@ class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val 
 
 
        val currentItem =plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        Glide.with(context).load(plantList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantRateType.text = currentItem.purchased_on
@@ -55,7 +57,7 @@ class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
 
 
-//        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
+        val plantImage: ImageView = itemView.findViewById(R.id.imageView8)
         val plantName: TextView = itemView.findViewById(R.id.crop_name_tv)
         val plantRateType: TextView = itemView.findViewById(R.id.rate_type_tv)
         val postedBy: TextView = itemView.findViewById(R.id.postedByTV)

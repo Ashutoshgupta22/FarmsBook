@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
 class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val context: Context):RecyclerView.Adapter<ListingsAdapter.Myviewholder> () {
@@ -35,12 +36,12 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
         val currentItem =plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        Glide.with(context).load(plantList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
         holder.plantDate.text = "Posted on : ${currentItem.timestamp}"
-        holder.plantStatus.text = "${currentItem.receive_offer_status} Suppliers shown interest"
+        holder.plantStatus.text = "${currentItem.no_of_offers} Buyers shown interest"
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
@@ -54,7 +55,7 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
 
 
-//        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
+        val plantImage: ImageView = itemView.findViewById(R.id.requirementCropImage)
         val plantName: TextView = itemView.findViewById(R.id.requirementName_tv)
         val plantPrice: TextView = itemView.findViewById(R.id.requirement_price_tv)
         val plantDate: TextView = itemView.findViewById(R.id.postedOn_tv)
@@ -69,6 +70,5 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
                 listener.deleteClick(adapterPosition)
             }
         }
-
     }
 }

@@ -31,8 +31,11 @@ class OffersFragment : Fragment() {
     private lateinit var plantList: ArrayList<LatestOffersData>
     override fun onResume() {
         super.onResume()
+
         getDataUsingVolley()
+
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,6 +49,7 @@ class OffersFragment : Fragment() {
         //getDataUsingVolley()
         return root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -56,8 +60,8 @@ class OffersFragment : Fragment() {
         // url to post our data
         plantList = arrayListOf<LatestOffersData>()
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
-        val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val userId =  sharedPreference?.getInt("USER_ID",0)
+        val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
         val url = "$baseAddressUrl/user/$userId/offer"
 
         // creating a new variable for our request queue
@@ -69,24 +73,27 @@ class OffersFragment : Fragment() {
         // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
-            for(i in 0 until response.length())
-            {
+            for (i in 0 until response.length()) {
                 try {
 
                     var cropObject = response.getJSONObject(i)
                     var crop = LatestOffersData()
-                   // crop.crop_name = cropObject.getString("crop_name")
+                    crop.offerId = cropObject.getString("offerId")
+                    crop.crop_image = cropObject.getString("imageUrl0")
                     crop.offer_to_crop_id = cropObject.getInt("offer_to_crop_id").toString()
                     crop.offer_to_farmer_id = cropObject.getInt("offer_to_farmer_id").toString()
                     crop.offering_price = cropObject.getInt("offering_price").toString()
                     crop.offer_status = cropObject.getBoolean("offer_status").toString()
+                    crop.crop_name = cropObject.getString("offer_cropName").toString()
                     crop.buyer_name = cropObject.getString("buyer_name").toString()
                     crop.phone = cropObject.getString("phone").toString()
-                   // crop.max_price = cropObject.getInt("max_range").toString()
+                    crop.counter_status = cropObject.getJSONArray("counterStatus")
+                    crop.replied = cropObject.getString("replied")
                     //crop.min_price = cropObject.getInt("min_range").toString()
-                    crop.offering_quantity_unit = cropObject.getString("offering_quantity_unit").toString()
+                    crop.offering_quantity_unit =
+                        cropObject.getString("offering_quantity_unit").toString()
                     crop.offering_quantity = cropObject.getString("offering_quantity").toString()
-                    if(cropObject.getBoolean("purchased_on").toString().equals("true"))
+                    if (cropObject.getBoolean("purchased_on").toString().equals("true"))
                         crop.purchased_on = "On Commission"
                     else
                         crop.purchased_on = "Fixed Rate"
@@ -97,21 +104,18 @@ class OffersFragment : Fragment() {
 //                        crop.max = a[1]
 //                        crop.min = a[2]
 
-                        plantList.add(crop)
+                    plantList.add(crop)
 
 
-                }catch(e:Exception)
-                {
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
-            if(plantList.size == 0)
-            {
+            if (plantList.size == 0) {
                 binding.textView5.visibility = View.VISIBLE
                 binding.latestRequirementsRv.visibility = View.GONE
                 binding.textView51.visibility = View.GONE
-            }
-            else{
+            } else {
                 binding.textView5.visibility = View.GONE
                 binding.latestRequirementsRv.visibility = View.VISIBLE
                 binding.textView51.visibility = View.VISIBLE
@@ -122,7 +126,14 @@ class OffersFragment : Fragment() {
             adapter?.setOnItemClickListener(object : LatestOffersAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
 
-                    //startActivity(Intent(context, ViewRequirementActivity::class.java))
+                    if(plantList[position].counter_status?.length() == 0)
+                    {
+                        startActivity(Intent(context, ViewOfferActivity::class.java).putExtra("OFFER_ID",plantList[position].offerId))
+                    }
+                    else{
+                        startActivity(Intent(context, ViewCounterOfferActivity::class.java))
+                    }
+
                     //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
 //                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
 //                intent.putExtra("Name",plantList[position].Name)
@@ -149,7 +160,7 @@ class OffersFragment : Fragment() {
 
     }
 
-    private fun getPlantData(farmerId: String , cropId: String) {
+    private fun getPlantData(farmerId: String, cropId: String) {
 
         val queue: RequestQueue = Volley.newRequestQueue(context)
 
@@ -158,7 +169,7 @@ class OffersFragment : Fragment() {
 
             a.add(response["crop_name"].toString())
 
-            Log.d("Offer",a.toString())
+            Log.d("Offer", a.toString())
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.

@@ -33,12 +33,10 @@ class ChooseRoleFragment : Fragment() {
         val linear1 = view.findViewById<LinearLayout>(R.id.linearLayout)
         val linear2 = view.findViewById<LinearLayout>(R.id.linearLayout2)
 
-        var role:Boolean = false
 
         linear1.setOnClickListener {
             radio1.isChecked = true
-            role = false
-           Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
+           //Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
             if (radio2.isChecked) {
                 radio2.isChecked = false
             }
@@ -46,8 +44,19 @@ class ChooseRoleFragment : Fragment() {
 
         linear2.setOnClickListener {
             radio2.isChecked = true
-            role = true
-            Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
+            if (radio1.isChecked) {
+                radio1.isChecked = false
+            }
+        }
+
+        radio1.setOnClickListener {
+            if (radio2.isChecked) {
+                radio2.isChecked = false
+            }
+        }
+
+        radio2.setOnClickListener {
             if (radio1.isChecked) {
                 radio1.isChecked = false
             }
@@ -64,7 +73,15 @@ class ChooseRoleFragment : Fragment() {
 
             val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
             var editor = sharedPreference?.edit()
-            editor?.putBoolean("USER_ROLE",role)
+            if(radio1.isChecked)
+            {
+                editor?.putBoolean("USER_ROLE",false)
+            }
+            else if(radio2.isChecked){
+
+                editor?.putBoolean("USER_ROLE",true)
+            }
+
             editor?.commit()
 
             val value = requireArguments().getString("PhoneNumber")
@@ -78,17 +95,7 @@ class ChooseRoleFragment : Fragment() {
             fragmentTransaction?.commit()
 
         }
-        radio1.setOnClickListener {
-            if (radio2.isChecked) {
-                radio2.isChecked = false
-            }
-        }
-
-        radio2.setOnClickListener {
-            if (radio1.isChecked) {
-                radio1.isChecked = false
-            }
-        }
+//
         return view
     }
 }

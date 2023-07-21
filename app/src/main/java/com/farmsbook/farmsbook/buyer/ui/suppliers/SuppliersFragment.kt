@@ -106,6 +106,8 @@ class SuppliersFragment : Fragment() {
                     e.printStackTrace()
                 }
             }
+            Log.d("Suppliers" , plantList.size.toString())
+            Log.d("Suppliers" , addedList.size.toString())
             if(plantList.size == 0)
             {
                 binding.textView18.visibility = GONE
@@ -196,7 +198,7 @@ class SuppliersFragment : Fragment() {
                     var cropObject = response.getJSONObject(i)
                     var crop = SuppliersData()
                     crop.GroupName = cropObject.getString("company_name")
-                    crop.Image = cropObject.getString("image")
+                    crop.Image = cropObject.getString("imagePath")
                     crop.FarmerName = cropObject.getString("name")
                     crop.id = cropObject.getInt("id").toString()
                     crop.FarmerID = cropObject.getString("sender_id").toString()

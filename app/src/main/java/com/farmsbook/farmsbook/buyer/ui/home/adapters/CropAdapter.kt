@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
 class CropAdapter (private var plantList : ArrayList<CropData>, val context: Context):RecyclerView.Adapter<CropAdapter.Myviewholder> () {
@@ -38,7 +39,7 @@ class CropAdapter (private var plantList : ArrayList<CropData>, val context: Con
 
 
         val currentItem = plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        Glide.with(context).load(plantList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
@@ -57,7 +58,7 @@ class CropAdapter (private var plantList : ArrayList<CropData>, val context: Con
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
 
 
-//        val plantImage: ImageView = itemView.findViewById(R.id.plantImage)
+       val plantImage: ImageView = itemView.findViewById(R.id.imageView7)
         val plantName: TextView = itemView.findViewById(R.id.cropNameTv)
         val plantPrice: TextView = itemView.findViewById(R.id.costTv)
         val plantLocation: TextView = itemView.findViewById(R.id.locationTv)

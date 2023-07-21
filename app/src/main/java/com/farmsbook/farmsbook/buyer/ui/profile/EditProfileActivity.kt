@@ -15,6 +15,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.MainActivity
 import com.farmsbook.farmsbook.databinding.ActivityEditProfileBinding
@@ -25,10 +26,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class EditProfileActivity : AppCompatActivity() {
+    private lateinit var image: String
+    private lateinit var background_image: String
     private lateinit var name: EditText
-    private lateinit var phone: EditText
+    private lateinit var phone: TextView
     private lateinit var email: EditText
-    private lateinit var location: AutoCompleteTextView
+    private lateinit var location:TextView
     private lateinit var businessName: EditText
     private lateinit var businessTurnOver: EditText
     private lateinit var foundationDate: EditText
@@ -47,14 +50,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         getDataUsingVolley()
 
-        val states = resources.getStringArray(R.array.States)
-        // create an array adapter and pass the required parameter
-        // in our case pass the context, drop down layout , and array.
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, states)
-        // get reference to the autocomplete text view
-        location = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
-        // set adapter to the autocomplete tv to the arrayAdapter
-        location.setAdapter(arrayAdapter)
+        location = findViewById<TextView>(R.id.locationEdt)
 
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val role = sharedPreference?.getBoolean("USER_ROLE",false)
@@ -69,7 +65,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         val locale = Locale("en", "IN")
         Locale.setDefault(locale)
-        val c = Calendar.getInstance(locale)
+        val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
@@ -153,10 +149,13 @@ class EditProfileActivity : AppCompatActivity() {
             // in this we are calling a post method.
             val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
 
+                image = response["imagePath"].toString()
+                Glide.with(this).load(image).into(binding.profileImage)
+                background_image = response["imagePath"].toString()
                 name.setText(response["name"].toString())
                 phone.setText(response["phone"].toString())
                 email.setText(response["email"].toString())
-                //location.setText(response["location"].toString())
+                location.setText(response["location"].toString())
                 businessName.setText(response["business_name"].toString())
                 businessTurnOver.setText(response["business_turnovers"].toString())
                 foundationDate.setText(response["foundation_date"].toString())
@@ -189,8 +188,8 @@ class EditProfileActivity : AppCompatActivity() {
         val queue: RequestQueue = Volley.newRequestQueue(this)
         val respObj = JSONObject()
 
-        respObj.put("display_image", "https://example.com/display_image.jpg")
-        respObj.put("background_image", "https://example.com/background_image.jpg")
+        respObj.put("imagePath", image)
+        respObj.put("background_imagePath", background_image)
         respObj.put("name", name)
         respObj.put("phone", phone)
         respObj.put("email", email)
@@ -207,8 +206,6 @@ class EditProfileActivity : AppCompatActivity() {
         // request method to post the data to our API
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.PUT, url, respObj, {
-
-
 
             Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
             //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()

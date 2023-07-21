@@ -10,6 +10,7 @@
         android:id="@+id/supplierCropImageTV"
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        android:scaleType="fitXY"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -11,6 +11,8 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.MainActivity
 import com.farmsbook.farmsbook.buyer.ui.home.OfferConfirmationActivity
 import com.farmsbook.farmsbook.databinding.ActivityViewSellerHomeCropBinding
@@ -21,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ViewSellerHomeCropActivity : AppCompatActivity() {
-
+    private lateinit var cropImages: java.util.ArrayList<Int>
     private lateinit var binding : ActivityViewSellerHomeCropBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,45 @@ class ViewSellerHomeCropActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         getDataUsingVolley()
+        cropImages = arrayListOf()
+        cropImages.add(R.drawable.bajra)
+        cropImages.add(R.drawable.barley)
+        cropImages.add(R.drawable.basmati_paddy)
+        cropImages.add(R.drawable.black_pepper)
+        cropImages.add(R.drawable.cashew)
+        cropImages.add(R.drawable.castor_seeds)
+        cropImages.add(R.drawable.chana)
+        cropImages.add(R.drawable.chilli)
+        cropImages.add(R.drawable.coffee)
+        cropImages.add(R.drawable.coriander_seeds)
+        cropImages.add(R.drawable.cotton)
+        cropImages.add(R.drawable.groundnut)
+        cropImages.add(R.drawable.guar_gum_refind_splits)
+        cropImages.add(R.drawable.guarseed)
+        cropImages.add(R.drawable.jaggery)
+        cropImages.add(R.drawable.jeera)
+        cropImages.add(R.drawable.jowar_white)
+        cropImages.add(R.drawable.jowar_yellow)
+        cropImages.add(R.drawable.jowar)
+        cropImages.add(R.drawable.kapas)
+        cropImages.add(R.drawable.maize_kharif)
+        cropImages.add(R.drawable.masoor_bold)
+        cropImages.add(R.drawable.mazie)
+        cropImages.add(R.drawable.moong_dal)
+        cropImages.add(R.drawable.mustard_oil)
+        cropImages.add(R.drawable.mustard_seed)
+        cropImages.add(R.drawable.paddy_basmati_1121)
+        cropImages.add(R.drawable.polished_turmeric)
+        cropImages.add(R.drawable.refined_soy_oil)
+        cropImages.add(R.drawable.rice)
+        cropImages.add(R.drawable.sesameseeds)
+        cropImages.add(R.drawable.soyabean_meal)
+        cropImages.add(R.drawable.soyabean)
+        cropImages.add(R.drawable.toor_daal)
+        cropImages.add(R.drawable.turmarice_farmer_unpolished)
+        cropImages.add(R.drawable.turmeric)
+        cropImages.add(R.drawable.wheat)
+        cropImages.add(R.drawable.yellow_peas)
 
         binding.callBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
@@ -94,6 +135,7 @@ class ViewSellerHomeCropActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
 
+            Glide.with(this).load(cropImages[response["manageCropId"]as Int -1]).into(binding.imageView26)
             binding.cropNameTV.text = response["crop_name"].toString()
             binding.postedOnTV.text = "Posted on "+response["timestamp"].toString()
             binding.locationTV.text = response["location"].toString()
@@ -118,6 +160,7 @@ class ViewSellerHomeCropActivity : AppCompatActivity() {
 
             binding.farmerLocationTV.text = response["location"].toString()
             binding.farmerNameTV.text = response["name"].toString()
+            Glide.with(this).load(response["imagePath"].toString()).into(binding.imageView28)
             binding.farmerPhoneTV.text = response["phone"].toString()
 
         }, { error -> // method to handle errors.

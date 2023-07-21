@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ProfileCropData
 
-class SuppliersCropAdapter (private val plantList : ArrayList<SuppliersCropData>, val context: Context):RecyclerView.Adapter<SuppliersCropAdapter.Myviewholder> () {
+class SuppliersCropAdapter(private val plantList: ArrayList<SuppliersCropData>, val context: Context):RecyclerView.Adapter<SuppliersCropAdapter.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 
@@ -34,12 +36,12 @@ class SuppliersCropAdapter (private val plantList : ArrayList<SuppliersCropData>
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       // val currentItem =plantList[position]
-        //Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
+        val currentItem =plantList[position]
+        Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
 
-        holder.cropName.text = "Cucumber"
-        holder.cropPrice.text= "100-150/10 kg"
+        holder.cropName.text = currentItem.Name
+        holder.cropPrice.text= currentItem.PricePerKg
 
 
 //        holder.itemView.setOnClickListener {
@@ -48,13 +50,13 @@ class SuppliersCropAdapter (private val plantList : ArrayList<SuppliersCropData>
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return plantList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
 
 
-       // val cropImage: ImageView = itemView.findViewById(R.id.supplierCropImageTV)
+       val plantImage: ImageView = itemView.findViewById(R.id.supplierCropImageTV)
         val cropName: TextView = itemView.findViewById(R.id.supplierCropNameTV)
         val cropPrice: TextView = itemView.findViewById(R.id.supplierCropPriceTv)
 

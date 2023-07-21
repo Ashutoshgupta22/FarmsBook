@@ -1,8 +1,14 @@
 package com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters
 
+import org.json.JSONArray
+
 data class LatestOffersData(
     var offerId: String? = null,
     var buyer_name: String? = null,
+    var crop_name: String? = null,
+    var crop_image: String? = null,
+    var counter_status: JSONArray? = null,
+    var replied: String? = null,
     var name: String? = null,
     var phone: String? = null,
     var max: String? = null,

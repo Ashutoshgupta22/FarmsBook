@@ -22,9 +22,10 @@
 
     <TextView
         android:id="@+id/name_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Arun Sharma"
@@ -37,31 +38,18 @@
 
     <TextView
         android:id="@+id/companyNameTV"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Agrigoods Pvt. Ltd"
+        android:layout_marginEnd="12dp"
         android:textColor="@color/gray"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/callBtn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/name_tv"
         app:layout_constraintTop_toBottomOf="@+id/name_tv" />
-
-    <TextView
-        android:id="@+id/postedByTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Crops are available for sale"
-        android:textColor="@color/green"
-
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <TextView
         android:id="@+id/callBtn"
