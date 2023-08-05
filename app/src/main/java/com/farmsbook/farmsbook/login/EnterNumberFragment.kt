@@ -103,6 +103,8 @@ class EnterNumberFragment : Fragment() {
             // in this we are calling a post method.
             val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
+                Log.d("EnterNumberFrag", "sendOtp: response: ${it?.toString()}")
+
                 //Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
                 //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
 

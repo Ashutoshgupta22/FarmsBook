@@ -21,21 +21,17 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.MainActivity
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersCropAdapter
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersCropData
 import com.farmsbook.farmsbook.seller.SellerMainActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
-import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 
@@ -116,11 +112,11 @@ class EnterOtpFragment : Fragment() {
                 progressDialog.setMessage("Verifying")
                 progressDialog.show()
 
-                timer.cancel()
+               // timer.cancel()
 
                 Handler().postDelayed({
                     progressDialog.dismiss()
-                    validateOtp(typedOTP)
+                    validateOtp(typedOTP, timer)
 //                    val frag = ChooseRoleFragment()
 //                    val args = Bundle()
 //                    args.putString("PhoneNumber", value)
@@ -204,25 +200,43 @@ class EnterOtpFragment : Fragment() {
 
     }
 
-    private fun validateOtp(phone:String) {
+    private fun validateOtp(typedOtp: String, timer: CountDownTimer) {
         // url to post our data
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val url = "$baseAddressUrl/otp/validate"
 
         val jsonBody = JSONObject()
-        jsonBody.put("otpCode", phone)
+        jsonBody.put("otpCode", typedOtp)
         // creating a new variable for our request queue
         val queue = Volley.newRequestQueue(context)
         val request = object : StringRequest(Method.POST, url, Response.Listener { response ->
             // Handle the response here
 
+            Log.i("EnterOtpFrag","validateOtp response: $response")
 
-           Log.d("OTP", response)
-            val value = requireArguments().getString("PhoneNumber")
-            getDataUsingVolley(value.toString())
+            if (response.isNotEmpty()) {
 
+                try {
+                    val jsonResponse = JSONObject(response)
+                    val valid = jsonResponse.getBoolean("valid")
 
-        }, Response.ErrorListener { error ->
+                    if (valid) {
+
+                        timer.cancel()
+                        val value = requireArguments().getString("PhoneNumber")
+                        getDataUsingVolley(value.toString())
+                    }
+                    else Toast.makeText(requireContext(), "Invalid OTP",
+                        Toast.LENGTH_SHORT).show()
+
+                }
+                catch (e: JSONException) {
+                    Log.e("EnterOtpFrag", "validateOtp: Json exception",e )
+                }
+            }
+            else Toast.makeText(requireContext(), "Invalid OTP", Toast.LENGTH_SHORT).show()
+
+         }, Response.ErrorListener { error ->
             Toast.makeText(context,"Invalid OTP",Toast.LENGTH_SHORT).show()
         }) {
             override fun getBodyContentType(): String {
@@ -268,25 +282,28 @@ class EnterOtpFragment : Fragment() {
             }
             else{
                 val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                var editor = sharedPreference?.edit()
+                val editor = sharedPreference?.edit()
                 editor?.putInt("USER_ID",response["id"].toString().toInt())
                 editor?.putBoolean("USER_ROLE",response["role"].toString().toBoolean())
-                editor?.commit()
+                editor?.apply()
 
                 if(response["role"] == true)
                 {
+                    Log.i("EnterOtpFrag", "getDataUsingVolley: MainActivity called")
                     startActivity(Intent(context,MainActivity::class.java))
                     finishAffinity(LoginActivity())
                 }
                 else
                 {
+                    Log.i("EnterFrag", "getDataUsingVolley: sellerMainActivity called ")
                     startActivity(Intent(context, SellerMainActivity::class.java))
                     finishAffinity(LoginActivity())
                 }
             }
 
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            Log.e("EnterOtpFrag", "getDataUsingVolley: Failed",error )
+            Toast.makeText(context, "Something went wrong! Try again", Toast.LENGTH_LONG).show()
         })
         queue.add(request2)
     }
