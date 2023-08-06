@@ -14,6 +14,7 @@ data class BuyerOfferData(
     var offer_quantity : String? = null,
     var offer_quantity_unit : String? = null,
     var location : String? = null,
+    var phone: String? = null,
     var transportation : String? = null,
     var type_of_farming : String? = null,
     var type_of_sowing : String? = null,

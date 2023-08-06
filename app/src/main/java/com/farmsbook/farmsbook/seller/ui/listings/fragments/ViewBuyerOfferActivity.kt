@@ -43,6 +43,7 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             acceptOffer()
         }
         binding.rejectBtn.setOnClickListener {
+            Log.i("ViewBuyerOfferActivity", "onCreate: reject clicked")
             rejectOffer()
         }
         binding.counterBtn.setOnClickListener {

@@ -2,6 +2,7 @@ package com.farmsbook.farmsbook.seller.ui.listings
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -32,7 +33,7 @@ class ViewListingActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         getDataUsingVolley()
-        getDataUsingVolley2()
+        getAllOfferOfBuyers()
         binding.backBtn.setOnClickListener {
             finish()
         }
@@ -72,15 +73,17 @@ class ViewListingActivity : AppCompatActivity() {
         queue.add(request)
     }
 
-    private fun getDataUsingVolley2() {
+    private fun getAllOfferOfBuyers() {
 
-        // url to post our data
         plantList = arrayListOf<BuyerOfferData>()
 
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
         val list_id = intent.getStringExtra("LIST_ID")
+
+        Log.i("ViewListingActivity", "getAllOfferOfBuyers: " +
+                "listId- $list_id userId -$userId")
         val url = "$baseAddressUrl/user/$userId/listings/$list_id/getAllOfferOfBuyers"
 
         // creating a new variable for our request queue
@@ -101,6 +104,7 @@ class ViewListingActivity : AppCompatActivity() {
                     crop.listedOfferId = cropObject.getString("listed_offerId")
                     crop.offer_price = cropObject.getString("listed_offering_price")
                     crop.location = cropObject.getString("delivery_place")
+                    crop.phone = cropObject.getString("phone")
                     crop.buyer_name = cropObject.getString("buyer_name")
                     crop.offer_quantity = cropObject.getString("listed_offering_quantity")
                     crop.offer_quantity_unit = cropObject.getString("listed_offering_quantity_unit")
@@ -147,14 +151,12 @@ class ViewListingActivity : AppCompatActivity() {
 //                startActivity(intent)
                 }
 
-                override fun acceptClick(position: Int) {
-                    acceptOffer(plantList[position].listedOfferId)
-                    finish()
-                }
+                override fun callClick(position: Int) {
 
-                override fun rejectClick(position: Int) {
-                    rejectOffer(plantList[position].listedOfferId)
-                    finish()
+                    Log.i("ViewListingActivity", "callClick: clicked")
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse("tel:${plantList[position].phone}")
+                    startActivity(intent)
                 }
             })
         }, { error -> // method to handle errors.
@@ -163,52 +165,52 @@ class ViewListingActivity : AppCompatActivity() {
         queue.add(request)
     }
 
-    private fun rejectOffer(listedOfferId: String?) {
-        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
-        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val userId = sharedPreference?.getInt("USER_ID", 0)
-        val list_id = intent.getStringExtra("LIST_ID")
-        val url = "$baseAddressUrl/user/$userId/listings/$list_id/offer/$listedOfferId/value/0"
-
-        // creating a new variable for our request queue
-        val queue: RequestQueue = Volley.newRequestQueue(this)
-
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
-
-
-        }, { error -> // method to handle errors.
-            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
-        })
-        queue.add(request)
-    }
-
-    private fun acceptOffer(listedOfferId: String?) {
-        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
-        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val userId = sharedPreference?.getInt("USER_ID", 0)
-        val list_id = intent.getStringExtra("LIST_ID")
-        val url = "$baseAddressUrl/user/$userId/listings/$list_id/offer/$listedOfferId/value/1"
-
-        // creating a new variable for our request queue
-        val queue: RequestQueue = Volley.newRequestQueue(this)
-
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
-
-
-        }, { error -> // method to handle errors.
-            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
-        })
-        queue.add(request)
-
-    }
+//    private fun rejectOffer(listedOfferId: String?) {
+//        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+//        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+//        val userId = sharedPreference?.getInt("USER_ID", 0)
+//        val list_id = intent.getStringExtra("LIST_ID")
+//        val url = "$baseAddressUrl/user/$userId/listings/$list_id/offer/$listedOfferId/value/0"
+//
+//        // creating a new variable for our request queue
+//        val queue: RequestQueue = Volley.newRequestQueue(this)
+//
+//
+//        // on below line we are calling a string
+//        // request method to post the data to our API
+//        // in this we are calling a post method.
+//        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
+//
+//
+//        }, { error -> // method to handle errors.
+//            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+//            Log.d("Profile Data", "Fail to get response = $error")
+//        })
+//        queue.add(request)
+//    }
+//
+//    private fun acceptOffer(listedOfferId: String?) {
+//        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+//        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+//        val userId = sharedPreference?.getInt("USER_ID", 0)
+//        val list_id = intent.getStringExtra("LIST_ID")
+//        val url = "$baseAddressUrl/user/$userId/listings/$list_id/offer/$listedOfferId/value/1"
+//
+//        // creating a new variable for our request queue
+//        val queue: RequestQueue = Volley.newRequestQueue(this)
+//
+//
+//        // on below line we are calling a string
+//        // request method to post the data to our API
+//        // in this we are calling a post method.
+//        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
+//
+//
+//        }, { error -> // method to handle errors.
+//            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+//            Log.d("Profile Data", "Fail to get response = $error")
+//        })
+//        queue.add(request)
+//
+//    }
 }

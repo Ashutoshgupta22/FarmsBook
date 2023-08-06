@@ -66,44 +66,7 @@
         app:layout_constraintStart_toStartOf="@+id/name_tv"
         app:layout_constraintTop_toBottomOf="@+id/name_tv" />
 
-    <TextView
-        android:id="@+id/declineBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edtxt_background_rounded6"
-        android:fontFamily="@font/roboto_medium"
-        android:paddingHorizontal="18dp"
-        android:paddingVertical="8dp"
-        android:text="Reject"
 
-        android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/acceptBtn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView62"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/acceptBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:background="@drawable/button_background_rounded_3"
-        android:fontFamily="@font/roboto_medium"
-        android:paddingHorizontal="18dp"
-        android:paddingVertical="8dp"
-        android:text="Accept"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/declineBtn"
-        app:layout_constraintTop_toTopOf="@+id/declineBtn" />
 
     <TextView
         android:id="@+id/textView61"
@@ -160,5 +123,23 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/textView62"
         app:layout_constraintTop_toTopOf="@+id/textView62" />
+
+    <TextView
+        android:id="@+id/btn_buyer_offer_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background_rounded_3"
+        android:drawableEnd="@drawable/baseline_call_24"
+        android:drawableTint="@color/white"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="Call "
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/quantityTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

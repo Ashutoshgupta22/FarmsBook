@@ -18,8 +18,6 @@ class BuyersAdapter3 (private val plantList : ArrayList<BuyersData>, val context
 
         fun onItemClick(position: Int)
         fun callClick(position: Int)
-
-
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){

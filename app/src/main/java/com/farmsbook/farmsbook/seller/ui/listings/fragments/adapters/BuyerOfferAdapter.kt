@@ -17,8 +17,7 @@ class BuyerOfferAdapter (private val plantList : ArrayList<BuyerOfferData>, val 
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
-        fun acceptClick(position: Int)
-        fun rejectClick(position: Int)
+        fun callClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
@@ -69,12 +68,10 @@ class BuyerOfferAdapter (private val plantList : ArrayList<BuyerOfferData>, val 
 
                 listener.onItemClick(adapterPosition)
             }
-            itemView.findViewById<TextView>(R.id.acceptBtn).setOnClickListener {
-                listener.acceptClick(adapterPosition)
+            itemView.findViewById<TextView>(R.id.btn_buyer_offer_call).setOnClickListener {
+                listener.callClick(adapterPosition)
             }
-            itemView.findViewById<TextView>(R.id.declineBtn).setOnClickListener {
-                listener.rejectClick(adapterPosition)
-            }
+
         }
     }
 }
