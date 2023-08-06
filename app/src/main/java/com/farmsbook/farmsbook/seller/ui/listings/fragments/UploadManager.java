@@ -38,6 +38,8 @@ public class UploadManager {
 
 
     public void uploadFormData(String url, ArrayList<File> imageFile) {
+
+        Log.i("UploadManager", "uploadFormData: called ");
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 
 
@@ -57,7 +59,7 @@ public class UploadManager {
                     public void onResponse(NetworkResponse response) {
                         String responseBody = new String(response.data);
                         System.out.println(responseBody);
-                        Log.d("Profile", "Upload success. Response: " + response.toString());
+                        Log.i("UploadManager", "image Upload success. Response: " + response.toString());
                         // Handle the response
 //                        Context context = new LoginActivity();
 //                        SharedPreferences sharedPref =  context.getSharedPreferences("pref", Context.MODE_PRIVATE);

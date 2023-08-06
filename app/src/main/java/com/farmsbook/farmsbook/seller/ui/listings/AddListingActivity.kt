@@ -220,7 +220,7 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
             }, 100)
 
             Handler().postDelayed({
-              //  uploadImages()
+                uploadImages()
             }, 900)
 
 
@@ -265,7 +265,8 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
 
                 for (i in 0 until x!!) {
                     if (imageList.size < 1) {
-                        if (getImageFilePath(data.clipData?.getItemAt(i)!!.uri)?.let { File(it).length() }!! < maxFileSize) {
+                        if (getImageFilePath(data.clipData?.getItemAt(i)!!.uri)?.let {
+                                File(it).length() }!! < maxFileSize) {
                             imageList.add(data.clipData?.getItemAt(i)!!.uri)
                         } else {
                             showErrorDialog(
@@ -352,7 +353,6 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
             Log.i("AddListingActivity", "postListing: SUCCESS ")
 
             getListings()
-            uploadImages()
 
         }, { error -> // method to handle errors.
             Log.e("AddListingActivity", "postListing: FAILED ",error )
@@ -496,11 +496,11 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
                     images.add(comImageFile)
                 }
             }
-            Log.w("IMAGE Path", images.toString())
+            Log.i("IMAGE Path", images.toString())
 
             uploadManager?.uploadFormData(url, images)
 
-            Log.w("IMAGE Path", "Uploaded")
+            Log.i("IMAGE Path", "Uploaded")
             startActivity(
                 Intent(
                     this@AddListingActivity, ListingConfirmationActivity::class.java
