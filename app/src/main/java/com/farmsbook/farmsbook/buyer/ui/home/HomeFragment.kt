@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -62,7 +63,9 @@ class HomeFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filter(s.toString())
+                Log.i("Buyer HomeFrag", "onTextChanged: filter called ")
+                if (plantList.isNotEmpty())
+                    filter(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {

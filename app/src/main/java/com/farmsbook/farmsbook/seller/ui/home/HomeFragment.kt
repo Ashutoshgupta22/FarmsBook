@@ -104,7 +104,8 @@ class HomeFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.i("HomeFrag Seller", "onTextChanged: filter called")
-                filter(s.toString())
+                if (plantList.isNotEmpty())
+                    filter(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {

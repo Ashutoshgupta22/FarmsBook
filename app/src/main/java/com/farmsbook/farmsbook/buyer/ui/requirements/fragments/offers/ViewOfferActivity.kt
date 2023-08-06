@@ -25,7 +25,7 @@ class ViewOfferActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-        getDataUsingVolley()
+        getOfferData()
         binding.backBtn.setOnClickListener {
             finish()
         }
@@ -38,7 +38,7 @@ class ViewOfferActivity : AppCompatActivity() {
 
     }
 
-    private fun getDataUsingVolley() {
+    private fun getOfferData() {
 
         // url to post our data
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
@@ -56,7 +56,9 @@ class ViewOfferActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
 
-            Glide.with(this).load(response.getString("imageUrl0")).into(binding.imageView7)
+            Log.i("ViewOfferActivity", "getOfferData: $response")
+
+            Glide.with(this).load(response.getString("imageUrl0")).into(binding.profileImage)
             binding.cropNameTv.text = response.getString("offer_cropName")
             binding.postedOnTV.text = "Posted on " + response.getString("timestamp")
             binding.farmerNameTV.text = response.getString("buyer_name")
