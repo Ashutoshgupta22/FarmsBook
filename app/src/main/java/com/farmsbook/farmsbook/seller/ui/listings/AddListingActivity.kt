@@ -47,7 +47,6 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import android.graphics.Matrix as Matrix1
 
 class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRemoved {
 
@@ -74,7 +73,7 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         super.onCreate(savedInstanceState)
         binding = ActivityAddListingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         supportActionBar?.hide()
 
@@ -147,7 +146,7 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         }
 
 
-        addData()
+        getManageCrops()
 
         val arrayAdapter4 = ArrayAdapter(this, R.layout.dropdown_item, cropList)
         name = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView4)
@@ -215,13 +214,13 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
 //            }
 //            else {
 
-            postDataUsingVolley(type_of_sale, transportation, type_of_farming)
+            postListing(type_of_sale, transportation, type_of_farming)
             Handler().postDelayed({
-                getDataUsingVolley()
+              //  getListings()
             }, 100)
 
             Handler().postDelayed({
-                postDataUsingVolley()
+              //  uploadImages()
             }, 900)
 
 
@@ -305,7 +304,7 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         }
     }
 
-    private fun postDataUsingVolley(
+    private fun postListing(
         type_of_sale: Boolean,
         transportation: Boolean,
         type_of_farming: Boolean
@@ -349,23 +348,26 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         // request method to post the data to our API
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
-//            Toast.makeText(this, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
+           response ->
+            Log.i("AddListingActivity", "postListing: SUCCESS ")
 
+            getListings()
+            uploadImages()
 
         }, { error -> // method to handle errors.
-            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            Log.e("AddListingActivity", "postListing: FAILED ",error )
+            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show()
         })
         if (imageList.size != 0) {
             queue.add(request)
         } else {
-            showErrorDialog(this, "Image Selection Error", "Select atleast 1 image to upload")
+            showErrorDialog(this, "Image Selection Error",
+                "Select atleast 1 image to upload")
         }
-
 
     }
 
-    private fun addData() {
+    private fun getManageCrops() {
 
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -391,6 +393,7 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
                 }
             }
         }, { error -> // method to handle errors.
+            Log.e("AddListingActivity", "getManageCrops: FAILED",error )
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
@@ -401,7 +404,7 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         Log.d("Images", imageList.size.toString())
     }
 
-    private fun getDataUsingVolley() {
+    private fun getListings() {
 
         // url to post our data
         plantList = arrayListOf()
@@ -418,6 +421,8 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         // request method to post the data to our API
         // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
+
+            Log.i("AddListingActivity", "getDataUsingVolley: $response ")
 
             for (i in 0 until response.length()) {
                 try {
@@ -457,7 +462,7 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         return imagePath
     }
 
-    private fun postDataUsingVolley() {
+    private fun uploadImages() {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)

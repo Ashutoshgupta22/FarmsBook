@@ -15,20 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.farmsbook.farmsbook.buyer.ui.profile.ViewProfileActivity
-import com.farmsbook.farmsbook.buyer.ui.suppliers.AddSupplierActivity
 import com.farmsbook.farmsbook.buyer.ui.suppliers.ViewSupplierActivity
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersAdapter2
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersAdapter3
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersAdapter4
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersData
 import com.farmsbook.farmsbook.databinding.FragmentBuyersBinding
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.*
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
-import org.json.JSONObject
 
 class BuyersFragment : Fragment() {
 
@@ -235,8 +228,8 @@ class BuyersFragment : Fragment() {
                 }
 
                 override fun declineClick(position: Int) {
-                    declineRequest(followList[position].id.toString())
-                    adapter3.notifyDataSetChanged()
+
+                    declineRequest(position, adapter3)
                 }
             })
 
@@ -251,7 +244,10 @@ class BuyersFragment : Fragment() {
 
     }
 
-    private fun declineRequest(requestId : String) {
+    private fun declineRequest(position: Int, adapter3: BuyersAdapter4) {
+
+        val requestId = followList[position].id.toString()
+
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -264,12 +260,26 @@ class BuyersFragment : Fragment() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
+        val request = StringRequest(Request.Method.DELETE, url,  { response: String ->
+
+            Log.i("BuyersFrag", "declineBuyerFollowRequest: SUCCESS")
+            followList.removeAt(position)
+            adapter3.notifyDataSetChanged()
+
+            if(followList.size == 0)
+            {
+                binding.textView10.visibility = View.GONE
+                binding.requestRV.visibility = View.GONE
+            }
+            else{
+                binding.textView10.visibility = View.VISIBLE
+                binding.requestRV.visibility = View.VISIBLE
+            }
 
 
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
+            Log.e("BuyersFrag", "declineBuyerFollowRequest: FAILED ",error)
         })
         queue.add(request)
     }
@@ -287,12 +297,14 @@ class BuyersFragment : Fragment() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
+        val request = StringRequest(Request.Method.POST, url,  { response: String ->
+
+            Log.i("BuyersFrag", "acceptBuyerFollowRequest: SUCCESS")
 
 
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
+            Log.e("BuyersFrag", "acceptBuyerFollowRequest: FAILED ",error)
         })
         queue.add(request)
     }

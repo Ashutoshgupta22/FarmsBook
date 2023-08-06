@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
-class SuppliersAdapter4 (private val plantList : ArrayList<SuppliersData>, val context: Context):RecyclerView.Adapter<SuppliersAdapter4.Myviewholder> () {
+class SuppliersAdapter4 (private val plantList : ArrayList<SuppliersData>,
+                         val context: Context):
+    RecyclerView.Adapter<SuppliersAdapter4.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 

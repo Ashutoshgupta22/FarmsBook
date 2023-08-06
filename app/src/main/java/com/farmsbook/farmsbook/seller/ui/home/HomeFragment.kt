@@ -103,6 +103,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Log.i("HomeFrag Seller", "onTextChanged: filter called")
                 filter(s.toString())
             }
 

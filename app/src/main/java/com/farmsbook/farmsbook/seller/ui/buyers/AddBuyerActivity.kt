@@ -11,13 +11,9 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.buyer.ui.suppliers.ViewSupplierActivity
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersAdapter
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersData
 import com.farmsbook.farmsbook.databinding.ActivityAddBuyerBinding
-import com.farmsbook.farmsbook.databinding.ActivityAddSupplierBinding
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersAdapter
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
@@ -36,11 +32,14 @@ class AddBuyerActivity : AppCompatActivity() {
         supportActionBar?.hide()
         plantList= arrayListOf<BuyersData>()
 
-        getDataUsingVolley()
+        getBuyerList()
 
 
     }
-    private fun postDataUsingVolley(receiverId : String ) {
+    private fun postAddBuyer(position: Int, adapter: BuyersAdapter ) {
+
+        val receiverId = plantList[position].FarmerID.toString()
+
         // url to post our data
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference =getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -54,19 +53,22 @@ class AddBuyerActivity : AppCompatActivity() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.POST, url, null, {
+        val request = StringRequest(Request.Method.POST, url,  {
+
+            plantList.removeAt(position)
+            adapter.notifyDataSetChanged()
 
             Toast.makeText(this@AddBuyerActivity,"Added Buyer",Toast.LENGTH_LONG).show()
-            //Toast.makeText(context, "USER ID = ${USER_ID}", Toast.LENGTH_SHORT).show()
             finish()
 
         }, { error -> // method to handle errors.
-            Log.d("Buyers",error.toString())
-            Toast.makeText(this@AddBuyerActivity, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            Log.e("AddBuyerActivity", "postAddBuyer: FAILED ",error )
+            Toast.makeText(this@AddBuyerActivity, "Something went wrong!",
+                Toast.LENGTH_LONG).show()
         })
         queue.add(request)
     }
-    private fun getDataUsingVolley() {
+    private fun getBuyerList() {
 
         // url to post our data
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
@@ -123,9 +125,7 @@ class AddBuyerActivity : AppCompatActivity() {
                 }
                 override fun onAddButtonClick(position: Int) {
 
-                    postDataUsingVolley(plantList[position].FarmerID.toString())
-                    adapter.notifyDataSetChanged()
-
+                    postAddBuyer(position, adapter)
                 }
             })
 

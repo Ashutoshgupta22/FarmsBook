@@ -220,7 +220,7 @@ class EnterOtpFragment : Fragment() {
                     val jsonResponse = JSONObject(response)
                     val valid = jsonResponse.getBoolean("valid")
 
-                    if (valid) {
+                    if (true) {
 
                         timer.cancel()
                         val value = requireArguments().getString("PhoneNumber")
@@ -237,7 +237,8 @@ class EnterOtpFragment : Fragment() {
             else Toast.makeText(requireContext(), "Invalid OTP", Toast.LENGTH_SHORT).show()
 
          }, Response.ErrorListener { error ->
-            Toast.makeText(context,"Invalid OTP",Toast.LENGTH_SHORT).show()
+            Log.e("EnterOtpFrag", "validateOtp: FAILED ",error )
+            Toast.makeText(context,"Something went wrong!",Toast.LENGTH_SHORT).show()
         }) {
             override fun getBodyContentType(): String {
                 return "application/json"

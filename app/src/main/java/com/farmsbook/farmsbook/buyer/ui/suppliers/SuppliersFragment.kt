@@ -2,9 +2,7 @@ package com.farmsbook.farmsbook.buyer.ui.suppliers
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,18 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.farmsbook.farmsbook.buyer.ui.home.ViewHomeCropActivity
-import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropAdapter
 import com.farmsbook.farmsbook.databinding.FragmentSuppliersBinding
-import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.*
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
-import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.*
+import java.text.FieldPosition
 import kotlin.collections.ArrayList
 
 class SuppliersFragment : Fragment() {
@@ -74,6 +67,7 @@ class SuppliersFragment : Fragment() {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference =activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
+        Log.i("SuppliersFrag", "getDataUsingVolley: userId: $userId")
         val url = "$baseAddressUrl/user/$userId/getSuppliers"
 
         // creating a new variable for our request queue
@@ -244,8 +238,8 @@ class SuppliersFragment : Fragment() {
                 }
 
                 override fun declineClick(position: Int) {
-                    declineRequest(followList[position].id.toString())
-                    adapter3.notifyDataSetChanged()
+
+                    declineRequest(position, adapter3)
                 }
             })
 
@@ -253,16 +247,22 @@ class SuppliersFragment : Fragment() {
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            Log.e("SuppliersFrag", "getSellerFollowRequest: Failed ", error)
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
         })
         queue.add(request2)
 
     }
 
-    private fun declineRequest(requestId : String) {
+    private fun declineRequest(position: Int, adapter3: SuppliersAdapter4) {
+
+        val requestId = followList[position].id.toString()
+        
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
+
+        Log.i("SuppliersFrag", "declineRequest: userId: $userId   requestId: $requestId")
         val url = "$baseAddressUrl/user/$userId/rejectFollowRequestOfFarmer/${requestId}/reject"
 
         // creating a new variable for our request queue
@@ -272,14 +272,30 @@ class SuppliersFragment : Fragment() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
+        val request = StringRequest(Request.Method.DELETE, url, {
+                response: String ->
+
+            Log.i("SuppliersFrag", "declineSellerFollowRequest: SUCCESS")
+            followList.removeAt(position)
+            adapter3.notifyDataSetChanged()
+
+            if(followList.size == 0)
+            {
+                binding.textView10.visibility = GONE
+                binding.requestRV.visibility = GONE
+            }
+            else{
+                binding.textView10.visibility = VISIBLE
+                binding.requestRV.visibility = VISIBLE
+            }
 
 
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
+            Log.e("SuppliersFrag", "declineSellerFollowRequest: FAILED ",error)
         })
         queue.add(request)
+
     }
 
     private fun acceptRequest(requestId : String) {
@@ -295,12 +311,16 @@ class SuppliersFragment : Fragment() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
+        val request = StringRequest(Request.Method.POST, url,  {
+                response: String ->
+
+            Log.i("SuppliersFrag", "acceptSellerFollowRequest: SUCCESS")
+
 
 
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
+            Log.e("SuppliersFrag", "acceptSellerFollowRequest: FAILED ",error)
         })
         queue.add(request)
     }
