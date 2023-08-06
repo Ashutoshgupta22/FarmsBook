@@ -261,9 +261,8 @@ class SellerProfileFragment : Fragment() {
 
         val storedLocale = AppCompatDelegate.getApplicationLocales()
 
-        val checkedItem: Int = if (storedLocale.toLanguageTags() == "en")  0
-        else if (storedLocale.toLanguageTags() == "hi") 1
-        else -1
+        val checkedItem: Int = if (storedLocale.toLanguageTags() == "hi") 1
+        else 0
 
         val listItems = arrayOf("English", "Hindi")
         val mBuilder = context?.let { AlertDialog.Builder(it) }
