@@ -14,18 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters.LatestOffersAdapter
-import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters.LatestOffersData
 import com.farmsbook.farmsbook.databinding.FragmentInterestedBinding
-import com.farmsbook.farmsbook.databinding.FragmentOffersBinding
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.InterestedAdapter
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.InterestedData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
-import org.json.JSONObject
 
 
 class InterestedFragment : Fragment() {
@@ -39,7 +35,7 @@ class InterestedFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        getDataUsingVolley()
+        getInterestedRequirement()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,11 +84,11 @@ class InterestedFragment : Fragment() {
         cropImages.add(R.drawable.turmeric)
         cropImages.add(R.drawable.wheat)
         cropImages.add(R.drawable.yellow_peas)
-        getDataUsingVolley()
+        getInterestedRequirement()
 
         return root
     }
-    private fun getDataUsingVolley() {
+    private fun getInterestedRequirement() {
 
         // url to post our data
         plantList = arrayListOf<InterestedData>()
@@ -175,19 +171,20 @@ class InterestedFragment : Fragment() {
 
                 override fun deleteClick(position: Int) {
                     cropId = plantList[position].interest_id.toString()
-                        deleteInterest()
+                    deleteInterest(position, adapter)
                 }
             })
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            Log.e("InterestedFragment", "getInterestedListing: ", error)
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
 
     }
 
-    private fun deleteInterest() {
+    private fun deleteInterest(position: Int, adapter: InterestedAdapter) {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -200,11 +197,16 @@ class InterestedFragment : Fragment() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
+        val request = StringRequest(Request.Method.DELETE, url,  {
+                response: String ->
+
+            Log.i("InterestedFrag", "deleteInterest: SUCCESS")
+            plantList.removeAt(position)
+            adapter.notifyDataSetChanged()
 
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Requirements", "Fail to get response = $error")
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
+            Log.e("InterestedFrag", "deleteInterest: FAILED",error )
         })
         queue.add(request)
     }
