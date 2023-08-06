@@ -97,10 +97,6 @@ class ViewRequirementActivity : AppCompatActivity() {
         builder.setView(view)
         logoutDialog = builder.create()
 
-        binding.cancelBTN.setOnClickListener {
-            logoutDialog.show()
-        }
-
         binding.backBtn.setOnClickListener {
             finish()
         }

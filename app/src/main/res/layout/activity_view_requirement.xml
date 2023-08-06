@@ -226,40 +226,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/cancelBTN"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edtxt_background_rounded5"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/cancel"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/editBTN"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/editBTN"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_background_rounded_5"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/edit"
-                    android:textColor="@color/green"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/cancelBTN"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
