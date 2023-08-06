@@ -12,8 +12,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.core.app.ActivityCompat.recreate
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -256,18 +258,25 @@ class SellerProfileFragment : Fragment() {
 
     }
     private fun showLanguageChangeDialog() {
+
+        val storedLocale = AppCompatDelegate.getApplicationLocales()
+
+        val checkedItem: Int = if (storedLocale.toLanguageTags() == "en")  0
+        else if (storedLocale.toLanguageTags() == "hi") 1
+        else -1
+
         val listItems = arrayOf("English", "Hindi")
         val mBuilder = context?.let { AlertDialog.Builder(it) }
         mBuilder?.setTitle("Choose Language...")
         mBuilder?.setSingleChoiceItems(
-            listItems, -1
+            listItems, checkedItem
         ) { dialogInterface, i ->
             if (i == 0) {
                 setLocale("en")
-                recreate(requireActivity())
+              //  recreate(requireActivity())
             } else if (i == 1) {
                 setLocale("hi")
-                recreate(requireActivity())
+               // recreate(requireActivity())
             }
             dialogInterface.dismiss()
         }
@@ -276,10 +285,14 @@ class SellerProfileFragment : Fragment() {
     }
 
     private fun setLocale(lang: String?) {
-        val locale = Locale(lang)
-        Locale.setDefault(locale)
-        val config = Configuration()
-        config.locale = locale
+
+        val appLocale = LocaleListCompat.forLanguageTags(lang)
+        AppCompatDelegate.setApplicationLocales(appLocale)
+
+//        val locale = Locale(lang)
+//        Locale.setDefault(locale)
+//        val config = Configuration()
+//        config.locale = locale
 //        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
 //        val editor = getSharedPreferences("Settings", AppCompatActivity.MODE_PRIVATE).edit()
 //        editor.putString("My_lang", lang)
