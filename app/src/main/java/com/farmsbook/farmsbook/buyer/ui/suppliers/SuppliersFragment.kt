@@ -23,7 +23,6 @@ import com.farmsbook.farmsbook.databinding.FragmentSuppliersBinding
 import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.*
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
-import java.text.FieldPosition
 import kotlin.collections.ArrayList
 
 class SuppliersFragment : Fragment() {
@@ -89,7 +88,7 @@ class SuppliersFragment : Fragment() {
                     crop.phone = cropObject.getString("phone")
                     crop.Location = cropObject.getString("location")
                     crop.FarmerName = cropObject.getString("name")
-                    crop.FarmerID = cropObject.getString("parent_id").toString()
+                    crop.FarmerID = cropObject.getString("parentId").toString()
 
                     if(cropObject.getBoolean("add_response_status") == false)
                         plantList.add(crop)
@@ -233,8 +232,7 @@ class SuppliersFragment : Fragment() {
                 }
 
                 override fun acceptClick(position: Int) {
-                    acceptRequest(followList[position].id.toString())
-                    adapter3.notifyDataSetChanged()
+                    acceptRequest(position, adapter3)
                 }
 
                 override fun declineClick(position: Int) {
@@ -298,7 +296,10 @@ class SuppliersFragment : Fragment() {
 
     }
 
-    private fun acceptRequest(requestId : String) {
+    private fun acceptRequest(position: Int, adapter3: SuppliersAdapter4) {
+
+        val requestId = followList[position].id.toString()
+
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -311,14 +312,25 @@ class SuppliersFragment : Fragment() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = StringRequest(Request.Method.POST, url,  {
-                response: String ->
+        val request = StringRequest(Request.Method.POST, url,
+            { response: String ->
 
             Log.i("SuppliersFrag", "acceptSellerFollowRequest: SUCCESS")
 
+                followList.removeAt(position)
+                adapter3.notifyDataSetChanged()
 
+                if(followList.size == 0)
+                {
+                    binding.textView10.visibility = GONE
+                    binding.requestRV.visibility = GONE
+                }
+                else{
+                    binding.textView10.visibility = VISIBLE
+                    binding.requestRV.visibility = VISIBLE
+                }
 
-        }, { error -> // method to handle errors.
+            }, { error -> // method to handle errors.
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
             Log.e("SuppliersFrag", "acceptSellerFollowRequest: FAILED ",error)
         })

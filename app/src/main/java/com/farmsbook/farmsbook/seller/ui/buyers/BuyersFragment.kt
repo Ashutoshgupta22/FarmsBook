@@ -22,6 +22,7 @@ import com.farmsbook.farmsbook.databinding.FragmentBuyersBinding
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.*
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
+import kotlin.math.log
 
 class BuyersFragment : Fragment() {
 
@@ -58,119 +59,35 @@ class BuyersFragment : Fragment() {
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Log.i("BuyersFragment", "onViewCreated: called")
+
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference =activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+
+        //val queue: RequestQueue = Volley.newRequestQueue(context)
+
+        getAddedBuyers(baseAddressUrl, userId)
+    }
+
     private fun getDataUsingVolley() {
 
         // url to post our data
         plantList= arrayListOf<BuyersData>()
         addedList= arrayListOf<BuyersData>()
         followList= arrayListOf<BuyersData>()
+
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference =activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
-        val url = "$baseAddressUrl/user/$userId/getBuyers"
 
-        // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
 
 
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
-        val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
-
-            for (i in 0 until response.length()) {
-                try {
-
-                    var cropObject = response.getJSONObject(i)
-                    var crop = BuyersData()
-                    crop.GroupName = cropObject.getString("group_name")
-                    crop.Image = cropObject.getString("imagePath")
-                    crop.phone = cropObject.getString("phone")
-                    crop.Location = cropObject.getString("location")
-                    crop.FarmerName = cropObject.getString("name")
-                    crop.FarmerID = cropObject.getString("parent_id").toString()
-
-                    if(cropObject.getBoolean("add_response_status") == false)
-                        plantList.add(crop)
-                    else{
-                        addedList.add(crop)
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-
-            if(plantList.size == 0)
-            {
-                binding.textView18.visibility = View.GONE
-                binding.sentRequestRV.visibility = View.GONE
-            }
-            else{
-                binding.textView18.visibility = View.VISIBLE
-                binding.sentRequestRV.visibility = View.VISIBLE
-            }
-
-            if(addedList.size == 0)
-            {
-                binding.textView15.visibility = View.GONE
-                binding.suppliersRv.visibility = View.GONE
-            }
-            else{
-                binding.textView15.visibility = View.VISIBLE
-                binding.suppliersRv.visibility = View.VISIBLE
-            }
-
-            binding.sentRequestRV.layoutManager = LinearLayoutManager(context)
-            val adapter = context?.let { BuyersAdapter2(plantList, it) }
-            binding.sentRequestRV.adapter = adapter
-
-            adapter?.setOnItemClickListener(object : BuyersAdapter2.onItemClickListener {
-                override fun onItemClick(position: Int) {
-
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-                    startActivity(Intent(context,ViewBuyerActivity::class.java).putExtra("ID",plantList[position].FarmerID))
-//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
-//                intent.putExtra("Name",plantList[position].Name)
-//                intent.putExtra("Location",plantList[position].Location)
-//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
-//                intent.putExtra("Availability",plantList[position].Availability)
-//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
-//                intent.putExtra("Quality",plantList[position].Quality)
-//                startActivity(intent)
-                }
-            })
-
-            binding.suppliersRv.layoutManager = LinearLayoutManager(context)
-            val adapter2 = context?.let { BuyersAdapter3(addedList, it) }
-            binding.suppliersRv.adapter = adapter2
-
-            adapter2?.setOnItemClickListener(object : BuyersAdapter3.onItemClickListener {
-                override fun onItemClick(position: Int) {
-
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-                    startActivity(Intent(context,ViewBuyerActivity::class.java).putExtra("ID",addedList[position].FarmerID))
-//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
-//                intent.putExtra("Name",plantList[position].Name)
-//                intent.putExtra("Location",plantList[position].Location)
-//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
-//                intent.putExtra("Availability",plantList[position].Availability)
-//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
-//                intent.putExtra("Quality",plantList[position].Quality)
-//                startActivity(intent)
-                }
-                override fun callClick(position: Int) {
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse("tel:${addedList[position].phone}")
-                    startActivity(intent)
-                }
-            })
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
-        }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-        })
-        queue.add(request)
-
+       // getAddedBuyers()
 
         val url2 = "$baseAddressUrl/user/$userId/getFarmerFollowRequest"
 
@@ -223,8 +140,7 @@ class BuyersFragment : Fragment() {
                 }
 
                 override fun acceptClick(position: Int) {
-                    acceptRequest(followList[position].id.toString())
-                    adapter3.notifyDataSetChanged()
+                    acceptRequest(position, adapter3)
                 }
 
                 override fun declineClick(position: Int) {
@@ -242,6 +158,113 @@ class BuyersFragment : Fragment() {
         queue.add(request2)
 
 
+    }
+
+    private fun getAddedBuyers(baseAddressUrl: String, userId: Int?) {
+
+        Log.i("BuyersFragment", "getAddedBuyers: called ")
+
+        val url = "$baseAddressUrl/user/$userId/getBuyers"
+
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
+
+            for (i in 0 until response.length()) {
+                try {
+
+                    var cropObject = response.getJSONObject(i)
+                    var crop = BuyersData()
+                    crop.GroupName = cropObject.getString("group_name")
+                    crop.Image = cropObject.getString("imagePath")
+                    crop.phone = cropObject.getString("phone")
+                    crop.Location = cropObject.getString("location")
+                    crop.FarmerName = cropObject.getString("name")
+                    crop.FarmerID = cropObject.getString("parentId").toString()
+
+                    if(cropObject.getBoolean("add_response_status") == false)
+                        plantList.add(crop)
+                    else{
+                        addedList.add(crop)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            if(plantList.size == 0)
+            {
+                binding.textView18.visibility = View.GONE
+                binding.sentRequestRV.visibility = View.GONE
+            }
+            else{
+                binding.textView18.visibility = View.VISIBLE
+                binding.sentRequestRV.visibility = View.VISIBLE
+            }
+
+            if(addedList.size == 0)
+            {
+                binding.textView15.visibility = View.GONE
+                binding.suppliersRv.visibility = View.GONE
+            }
+            else{
+                binding.textView15.visibility = View.VISIBLE
+                binding.suppliersRv.visibility = View.VISIBLE
+            }
+
+            binding.sentRequestRV.layoutManager = LinearLayoutManager(context)
+            val adapter = context?.let { BuyersAdapter2(plantList, it) }
+            binding.sentRequestRV.adapter = adapter
+
+            adapter?.setOnItemClickListener(object : BuyersAdapter2.onItemClickListener {
+                override fun onItemClick(position: Int) {
+
+                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
+                    startActivity(Intent(context,ViewBuyerActivity::class.java).putExtra("ID",plantList[position].FarmerID))
+//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
+//                intent.putExtra("Name",plantList[position].Name)
+//                intent.putExtra("Location",plantList[position].Location)
+//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
+//                intent.putExtra("Availability",plantList[position].Availability)
+//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
+//                intent.putExtra("Quality",plantList[position].Quality)
+//                startActivity(intent)
+                }
+            })
+
+            binding.suppliersRv.layoutManager = LinearLayoutManager(context)
+            val adapter2 = context?.let { BuyersAdapter3(addedList, it) }!!
+            binding.suppliersRv.adapter = adapter2
+
+            adapter2?.setOnItemClickListener(object : BuyersAdapter3.onItemClickListener {
+                override fun onItemClick(position: Int) {
+
+                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
+                    startActivity(Intent(context,ViewBuyerActivity::class.java).putExtra("ID",addedList[position].FarmerID))
+//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
+//                intent.putExtra("Name",plantList[position].Name)
+//                intent.putExtra("Location",plantList[position].Location)
+//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
+//                intent.putExtra("Availability",plantList[position].Availability)
+//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
+//                intent.putExtra("Quality",plantList[position].Quality)-
+//                startActivity(intent)
+                }
+                override fun callClick(position: Int) {
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse("tel:${addedList[position].phone}")
+                    startActivity(intent)
+                }
+            })
+//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
+//                .show()
+        }, { error -> // method to handle errors.
+            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
     }
 
     private fun declineRequest(position: Int, adapter3: BuyersAdapter4) {
@@ -284,7 +307,10 @@ class BuyersFragment : Fragment() {
         queue.add(request)
     }
 
-    private fun acceptRequest(requestId : String) {
+    private fun acceptRequest(position: Int, adapter3: BuyersAdapter4) {
+
+        val requestId = followList[position].id.toString()
+
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -300,6 +326,20 @@ class BuyersFragment : Fragment() {
         val request = StringRequest(Request.Method.POST, url,  { response: String ->
 
             Log.i("BuyersFrag", "acceptBuyerFollowRequest: SUCCESS")
+            followList.removeAt(position)
+            adapter3.notifyDataSetChanged()
+            getAddedBuyers(baseAddressUrl, userId)
+            //adapter2.notifyDataSetChanged()
+
+            if(followList.size == 0)
+            {
+                binding.textView10.visibility = View.GONE
+                binding.requestRV.visibility = View.GONE
+            }
+            else{
+                binding.textView10.visibility = View.VISIBLE
+                binding.requestRV.visibility = View.VISIBLE
+            }
 
 
         }, { error -> // method to handle errors.
