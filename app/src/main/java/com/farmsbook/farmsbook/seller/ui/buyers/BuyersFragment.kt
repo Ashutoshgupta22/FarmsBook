@@ -59,20 +59,6 @@ class BuyersFragment : Fragment() {
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        Log.i("BuyersFragment", "onViewCreated: called")
-
-        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
-        val sharedPreference =activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val userId = sharedPreference?.getInt("USER_ID", 0)
-
-        //val queue: RequestQueue = Volley.newRequestQueue(context)
-
-        getAddedBuyers(baseAddressUrl, userId)
-    }
-
     private fun getDataUsingVolley() {
 
         // url to post our data
@@ -83,8 +69,7 @@ class BuyersFragment : Fragment() {
 
         val queue: RequestQueue = Volley.newRequestQueue(context)
 
-
-       // getAddedBuyers()
+        getAddedBuyers(baseAddressUrl, userId)
 
         val url2 = "$baseAddressUrl/user/$userId/getFarmerFollowRequest"
 
@@ -153,13 +138,13 @@ class BuyersFragment : Fragment() {
             Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request2)
-
-
     }
 
     private fun getAddedBuyers(baseAddressUrl: String, userId: Int?) {
 
         Log.i("BuyersFragment", "getAddedBuyers: called ")
+        addedList.clear()
+        plantList.clear()
 
         val url = "$baseAddressUrl/user/$userId/getBuyers"
 
@@ -316,10 +301,6 @@ class BuyersFragment : Fragment() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
 
-        followList.removeAt(position)
-        adapter3.notifyDataSetChanged()
-        getAddedBuyers(baseAddressUrl, userId)
-
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
@@ -329,7 +310,6 @@ class BuyersFragment : Fragment() {
             followList.removeAt(position)
             adapter3.notifyDataSetChanged()
             getAddedBuyers(baseAddressUrl, userId)
-            //adapter2.notifyDataSetChanged()
 
             if(followList.size == 0)
             {
@@ -346,7 +326,7 @@ class BuyersFragment : Fragment() {
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
             Log.e("BuyersFrag", "acceptBuyerFollowRequest: FAILED ",error)
         })
-       // queue.add(request)
+        queue.add(request)
     }
 
     override fun onDestroyView() {

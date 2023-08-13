@@ -165,6 +165,7 @@ class SuppliersFragment : Fragment() {
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
             addedList.clear()
+            plantList.clear()
 
             for (i in 0 until response.length()) {
                 try {
