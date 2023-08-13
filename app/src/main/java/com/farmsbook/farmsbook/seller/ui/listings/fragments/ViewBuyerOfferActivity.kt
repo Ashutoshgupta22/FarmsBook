@@ -59,6 +59,10 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
         val userId = sharedPreference?.getInt("USER_ID", 0)
         val list_id = intent.getStringExtra("LIST_ID")
         val listedOfferId = intent.getStringExtra("Offer_ID")
+
+        Log.i("ViewBuyerOfferActivity", "getData: userid-$userId listId-$list_id " +
+                "listOfferId-$listedOfferId")
+
         val url = "$baseAddressUrl/user/$userId/listings/$list_id/listedOffer/$listedOfferId"
 
         // creating a new variable for our request queue

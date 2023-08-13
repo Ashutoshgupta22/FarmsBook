@@ -67,6 +67,92 @@ class SuppliersFragment : Fragment() {
         val sharedPreference =activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
         Log.i("SuppliersFrag", "getDataUsingVolley: userId: $userId")
+
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+
+        getAddedSuppliers(baseAddressUrl, userId)
+
+        val url2 = "$baseAddressUrl/user/$userId/getBuyerFollowRequest"
+
+        // creating a new variable for our request queue
+
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request2 = JsonArrayRequest(Request.Method.GET, url2, null, { response: JSONArray ->
+
+            for (i in 0 until response.length()) {
+                try {
+
+                    var cropObject = response.getJSONObject(i)
+                    var crop = SuppliersData()
+                    crop.GroupName = cropObject.getString("company_name")
+                    crop.Image = cropObject.getString("imagePath")
+                    crop.FarmerName = cropObject.getString("name")
+                    crop.id = cropObject.getInt("id").toString()
+                    crop.FarmerID = cropObject.getString("sender_id").toString()
+
+                    followList.add(crop)
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            if(followList.size == 0)
+            {
+                binding.textView10.visibility = GONE
+                binding.requestRV.visibility = GONE
+            }
+            else{
+                binding.textView10.visibility = VISIBLE
+                binding.requestRV.visibility = VISIBLE
+            }
+
+            binding.requestRV.layoutManager = LinearLayoutManager(context)
+            val adapter3 = context?.let { SuppliersAdapter4(followList, it) }
+            binding.requestRV.adapter = adapter3
+
+            adapter3?.setOnItemClickListener(object : SuppliersAdapter4.onItemClickListener {
+                override fun onItemClick(position: Int) {
+
+                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
+                    startActivity(Intent(context,ViewSupplierActivity::class.java).putExtra("FARMER_ID",followList[position].FarmerID))
+//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
+//                intent.putExtra("Name",plantList[position].Name)
+//                intent.putExtra("Location",plantList[position].Location)
+//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
+//                intent.putExtra("Availability",plantList[position].Availability)
+//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
+//                intent.putExtra("Quality",plantList[position].Quality)
+//                startActivity(intent)
+                }
+
+                override fun acceptClick(position: Int) {
+                    acceptRequest(position, adapter3)
+                }
+
+                override fun declineClick(position: Int) {
+
+                    declineRequest(position, adapter3)
+                }
+            })
+
+
+//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
+//                .show()
+        }, { error -> // method to handle errors.
+            Log.e("SuppliersFrag", "getSellerFollowRequest: Failed ", error)
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request2)
+
+    }
+
+    private fun getAddedSuppliers(baseAddressUrl: String, userId: Int?) {
+
+        Log.i("SuppliersFragment", "getAddedSuppliers: called")
+
         val url = "$baseAddressUrl/user/$userId/getSuppliers"
 
         // creating a new variable for our request queue
@@ -77,6 +163,8 @@ class SuppliersFragment : Fragment() {
         // request method to post the data to our API
         // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
+
+            addedList.clear()
 
             for (i in 0 until response.length()) {
                 try {
@@ -169,86 +257,12 @@ class SuppliersFragment : Fragment() {
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+
+            Log.e("SuppliersFrag", "getAddedSuppliers: FAILED",error )
+            Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
-
-
-
-        val url2 = "$baseAddressUrl/user/$userId/getBuyerFollowRequest"
-
-        // creating a new variable for our request queue
-
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
-        val request2 = JsonArrayRequest(Request.Method.GET, url2, null, { response: JSONArray ->
-
-            for (i in 0 until response.length()) {
-                try {
-
-                    var cropObject = response.getJSONObject(i)
-                    var crop = SuppliersData()
-                    crop.GroupName = cropObject.getString("company_name")
-                    crop.Image = cropObject.getString("imagePath")
-                    crop.FarmerName = cropObject.getString("name")
-                    crop.id = cropObject.getInt("id").toString()
-                    crop.FarmerID = cropObject.getString("sender_id").toString()
-
-                    followList.add(crop)
-
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-            if(followList.size == 0)
-            {
-                binding.textView10.visibility = GONE
-                binding.requestRV.visibility = GONE
-            }
-            else{
-                binding.textView10.visibility = VISIBLE
-                binding.requestRV.visibility = VISIBLE
-            }
-
-            binding.requestRV.layoutManager = LinearLayoutManager(context)
-            val adapter3 = context?.let { SuppliersAdapter4(followList, it) }
-            binding.requestRV.adapter = adapter3
-
-            adapter3?.setOnItemClickListener(object : SuppliersAdapter4.onItemClickListener {
-                override fun onItemClick(position: Int) {
-
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-                    startActivity(Intent(context,ViewSupplierActivity::class.java).putExtra("FARMER_ID",followList[position].FarmerID))
-//                val intent = Intent(this@MainActivity,CropDetailsActivity::class.java)
-//                intent.putExtra("Name",plantList[position].Name)
-//                intent.putExtra("Location",plantList[position].Location)
-//                intent.putExtra("Farmer Name",plantList[position].FarmerName)
-//                intent.putExtra("Availability",plantList[position].Availability)
-//                intent.putExtra("PricePerKg",plantList[position].PricePerKg)
-//                intent.putExtra("Quality",plantList[position].Quality)
-//                startActivity(intent)
-                }
-
-                override fun acceptClick(position: Int) {
-                    acceptRequest(position, adapter3)
-                }
-
-                override fun declineClick(position: Int) {
-
-                    declineRequest(position, adapter3)
-                }
-            })
-
-
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
-        }, { error -> // method to handle errors.
-            Log.e("SuppliersFrag", "getSellerFollowRequest: Failed ", error)
-            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
-        })
-        queue.add(request2)
 
     }
 
@@ -308,7 +322,6 @@ class SuppliersFragment : Fragment() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
 
-
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
@@ -319,6 +332,7 @@ class SuppliersFragment : Fragment() {
 
                 followList.removeAt(position)
                 adapter3.notifyDataSetChanged()
+                getAddedSuppliers(baseAddressUrl, userId)
 
                 if(followList.size == 0)
                 {

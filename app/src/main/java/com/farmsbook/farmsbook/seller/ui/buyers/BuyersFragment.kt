@@ -316,6 +316,9 @@ class BuyersFragment : Fragment() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
 
+        followList.removeAt(position)
+        adapter3.notifyDataSetChanged()
+        getAddedBuyers(baseAddressUrl, userId)
 
         // on below line we are calling a string
         // request method to post the data to our API
@@ -343,7 +346,7 @@ class BuyersFragment : Fragment() {
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()
             Log.e("BuyersFrag", "acceptBuyerFollowRequest: FAILED ",error)
         })
-        queue.add(request)
+       // queue.add(request)
     }
 
     override fun onDestroyView() {
