@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.ViewUtils
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -97,12 +98,24 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             binding.rateTV.text = response.getString("rate_of_commission")
             binding.quantityTV.text = response.getString("listed_offering_quantity")+" "+response.getString("listed_offering_quantity_unit")
             binding.locationTV.text = response.getString("delivery_place")
+            val reply = response.getBoolean("reply")
+
+            checkReply(reply)
 
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
             Log.e("ViewBuyerOfferActivity", "getData: ",error )
         })
         queue.add(request)
+    }
+
+    private fun checkReply(reply: Boolean) {
+
+        Log.i("ViewBuyerOfferActivity", "checkReply: $reply")
+        if (reply) {
+            binding.acceptBtn.visibility = View.INVISIBLE
+            binding.rejectBtn.visibility = View.INVISIBLE
+        }
     }
 
     private fun rejectOffer() {
@@ -125,6 +138,7 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             Log.i("ViewBuyerActivity", "rejectOffer: SUCCESS")
             Toast.makeText(this, "Offer Rejected", Toast.LENGTH_SHORT).show()
             binding.rejectBtn.visibility = View.INVISIBLE
+            binding.acceptBtn.visibility = View.INVISIBLE
 
         }, { error -> // method to handle errors.
 
@@ -154,6 +168,7 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
                 Log.i("ViewBuyerOfferActivity", "acceptOffer: SUCCESS")
                 Toast.makeText(this, "Offer Accepted", Toast.LENGTH_SHORT).show()
                 binding.acceptBtn.visibility = View.INVISIBLE
+                binding.rejectBtn.visibility = View.INVISIBLE
 
         }, { error -> // method to handle errors.
                 Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()

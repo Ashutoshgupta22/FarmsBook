@@ -74,22 +74,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Rice"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+                app:layout_constraintTop_toBottomOf="@+id/postedOnTV" />
 
             <TextView
                 android:id="@+id/postedOnTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
                 android:text="Posted on : 02 may 2023"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/requirement_name_tv" />
+                app:layout_constraintTop_toBottomOf="@id/imageView16" />
 
             <TextView
                 android:id="@+id/textView55"
