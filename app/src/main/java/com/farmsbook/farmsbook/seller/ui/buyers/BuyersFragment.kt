@@ -26,9 +26,9 @@ import kotlin.math.log
 
 class BuyersFragment : Fragment() {
 
-    private lateinit var plantList: ArrayList<BuyersData>
-    private lateinit var followList: ArrayList<BuyersData>
-    private lateinit var addedList: ArrayList<BuyersData>
+    private val plantList = arrayListOf<BuyersData>()
+    private val followList =  arrayListOf<BuyersData>()
+    private val addedList = arrayListOf<BuyersData>()
     private var _binding: FragmentBuyersBinding? = null
 
     // This property is only valid between onCreateView and
@@ -76,9 +76,6 @@ class BuyersFragment : Fragment() {
     private fun getDataUsingVolley() {
 
         // url to post our data
-        plantList= arrayListOf<BuyersData>()
-        addedList= arrayListOf<BuyersData>()
-        followList= arrayListOf<BuyersData>()
 
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference =activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)

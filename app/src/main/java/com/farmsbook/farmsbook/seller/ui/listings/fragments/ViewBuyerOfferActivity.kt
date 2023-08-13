@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -94,8 +95,8 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             binding.locationTV.text = response.getString("delivery_place")
 
         }, { error -> // method to handle errors.
-            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
+            Log.e("ViewBuyerOfferActivity", "getData: ",error )
         })
         queue.add(request)
     }
@@ -114,11 +115,17 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
+        val request = JsonObjectRequest(Request.Method.POST, url, null, {
+                response: JSONObject ->
+
+            Log.i("ViewBuyerActivity", "rejectOffer: SUCCESS")
+            Toast.makeText(this, "Offer Rejected", Toast.LENGTH_SHORT).show()
+            binding.rejectBtn.visibility = View.INVISIBLE
 
         }, { error -> // method to handle errors.
-            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+
+            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()
+            Log.e("ViewBuyerActivity", "rejectOffer: FAILED",error )
         })
         queue.add(request)
     }
@@ -137,11 +144,17 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.POST, url, null, { response: JSONObject ->
+        val request = JsonObjectRequest(Request.Method.POST, url, null,
+            { response: JSONObject ->
+
+                Log.i("ViewBuyerOfferActivity", "acceptOffer: SUCCESS")
+                Toast.makeText(this, "Offer Accepted", Toast.LENGTH_SHORT).show()
+                binding.acceptBtn.visibility = View.INVISIBLE
 
         }, { error -> // method to handle errors.
-            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+                Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()
+                Log.e("ViewBuyerOfferActivity", "acceptOffer: FAILED",error )
+
         })
         queue.add(request)
     }
