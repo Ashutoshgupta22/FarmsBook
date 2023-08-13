@@ -58,24 +58,27 @@ class ViewOfferActivity : AppCompatActivity() {
 
             Log.i("ViewOfferActivity", "getOfferData: $response")
 
-            Glide.with(this).load(response.getString("imageUrl0")).into(binding.profileImage)
+            Glide
+                .with(this)
+                .load(response.getString("imageUrl0"))
+                .into(binding.profileImage)
             binding.cropNameTv.text = response.getString("offer_cropName")
             binding.postedOnTV.text = "Posted on " + response.getString("timestamp")
-            binding.farmerNameTV.text = response.getString("buyer_name")
-            binding.phoneTV.text = response.getString("phone")
+            binding.farmerNameTV.text = response.getString("farmer_name")
+            binding.phoneTV.text = response.getString("phone2")
             binding.rateTV.text = response.getString("rate_of_commission")
-            binding.textView21.text = "Contact ${response.getString("buyer_name")} to place order"
+            binding.textView21.text = "Contact ${response.getString("farmer_name")} to place order"
             if (response.getString("replied") == "false") {
-                binding.textView20.text = "Response pending by ${response.getString("buyer_name")}"
+                binding.textView20.text = "Response pending by ${response.getString("farmer_name")}"
                 binding.textView20.setTextColor(Color.parseColor("#FF8A00"))
             } else {
                 if (response.getBoolean("offer_status") == false) {
                     binding.textView20.text =
-                        "Offer Rejected by ${response.getString("buyer_name")}"
+                        "Offer Rejected by ${response.getString("farmer_name")}"
                     binding.textView20.setTextColor(Color.parseColor("#B80000"))
                 } else {
                     binding.textView20.text =
-                        "Offer Accepted by ${response.getString("buyer_name")}"
+                        "Offer Accepted by ${response.getString("farmer_name")}"
                     binding.textView20.setTextColor(Color.parseColor("#00853C"))
                 }
             }
@@ -91,8 +94,8 @@ class ViewOfferActivity : AppCompatActivity() {
                 binding.transportaitonTV.text = "Not Required"
 
         }, { error -> // method to handle errors.
-            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+            Log.e("ViewOfferActivity", "FAILED " ,error)
         })
         queue.add(request)
 

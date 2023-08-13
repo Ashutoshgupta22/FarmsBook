@@ -28,7 +28,7 @@ class OffersFragment : Fragment() {
 
     private lateinit var a: ArrayList<String>
     private val binding get() = _binding!!
-    private lateinit var plantList: ArrayList<LatestOffersData>
+    private lateinit var offersList: ArrayList<LatestOffersData>
     override fun onResume() {
         super.onResume()
 
@@ -58,7 +58,7 @@ class OffersFragment : Fragment() {
     private fun getDataUsingVolley() {
 
         // url to post our data
-        plantList = arrayListOf<LatestOffersData>()
+        offersList = arrayListOf<LatestOffersData>()
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -86,6 +86,7 @@ class OffersFragment : Fragment() {
                     crop.offer_status = cropObject.getBoolean("offer_status").toString()
                     crop.crop_name = cropObject.getString("offer_cropName").toString()
                     crop.buyer_name = cropObject.getString("buyer_name").toString()
+                    crop.farmerName = cropObject.getString("farmer_name")
                     crop.phone = cropObject.getString("phone").toString()
                     crop.counter_status = cropObject.getJSONArray("counterStatus")
                     crop.replied = cropObject.getString("replied")
@@ -104,14 +105,14 @@ class OffersFragment : Fragment() {
 //                        crop.max = a[1]
 //                        crop.min = a[2]
 
-                    plantList.add(crop)
+                    offersList.add(crop)
 
 
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
-            if (plantList.size == 0) {
+            if (offersList.size == 0) {
                 binding.textView5.visibility = View.VISIBLE
                 binding.latestRequirementsRv.visibility = View.GONE
                 binding.textView51.visibility = View.GONE
@@ -121,14 +122,14 @@ class OffersFragment : Fragment() {
                 binding.textView51.visibility = View.VISIBLE
             }
             binding.latestRequirementsRv.layoutManager = LinearLayoutManager(context)
-            val adapter = context?.let { LatestOffersAdapter(plantList, it) }
+            val adapter = context?.let { LatestOffersAdapter(offersList, it) }
             binding.latestRequirementsRv.adapter = adapter
             adapter?.setOnItemClickListener(object : LatestOffersAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
 
-                    if(plantList[position].counter_status?.length() == 0)
+                    if(offersList[position].counter_status?.length() == 0)
                     {
-                        startActivity(Intent(context, ViewOfferActivity::class.java).putExtra("OFFER_ID",plantList[position].offerId))
+                        startActivity(Intent(context, ViewOfferActivity::class.java).putExtra("OFFER_ID",offersList[position].offerId))
                     }
                     else{
                         startActivity(Intent(context, ViewCounterOfferActivity::class.java))
@@ -147,7 +148,7 @@ class OffersFragment : Fragment() {
 
                 override fun callBtnClick(position: Int) {
                     val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse("tel:${plantList[position].phone}")
+                    intent.data = Uri.parse("tel:${offersList[position].phone}")
                     startActivity(intent)
                 }
             })

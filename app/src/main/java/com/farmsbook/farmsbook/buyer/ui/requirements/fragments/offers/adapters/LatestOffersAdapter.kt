@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
-class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, val context: Context):RecyclerView.Adapter<LatestOffersAdapter.Myviewholder> () {
+class LatestOffersAdapter (private val offersList : ArrayList<LatestOffersData>, val context: Context):RecyclerView.Adapter<LatestOffersAdapter.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 
@@ -38,8 +38,8 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
     override fun onBindViewHolder(holder: Myviewholder, position: Int) {
 
 
-       val currentItem =plantList[position]
-        Glide.with(context).load(plantList[position].crop_image).into(holder.plantImage)
+       val currentItem =offersList[position]
+        Glide.with(context).load(offersList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantPrice.text = "Price Offered : ${currentItem.offering_price}/kg"
@@ -47,14 +47,14 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
         holder.plantRateType.text = currentItem.purchased_on
 
         if(currentItem.replied == "false" ){
-            holder.plantStatus.text = "Response pending by ${currentItem.buyer_name}"
+            holder.plantStatus.text = "Response pending by ${currentItem.farmerName}"
             holder.plantStatus.setTextColor(Color.parseColor("#FF8A00"))
         }else{
 
         if(currentItem.offer_status == "true")
-        holder.plantStatus.text = "Offer Accepted by ${currentItem.buyer_name}"
+        holder.plantStatus.text = "Offer Accepted by ${currentItem.farmerName}"
         else{
-            holder.plantStatus.text = "Offer Rejected by ${currentItem.buyer_name}"
+            holder.plantStatus.text = "Offer Rejected by ${currentItem.farmerName}"
             holder.plantStatus.setTextColor(Color.parseColor("#B80000"))
         }
         }
@@ -65,7 +65,7 @@ class LatestOffersAdapter (private val plantList : ArrayList<LatestOffersData>, 
     }
 
     override fun getItemCount(): Int {
-        return plantList.size
+        return offersList.size
     }
 
     class Myviewholder(itemView : View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView){ //,listener:onItemClickListener
