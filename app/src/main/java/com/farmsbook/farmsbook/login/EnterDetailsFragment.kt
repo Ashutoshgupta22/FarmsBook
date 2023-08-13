@@ -53,10 +53,9 @@ open class EnterDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_enter_details, container, false)
         val backBtn = view.findViewById<ImageView>(R.id.backBtn)
 
-
-        val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val role = sharedPreference?.getBoolean("USER_ROLE",false)
-        //Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
+        val sharedPreference =  activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)!!
+        val role = sharedPreference.getBoolean("USER_ROLE",false)
+       //Toast.makeText(context,"Role = $role",Toast.LENGTH_SHORT).show()
 
         val states = resources.getStringArray(R.array.States)
         // create an array adapter and pass the required parameter
@@ -73,6 +72,10 @@ open class EnterDetailsFragment : Fragment() {
         businessName = view.findViewById(R.id.businessNameEdt)
         businessTurnOver = view.findViewById(R.id.businessTurnoverEdt)
         foundationDate = view.findViewById(R.id.foundationDateEdt)
+        val tvRole: TextView = view.findViewById(R.id.tv_role_enter_details)
+
+        if (role) tvRole.text = "Trader / Buyer"
+        else tvRole.text = "Farmer Group / FPO"
 
         val value = requireArguments().getString("PhoneNumber")
 phone.setText(value)

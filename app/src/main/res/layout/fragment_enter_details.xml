@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profile.EditProfileActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -55,15 +54,26 @@
             android:layout_height="1400dp"
             android:padding="24dp">
 
+            <TextView
+                android:id="@+id/tv_role_enter_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Farmer Group / FPO"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="186dp"
+                tools:layout_editor_absoluteY="20dp" />
 
             <TextView
                 android:id="@+id/textView22_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CEO Name/ Username"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                 />
+                app:layout_constraintTop_toBottomOf="@id/tv_role_enter_details" />
 
             <EditText
                 android:id="@+id/nameEdt"
@@ -266,6 +276,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/foundationDateEdt" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
