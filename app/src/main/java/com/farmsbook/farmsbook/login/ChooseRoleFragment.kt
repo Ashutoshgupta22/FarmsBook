@@ -3,6 +3,7 @@ package com.farmsbook.farmsbook.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,8 @@ class ChooseRoleFragment : Fragment() {
         val linear1 = view.findViewById<LinearLayout>(R.id.linearLayout)
         val linear2 = view.findViewById<LinearLayout>(R.id.linearLayout2)
 
+//        val value = requireArguments().getString("PhoneNumber")
+//        Log.i("ChooseRoleFragment", "onCreateView: phoneNo-$value")
 
         linear1.setOnClickListener {
             radio1.isChecked = true

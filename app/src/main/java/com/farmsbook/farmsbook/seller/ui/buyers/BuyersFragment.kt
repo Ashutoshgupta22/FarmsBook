@@ -73,7 +73,10 @@ class BuyersFragment : Fragment() {
 
         val url2 = "$baseAddressUrl/user/$userId/getFarmerFollowRequest"
 
-        val request2 = JsonArrayRequest(Request.Method.GET, url2, null, { response: JSONArray ->
+        val request2 = JsonArrayRequest(Request.Method.GET, url2, null,
+            { response: JSONArray ->
+
+                followList.clear()
 
             for (i in 0 until response.length()) {
                 try {
