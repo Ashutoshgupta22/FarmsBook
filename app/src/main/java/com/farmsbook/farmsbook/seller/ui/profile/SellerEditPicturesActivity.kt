@@ -244,14 +244,14 @@ class SellerEditPicturesActivity : AppCompatActivity() {
         val imagePath = uritext?.let { getImageFilePath(it) }
         val imagePath2 = uritext2?.let { getImageFilePath(it) }
 
-        Log.w("Display IMAGE Path", imagePath.toString())
-        Log.w("Background IMAGE Path", imagePath.toString())
+        Log.i("Display IMAGE Path", imagePath.toString())
+        Log.i("Background IMAGE Path", imagePath.toString())
 
         if (imagePath != null && imagePath2 != null) {
 
 
-            Log.w("Display IMAGE Path", imagePath.toString())
-            Log.w("Background IMAGE Path", imagePath2.toString())
+            Log.i("Display IMAGE Path", imagePath.toString())
+            Log.i("Background IMAGE Path", imagePath2.toString())
 
             val imageFile = File(imagePath)
             val imageFile2 = File(imagePath2)
@@ -276,8 +276,8 @@ class SellerEditPicturesActivity : AppCompatActivity() {
 
         }else if (imagePath != null && imagePath2 == null) {
 
-            Log.w("Display IMAGE Path", imagePath.toString())
-            Log.w("Background IMAGE Path", imagePath2.toString())
+            Log.i("Display IMAGE Path", imagePath.toString())
+            Log.i("Background IMAGE Path", imagePath2.toString())
 
             val imageFile = File(imagePath)
             val maxFileSize = 4 * 1024 * 1024 // 5MB (example: set your desired maximum file size limit)

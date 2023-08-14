@@ -404,9 +404,9 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         Log.d("Images", imageList.size.toString())
     }
 
+    // to get the list id of newly added listing, to post image using that list id
     private fun getListings() {
 
-        // url to post our data
         plantList = arrayListOf()
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -438,7 +438,9 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
                     e.printStackTrace()
                 }
             }
-            listId = plantList[plantList.size - 1].list_id!!.toInt()
+
+            //get list id of latest listing
+            listId = plantList[0].list_id!!.toInt()
             Log.d("List Id", listId.toString())
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()

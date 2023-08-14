@@ -317,6 +317,8 @@ class SellerProfileFragment : Fragment() {
 
             if(response.getString("imagePath") != "null")
             {
+                Log.i("SellerProfileFragment", "getDataUsingVolley: " +
+                        "image-${response.getString("imagePath")}")
                 context?.let { Glide.with(it).load(response.getString("imagePath")).into( binding.profileImage) }
             }
 
