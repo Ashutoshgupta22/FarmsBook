@@ -178,8 +178,7 @@ class CropsListingFragment : Fragment() {
 
                 }
             })
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
+
         }, { error -> // method to handle errors.
             Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })

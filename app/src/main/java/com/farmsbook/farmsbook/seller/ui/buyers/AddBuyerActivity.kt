@@ -17,6 +17,7 @@ import com.farmsbook.farmsbook.databinding.ActivityAddBuyerBinding
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersAdapter
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -56,7 +57,7 @@ class AddBuyerActivity : AppCompatActivity() {
         val request = StringRequest(Request.Method.POST, url,  {
 
             plantList.removeAt(position)
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemRemoved(position)
 
             Toast.makeText(this@AddBuyerActivity,"Added Buyer",Toast.LENGTH_LONG).show()
             finish()
@@ -95,6 +96,8 @@ class AddBuyerActivity : AppCompatActivity() {
                     crop.Location = cropObject.getString("location")
                     crop.FarmerName = cropObject.getString("name")
                     crop.FarmerID = cropObject.getString("buyer_id").toString()
+                    val time = cropObject.getString("timestamp")
+                    crop.timestamp =  TimeFormatter().getJoinedTime(time)
 
                     plantList.add(crop)
                 } catch (e: Exception) {

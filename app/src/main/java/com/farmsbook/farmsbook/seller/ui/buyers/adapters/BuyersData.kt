@@ -8,4 +8,5 @@ data class BuyersData(
     var Image : String? = null,
     var FarmerID: String?= null,
     var FarmerName : String ?= null,
+    var timestamp: String? = null
 )

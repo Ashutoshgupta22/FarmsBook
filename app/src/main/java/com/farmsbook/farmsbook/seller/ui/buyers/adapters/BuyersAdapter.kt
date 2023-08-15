@@ -52,6 +52,8 @@ class BuyersAdapter (private val plantList : ArrayList<BuyersData>, val context:
         holder.groupName.text = currentItem.GroupName
         holder.suppliersName.text= currentItem.FarmerName
         holder.suppliersLocation.text= currentItem.Location
+        holder.tvJoinedDate.text = "Joined - ${currentItem.timestamp}"
+
         holder.crop1.text = "Rice"
         holder.crop2.text = "Wheat"
         holder. crop3.text = "Apple"
@@ -72,6 +74,8 @@ class BuyersAdapter (private val plantList : ArrayList<BuyersData>, val context:
         val groupName: TextView = itemView.findViewById(R.id.group_name_tv)
         val suppliersName: TextView = itemView.findViewById(R.id.supplier_name_tv)
         val suppliersLocation: TextView = itemView.findViewById(R.id.supplier_location_tv)
+        val tvJoinedDate: TextView = itemView.findViewById(R.id.tv_joined_supplier_list_item)
+
         val crop1 : TextView = itemView.findViewById(R.id.crop1_tv)
         val crop2 : TextView = itemView.findViewById(R.id.crop2_tv)
         val crop3 : TextView = itemView.findViewById(R.id.crop3_tv)

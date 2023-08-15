@@ -24,4 +24,13 @@ class TimeFormatter {
         return DateUtils.getRelativeTimeSpanString(time, nowTime,
             DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_TIME ).toString()
     }
+
+    fun getJoinedTime(time: String): String {
+
+        val inputFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val outputFormatter = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        val date = inputFormatter.parse(time)!!
+
+        return outputFormatter.format(date)
+    }
 }

@@ -208,8 +208,7 @@ class HomeFragment : Fragment() {
                 }
             })
 
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
+
         }, { error -> // method to handle errors.
             Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
@@ -220,10 +219,6 @@ class HomeFragment : Fragment() {
         val listedId = plantList[position].id.toString()
         val parentId = plantList[position].parent_id.toString()
 
-        Log.i("HomeFragment", "postDataUsingVolley: plantList-${plantList.size}")
-
-
-        Log.i("HomeFragment", "postDataUsingVolley: listedId-$listedId parentID-$parentId")
 
 //        {
 //            "offerId": 1,
@@ -253,8 +248,6 @@ class HomeFragment : Fragment() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
-//            Log.i("HomeFragment", "postDataUsingVolley: plantList-${plantList.size}")
-//            Log.i("HomeFragment", "postDataUsingVolley: position clicked-$position")
             plantList.removeAt(position)
             adapter.notifyItemRemoved(position)
 

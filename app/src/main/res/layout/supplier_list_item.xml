@@ -102,6 +102,18 @@
         app:layout_constraintStart_toStartOf="@+id/supplier_name_tv"
         app:layout_constraintTop_toBottomOf="@+id/supplier_name_tv" />
 
+    <TextView
+        android:id="@+id/tv_joined_supplier_list_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Joined - August 2023"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/supplier_location_tv"
+        app:layout_constraintEnd_toEndOf="@id/supplier_location_tv"
+        app:layout_constraintTop_toBottomOf="@id/supplier_location_tv"/>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -109,7 +121,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/supplier_location_tv"
-        app:layout_constraintTop_toBottomOf="@+id/supplier_location_tv">
+        app:layout_constraintTop_toBottomOf="@+id/tv_joined_supplier_list_item">
 
         <TextView
             android:id="@+id/crop1_tv"

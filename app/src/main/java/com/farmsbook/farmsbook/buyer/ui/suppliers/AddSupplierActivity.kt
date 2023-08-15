@@ -16,6 +16,7 @@ import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersAdapter
 import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersData
 import com.farmsbook.farmsbook.databinding.ActivityAddSupplierBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -94,6 +95,8 @@ class AddSupplierActivity : AppCompatActivity() {
                     crop.Location = cropObject.getString("location")
                     crop.FarmerName = cropObject.getString("name")
                     crop.FarmerID = cropObject.getString("farmer_id").toString()
+                    val time = cropObject.getString("timestamp")
+                    crop.timestamp =  TimeFormatter().getJoinedTime(time)
 
                     plantList.add(crop)
                 } catch (e: Exception) {
