@@ -201,11 +201,10 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun interestedClick(position: Int) {
-                    postDataUsingVolley(plantList[position].id.toString(),plantList[position].parent_id.toString())
-                    adapter.notifyDataSetChanged()
-                    val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                    val userId = sharedPreference?.getInt("USER_ID", 0)
-                    getDataUsingVolley("/user/$userId/home_farmer_main")
+                    postDataUsingVolley(position,adapter)
+//                    val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+//                    val userId = sharedPreference?.getInt("USER_ID", 0)
+//                    getDataUsingVolley("/user/$userId/home_farmer_main")
                 }
             })
 
@@ -216,7 +215,15 @@ class HomeFragment : Fragment() {
         })
         queue.add(request)
     }
-    private fun postDataUsingVolley(listed_id:String , parent_id:String) {
+    private fun postDataUsingVolley(position: Int, adapter: CropAdapter) {
+
+        val listedId = plantList[position].id.toString()
+        val parentId = plantList[position].parent_id.toString()
+
+        Log.i("HomeFragment", "postDataUsingVolley: plantList-${plantList.size}")
+
+
+        Log.i("HomeFragment", "postDataUsingVolley: listedId-$listedId parentID-$parentId")
 
 //        {
 //            "offerId": 1,
@@ -233,7 +240,7 @@ class HomeFragment : Fragment() {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
-        val url = "$baseAddressUrl/user/$parent_id/requirements/$listed_id/value/1/$userId"
+        val url = "$baseAddressUrl/user/$parentId/requirements/$listedId/value/1/$userId"
 
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
@@ -246,8 +253,15 @@ class HomeFragment : Fragment() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
+//            Log.i("HomeFragment", "postDataUsingVolley: plantList-${plantList.size}")
+//            Log.i("HomeFragment", "postDataUsingVolley: position clicked-$position")
+            plantList.removeAt(position)
+            adapter.notifyItemRemoved(position)
+
             Toast.makeText(context, "Posted Interest", Toast.LENGTH_SHORT)
                 .show()
+
+
         }, { error -> // method to handle errors.
             Toast.makeText(getContext(), "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
