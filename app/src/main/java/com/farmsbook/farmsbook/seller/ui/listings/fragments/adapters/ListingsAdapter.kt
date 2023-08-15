@@ -40,7 +40,7 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
-        holder.plantDate.text = "Posted on : ${currentItem.timestamp}"
+        holder.plantDate.text = "Posted : ${currentItem.timestamp}"
         holder.plantStatus.text = "${currentItem.no_of_offers} Buyers shown interest"
 
 //        holder.itemView.setOnClickListener {

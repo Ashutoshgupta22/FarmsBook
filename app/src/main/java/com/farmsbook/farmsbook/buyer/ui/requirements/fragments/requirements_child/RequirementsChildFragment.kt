@@ -29,6 +29,7 @@ import com.farmsbook.farmsbook.seller.SellerMainActivity
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ListingsAdapter
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ListingsData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -182,7 +183,8 @@ class RequirementsChildFragment : Fragment() {
                     crop.req_id = cropObject.getInt("req_id").toString()
                     crop.max_price = cropObject.getInt("max_range").toString()
                     crop.min_price = cropObject.getInt("min_range").toString()
-                    crop.timestamp = cropObject.getString("timestamp").toString()
+                    val time = cropObject.getString("timestamp")
+                    crop.timestamp = TimeFormatter().getRelativeTime(time)
                     crop.quantity_unit = cropObject.getString("quantity_unit").toString()
                     crop.interested_suppliers = cropObject.getJSONArray("reqInterestedUser").length().toString()
                     plantList.add(crop)

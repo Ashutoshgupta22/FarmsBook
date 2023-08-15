@@ -20,6 +20,7 @@ import com.farmsbook.farmsbook.seller.ui.listings.fragments.ViewBuyerOfferActivi
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.BuyerOfferAdapter
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.BuyerOfferData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -59,7 +60,8 @@ class ViewListingActivity : AppCompatActivity() {
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
             Glide.with(this).load(response.getString("imageUrl0")).into(binding.imageView16)
             binding.requirementNameTv.text = response.getString("crop_name")
-            binding.postedOnTV.text = "Posted on " + response.getString("timestamp")
+            val time = response.getString("timestamp")
+            binding.postedOnTV.text = "Posted : " + TimeFormatter().getRelativeTime(time)
             binding.varietyTV.text = response.getString("variety")
             binding.PriceTV.text =
                 response.getString("min_price") + "/kg to " + response.getString("max_price") + "/kg"

@@ -23,6 +23,7 @@ import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_chil
 import com.farmsbook.farmsbook.buyer.ui.suppliers.ViewSupplierActivity
 import com.farmsbook.farmsbook.databinding.ActivityViewRequirementBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -145,7 +146,8 @@ class ViewRequirementActivity : AppCompatActivity() {
 
             Glide.with(this).load(cropImages[response.getString("manageCropId").toInt()-1]).into( binding.imageView16)
             binding.requirementNameTv.text = response.getString("crop_name")
-            binding.postedOnTV.text = "Posted on " + response.getString("timestamp")
+            val time = response.getString("timestamp")
+            binding.postedOnTV.text = "Posted : " + TimeFormatter().getRelativeTime(time)
             binding.varietyTV.text = response.getString("variety")
             binding.PriceTV.text =
                 response.getString("min_range") + "/kg to " + response.getString("max_range") + "/kg"

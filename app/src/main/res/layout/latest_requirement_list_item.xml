@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
-        android:text="Posted on : 02 may 2023"
+        android:text="Posted : 5 minutes ago"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/requirement_price_tv"
         app:layout_constraintEnd_toEndOf="parent"
