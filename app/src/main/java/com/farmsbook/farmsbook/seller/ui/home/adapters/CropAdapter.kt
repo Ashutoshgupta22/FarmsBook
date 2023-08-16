@@ -44,6 +44,7 @@ class CropAdapter (private var plantList : ArrayList<CropData>, val context: Con
         holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
         holder.plantLocation.text = currentItem.crop_location
         holder.plantWeight.text = currentItem.quantity.toString()
+        holder.tvTimestamp.text = "Posted : ${currentItem.timestamp}"
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
 //        }
@@ -61,6 +62,7 @@ class CropAdapter (private var plantList : ArrayList<CropData>, val context: Con
         val plantPrice: TextView = itemView.findViewById(R.id.costTv)
         val plantLocation: TextView = itemView.findViewById(R.id.locationTv)
         val plantWeight : TextView = itemView.findViewById(R.id.weightTv)
+        val tvTimestamp: TextView = itemView.findViewById(R.id.tv_posted_seller_home)
 
         init {
             itemView.setOnClickListener{

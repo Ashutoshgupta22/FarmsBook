@@ -51,6 +51,19 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
+            android:id="@+id/tv_posted_home_crop_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="9dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Posted : 5 days ago"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/locationTv"
+            app:layout_constraintStart_toStartOf="@+id/cropNameTv"
+            app:layout_constraintTop_toBottomOf="@+id/cropNameTv" />
+
+        <TextView
             android:id="@+id/locationTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,8 +75,8 @@
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/location_on"
             app:layout_constraintBottom_toTopOf="@+id/weightTv"
-            app:layout_constraintStart_toStartOf="@+id/cropNameTv"
-            app:layout_constraintTop_toBottomOf="@+id/cropNameTv" />
+            app:layout_constraintStart_toStartOf="@+id/tv_posted_home_crop_item"
+            app:layout_constraintTop_toBottomOf="@+id/tv_posted_home_crop_item" />
 
         <TextView
             android:id="@+id/weightTv"

@@ -26,6 +26,7 @@ import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropAdapter
 import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.databinding.FragmentHomeBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
 import java.util.*
 import kotlin.collections.ArrayList
@@ -259,6 +260,8 @@ class HomeFragment : Fragment() {
                     crop.max_price = cropObject.getInt("crop_max_price").toString()
                     crop.id = cropObject.getInt("id").toString()
                     crop.parent_id = cropObject.getInt("parent_id").toString()
+                    val time = cropObject.getString("timestamp")
+                    crop.timestamp = TimeFormatter().getRelativeTime(time)
 
                     plantList.add(crop)
                 } catch (e: Exception) {

@@ -26,6 +26,7 @@ import com.farmsbook.farmsbook.databinding.FragmentSellerHomeBinding
 import com.farmsbook.farmsbook.seller.ui.home.adapters.CropAdapter
 import com.farmsbook.farmsbook.seller.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
@@ -166,7 +167,8 @@ class HomeFragment : Fragment() {
                    // crop.crop_image = cropObject.getString("buyer_crop_image")
                     crop.crop_image = cropImages[cropObject.getString("cropId").toInt()-1]
                     crop.crop_location = cropObject.getString("buyer_location")
-                    crop.timestamp = cropObject.getString("timestamp")
+                    val time = cropObject.getString("timestamp")
+                    crop.timestamp = TimeFormatter().getRelativeTime(time)
                     crop.user = cropObject.getString("user")
                     crop.offer = cropObject.getBoolean("buyer_interest_status").toString()
                     crop.min_price = cropObject.getInt("buyer_min_price").toString()

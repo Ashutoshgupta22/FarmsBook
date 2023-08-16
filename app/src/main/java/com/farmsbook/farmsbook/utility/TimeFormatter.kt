@@ -9,9 +9,11 @@ class TimeFormatter {
 
     fun getRelativeTime(dateTime: String): String {
 
+        // dateTime is in GMT
+
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val date = formatter.parse(dateTime)!!
-        var time = date.time       // time is in GMT
+        var time = date.time
 
         // offset is difference between GMT and current TimeZone (IST)
         val offset = Calendar.getInstance().timeZone.getOffset(time)
