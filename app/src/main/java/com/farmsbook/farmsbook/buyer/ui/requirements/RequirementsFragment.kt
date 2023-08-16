@@ -12,6 +12,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.FragmentRequirementsBinding
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.offers.OffersFragment
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.RequirementsChildFragment
@@ -46,8 +47,10 @@ class RequirementsFragment : Fragment() {
         tabLayout?.setupWithViewPager(viewpager)
 
         val vpAdapter= VPAdapter(childFragmentManager)
-        vpAdapter.addFragment(RequirementsChildFragment(),"Requirements")
-        vpAdapter.addFragment(OffersFragment(),"Offers")
+        vpAdapter.addFragment(RequirementsChildFragment(),
+            resources.getString(R.string.requirements))
+        vpAdapter.addFragment(OffersFragment(),
+            resources.getString(R.string.offers))
         viewpager.adapter = vpAdapter
         viewpager.setSwipePagingEnabled(true)
 

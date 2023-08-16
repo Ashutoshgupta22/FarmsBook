@@ -61,7 +61,7 @@
         android:fontFamily="@font/roboto_medium"
         android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
-        android:text="Call "
+        android:text="@string/call"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/companyNameTV"

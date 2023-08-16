@@ -45,7 +45,8 @@ class CropAdapter (private var plantList : ArrayList<CropData>, val context: Con
         holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
         holder.plantLocation.text = currentItem.crop_location
         holder.plantWeight.text = currentItem.quantity.toString()+" ton"
-        holder.tvTimestamp.text = "Posted : ${currentItem.timestamp}"
+        holder.tvTimestamp.text = "${context.resources.getString(R.string.posted)} : " +
+                "${currentItem.timestamp}"
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)

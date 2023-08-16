@@ -107,7 +107,7 @@
     <string name="type_of_sale_available">Type of sale available</string>
     <string name="other_services_available">Other Services Available</string>
     <string name="farmer_s_info">Farmer\'s Info</string>
-    <string name="call">Call</string>
+    <string name="call">Call </string>
     <string name="add_supplier">Add Supplier</string>
     <string name="post_offer">Post Offer</string>
     <string name="interest">Interest</string>
@@ -129,6 +129,24 @@
     <string name="filter_by">Filter By</string>
     <string name="select_your_crops">Select your crops</string>
     <string name="select">Select</string>
+    <string name="joined">Joined</string>
+    <string name="posted">Posted</string>
+    <string name="requirements">Requirements</string>
+    <string name="latest">Latest</string>
+    <string name="suppliers_shown_interest">Suppliers shown interest</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="farmer">Farmer</string>
+    <string name="trader">Trader</string>
+    <string name="offer_your_price">Offer your price</string>
+    <string name="pending">Pending</string>
+    <string name="added_suppliers">Added Suppliers</string>
+    <string name="request_received">Request Received</string>
+    <string name="request_sent">Request Sent</string>
+    <string name="view_profile">View Profile</string>
+    <string name="language">Language</string>
+    <string name="terms_conditions">Terms &amp; Conditions</string>
+    <string name="share_app">Share the app</string>
+    <string name="logout">Logout</string>
 
 
     <string-array name="States">

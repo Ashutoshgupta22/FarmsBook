@@ -5,9 +5,9 @@
     <string name="sign_up">साइन अप करें</string>
     <string name="sign_in">साइन इन करें</string>
     <string name="welcome">आपका स्वागत है</string>
-    <string name="farms">फ़ार्म्स</string>
     <string name="book">बुक</string>
     <string name="change_language">भाषा बदलें</string>
+    <string name="farms">फ़ार्म्स</string>
 
     <!--    Enter Number Fragment-->
     <string name="enter_your_phone_number">अपना फ़ोन नंबर दर्ज करें</string>
@@ -43,16 +43,33 @@
     <string name="recommended">अनुशंसित</string>
     <string name="sort">सॉर्ट</string>
     <string name="filter">फ़िल्टर</string>
+    <string name="offer_your_price">अपनी कीमत पेश करें</string>
 
 
     <!--    Requirements Screen-->
     <string name="title_requirements">आवश्यकताएं</string>
+    <string name="requirements">आवश्यकताएँ</string>
+    <string name="latest">नवीनतम</string>
+    <string name="suppliers_shown_interest">आपूर्तिकर्ताओं ने दिखाया दिलचस्पी</string>
+    <string name="choose_language">भाषा चुनें</string>
 
     <!--    Orders Screen-->
     <string name="title_orders">ऑर्डर</string>
 
     <!--    Profile Screen-->
     <string name="title_profile">प्रोफ़ाइल</string>
+    <string name="farmer">किसान</string>
+    <string name="trader">व्यापारी</string>
+    <string name="view_profile">प्रोफ़ाइल देखें</string>
+    <string name="language">भाषा</string>
+    <string name="terms_conditions">नियम और शर्तें</string>
+    <string name="share_app">ऐप शेयर करें</string>
+    <string name="logout">लॉगआउट</string>
+
+    <string name="pending">बकाया</string>
+    <string name="added_suppliers">जोड़े गए आपूर्तिकर्ता</string>
+    <string name="request_received">अनुरोध प्राप्त हुआ</string>
+    <string name="request_sent">अनुरोध भेजा गया</string>
 
 
 <!--    Add Listing Screen-->
@@ -136,7 +153,7 @@
     <string name="type_of_sale_available">उपलब्ध बिक्री के प्रकार</string>
     <string name="other_services_available">अन्य सेवाएं उपलब्ध हैं</string>
     <string name="farmer_s_info">किसान की जानकारी</string>
-    <string name="call">कॉल करें</string>
+    <string name="call">कॉल करें </string>
     <string name="add_supplier">आपूर्तिकर्ता जोड़ें</string>
     <string name="post_offer">ऑफर पोस्ट करें</string>
     <string name="interest">रुचि</string>
@@ -158,5 +175,109 @@
     <string name="filter_by">द्वारा फ़िल्टर करें</string>
     <string name="select_your_crops">अपनी फसलें चुनें</string>
     <string name="select">चुनें</string>
+    <string name="joined">शामिल हुए</string>
+    <string name="posted">पोस्ट किया</string>
+
+    <string-array name="States">
+        <item>अंडमान और निकोबार द्वीपसमूह</item>
+        <item>आंध्र प्रदेश</item>
+        <item>अरुणाचल प्रदेश</item>
+        <item>असम</item>
+        <item>बिहार</item>
+        <item>चंडीगढ़</item>
+        <item>छत्तीसगढ़</item>
+        <item>दादरा और नगर हवेली</item>
+        <item>दमन और दीव</item>
+        <item>दिल्ली</item>
+        <item>गोवा</item>
+        <item>गुजरात</item>
+        <item>हरियाणा</item>
+        <item>हिमाचल प्रदेश</item>
+        <item>जम्मू और कश्मीर</item>
+        <item>झारखंड</item>
+        <item>कर्नाटक</item>
+        <item>केरल</item>
+        <item>लक्षद्वीप</item>
+        <item>लद्दाख</item>
+        <item>मध्य प्रदेश</item>
+        <item>महाराष्ट्र</item>
+        <item>मणिपुर</item>
+        <item>मेघालय</item>
+        <item>मिजोरम</item>
+        <item>नागालैंड</item>
+        <item>ओडिशा</item>
+        <item>पुडुचेरी</item>
+        <item>पंजाब</item>
+        <item>राजस्थान</item>
+        <item>सिक्किम</item>
+        <item>तमिलनाडु</item>
+        <item>तेलंगाना</item>
+        <item>त्रिपुरा</item>
+        <item>उत्तर प्रदेश</item>
+        <item>उत्तराखंड</item>
+        <item>पश्चिम बंगाल</item>
+    </string-array>
+
+    <string-array name="Crops">
+        <item>बाजरा</item>
+        <item>जौ</item>
+        <item>बासमती धान</item>
+        <item>काली मिर्च</item>
+        <item>काजू</item>
+        <item>कास्टर बीज</item>
+        <item>चना</item>
+        <item>मिर्च</item>
+        <item>कॉफी</item>
+        <item>धनिया बीज</item>
+        <item>कपास</item>
+        <item>मूंगफली</item>
+        <item>ग्वार गम रिफाइंड स्प्लिट्स</item>
+        <item>ग्वार बीज</item>
+        <item>गुड़</item>
+        <item>जीरा</item>
+        <item>ज्वार श्वेत</item>
+        <item>ज्वार पीला</item>
+        <item>ज्वार</item>
+        <item>कपास</item>
+        <item>मक्का खरीफ</item>
+        <item>मसूर बोल्ड</item>
+        <item>मक्का</item>
+        <item>मूंग दाल</item>
+        <item>सरसों का तेल</item>
+        <item>सरसों का बीज</item>
+        <item>बासमती धान 1121</item>
+        <item>पीसी हल्दी</item>
+        <item>रिफाइंड सोयाबीन तेल</item>
+        <item>चावल</item>
+        <item>तिल</item>
+        <item>सोयाबीन मील</item>
+        <item>सोयाबीन</item>
+        <item>तूर दाल</item>
+        <item>तुरमेला किसान अपॉलिश्ड</item>
+        <item>हल्दी</item>
+        <item>गेहूँ</item>
+        <item>पीली मटर</item>
+    </string-array>
+
+    <string-array name="Metrics">
+        <item>टन</item>
+        <item>किलोग्राम</item>
+        <item>क्विंटल</item>
+    </string-array>
+
+    <string-array name="Months">
+        <item>जनवरी</item>
+        <item>फ़रवरी</item>
+        <item>मार्च</item>
+        <item>अप्रैल</item>
+        <item>मई</item>
+        <item>जून</item>
+        <item>जुलाई</item>
+        <item>अगस्त</item>
+        <item>सितंबर</item>
+        <item>अक्टूबर</item>
+        <item>नवंबर</item>
+        <item>दिसंबर</item>
+    </string-array>
 
 </resources>

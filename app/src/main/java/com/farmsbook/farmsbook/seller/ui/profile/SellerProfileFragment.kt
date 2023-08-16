@@ -266,7 +266,7 @@ class SellerProfileFragment : Fragment() {
 
         val listItems = arrayOf("English", "Hindi")
         val mBuilder = context?.let { AlertDialog.Builder(it) }
-        mBuilder?.setTitle("Choose Language...")
+        mBuilder?.setTitle(context?.resources?.getString(R.string.choose_language))
         mBuilder?.setSingleChoiceItems(
             listItems, checkedItem
         ) { dialogInterface, i ->
@@ -323,9 +323,9 @@ class SellerProfileFragment : Fragment() {
             }
 
             if (!response.getBoolean("role"))
-                binding.roleTv.text = "Farmer"
+                binding.roleTv.text = context?.resources?.getString(R.string.farmer)
             else
-                binding.roleTv.text = "Trader"
+                binding.roleTv.text = context?.resources?.getString(R.string.trader)
             binding.nameTv.text = response.getString("name")
             binding.companyTv.text = response.getString("business_name")
             binding.phoneTv.text = response.getString("phone")

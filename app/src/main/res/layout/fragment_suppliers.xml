@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeSearchActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView16"
@@ -14,7 +13,7 @@
         android:fontFamily="@font/roboto_medium"
         android:gravity="center_vertical"
         android:paddingStart="32dp"
-        android:text="Suppliers"
+        android:text="@string/suppliers"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +42,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:visibility="gone"
-                android:text="Request Received"
+                android:text="@string/request_received"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Added Suppliers"
+                android:text="@string/added_suppliers"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requestRV" />
 
@@ -84,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Request Sent"
+                android:text="@string/request_sent"
 
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"

@@ -42,8 +42,10 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantPrice.text = "${currentItem.min_price}/${currentItem.quantity_unit} - ${currentItem.max_price}/${currentItem.quantity_unit}"
-        holder.plantDate.text = "Posted : ${currentItem.timestamp}"
-        holder.plantStatus.text = "${currentItem.interested_suppliers} Suppliers shown interest"
+        holder.plantDate.text = "${context.resources.getString(R.string.posted)} " +
+                ": ${currentItem.timestamp}"
+        holder.plantStatus.text = "${currentItem.interested_suppliers} " +
+                "${context.resources.getString(R.string.suppliers_shown_interest)}"
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
