@@ -101,6 +101,15 @@ class AddRequirementActivity : AppCompatActivity() {
         location = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
         location.setAdapter(arrayAdapter)
 
+        val buyerLocation = getSharedPreferences("pref",
+            MODE_PRIVATE).getString("buyerLocation", null)
+
+        Log.i("AddRequirementActivity", "buyerLocation $buyerLocation")
+
+        buyerLocation?.let {
+            location.setText(it, false)
+        }
+
         val metric = resources.getStringArray(R.array.Metrics)
         val arrayAdapter2 = ArrayAdapter(this, R.layout.dropdown_item , metric)
         metrics = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)

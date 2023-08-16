@@ -157,6 +157,14 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
         location = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
         location.setAdapter(arrayAdapter)
 
+        val sellerLocation = getSharedPreferences("pref",
+            MODE_PRIVATE).getString("sellerLocation", null)
+
+        Log.i("AddListingActivity", "sellerLocation-$sellerLocation")
+
+        sellerLocation?.let {
+            location.setText(it, false)
+        }
         val metric = resources.getStringArray(R.array.Metrics)
         val arrayAdapter2 = ArrayAdapter(this, R.layout.dropdown_item, metric)
         metrics = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)

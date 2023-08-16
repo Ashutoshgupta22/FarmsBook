@@ -57,9 +57,6 @@ class RequirementsChildFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-
-
-
         _binding = FragmentRequirementsChildBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

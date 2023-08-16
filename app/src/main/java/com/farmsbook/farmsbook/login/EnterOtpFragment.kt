@@ -286,20 +286,24 @@ class EnterOtpFragment : Fragment() {
                 val editor = sharedPreference?.edit()
                 editor?.putInt("USER_ID",response["id"].toString().toInt())
                 editor?.putBoolean("USER_ROLE",response["role"].toString().toBoolean())
-                editor?.apply()
 
                 if(response["role"] == true)
                 {
-                    Log.i("EnterOtpFrag", "getDataUsingVolley: MainActivity called")
+                    editor?.putString("buyerLocation", response.getString("location"))
+
+                    Log.i("EnterOtpFrag", "response location ${response.getString("location")}")
                     startActivity(Intent(context,MainActivity::class.java))
                     finishAffinity(LoginActivity())
                 }
                 else
                 {
+                    editor?.putString("sellerLocation",response.getString("location"))
                     Log.i("EnterFrag", "getDataUsingVolley: sellerMainActivity called ")
                     startActivity(Intent(context, SellerMainActivity::class.java))
                     finishAffinity(LoginActivity())
                 }
+                editor?.apply()
+
             }
 
         }, { error -> // method to handle errors.

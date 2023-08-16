@@ -1,10 +1,12 @@
 package com.farmsbook.farmsbook.login
 
 import android.Manifest
+import android.app.Activity.MODE_PRIVATE
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
@@ -130,6 +132,15 @@ phone.setText(value)
                 foundationDate.error = "Enter a valid Foundation Date"
                 foundationDate.requestFocus()
             } else {
+
+                val preferences = requireContext().getSharedPreferences(
+                    "pref", MODE_PRIVATE)
+                val editor = preferences.edit()!!
+
+                if(role) editor.putString("buyerLocation", location.text.toString())
+                else editor.putString("sellerLocation", location.text.toString())
+
+                editor.apply()
 
                 postDataUsingVolley(
                     name.text.trim().toString(),
