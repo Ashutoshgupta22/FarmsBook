@@ -8,7 +8,6 @@ import java.util.Locale
 class TimeFormatter {
 
     fun getRelativeTime(dateTime: String): String {
-
         // dateTime is in GMT
 
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())

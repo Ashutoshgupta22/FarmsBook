@@ -16,6 +16,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
@@ -33,12 +34,11 @@ import org.json.JSONObject
 
 class CropsListingFragment : Fragment() {
 
-
     private lateinit var binding : FragmentCropsListingBinding
 
     private lateinit var adapter:ListingsAdapter
     private lateinit var logoutDialog: AlertDialog
-    private lateinit var cropId : String
+    private var clickedPosition = -1
 
     private lateinit var plantList: ArrayList<ListingsData>
 
@@ -81,6 +81,8 @@ class CropsListingFragment : Fragment() {
     }
 
     private fun deleteRequirement() {
+
+        val cropId = plantList[clickedPosition].list_id.toString()
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -89,16 +91,17 @@ class CropsListingFragment : Fragment() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(context)
 
+        val request = StringRequest(Request.Method.DELETE, url,
+            { response: String ->
 
+            plantList.removeAt(clickedPosition)
+            adapter.notifyItemRemoved(clickedPosition)
 
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
-           getDataUsingVolley()
-        }, { error -> // method to handle errors.
-            //Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Requirements", "Fail to get response = $error")
+        }, { error ->
+
+            Toast.makeText(requireContext(), "Something went wrong!",
+                Toast.LENGTH_SHORT).show()
+            Log.e("CropsListingFragment", "Failed",error)
         })
         queue.add(request)
     }
@@ -173,8 +176,9 @@ class CropsListingFragment : Fragment() {
 //                startActivity(intent)
                 }
                 override fun deleteClick(position: Int) {
-                    logoutDialog.show()
-                    cropId = plantList[position].list_id.toString()
+
+                    clickedPosition = position
+                    if (clickedPosition != -1 ) logoutDialog.show()
 
                 }
             })

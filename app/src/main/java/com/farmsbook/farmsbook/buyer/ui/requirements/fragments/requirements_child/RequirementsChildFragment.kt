@@ -17,6 +17,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.ui.requirements.AddRequirementActivity
@@ -43,9 +44,8 @@ class RequirementsChildFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter:LatestRequirementsAdapter
-    private lateinit var cropId : String
+    private var clickedPosition = -1
     private lateinit var plantList: ArrayList<LatestRequirementsData>
-    private lateinit var plantList2 :ArrayList<LatestRequirementsData>
 
     override fun onResume() {
         super.onResume()
@@ -132,6 +132,8 @@ class RequirementsChildFragment : Fragment() {
     }
 
     private fun deleteRequirement() {
+
+        val cropId = plantList[clickedPosition].req_id.toString()
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -144,11 +146,17 @@ class RequirementsChildFragment : Fragment() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
+        val request = StringRequest(Request.Method.DELETE, url,
+            { response: String ->
+
+                plantList.removeAt(clickedPosition)
+                adapter.notifyItemRemoved(clickedPosition)
 
         }, { error -> // method to handle errors.
-            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Requirements", "Fail to get response = $error")
+
+                Toast.makeText(requireContext(), "Something went wrong!",
+                    Toast.LENGTH_SHORT).show()
+                Log.e("RequirementsChildFragment", "Failed" ,error)
         })
         queue.add(request)
     }
@@ -224,8 +232,9 @@ class RequirementsChildFragment : Fragment() {
                 }
 
                 override fun deleteClick(position: Int) {
-                    logoutDialog.show()
-                    cropId = plantList[position].req_id.toString()
+
+                    clickedPosition = position
+                    if(clickedPosition != -1 ) logoutDialog.show()
                 }
             })
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
