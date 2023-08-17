@@ -14,7 +14,7 @@
     <item
         android:id="@+id/navigation_order"
         android:icon="@drawable/icon3_selector"
-        android:title="@string/title_orders" />
+        android:title="@string/suppliers" />
 
     <item
         android:id="@+id/navigation_profile"

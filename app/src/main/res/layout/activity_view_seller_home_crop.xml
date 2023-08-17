@@ -229,53 +229,49 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/farmerNameTV" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView28">
 
                 <TextView
                     android:id="@+id/interestedBtn"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
                     android:background="@drawable/button_background_rounded_5"
                     android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:maxWidth="100dp"
-                    android:padding="8dp"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="40dp"
                     android:text="@string/interested"
                     android:textColor="#00853C"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    app:layout_constraintEnd_toStartOf="@id/callBtn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView28"/>
 
                 <TextView
                     android:id="@+id/callBtn"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:layout_weight="1"
                     android:background="@drawable/button_background_rounded_3"
                     android:drawableEnd="@drawable/baseline_phone_24"
-                    android:paddingHorizontal="57dp"
                     android:drawableTint="@color/white"
                     android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:maxWidth="100dp"
                     android:paddingVertical="8dp"
+                    android:paddingHorizontal="40dp"
                     android:text="@string/call"
                     android:textColor="@color/white"
-                    android:textSize="16dp" />
-            </LinearLayout>
+                    android:textSize="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="32dp"
+                    app:layout_constraintStart_toEndOf="@id/interestedBtn"
+                    app:layout_constraintTop_toTopOf="@id/interestedBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

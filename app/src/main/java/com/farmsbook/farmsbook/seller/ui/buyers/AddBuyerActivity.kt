@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityAddBuyerBinding
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersAdapter
 import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersData
@@ -59,12 +60,12 @@ class AddBuyerActivity : AppCompatActivity() {
             plantList.removeAt(position)
             adapter.notifyItemRemoved(position)
 
-            Toast.makeText(this@AddBuyerActivity,"Added Buyer",Toast.LENGTH_LONG).show()
+            Toast.makeText(this@AddBuyerActivity, getString(R.string.added_buyer),Toast.LENGTH_LONG).show()
             finish()
 
         }, { error -> // method to handle errors.
             Log.e("AddBuyerActivity", "postAddBuyer: FAILED ",error )
-            Toast.makeText(this@AddBuyerActivity, "Something went wrong!",
+            Toast.makeText(this@AddBuyerActivity, getString(R.string.something_went_wrong),
                 Toast.LENGTH_LONG).show()
         })
         queue.add(request)

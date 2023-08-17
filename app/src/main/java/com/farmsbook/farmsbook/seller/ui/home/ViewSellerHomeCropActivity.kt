@@ -18,6 +18,7 @@ import com.farmsbook.farmsbook.buyer.ui.home.OfferConfirmationActivity
 import com.farmsbook.farmsbook.databinding.ActivityViewSellerHomeCropBinding
 import com.farmsbook.farmsbook.seller.SellerMainActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -137,7 +138,9 @@ class ViewSellerHomeCropActivity : AppCompatActivity() {
 
             Glide.with(this).load(cropImages[response["manageCropId"]as Int -1]).into(binding.imageView26)
             binding.cropNameTV.text = response["crop_name"].toString()
-            binding.postedOnTV.text = "Posted on "+response["timestamp"].toString()
+            val time = response.getString("timestamp")
+            binding.postedOnTV.text = "${getString(R.string.posted)} : " +
+                    "${TimeFormatter().getRelativeTime(time)}"
             binding.locationTV.text = response["location"].toString()
             binding.varietyTV.text = response["variety"].toString()
             binding.priceTV.text = response["min_range"].toString()+"/kg to ₹"+response["max_range"].toString()+"/kg"
@@ -145,9 +148,9 @@ class ViewSellerHomeCropActivity : AppCompatActivity() {
 
 
             if(response["transportation"].toString().equals("true"))
-                binding.transportationTV.text = "Required"
+                binding.transportationTV.text = getString(R.string.required)
             else
-                binding.transportationTV.text = "Not Required"
+                binding.transportationTV.text = getString(R.string.not_required)
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.
@@ -202,7 +205,7 @@ class ViewSellerHomeCropActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
-        Toast.makeText(this, "Posted Interest", Toast.LENGTH_SHORT)
+        Toast.makeText(this, getString(R.string.posted_interest), Toast.LENGTH_SHORT)
                 .show()
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()

@@ -186,6 +186,8 @@
     <string name="choose_your_role">Choose your role</string>
     <string name="farmer_group_fpo">Farmer Group / FPO</string>
     <string name="trader_buyer">Trader / Buyer</string>
+    <string name="added_buyer">Added Buyer</string>
+    <string name="something_went_wrong">Something went wrong!</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
