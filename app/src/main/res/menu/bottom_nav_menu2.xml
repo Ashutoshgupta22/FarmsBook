@@ -9,12 +9,12 @@
     <item
         android:id="@+id/navigation_listings"
         android:icon="@drawable/icon2_selector"
-        android:title="Listings" />
+        android:title="@string/listings" />
 
     <item
         android:id="@+id/navigation_buyers"
         android:icon="@drawable/icon3_selector"
-        android:title="Buyers" />
+        android:title="@string/buyers" />
 
     <item
         android:id="@+id/navigation_profile2"

@@ -13,6 +13,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityViewOfferBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONObject
@@ -63,13 +64,14 @@ class ViewOfferActivity : AppCompatActivity() {
                 .load(response.getString("imageUrl0"))
                 .into(binding.profileImage)
             binding.cropNameTv.text = response.getString("offer_cropName")
-            binding.postedOnTV.text = "Posted on " + response.getString("timestamp")
+            binding.postedOnTV.text = "${resources.getString(R.string.posted)} :"+ response.getString("timestamp")
             binding.farmerNameTV.text = response.getString("farmer_name")
             binding.phoneTV.text = response.getString("phone2")
             binding.rateTV.text = response.getString("rate_of_commission")
-            binding.textView21.text = "Contact ${response.getString("farmer_name")} to place order"
+            val farmerName = response.getString("farmer_name")
+            binding.textView21.text = resources.getString(R.string.contact_to_place_order,farmerName)
             if (response.getString("replied") == "false") {
-                binding.textView20.text = "Response pending by ${response.getString("farmer_name")}"
+                binding.textView20.text = "${resources.getString(R.string.response_pending_by)} ${response.getString("farmer_name")}"
                 binding.textView20.setTextColor(Color.parseColor("#FF8A00"))
             } else {
                 if (response.getBoolean("offer_status") == false) {
@@ -82,16 +84,17 @@ class ViewOfferActivity : AppCompatActivity() {
                     binding.textView20.setTextColor(Color.parseColor("#00853C"))
                 }
             }
-            binding.priceTV.text = response.getString("offering_price") + "/ kg"
-            binding.costTv.text = response.getString("offering_price") + "/ kg"
+            val kg = resources.getStringArray(R.array.Metrics)[1]
+            binding.priceTV.text = response.getString("offering_price") + "/ $kg"
+            binding.costTv.text = response.getString("offering_price") + "/ $kg"
             binding.locationTV.text = response.getString("delivery_place")
             binding.locationTV2.text = response.getString("delivery_place")
             binding.quantityTV.text =
                 response.getString("offering_quantity") + " " + response.getString("offering_quantity_unit")
             if (response.getString("transportation").equals("true"))
-                binding.transportaitonTV.text = "Required"
+                binding.transportaitonTV.text = resources.getString(R.string.required)
             else
-                binding.transportaitonTV.text = "Not Required"
+                binding.transportaitonTV.text = resources.getString(R.string.not_required)
 
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()

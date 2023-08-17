@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Variety"
+                android:text="@string/variety"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView80"
                 app:layout_constraintTop_toBottomOf="@+id/textView80" />
@@ -152,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Time of sowing"
+                android:text="@string/time_of_sowing"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView81"
                 app:layout_constraintTop_toBottomOf="@+id/textView81" />
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Type of farming"
+                android:text="@string/type_of_farming"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView83"
                 app:layout_constraintTop_toBottomOf="@+id/textView83" />

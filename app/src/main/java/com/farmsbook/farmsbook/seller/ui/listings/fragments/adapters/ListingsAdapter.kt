@@ -39,9 +39,12 @@ class ListingsAdapter (private val plantList : ArrayList<ListingsData>, val cont
         Glide.with(context).load(plantList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
-        holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
-        holder.plantDate.text = "Posted : ${currentItem.timestamp}"
-        holder.plantStatus.text = "${currentItem.no_of_offers} Buyers shown interest"
+        val kg = context.resources.getStringArray(R.array.Metrics)[1]
+        holder.plantPrice.text = "${currentItem.min_price}/$kg - ${currentItem.max_price}/$kg"
+        holder.plantDate.text = "${context.resources.getString(R.string.posted)} : " +
+                "${currentItem.timestamp}"
+        holder.plantStatus.text = "${currentItem.no_of_offers} " +
+                "${context.resources.getString(R.string.buyers_shown_interest)}"
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)

@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters.LatestOffersAdapter
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters.LatestOffersData
 import com.farmsbook.farmsbook.databinding.FragmentOffersBinding
@@ -95,9 +96,9 @@ class OffersFragment : Fragment() {
                         cropObject.getString("offering_quantity_unit").toString()
                     crop.offering_quantity = cropObject.getString("offering_quantity").toString()
                     if (cropObject.getBoolean("purchased_on").toString().equals("true"))
-                        crop.purchased_on = "On Commission"
+                        crop.purchased_on = requireContext().resources.getString(R.string.on_commission)
                     else
-                        crop.purchased_on = "Fixed Rate"
+                        crop.purchased_on = requireContext().resources.getString(R.string.fixed_rate)
 
 //                   getPlantData(cropObject.getInt("offer_to_farmer_id").toString(),cropObject.getInt("offer_to_crop_id").toString())
 

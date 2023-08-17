@@ -41,7 +41,8 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
         Glide.with(context).load(plantList[position].Image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
-        holder.plantPrice.text = "${currentItem.min_price}/${currentItem.quantity_unit} - ${currentItem.max_price}/${currentItem.quantity_unit}"
+        val unit = getUnit(currentItem.quantity_unit)
+        holder.plantPrice.text = "${currentItem.min_price}/$unit - ${currentItem.max_price}/$unit"
         holder.plantDate.text = "${context.resources.getString(R.string.posted)} " +
                 ": ${currentItem.timestamp}"
         holder.plantStatus.text = "${currentItem.interested_suppliers} " +
@@ -50,6 +51,17 @@ class LatestRequirementsAdapter (private val plantList : ArrayList<LatestRequire
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
 //        }
+    }
+
+    private fun getUnit(quantityUnit: String?): String {
+
+       return when(quantityUnit) {
+            "ton" -> context.resources.getStringArray(R.array.Metrics)[0]
+            "kg" -> context.resources.getStringArray(R.array.Metrics)[1]
+            "quintal" -> context.resources.getStringArray(R.array.Metrics)[2]
+           else -> {"/kg"}
+       }
+
     }
 
     override fun getItemCount(): Int {

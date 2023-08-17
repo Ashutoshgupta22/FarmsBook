@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeSearchActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView16"
@@ -14,7 +13,7 @@
         android:fontFamily="@font/roboto_medium"
         android:gravity="center_vertical"
         android:paddingStart="32dp"
-        android:text="Buyers"
+        android:text="@string/buyers"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +40,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:visibility="gone"
-                android:text="Request Received"
+                android:text="@string/request_received"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
-                android:text="Added Buyers"
+                android:text="@string/added_buyers"
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requestRV" />
@@ -82,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Request Sent"
+                android:text="@string/request_sent"
                 android:layout_marginStart="16dp"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"

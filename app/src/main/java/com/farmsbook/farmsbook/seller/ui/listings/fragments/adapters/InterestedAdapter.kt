@@ -42,7 +42,8 @@ class InterestedAdapter (private val plantList : ArrayList<InterestedData>, val 
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
         holder.plantRateType.text = currentItem.purchased_on
-        holder.postedBy.text = "Requirement Posted by ${currentItem.buyer_name}"
+        holder.postedBy.text = "${context.resources.getString(R.string.requirement_posted_by)} " +
+                "${currentItem.buyer_name}"
 
 
 //        holder.itemView.setOnClickListener {

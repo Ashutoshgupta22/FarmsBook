@@ -44,6 +44,8 @@
     <string name="sort">सॉर्ट</string>
     <string name="filter">फ़िल्टर</string>
     <string name="offer_your_price">अपनी कीमत पेश करें</string>
+    <string name="transportation_available">ट्रांसपोर्टेशन\nउपलब्ध</string>
+    <string name="transportation_not_available">ट्रांसपोर्टेशन\nउपलब्ध नहीं</string>
 
 
     <!--    Requirements Screen-->
@@ -55,6 +57,7 @@
 
     <!--    Orders Screen-->
     <string name="title_orders">ऑर्डर</string>
+    <string name="price_range_to">मूल्य सीमा: ₹ %s से ₹ %s तक</string>
 
     <!--    Profile Screen-->
     <string name="title_profile">प्रोफ़ाइल</string>
@@ -102,6 +105,7 @@
     <string name="not_required">आवश्यक नहीं</string>
     <string name="price_range">मूल्य सीमा</string>
     <string name="search_product_farmer_etc">खोजें उत्पाद, किसान आदि</string>
+    <string name="added_buyers">जोड़े गए खरीदार</string>
 
 <!--    Edit Profile Screen-->
     <string name="edit_your_profile">प्रोफ़ाइल बदले</string>
@@ -160,6 +164,7 @@
     <string name="requirement_posted_by">मांग द्वारा पोस्ट की गई</string>
     <string name="you_have_posted_your_interest_for_this_demand">आपने इस मांग के लिए अपनी रुचि पोस्ट की है</string>
     <string name="listing">सूचीकरण</string>
+    <string name="listings">सूचीकरण</string>
     <string name="offers_from_buyers_right_now">खरीदारों की वर्तमान में ऑफरें</string>
     <string name="offers_from_suppliers_right_now">आपूर्तिकर्ताओं की वर्तमान में ऑफरें</string>
     <string name="edit">संपादित करें</string>
@@ -177,6 +182,18 @@
     <string name="select">चुनें</string>
     <string name="joined">शामिल हुए</string>
     <string name="posted">पोस्ट किया</string>
+    <string name="you_have_not_listed_your_crops">आपने अभी तक अपनी फसलें सूचीबद्ध नहीं की हैं\n\n\nनीचे दिए गए बटन पर क्लिक करके अपनी फसलें जोड़ें</string>
+    <string name="buyers_shown_interest">खरीददारों ने दिखाया दिलचस्पी</string>
+    <string name="you_have_not_added_interest">आपने अब तक कोई \nदिलचस्पी नहीं जोड़ी है</string>
+    <string name="view">देखें</string>
+    <string name="response_pending_by">प्रतिक्रिया बकाया </string>
+    <string name="contact_to_place_order">आदेश प्लेस करने के लिए %s से संपर्क करें</string>
+    <string name="price_offered">प्रस्तावित मूल्य</string>
+    <string name="offer_accepted_by">प्रस्ताव स्वीकृत किया गया है</string>
+    <string name="offer_rejected_by">प्रस्ताव अस्वीकृत किया गया है</string>
+    <string name="crop_listings">फसल लिस्टिंग</string>
+    <string name="buyers_requirements">खरीदार की आवश्यकताएँ</string>
+    <string name="posted_interest">दर्ज की गई रुचियाँ</string>
 
     <string-array name="States">
         <item>अंडमान और निकोबार द्वीपसमूह</item>

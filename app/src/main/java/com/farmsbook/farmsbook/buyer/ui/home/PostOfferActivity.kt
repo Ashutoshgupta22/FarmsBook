@@ -180,7 +180,10 @@ class PostOfferActivity : AppCompatActivity() {
             Glide.with(this).load(response.getString("imageUrl0")).into( binding.imageView7)
             binding.cropNameTv.text = response["crop_name"].toString()
             binding.locationTv.text = response["location"].toString()
-            binding.costTv.text = "Price Range : ₹"+response["min_price"].toString()+"/kg to ₹"+response["max_price"].toString()+"/kg"
+            val kg = resources.getStringArray(R.array.Metrics)[1]
+            val minPrice = response["min_price"].toString()+"/$kg"
+            val maxPrice = response["max_price"].toString()+"/$kg"
+            binding.costTv.text = resources.getString(R.string.price_range_to,minPrice,maxPrice)
             binding.weightTv.text = response["quantity"].toString()+" "+response["quantity_unit"].toString()
 
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)

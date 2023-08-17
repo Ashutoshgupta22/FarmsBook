@@ -202,7 +202,7 @@ class InterestedFragment : Fragment() {
 
             Log.i("InterestedFrag", "deleteInterest: SUCCESS")
             plantList.removeAt(position)
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemRemoved(position)
 
         }, { error -> // method to handle errors.
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show()

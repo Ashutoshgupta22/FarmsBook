@@ -116,7 +116,7 @@
             android:fontFamily="@font/roboto_medium"
             android:paddingHorizontal="10dp"
             android:paddingVertical="6dp"
-            android:text="Interested"
+            android:text="@string/interested"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

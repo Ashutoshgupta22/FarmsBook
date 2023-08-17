@@ -82,14 +82,14 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             }
 
             if (!response.getBoolean("purchased_on"))
-                binding.purchasedOnTV.text = "On Commission"
+                binding.purchasedOnTV.text = resources.getString(R.string.on_commission)
             else
-                binding.purchasedOnTV.text = "Fixed Rate"
+                binding.purchasedOnTV.text = resources.getString(R.string.fixed_rate)
 
             if (!response.getBoolean("transportation"))
-                binding.purchasedOnTV.text = "Required"
+                binding.purchasedOnTV.text = resources.getString(R.string.required)
             else
-                binding.purchasedOnTV.text = "Not Required"
+                binding.purchasedOnTV.text = resources.getString(R.string.not_required)
 
             binding.farmerNameTV.text = response.getString("buyer_name")
             binding.companyNameTV.text = response.getString("farmer_company")

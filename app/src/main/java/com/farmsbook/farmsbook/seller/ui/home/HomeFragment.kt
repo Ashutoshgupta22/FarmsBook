@@ -253,12 +253,12 @@ class HomeFragment : Fragment() {
             plantList.removeAt(position)
             adapter.notifyItemRemoved(position)
 
-            Toast.makeText(context, "Posted Interest", Toast.LENGTH_SHORT)
+            Toast.makeText(context, getString(R.string.posted_interest), Toast.LENGTH_SHORT)
                 .show()
 
 
         }, { error -> // method to handle errors.
-            Toast.makeText(getContext(), "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
     }

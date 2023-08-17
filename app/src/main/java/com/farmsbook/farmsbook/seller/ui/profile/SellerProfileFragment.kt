@@ -80,7 +80,7 @@ class SellerProfileFragment : Fragment() {
             var editor = sharedPreference?.edit()
             editor?.remove("USER_ID")
             editor?.remove("USER_ROLE")
-            editor?.commit()
+            editor?.apply()
 
         }
         no.setOnClickListener {

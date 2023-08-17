@@ -104,28 +104,31 @@ class ViewHomeCropActivity : AppCompatActivity() {
 
             Glide.with(this).load(response.getString("imageUrl0")).into( binding.imageView26)
             binding.cropNameTV.text = response["crop_name"].toString()
-            binding.postedOnTV.text = "Posted on "+response["timestamp"].toString()
+            binding.postedOnTV.text = "${resources.getString(R.string.posted)} : "+response["timestamp"].toString()
             binding.locationTV.text = response["location"].toString()
             binding.varietyTV.text = response["variety"].toString()
             binding.varietyTV2.text = response["variety"].toString()
-            binding.priceRangeTV.text = "Price Range : ₹"+response["min_price"].toString()+"/kg to ₹"+response["max_price"].toString()+"/kg"
+            val kg = resources.getStringArray(R.array.Metrics)[1]
+            val minPrice = response["min_price"].toString()+"/$kg"
+            val maxPrice = response["max_price"].toString()+"/$kg"
+            binding.priceRangeTV.text = resources.getString(R.string.price_range_to,minPrice,maxPrice)
             binding.timeOfSowingTV.text = response["time_of_sowing"].toString()
             binding.quantityTV.text = response["quantity"].toString()+" "+response["quantity_unit"].toString()
 
             if(response["type_of_farming"].toString().equals("true"))
-                binding.timeOfFarmingTV.text = "Organic"
+                binding.timeOfFarmingTV.text = resources.getString(R.string.organic)
             else
-                binding.timeOfFarmingTV.text = "Unorganic"
+                binding.timeOfFarmingTV.text = resources.getString(R.string.unorganic)
 
             if(response["type_of_sale"].toString().equals("true"))
-                binding.typeOfSaleTV.text = "On Commission"
+                binding.typeOfSaleTV.text = resources.getString(R.string.on_commission)
             else
-                binding.typeOfSaleTV.text = "Fixed Rate"
+                binding.typeOfSaleTV.text = resources.getString(R.string.fixed_rate)
 
             if(response["transportation"].toString().equals("true"))
-                binding.transportaionTV.text = "Transportation \nAvailable"
+                binding.transportaionTV.text = getString(R.string.transportation_available)
             else
-                binding.transportaionTV.text = "Transportation \nNot Available"
+                binding.transportaionTV.text = getString(R.string.transportation_not_available)
 //            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
 //                .show()
         }, { error -> // method to handle errors.

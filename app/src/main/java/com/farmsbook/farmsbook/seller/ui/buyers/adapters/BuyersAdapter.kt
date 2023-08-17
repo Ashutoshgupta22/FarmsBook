@@ -52,7 +52,8 @@ class BuyersAdapter (private val plantList : ArrayList<BuyersData>, val context:
         holder.groupName.text = currentItem.GroupName
         holder.suppliersName.text= currentItem.FarmerName
         holder.suppliersLocation.text= currentItem.Location
-        holder.tvJoinedDate.text = "Joined - ${currentItem.timestamp}"
+        holder.tvJoinedDate.text = "${context.resources.getString(R.string.joined)} - " +
+                "${currentItem.timestamp}"
 
         holder.crop1.text = "Rice"
         holder.crop2.text = "Wheat"

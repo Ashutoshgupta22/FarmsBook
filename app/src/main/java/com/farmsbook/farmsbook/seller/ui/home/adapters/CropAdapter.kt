@@ -41,10 +41,11 @@ class CropAdapter (private var plantList : ArrayList<CropData>, val context: Con
         Glide.with(context).load(plantList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
-        holder.plantPrice.text = "${currentItem.min_price}/kg - ${currentItem.max_price}/kg"
+        val kg = context.resources.getStringArray(R.array.Metrics)[1]
+        holder.plantPrice.text = "${currentItem.min_price}/$kg - ${currentItem.max_price}/$kg"
         holder.plantLocation.text = currentItem.crop_location
         holder.plantWeight.text = currentItem.quantity.toString()
-        holder.tvTimestamp.text = "Posted : ${currentItem.timestamp}"
+        holder.tvTimestamp.text = "${context.getString(R.string.posted)} : ${currentItem.timestamp}"
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)
 //        }

@@ -42,19 +42,26 @@ class LatestOffersAdapter (private val offersList : ArrayList<LatestOffersData>,
         Glide.with(context).load(offersList[position].crop_image).into(holder.plantImage)
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.crop_name
-        holder.plantPrice.text = "Price Offered : ${currentItem.offering_price}/kg"
+        val kg = context.resources.getStringArray(R.array.Metrics)[1]
+        holder.plantPrice.text = "${context.resources.getString(R.string.price_offered)} : ${currentItem.offering_price}/$kg"
         holder.plantWeight.text = currentItem.offering_quantity+" "+currentItem.offering_quantity_unit
-        holder.plantRateType.text = currentItem.purchased_on
+        holder.plantRateType.text = if (currentItem.purchased_on == "Fixed Rate")
+                                        context.resources.getString(R.string.fixed_rate)
+                                    else
+                                        currentItem.purchased_on
 
         if(currentItem.replied == "false" ){
-            holder.plantStatus.text = "Response pending by ${currentItem.farmerName}"
+            holder.plantStatus.text = "${context.resources.getString(R.string.response_pending_by)} " +
+                    "${currentItem.farmerName}"
             holder.plantStatus.setTextColor(Color.parseColor("#FF8A00"))
         }else{
 
         if(currentItem.offer_status == "true")
-        holder.plantStatus.text = "Offer Accepted by ${currentItem.farmerName}"
+        holder.plantStatus.text = "${context.resources.getString(R.string.offer_accepted_by)} " +
+                "${currentItem.farmerName}"
         else{
-            holder.plantStatus.text = "Offer Rejected by ${currentItem.farmerName}"
+            holder.plantStatus.text = "${context.resources.getString(R.string.offer_rejected_by)} " +
+                    "${currentItem.farmerName}"
             holder.plantStatus.setTextColor(Color.parseColor("#B80000"))
         }
         }

@@ -114,6 +114,7 @@
     <string name="requirement_posted_by">Requirement posted by</string>
     <string name="you_have_posted_your_interest_for_this_demand">You have posted your interest for this demand</string>
     <string name="listing">Listing</string>
+    <string name="listings">Listings</string>
     <string name="offers_from_buyers_right_now">Offers from Buyers right now</string>
     <string name="offers_from_suppliers_right_now">Offers From Suppliers right now</string>
     <string name="edit">Edit</string>
@@ -147,7 +148,22 @@
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="share_app">Share the app</string>
     <string name="logout">Logout</string>
-
+    <string name="you_have_not_added_interest">You have not added \nany interests yet</string>
+    <string name="buyers_shown_interest">Buyers shown interest</string>
+    <string name="you_have_not_listed_your_crops">You have not Listed your crops right now\n\n\nAdd your Crops by clicking \nbelow</string>
+    <string name="view">View</string>
+    <string name="response_pending_by">Response pending by</string>
+    <string name="contact_to_place_order">Contact %s to place order</string>
+    <string name="price_offered">Price Offered</string>
+    <string name="offer_accepted_by">Offer Accepted by</string>
+    <string name="offer_rejected_by">Offer Rejected by</string>
+    <string name="price_range_to">Price Range : ₹ %s to ₹ %s</string>
+    <string name="transportation_available">Transportation \nAvailable</string>
+    <string name="transportation_not_available">Transportation \nNot Available</string>
+    <string name="added_buyers">Added Buyers</string>
+    <string name="crop_listings">Crop Listings</string>
+    <string name="buyers_requirements">Buyer\'s Requirements</string>
+    <string name="posted_interest">Posted Interest</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
@@ -192,7 +208,7 @@
 
     <string-array name="Metrics">
         <item>ton</item>
-        <item>kg</item>
+        <item >kg</item>
         <item>quintal</item>
 
 
