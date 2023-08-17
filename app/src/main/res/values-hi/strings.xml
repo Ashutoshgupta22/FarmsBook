@@ -194,6 +194,25 @@
     <string name="crop_listings">फसल लिस्टिंग</string>
     <string name="buyers_requirements">खरीदार की आवश्यकताएँ</string>
     <string name="posted_interest">दर्ज की गई रुचियाँ</string>
+    <string name="you_will_be_logout">आप हमारे खाते से लॉगआउट हो जाएंगे,\nक्या आप सुनिश्चित हैं कि आप जारी रखना चाहते हैं?</string>
+    <string name="share_us_on">हमें शेयर करें</string>
+    <string name="all_crops">सभी फसलें</string>
+    <string name="edit_images">छवियों को संपादित करें</string>
+    <string name="size_of_images_should_not_exeed">* चयनित छवियों का आकार 4 मेगाबाइट से अधिक नहीं होना चाहिए</string>
+    <string name="save">सहेजें</string>
+    <string name="no_offers_right_now">अब तक कोई प्रस्ताव नहीं</string>
+    <string name="price2">मूल्य -</string>
+    <string name="quantity2">मात्रा -</string>
+    <string name="select_images">छवियाँ चुनें</string>
+    <string name="log_out">लॉग आउट करें?</string>
+    <string name="you_have_not_posted_any_requirements">आपने अभी कोई आवश्यकताएँ पोस्ट नहीं की है। नीचे क्लिक करके अपनी फसलें जोड़ें</string>
+    <string name="no_offers_from_suppliers_right_now">अभी तक कोई आपूर्तिकर्ताओं से कोई प्रस्ताव नहीं है</string>
+    <string name="sort_by">क्रमबद्ध करें</string>
+    <string name="top_seller">शीर्ष विक्रेता</string>
+    <string name="price_low_to_high">मूल्य कम से ज्यादा</string>
+    <string name="price_high_to_low">मूल्य उच्च से कम</string>
+    <string name="product_name_a_z">उत्पाद का नाम A-Z</string>
+    <string name="product_name_z_a">उत्पाद का नाम Z-A</string>
 
     <string-array name="States">
         <item>अंडमान और निकोबार द्वीपसमूह</item>

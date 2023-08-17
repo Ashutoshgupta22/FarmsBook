@@ -11,7 +11,7 @@
         android:id="@+id/textView43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share us on"
+        android:text="@string/share_us_on"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_medium"

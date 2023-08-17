@@ -40,9 +40,16 @@ class BuyerOfferAdapter (private val plantList : ArrayList<BuyerOfferData>, val 
         //holder.plantImage.setImageResource(currentItem.Image)
         holder.plantName.text = currentItem.buyer_name
         holder.companyName.text = currentItem.company_name
-        holder.plantPrice.text = currentItem.offer_price +"/kg"
+        val kg = context.resources.getStringArray(R.array.Metrics)[1]
+        holder.plantPrice.text = currentItem.offer_price +"/$kg"
         holder.plantQuantity.text = currentItem.offer_quantity + " "+ currentItem.offer_quantity_unit
-        holder.purchasedOn.text = currentItem.purchaseOn
+        holder.purchasedOn.text = when(currentItem.purchaseOn) {
+
+            "Fixed Rate" ->context.getString(R.string.fixed_rate)
+            else -> context.getString(R.string.on_commission)
+
+        }
+
 
 //        holder.itemView.setOnClickListener {
 //            onItemClickListener?.invoke(currentItem)

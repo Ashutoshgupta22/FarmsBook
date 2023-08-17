@@ -15,6 +15,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityViewListingBinding
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.ViewBuyerOfferActivity
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.BuyerOfferAdapter
@@ -61,10 +62,11 @@ class ViewListingActivity : AppCompatActivity() {
             Glide.with(this).load(response.getString("imageUrl0")).into(binding.imageView16)
             binding.requirementNameTv.text = response.getString("crop_name")
             val time = response.getString("timestamp")
-            binding.postedOnTV.text = "Posted : " + TimeFormatter().getRelativeTime(time)
+            binding.postedOnTV.text = "${getString(R.string.posted)} : " + TimeFormatter().getRelativeTime(time)
             binding.varietyTV.text = response.getString("variety")
+            val kg = resources.getStringArray(R.array.Metrics)[1]
             binding.PriceTV.text =
-                response.getString("min_price") + "/kg to " + response.getString("max_price") + "/kg"
+                response.getString("min_price") + "/$kg to " + response.getString("max_price") + "/$kg"
             binding.quantityTV.text =
                 response.getString("quantity") + " " + response.getString("quantity_unit")
 

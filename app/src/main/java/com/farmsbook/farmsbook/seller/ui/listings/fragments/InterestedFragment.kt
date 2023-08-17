@@ -122,9 +122,9 @@ class InterestedFragment : Fragment() {
                     //crop.offering_quantity_unit = cropObject.getString("offering_quantity_unit").toString()
                    // crop.quantity = cropObject.getString("offering_quantity").toString()
                     if(cropObject.getBoolean("type_of_buy").toString().equals("true"))
-                        crop.purchased_on = "On Commission"
+                        crop.purchased_on = getString(R.string.on_commission)
                     else
-                        crop.purchased_on = "Fixed Rate"
+                        crop.purchased_on = getString(R.string.fixed_rate)
 
                     plantList.add(crop)
 

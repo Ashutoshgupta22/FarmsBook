@@ -164,6 +164,25 @@
     <string name="crop_listings">Crop Listings</string>
     <string name="buyers_requirements">Buyer\'s Requirements</string>
     <string name="posted_interest">Posted Interest</string>
+    <string name="log_out">Log out ?</string>
+    <string name="you_will_be_logout">You will be logout of your account with us,\nare you sure you want to continue?</string>
+    <string name="share_us_on">Share us on</string>
+    <string name="all_crops">All Crops</string>
+    <string name="edit_images">Edit Images</string>
+    <string name="size_of_images_should_not_exeed">* The size of selected images should not exeed 4 MB</string>
+    <string name="save">Save</string>
+    <string name="no_offers_right_now">No Offers right Now</string>
+    <string name="price2">Price -</string>
+    <string name="quantity2">Quantity -</string>
+    <string name="select_images">Select Images</string>
+    <string name="you_have_not_posted_any_requirements">You have not posted any requirements\nright now\n\n\nAdd your Crops by \nclicking below</string>
+    <string name="no_offers_from_suppliers_right_now">No Offers from Suppliers right now</string>
+    <string name="sort_by">Sort By</string>
+    <string name="top_seller">Top seller</string>
+    <string name="price_low_to_high">Price Low to High</string>
+    <string name="price_high_to_low">Price High to Low</string>
+    <string name="product_name_a_z">Product Name A-Z</string>
+    <string name="product_name_z_a">Product Name Z-A</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>

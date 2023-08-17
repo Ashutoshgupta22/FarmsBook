@@ -147,17 +147,18 @@ class ViewRequirementActivity : AppCompatActivity() {
             Glide.with(this).load(cropImages[response.getString("manageCropId").toInt()-1]).into( binding.imageView16)
             binding.requirementNameTv.text = response.getString("crop_name")
             val time = response.getString("timestamp")
-            binding.postedOnTV.text = "Posted : " + TimeFormatter().getRelativeTime(time)
+            binding.postedOnTV.text = "${getString(R.string.posted)} : " + TimeFormatter().getRelativeTime(time)
             binding.varietyTV.text = response.getString("variety")
+            val kg = resources.getStringArray(R.array.Metrics)[1]
             binding.PriceTV.text =
-                response.getString("min_range") + "/kg to " + response.getString("max_range") + "/kg"
+                response.getString("min_range") + "/$kg to " + response.getString("max_range") + "/$kg"
             binding.locationTV.text = response.getString("location")
             binding.quantityTV.text =
                 response.getString("quantity") + " " + response.getString("quantity_unit")
             if (response.getString("transportation").equals("true"))
-                binding.transportaitonTV.text = "Required"
+                binding.transportaitonTV.text = getString(R.string.required)
             else
-                binding.transportaitonTV.text = "Not Required"
+                binding.transportaitonTV.text = getString(R.string.not_required)
 
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()

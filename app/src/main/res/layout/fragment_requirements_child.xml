@@ -62,7 +62,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have not posted any requirements\nright now\n\n\nAdd your Crops by \nclicking below"
+        android:text="@string/you_have_not_posted_any_requirements"
         android:textColor="@color/gray"
         android:gravity="center"
         android:textSize="18sp"
