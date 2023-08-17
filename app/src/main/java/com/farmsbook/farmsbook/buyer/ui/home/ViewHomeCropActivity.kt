@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ActivityViewHomeCropBinding
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
+import com.farmsbook.farmsbook.utility.TimeFormatter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONObject
 
@@ -102,9 +103,14 @@ class ViewHomeCropActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
 
-            Glide.with(this).load(response.getString("imageUrl0")).into( binding.imageView26)
+            Glide
+                .with(this)
+                .load(response.getString("imageUrl0"))
+                .centerCrop()
+                .into( binding.imageView26)
             binding.cropNameTV.text = response["crop_name"].toString()
-            binding.postedOnTV.text = "${resources.getString(R.string.posted)} : "+response["timestamp"].toString()
+            val time = response.getString("timestamp")
+            binding.postedOnTV.text = "${resources.getString(R.string.posted)} : ${TimeFormatter().getRelativeTime(time)}"
             binding.locationTV.text = response["location"].toString()
             binding.varietyTV.text = response["variety"].toString()
             binding.varietyTV2.text = response["variety"].toString()

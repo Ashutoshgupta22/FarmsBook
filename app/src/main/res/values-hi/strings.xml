@@ -128,7 +128,7 @@
     <string name="price">कीमत</string>
     <string name="per_kg">प्रति किग्रा</string>
     <string name="quantity_you_want">आपकी इच्छित मात्रा</string>
-    <string name="delivery_place">वितरण तिथि</string>
+    <string name="delivery_place">वितरण स्थल</string>
     <string name="delivery_date">वितरण तिथि</string>
     <string name="you_have_successfully_posted_nyour_requirement">आपने सफलतापूर्वक अपनी आवश्यकता \nपोस्ट की है</string>
 
@@ -213,6 +213,9 @@
     <string name="price_high_to_low">मूल्य उच्च से कम</string>
     <string name="product_name_a_z">उत्पाद का नाम A-Z</string>
     <string name="product_name_z_a">उत्पाद का नाम Z-A</string>
+    <string name="choose_your_role">अपनी भूमिका चुनें</string>
+    <string name="farmer_group_fpo">किसान समूह / FPO</string>
+    <string name="trader_buyer">व्यापारी / खरीददार</string>
 
     <string-array name="States">
         <item>अंडमान और निकोबार द्वीपसमूह</item>

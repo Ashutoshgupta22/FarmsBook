@@ -19,13 +19,12 @@
 
             <ImageView
                 android:id="@+id/imageView26"
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:scaleType="fitXY"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/button_background_rounded_3" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/posted_onTV"
@@ -35,7 +34,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/button_background_rounded_4"
                 android:padding="2dp"
-                android:text="Posted on 02/05/2023"
+                android:text="Posted - 5 days ago"
                 android:textColor="@color/green"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView26" />

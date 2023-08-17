@@ -24,7 +24,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="Choose your role"
+        android:text="@string/choose_your_role"
         android:textColor="@color/green"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -54,7 +54,7 @@
             android:paddingStart="10dp"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_medium"
-            android:text="Farmer Group / FPO" />
+            android:text="@string/farmer_group_fpo" />
 
         <RadioButton
             android:id="@+id/radio1"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingStart="10dp"
-            android:text="Trader / Buyer"
+            android:text="@string/trader_buyer"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_medium"/>

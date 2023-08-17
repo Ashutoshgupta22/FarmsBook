@@ -183,6 +183,9 @@
     <string name="price_high_to_low">Price High to Low</string>
     <string name="product_name_a_z">Product Name A-Z</string>
     <string name="product_name_z_a">Product Name Z-A</string>
+    <string name="choose_your_role">Choose your role</string>
+    <string name="farmer_group_fpo">Farmer Group / FPO</string>
+    <string name="trader_buyer">Trader / Buyer</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
