@@ -15,7 +15,11 @@
         android:id="@+id/navigation_listings"
         android:name="com.farmsbook.farmsbook.seller.ui.listings.ListingsFragment"
         android:label="Listings"
-        tools:layout="@layout/fragment_listings" />
+        tools:layout="@layout/fragment_listings" >
+        <action
+            android:id="@+id/action_navigation_listings_to_navigation_profile2"
+            app:destination="@id/navigation_profile2" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_buyers"

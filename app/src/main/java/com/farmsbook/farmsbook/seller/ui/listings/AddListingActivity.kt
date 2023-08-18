@@ -32,11 +32,13 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.buyer.ui.profile.ManageCropsActivity
 import com.farmsbook.farmsbook.databinding.ActivityAddListingBinding
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.ListingConfirmationActivity
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.UploadManager
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ImageAdapter
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ListingsData
+import com.farmsbook.farmsbook.seller.ui.profile.SellerManageCropsActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 //import id.zelory.compressor.Compressor
 import org.json.JSONArray
@@ -145,12 +147,22 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
             }
         }
 
-
-        getManageCrops()
-
-        val arrayAdapter4 = ArrayAdapter(this, R.layout.dropdown_item, cropList)
+       // getManageCrops()
+       // val arrayAdapter4 = ArrayAdapter(this, R.layout.dropdown_item, cropList)
         name = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView4)
-        name.setAdapter(arrayAdapter4)
+       // name.setAdapter(arrayAdapter4)
+
+        name.setOnClickListener {
+            if (cropList.isEmpty()) {
+
+                val intent = Intent(this, SellerManageCropsActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+
+
+            }
+        }
 
         val states = resources.getStringArray(R.array.States)
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, states)
@@ -377,6 +389,8 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
 
     private fun getManageCrops() {
 
+        Log.i("AddListingActivity", "getManageCrops: called ")
+
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -400,6 +414,9 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
                     e.printStackTrace()
                 }
             }
+
+            val arrayadap = ArrayAdapter(this, R.layout.dropdown_item, cropList)
+            name.setAdapter(arrayadap)
         }, { error -> // method to handle errors.
             Log.e("AddListingActivity", "getManageCrops: FAILED",error )
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
@@ -620,6 +637,13 @@ class AddListingActivity : AppCompatActivity(), ImageAdapter.CountOfImagesWhenRe
             return null
         }
         return rotatedImageFile
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.i("AddListingActivity", "onResume: called")
+        getManageCrops()
     }
 
 }

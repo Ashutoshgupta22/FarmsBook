@@ -37,10 +37,24 @@ class SellerMainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener {
+            controller, destination, args ->
+
+            when(destination.id) {
+
+//                R.id.navigation_home2 -> navView.selectedItemId = R.id.navigation_home2
+//                R.id.navigation_listings -> navView.selectedItemId = R.id.navigation_listings
+//                R.id.navigation_buyers -> navView.selectedItemId = R.id.navigation_buyers
+//                R.id.navigation_profile2 -> controller.navigate(R.id.navigation_profile2)
+            }
+        }
     }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finishAffinity()
+       // finishAffinity()
     }
 }

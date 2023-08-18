@@ -11,6 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -23,9 +26,11 @@ import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.ViewRequirementActivity
 import com.farmsbook.farmsbook.databinding.FragmentCropsListingBinding
 import com.farmsbook.farmsbook.seller.ui.listings.AddListingActivity
+import com.farmsbook.farmsbook.seller.ui.listings.ListingsFragment
 import com.farmsbook.farmsbook.seller.ui.listings.ViewListingActivity
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ListingsAdapter
 import com.farmsbook.farmsbook.seller.ui.listings.fragments.adapters.ListingsData
+import com.farmsbook.farmsbook.seller.ui.profile.SellerProfileFragment
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import com.farmsbook.farmsbook.utility.TimeFormatter
 import org.json.JSONArray
@@ -38,6 +43,7 @@ class CropsListingFragment : Fragment() {
 
     private lateinit var adapter:ListingsAdapter
     private lateinit var logoutDialog: AlertDialog
+    private val cropList = arrayListOf<String>()
     private var clickedPosition = -1
 
     private lateinit var plantList: ArrayList<ListingsData>
@@ -51,6 +57,8 @@ class CropsListingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+
+        Log.i("CropsListingFragment", "onCreateView: called")
 
         binding = FragmentCropsListingBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -73,11 +81,53 @@ class CropsListingFragment : Fragment() {
         builder.setView(view)
         logoutDialog = builder.create()
 
-        binding.addRequirementBtn.setOnClickListener {
-            startActivity(Intent(context , AddListingActivity::class.java))
-        }
+        getAddedCrops()
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.addRequirementBtn.setOnClickListener {
+
+            startActivity(Intent(context , AddListingActivity::class.java))
+        }
+    }
+
+    private fun getAddedCrops() {
+
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference = requireContext().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference?.getInt("USER_ID", 0)
+        val url = "$baseAddressUrl/user/$userId/manageCrops"
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(requireContext())
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        val request = JsonArrayRequest(Request.Method.GET, url, null,
+            { response: JSONArray ->
+
+                cropList.clear()
+
+            for (i in 0 until response.length()) {
+                try {
+                    var cropObject = response.getJSONObject(i)
+//
+                    cropList.add(cropObject.getString("cropName"))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }, { error -> // method to handle errors.
+            Log.e("AddListingActivity", "getManageCrops: FAILED",error )
+            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
+
     }
 
     private fun deleteRequirement() {

@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.buyer.ui.profile.ManageCropsActivity
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropData
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.RequirementConfirmationActivity
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters.CropData
@@ -85,13 +86,22 @@ class AddRequirementActivity : AppCompatActivity() {
                 transportation = true
             }
         }
-        addData()
+       // addData()
 
-        val arrayAdapter4 = ArrayAdapter(this, R.layout.dropdown_item, cropName)
+       // val arrayAdapter4 = ArrayAdapter(this, R.layout.dropdown_item, cropName)
         name = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView4)
-        name.setAdapter(arrayAdapter4)
+      //  name.setAdapter(arrayAdapter4)
 
         //Log.d("Crop List","Hello")
+
+        name.setOnClickListener {
+
+            if (cropName.isEmpty()) {
+
+                val intent = Intent(this, ManageCropsActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
 
 //        Log.d("Crop List","$cropName")
@@ -248,6 +258,10 @@ class AddRequirementActivity : AppCompatActivity() {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
+
+                val arrayAdap = ArrayAdapter(this, R.layout.dropdown_item, cropName)
+                name.setAdapter(arrayAdap)
+
             }
            // Log.d("Crop List","${cropList}")
         }, { error -> // method to handle errors.
@@ -256,5 +270,11 @@ class AddRequirementActivity : AppCompatActivity() {
 
         })
         queue.add(request)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        addData()
     }
 }
