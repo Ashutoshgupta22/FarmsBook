@@ -2,6 +2,7 @@ package com.farmsbook.farmsbook.seller.ui.profile
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -44,6 +45,8 @@ class SellerProfileFragment : Fragment() {
     private lateinit var logoutDialog: AlertDialog
     private lateinit var shareDialog: AlertDialog
     private lateinit var langDialog: AlertDialog
+    private lateinit var appLink: String
+    private lateinit var template: String
 
     private var _binding: FragmentSellerProfileBinding? = null
 
@@ -60,6 +63,10 @@ class SellerProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        appLink = "https://play.google.com/store/apps/details?id="+ requireContext().packageName
+        template = "Download and install this amazing application from Google Play and share with your friends!!\n\n";
+
 
         val notificationsViewModel = ViewModelProvider(this)[SellerProfileViewModel::class.java]
 
@@ -94,16 +101,36 @@ class SellerProfileFragment : Fragment() {
         val facebook = view2.findViewById<ImageView>(R.id.facebookBtn)
         val twitter = view2.findViewById<ImageView>(R.id.twitterBtn)
         whatsapp.setOnClickListener {
-            shareDialog.dismiss()
 
+            val packageName ="com.whatsapp"
+            if (checkInstallation(requireContext(), packageName)) {
+                sendIntent(packageName);
+            }else{
+                Toast.makeText(requireContext(), "App not installed", Toast.LENGTH_SHORT).show();
+            }
+
+            shareDialog.dismiss()
         }
         twitter.setOnClickListener {
             shareDialog.dismiss()
 
+            val packageName ="com.twitter.android"
+            if (checkInstallation(requireContext(), packageName)) {
+                sendIntent(packageName);
+            }else{
+                Toast.makeText(requireContext(), "App not installed", Toast.LENGTH_SHORT).show();
+            }
         }
         facebook.setOnClickListener {
-            shareDialog.dismiss()
 
+            val packageName ="com.facebook.katana"
+            if (checkInstallation(requireContext(), packageName)) {
+                sendIntent(packageName);
+            }else{
+                Toast.makeText(requireContext(), "App not installed", Toast.LENGTH_SHORT).show();
+            }
+
+            shareDialog.dismiss()
         }
 
         builder.setView(view2)
@@ -183,6 +210,29 @@ class SellerProfileFragment : Fragment() {
 
 
         return root
+    }
+
+    private fun sendIntent(packageName: String) {
+
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.type = "text/plain"
+        intent.setPackage(packageName)
+        intent.putExtra(Intent.EXTRA_TEXT, template + appLink)
+        startActivity(intent)
+    }
+
+    private fun checkInstallation(context: Context, packageName: String): Boolean {
+
+        val packageManager = context.packageManager
+        try {
+            packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            return true
+        }
+        catch (e: PackageManager.NameNotFoundException ) {
+            return false
+        }
+
     }
 
     override fun onDestroyView() {

@@ -2,7 +2,7 @@ package com.farmsbook.farmsbook.buyer.ui.profile
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.recreate
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -26,18 +25,15 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropAdapter
+import com.farmsbook.farmsbook.buyer.MainActivity
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropAdapter3
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropData
 import com.farmsbook.farmsbook.databinding.FragmentProfileBinding
 import com.farmsbook.farmsbook.login.LoginActivity
 import com.farmsbook.farmsbook.seller.SellerMainActivity
-import com.farmsbook.farmsbook.seller.ui.profile.SellerAddCropsActivity
-import com.farmsbook.farmsbook.seller.ui.profile.SellerEditPicturesActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
 import org.json.JSONObject
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileFragment : Fragment() {
@@ -47,6 +43,10 @@ class ProfileFragment : Fragment() {
     private lateinit var logoutDialog: AlertDialog
     private lateinit var shareDialog: AlertDialog
     private lateinit var langDialog: AlertDialog
+    private lateinit var appLink: String
+    private lateinit var template: String
+
+
 
     private var _binding: FragmentProfileBinding? = null
 
@@ -64,6 +64,10 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        appLink = "https://play.google.com/store/apps/details?id="+ requireContext().packageName
+        template = "Download and install this amazing application from Google Play and share with your friends!!\n\n";
+
         val notificationsViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -99,12 +103,35 @@ class ProfileFragment : Fragment() {
         val facebook = view2.findViewById<ImageView>(R.id.facebookBtn)
         val twitter = view2.findViewById<ImageView>(R.id.twitterBtn)
         whatsapp.setOnClickListener {
+
+            val packageName ="com.whatsapp"
+            if (checkInstallation(requireContext(), packageName)) {
+                sendIntent(packageName);
+            }else{
+                Toast.makeText(requireContext(), "App not installed", Toast.LENGTH_SHORT).show();
+            }
+
             shareDialog.dismiss()
         }
         twitter.setOnClickListener {
             shareDialog.dismiss()
+
+            val packageName ="com.twitter.android"
+                if (checkInstallation(requireContext(), packageName)) {
+                    sendIntent(packageName);
+                }else{
+                    Toast.makeText(requireContext(), "App not installed", Toast.LENGTH_SHORT).show();
+                }
         }
         facebook.setOnClickListener {
+
+            val packageName ="com.facebook.katana"
+            if (checkInstallation(requireContext(), packageName)) {
+                sendIntent(packageName);
+            }else{
+                Toast.makeText(requireContext(), "App not installed", Toast.LENGTH_SHORT).show();
+            }
+
             shareDialog.dismiss()
         }
 
@@ -185,6 +212,29 @@ class ProfileFragment : Fragment() {
 
 
         return root
+    }
+
+    private fun sendIntent(packageName: String) {
+
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.type = "text/plain"
+        intent.setPackage(packageName)
+        intent.putExtra(Intent.EXTRA_TEXT, template + appLink)
+        startActivity(intent)
+    }
+
+    private fun checkInstallation(context: Context, packageName: String): Boolean {
+
+        val packageManager = context.packageManager
+        try {
+            packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            return true
+        }
+        catch (e: PackageManager.NameNotFoundException ) {
+            return false
+        }
+
     }
 
     override fun onDestroyView() {
