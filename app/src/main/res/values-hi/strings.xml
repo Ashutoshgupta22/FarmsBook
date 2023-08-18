@@ -216,6 +216,12 @@
     <string name="choose_your_role">अपनी भूमिका चुनें</string>
     <string name="farmer_group_fpo">किसान समूह / FPO</string>
     <string name="trader_buyer">व्यापारी / खरीददार</string>
+    <string name="added_buyer">खरीदार जोड़ दिया गया</string>
+    <string name="something_went_wrong">कुछ गलत हो गया है!</string>
+    <string name="offer">प्रस्ताव</string>
+    <string name="offer_details">प्रस्ताव विवरण</string>
+    <string name="reject">अस्वीकार करें</string>
+    <string name="per_kg_2">(प्रति किलोग्राम)</string>
 
     <string-array name="States">
         <item>अंडमान और निकोबार द्वीपसमूह</item>

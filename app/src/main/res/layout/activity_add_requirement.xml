@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f7f7f7"
-    tools:context="buyer.ui.requirements
-    .AddRequirementActivity">
+    android:background="#f7f7f7">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -139,6 +137,16 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/price_range"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/oc_rb" />
+
+            <TextView
+                android:id="@+id/text_per_kg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/per_kg_2"
+                app:layout_constraintStart_toEndOf="@id/textView22_3"
                 app:layout_constraintTop_toBottomOf="@+id/oc_rb" />
 
             <EditText

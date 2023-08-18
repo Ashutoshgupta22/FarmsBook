@@ -212,6 +212,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rateEdt" />
 
+            <TextView
+                android:id="@+id/text_per_kg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/per_kg_2"
+                app:layout_constraintStart_toEndOf="@id/textView22_3"
+                app:layout_constraintTop_toBottomOf="@+id/rateEdt" />
+
             <EditText
                 android:id="@+id/minEdt"
                 android:layout_width="0dp"

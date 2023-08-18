@@ -188,6 +188,10 @@
     <string name="trader_buyer">Trader / Buyer</string>
     <string name="added_buyer">Added Buyer</string>
     <string name="something_went_wrong">Something went wrong!</string>
+    <string name="offer">Offer</string>
+    <string name="offer_details">Offer Details</string>
+    <string name="reject">Reject</string>
+    <string name="per_kg_2">(per kg)</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
