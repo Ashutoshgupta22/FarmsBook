@@ -46,8 +46,6 @@ class ProfileFragment : Fragment() {
     private lateinit var appLink: String
     private lateinit var template: String
 
-
-
     private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
@@ -117,7 +115,7 @@ class ProfileFragment : Fragment() {
             shareDialog.dismiss()
 
             val packageName ="com.twitter.android"
-                if (checkInstallation(requireContext(), packageName)) {
+            if (checkInstallation(requireContext(), packageName)) {
                     sendIntent(packageName);
                 }else{
                     Toast.makeText(requireContext(), "App not installed", Toast.LENGTH_SHORT).show();
