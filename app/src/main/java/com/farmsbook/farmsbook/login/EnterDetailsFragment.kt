@@ -93,6 +93,10 @@ phone.setText(value)
 //
 //        }
 
+        location.setOnClickListener {
+            location.error = null
+        }
+
         foundationDate.setOnClickListener {
             val c = Calendar.getInstance(Locale.getDefault())
             val year = c.get(Calendar.YEAR)
@@ -116,7 +120,9 @@ phone.setText(value)
             if (TextUtils.isEmpty(name.text)) {
                 name.error = "Enter a valid Name"
                 name.requestFocus()
-            } else if (TextUtils.isEmpty(location.text)) {
+            } else if (location.text.toString() ==
+                resources.getString(R.string.select_your_state)) {
+
                 location.error = "Select a valid State"
                 location.requestFocus()
             } else if (TextUtils.isEmpty(phone.text)) {
