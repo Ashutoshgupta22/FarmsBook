@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 
-class ProfileCropAdapter (private val plantList : ArrayList<ProfileCropData>, val context: Context):RecyclerView.Adapter<ProfileCropAdapter.Myviewholder> () {
+class ProfileCropAdapter (private val plantList : ArrayList<ProfileCropData>,
+                          val context: Context):
+    RecyclerView.Adapter<ProfileCropAdapter.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 
@@ -27,7 +29,8 @@ class ProfileCropAdapter (private val plantList : ArrayList<ProfileCropData>, va
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Myviewholder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.supplier_crop_item,parent,false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.supplier_crop_item,parent,false)
 
         return Myviewholder(itemView,mListener)//,mListener
     }
@@ -36,11 +39,19 @@ class ProfileCropAdapter (private val plantList : ArrayList<ProfileCropData>, va
 
 
         val currentItem =plantList[position]
-        Glide.with(context).load(plantList[position].Image).into(holder.cropImage)
+        val imageBuyer = plantList[position].imageBuyer
+        val imageSeller = plantList[position].imageSeller
+
+        if (imageSeller != null)
+            Glide.with(context).load(plantList[position].imageSeller).into(holder.cropImage)
+        else if (imageBuyer != 0)
+            Glide.with(context).load(plantList[position].imageBuyer).into(holder.cropImage)
+
+
         //holder.plantImage.setImageResource(currentItem.Image)
 
-        holder.cropName.text = currentItem.Name
-        holder.cropPrice.text= currentItem.PricePerKg
+        holder.cropName.text = currentItem.name
+        holder.cropPrice.text= currentItem.pricePerKg
 
 
 //        holder.itemView.setOnClickListener {

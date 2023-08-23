@@ -1,14 +1,11 @@
 package com.farmsbook.farmsbook.buyer.ui.profile
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
@@ -16,22 +13,14 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.buyer.ui.home.ViewHomeCropActivity
-import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropAdapter
-import com.farmsbook.farmsbook.buyer.ui.home.adapters.CropData
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ProfileCropAdapter
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ProfileCropData
 import com.farmsbook.farmsbook.databinding.ActivityViewProfileBinding
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersCropAdapter
-import com.farmsbook.farmsbook.buyer.ui.suppliers.adapters.SuppliersCropData
-import com.farmsbook.farmsbook.databinding.SellerProfileViewActivityBinding
 import com.farmsbook.farmsbook.seller.ui.profile.adapters.ManageCropAdapter
 import com.farmsbook.farmsbook.seller.ui.profile.adapters.ManageCropData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
 import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class ViewProfileActivity : AppCompatActivity() {
@@ -116,9 +105,10 @@ class ViewProfileActivity : AppCompatActivity() {
                 try {
                     var cropObject = response.getJSONObject(i)
                     var crop = ProfileCropData()
-                    crop.Name = cropObject.getString("crop_name")
-                    crop.Image = null
-                    crop.PricePerKg = "₹ "+cropObject.getString("min_range")+"-"+cropObject.getString("max_range")+"/ kg"
+                    crop.name = cropObject.getString("crop_name")
+                    crop.imageBuyer = cropImages[cropObject.getInt("manageCropId") - 1]
+                    crop.pricePerKg = "₹ "+cropObject.getString("min_range")+"-" +
+                            cropObject.getString("max_range")+"/ kg"
 
                     plantList.add(crop)
                 } catch (e: Exception) {

@@ -171,10 +171,11 @@ class SellerViewProfileActivity : AppCompatActivity() {
 
                     var cropObject = response.getJSONObject(i)
                     var crop = ProfileCropData()
-                    crop.Name = cropObject.getString("crop_name")
-                    crop.Image = cropObject.getString("imageUrl0")
-                    crop.PricePerKg =
-                         cropObject.getString("min_price") + "-" + cropObject.getString("max_price") + "/ kg"
+                    crop.name = cropObject.getString("crop_name")
+                    crop.imageSeller = cropObject.getString("imageUrl0")
+                    crop.pricePerKg =
+                         cropObject.getString("min_price") + "-" +
+                                 cropObject.getString("max_price") + "/ kg"
 
                     plantList.add(crop)
                 } catch (e: Exception) {
