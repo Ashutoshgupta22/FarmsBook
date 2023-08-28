@@ -39,7 +39,8 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             finish()
         }
         binding.viewBtn.setOnClickListener {
-            startActivity(Intent(this,ViewBuyerActivity::class.java).putExtra("ID",buyerId))
+            startActivity(Intent(this,
+                ViewBuyerActivity::class.java).putExtra("ID",buyerId))
         }
         binding.acceptBtn.setOnClickListener {
             acceptOffer()
@@ -49,7 +50,10 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             rejectOffer()
         }
         binding.counterBtn.setOnClickListener {
-         startActivity(Intent(this,PostCounterOfferActivity::class.java).putExtra("Offer_ID", listedOfferId).putExtra("LIST_ID",list_id))
+         startActivity(Intent(this,
+             PostCounterOfferActivity::class.java)
+             .putExtra("Offer_ID", listedOfferId)
+             .putExtra("LIST_ID",list_id))
         }
 
     }
@@ -74,11 +78,15 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
         // on below line we are calling a string
         // request method to post the data to our API
         // in this we are calling a post method.
-        val request = JsonObjectRequest(Request.Method.GET, url, null, { response: JSONObject ->
+        val request = JsonObjectRequest(Request.Method.GET, url, null, {
+                response: JSONObject ->
 
             if(response.getString("buyerImage") != "null")
             {
-                Glide.with(this).load(response.getString("buyerImage")).into( binding.profileImage)
+                Glide
+                    .with(this)
+                    .load(response.getString("buyerImage"))
+                    .into( binding.profileImage)
             }
 
             if (!response.getBoolean("purchased_on"))
@@ -96,7 +104,8 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
             binding.dateTV.text = response.getString("timestamp")
             binding.priceTV.text = response.getString("listed_offering_price")+"/kg"
             binding.rateTV.text = response.getString("rate_of_commission")
-            binding.quantityTV.text = response.getString("listed_offering_quantity")+" "+response.getString("listed_offering_quantity_unit")
+            binding.quantityTV.text = response.getString("listed_offering_quantity")+" "+
+                    response.getString("listed_offering_quantity_unit")
             binding.locationTV.text = response.getString("delivery_place")
             val reply = response.getBoolean("reply")
 
@@ -115,6 +124,7 @@ class ViewBuyerOfferActivity : AppCompatActivity() {
         if (reply) {
             binding.acceptBtn.visibility = View.INVISIBLE
             binding.rejectBtn.visibility = View.INVISIBLE
+            binding.counterBtn.visibility = View.INVISIBLE
         }
     }
 

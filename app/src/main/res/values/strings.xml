@@ -192,6 +192,8 @@
     <string name="offer_details">Offer Details</string>
     <string name="reject">Reject</string>
     <string name="per_kg_2">(per kg)</string>
+    <string name="posted_counter_offer">Posted Counter Offer</string>
+    <string name="user_management">User Management</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
@@ -236,7 +238,7 @@
 
     <string-array name="Metrics">
         <item>ton</item>
-        <item >kg</item>
+        <item>kg</item>
         <item>quintal</item>
 
 

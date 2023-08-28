@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
 
     <queries>
         <package android:name="com.whatsapp" />
@@ -24,10 +24,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".admin.AdminMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.AdminMainActivity"/>
+        <activity
             android:name=".buyer.ui.profile.BuyerEditPicturesActivity"
-           android:theme="@style/Theme.Farmsbook.MainActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false" />
+            android:theme="@style/Theme.Farmsbook.MainActivity" />
         <activity
             android:name=".seller.ui.profile.SellerEditPicturesActivity"
             android:exported="false"
@@ -235,14 +239,13 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
             android:enabled="false"
             android:exported="false">
-
             <meta-data
                 android:name="autoStoreLocales"
-                android:value="true"/>
-
+                android:value="true" />
         </service>
     </application>
 

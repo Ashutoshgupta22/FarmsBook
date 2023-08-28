@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.RadioButton
@@ -74,7 +75,8 @@ class PostCounterOfferActivity : AppCompatActivity() {
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     // Display Selected date in textbox
-                    binding.deliveryDateEdt.setText("" + dayOfMonth + " / " + (monthOfYear + 1) + " / " + year)
+                    binding.deliveryDateEdt.setText("" + dayOfMonth + " / " +
+                            (monthOfYear + 1) + " / " + year)
                 },
                 year,
                 month,
@@ -162,11 +164,15 @@ class PostCounterOfferActivity : AppCompatActivity() {
         // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
-            //finish()
-//            Toast.makeText(this, "Posted Offer", Toast.LENGTH_SHORT)
-//                .show()
+            Toast.makeText(this, getString(R.string.posted_counter_offer),
+                Toast.LENGTH_SHORT).show()
+            finish()
+
         }, { error -> // method to handle errors.
-            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.something_went_wrong),
+                Toast.LENGTH_LONG).show()
+
+            Log.e("PostCounterOfferActivity", "postDataUsingVolley: ", error)
         })
         queue.add(request)
     }

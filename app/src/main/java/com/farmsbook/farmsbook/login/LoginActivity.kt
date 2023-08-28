@@ -1,5 +1,6 @@
 package com.farmsbook.farmsbook.login
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View.GONE
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.admin.AdminMainActivity
 import com.farmsbook.farmsbook.databinding.ActivityLoginBinding
 import java.util.*
 
@@ -26,6 +28,12 @@ class LoginActivity : AppCompatActivity() {
 
         binding.changeLangBtn.setOnClickListener {
             showLanguageChangeDialog()
+        }
+
+        binding.btnAdminLogin.setOnClickListener {
+            val intent = Intent(this, AdminMainActivity::class.java)
+            startActivity(intent)
+
         }
 
         binding.signinBtn.setOnClickListener {

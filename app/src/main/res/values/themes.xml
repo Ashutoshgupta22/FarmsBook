@@ -48,6 +48,22 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
+    <style name="Theme.Farmsbook.AdminMainActivity" parent="Theme.Material3.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="colorPrimaryVariant">@color/green</item>
+        <item name="colorOnPrimary">@color/green</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green</item>
+        <item name="colorSecondaryVariant">@color/green</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+<!--        <item name="android:statusBarColor">@color/white</item>-->
+        <!-- Customize your theme here. -->
+<!--        <item name="android:windowLightStatusBar">false</item>-->
+    </style>
+
 
     <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
         <item name="cornerSize">10%</item>

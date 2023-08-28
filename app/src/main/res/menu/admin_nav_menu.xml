@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group>
+        <item android:id="@+id/adminHomeFragment"
+            android:title="@string/title_home"
+            app:showAsAction="never"/>
+
+        <item android:id="@+id/admin_user_management"
+            android:title="@string/user_management"
+            app:showAsAction="never"/>
+
+        <item android:id="@+id/admin_crop_listings"
+            android:title="@string/crop_listings"
+            app:showAsAction="never"/>
+
+        <item android:id="@+id/admin_requirements"
+            android:title="@string/requirements"
+            app:showAsAction="never"/>
+
+        <item android:id="@+id/admin_offers"
+            android:title="@string/offers"
+            app:showAsAction="never"/>
+
+    </group>
+
+    <group >
+        <item android:id="@+id/admin_logout"
+            android:title="@string/logout"
+            app:showAsAction="never"/>
+    </group>
+
+
+</menu>

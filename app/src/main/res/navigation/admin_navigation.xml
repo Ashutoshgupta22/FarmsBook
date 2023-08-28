@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/admin_navigation"
+    app:startDestination="@id/adminHomeFragment">
+
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.home.AdminHomeFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/adminCropListingsFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.listings.AdminCropListingsFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/adminOffersFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.offers.AdminOffersFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/adminRequirementsFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.requirements.AdminRequirementsFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/adminUserManagementFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.management.AdminUserManagementFragment"
+        android:label="" />
+</navigation>
