@@ -194,6 +194,15 @@
     <string name="per_kg_2">(per kg)</string>
     <string name="posted_counter_offer">Posted Counter Offer</string>
     <string name="user_management">User Management</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="user_registered">User Registered</string>
+    <string name="today">Today</string>
+    <string name="sellers">Sellers</string>
+    <string name="total">Total</string>
+    <string name="crops_listed">Crops Listed</string>
+    <string name="offers_posted">Offers Posted</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>

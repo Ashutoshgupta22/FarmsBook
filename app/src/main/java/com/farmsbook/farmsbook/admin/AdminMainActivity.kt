@@ -2,6 +2,9 @@ package com.farmsbook.farmsbook.admin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
@@ -29,9 +32,15 @@ class AdminMainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(navController.graph,
             binding.adminDrawerLayout)
-        setupActionBarWithNavController(navController,appBarConfiguration)
-        //setupActionBarWithNavController(navController, binding.adminDrawerLayout)
+        binding.adminToolbar.setupWithNavController(navController, appBarConfiguration)
 
 
+    }
+
+    override fun onBackPressed() {
+
+        if (binding.adminDrawerLayout.isDrawerOpen(GravityCompat.START))
+            binding.adminDrawerLayout.closeDrawer(GravityCompat.START)
+        else super.onBackPressed()
     }
 }

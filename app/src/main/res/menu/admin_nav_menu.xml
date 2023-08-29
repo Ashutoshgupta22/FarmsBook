@@ -7,19 +7,19 @@
             android:title="@string/title_home"
             app:showAsAction="never"/>
 
-        <item android:id="@+id/admin_user_management"
+        <item android:id="@+id/adminUserManagementFragment"
             android:title="@string/user_management"
             app:showAsAction="never"/>
 
-        <item android:id="@+id/admin_crop_listings"
+        <item android:id="@+id/adminCropListingsFragment"
             android:title="@string/crop_listings"
             app:showAsAction="never"/>
 
-        <item android:id="@+id/admin_requirements"
+        <item android:id="@+id/adminRequirementsFragment"
             android:title="@string/requirements"
             app:showAsAction="never"/>
 
-        <item android:id="@+id/admin_offers"
+        <item android:id="@+id/adminOffersFragment"
             android:title="@string/offers"
             app:showAsAction="never"/>
 

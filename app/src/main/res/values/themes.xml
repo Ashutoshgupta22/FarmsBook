@@ -48,7 +48,7 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="Theme.Farmsbook.AdminMainActivity" parent="Theme.Material3.DayNight">
+    <style name="Theme.Farmsbook.AdminMainActivity" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
@@ -59,7 +59,7 @@
         <item name="colorSecondaryVariant">@color/green</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-<!--        <item name="android:statusBarColor">@color/white</item>-->
+<!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
         <!-- Customize your theme here. -->
 <!--        <item name="android:windowLightStatusBar">false</item>-->
     </style>
