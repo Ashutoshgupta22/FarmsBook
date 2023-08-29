@@ -222,6 +222,18 @@
     <string name="offer_details">प्रस्ताव विवरण</string>
     <string name="reject">अस्वीकार करें</string>
     <string name="per_kg_2">(प्रति किलोग्राम)</string>
+    <string name="posted_counter_offer">काउंटर ऑफर पोस्ट किया गया</string>
+    <string name="user_management">उपयोगकर्ता प्रबंधन</string>
+    <string name="navigation_drawer_open">खोलें</string>
+    <string name="navigation_drawer_close">बंद करें</string>
+    <string name="good_morning">सुप्रभात</string>
+    <string name="user_registered">उपयोगकर्ता पंजीकृत</string>
+    <string name="today">आज</string>
+    <string name="sellers">विक्रेताओं</string>
+    <string name="total">कुल</string>
+    <string name="crops_listed">फसलें सूचीबद्ध</string>
+    <string name="offers_posted">प्रस्ताव पोस्ट किए गए</string>
+    <string name="admin">एडमिन</string>
 
     <string-array name="States">
         <item>अंडमान और निकोबार द्वीपसमूह</item>

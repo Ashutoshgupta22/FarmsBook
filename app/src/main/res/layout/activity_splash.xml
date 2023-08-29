@@ -8,12 +8,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="130dp"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/farmsbooklogo" />
 
     <LinearLayout
@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Farms"
+            android:visibility="gone"
             android:textColor="@color/green"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -40,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Book"
+            android:visibility="gone"
             android:textColor="@color/yellow"
             android:textSize="40sp"
             android:textStyle="bold" />
