@@ -222,7 +222,7 @@ class EnterOtpFragment : Fragment() {
 
                     val value = requireArguments().getString("PhoneNumber")
 
-                    if (true || value == "9368836747") {
+                    if (valid || value == "9368836747") {
 
                         timer.cancel()
                        // val value = requireArguments().getString("PhoneNumber")
