@@ -30,8 +30,14 @@ class AdminMainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.adminNavView.setupWithNavController(navController)
 
-        val appBarConfiguration = AppBarConfiguration(navController.graph,
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.adminHomeFragment,
+                R.id.adminUserManagementFragment,
+                R.id.adminCropListingsFragment,
+                R.id.adminOffersFragment,
+                R.id.adminRequirementsFragment),
             binding.adminDrawerLayout)
+
         binding.adminToolbar.setupWithNavController(navController, appBarConfiguration)
 
 
