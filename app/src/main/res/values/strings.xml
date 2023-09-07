@@ -204,6 +204,9 @@
     <string name="crops_listed">Crops Listed</string>
     <string name="offers_posted">Offers Posted</string>
     <string name="admin">Admin</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_turnover">Company Turnover</string>
+    <string name="crops_deal_in">Crops Deal in</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
