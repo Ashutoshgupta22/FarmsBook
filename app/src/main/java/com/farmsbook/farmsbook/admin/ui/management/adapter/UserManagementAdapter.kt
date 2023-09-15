@@ -1,4 +1,4 @@
-package com.farmsbook.farmsbook.admin.ui.management
+package com.farmsbook.farmsbook.admin.ui.management.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ItemAdminUserManagementBinding
 
-class UserManagementAdapter():
+class UserManagementAdapter(private val callback: (pos: Int) -> Unit):
     RecyclerView.Adapter<UserManagementAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -16,12 +16,16 @@ class UserManagementAdapter():
     class ViewHolder(binding: ItemAdminUserManagementBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        val ivImage = binding.ivItemManagement
-        val tvName = binding.tvItemNameManagement
-        val tvLocation = binding.tvItemLocationManagement
-        val tvCompanyName = binding.tvItemCompanyNameManagement
-        val tvCompanyTurnover = binding.tvItemCompanyTurnoverManagement
-        val tvCropsDeal = binding.tvItemCropsDealManagement
+        val ivImage = binding.ivUserManagement
+        val tvName = binding.tvNameManagement
+        val tvLocation = binding.tvLocationManagement
+        val textCompanyName = binding.textCompanyName
+        val textCompanyTurnover = binding.textCompanyTurnover
+        val textCropsDeal = binding.textCropsDeal
+        val tvCompanyName = binding.tvCompanyNameManagement
+        val tvCompanyTurnover = binding.tvCompanyTurnoverManagement
+        val tvCropsDeal = binding.tvCropsDealManagement
+        val cvItem = binding.cvItemManagement
 
     }
 
@@ -39,14 +43,18 @@ class UserManagementAdapter():
 
         Glide
             .with(context)
-            .load(R.drawable.bajra)
+            .load(R.drawable.coffee)
             .centerCrop()
             .into(holder.ivImage)
+
+        holder.cvItem.setOnClickListener {
+
+            callback(position)
+        }
 
     }
 
     override fun getItemCount(): Int {
-
         return 4
     }
 }

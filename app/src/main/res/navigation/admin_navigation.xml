@@ -23,5 +23,15 @@
     <fragment
         android:id="@+id/adminUserManagementFragment"
         android:name="com.farmsbook.farmsbook.admin.ui.management.AdminUserManagementFragment"
+        android:label="" >
+        <action
+            android:id="@+id/action_adminUserManagementFragment_to_userManagementDetailFragment"
+            app:destination="@id/userManagementDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/userManagementDetailFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.management.UserManagementDetailFragment"
         android:label="" />
 </navigation>

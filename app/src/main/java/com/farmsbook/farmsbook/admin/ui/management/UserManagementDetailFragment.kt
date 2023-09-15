@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.admin.ui.management.adapter.UserManagementAdapter
-import com.farmsbook.farmsbook.databinding.FragmentBuyersManagementBinding
+import com.farmsbook.farmsbook.admin.ui.management.adapter.UserDetailAdapter
+import com.farmsbook.farmsbook.databinding.FragmentUserManagementDetailBinding
 
-class BuyersManagementFragment: Fragment() {
+class UserManagementDetailFragment: Fragment() {
 
-    private lateinit var binding: FragmentBuyersManagementBinding
+    private lateinit var binding: FragmentUserManagementDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +22,7 @@ class BuyersManagementFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentBuyersManagementBinding.inflate(layoutInflater,
+        binding = FragmentUserManagementDetailBinding.inflate(layoutInflater,
             container, false)
 
         return binding.root
@@ -31,19 +31,25 @@ class BuyersManagementFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navController = findNavController()
+        Glide
+            .with(requireContext())
+            .load(R.drawable.jowar)
+            .into(binding.ivUserManagement)
 
-        binding.rvBuyersManagement.apply {
-
+        binding.rvFirst.apply {
             layoutManager = LinearLayoutManager(requireContext(),
                 RecyclerView.VERTICAL, false)
 
-            adapter = UserManagementAdapter{
-
-                navController.navigate(R.id.userManagementDetailFragment)
-
-            }
+            adapter = UserDetailAdapter()
         }
+
+        binding.rvSecond.apply {
+            layoutManager = LinearLayoutManager(requireContext(),
+                RecyclerView.VERTICAL, false)
+
+            adapter = UserDetailAdapter()
+        }
+
 
     }
 }

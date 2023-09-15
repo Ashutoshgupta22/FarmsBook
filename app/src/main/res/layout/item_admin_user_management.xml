@@ -25,7 +25,7 @@
             android:padding="16dp">
 
             <ImageView
-                android:id="@+id/iv_item_management"
+                android:id="@+id/iv_user_management"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_alignParentTop="true"
@@ -33,28 +33,28 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/tv_item_name_management"
+                android:id="@+id/tv_name_management"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="John Doe"
                 android:textColor="@color/black"
                 android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/iv_item_management"/>
+                android:layout_toEndOf="@id/iv_user_management"/>
 
             <TextView
-                android:id="@+id/tv_item_location_management"
+                android:id="@+id/tv_location_management"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="Delhi"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/tv_item_name_management"
-                android:layout_toEndOf="@id/iv_item_management"/>
+                android:layout_below="@id/tv_name_management"
+                android:layout_toEndOf="@id/iv_user_management"/>
 
             <Button
-                android:id="@+id/btn_item_call_management"
+                android:id="@+id/btn_call_management"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Button.ElevatedButton.Icon"
@@ -63,11 +63,11 @@
                 app:iconGravity="end"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_below="@id/tv_item_location_management"
-                android:layout_toEndOf="@id/iv_item_management"/>
+                android:layout_below="@id/tv_location_management"
+                android:layout_toEndOf="@id/iv_user_management"/>
 
             <TextView
-                android:id="@+id/tv_item_company_name_management"
+                android:id="@+id/tv_company_name_management"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Agrigo Private Limited inksk i dfub idfb id "
@@ -77,23 +77,23 @@
                 android:layout_marginStart="64dp"
                 android:textAlignment="textEnd"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/text_item_company_name"
-                android:layout_below="@id/btn_item_call_management"
+                android:layout_toEndOf="@id/text_company_name"
+                android:layout_below="@id/btn_call_management"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/text_item_company_name"
+                android:id="@+id/text_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/tv_item_company_name_management"
+                android:layout_alignTop="@+id/tv_company_name_management"
                 android:text="@string/company_name" />
 
             <TextView
-                android:id="@+id/tv_item_company_turnover_management"
+                android:id="@+id/tv_company_turnover_management"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="56 lakh annually"
@@ -103,23 +103,23 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="64dp"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/text_item_company_turnover"
-                android:layout_below="@id/tv_item_company_name_management"
+                android:layout_toEndOf="@id/text_company_turnover"
+                android:layout_below="@id/tv_company_name_management"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/text_item_company_turnover"
+                android:id="@+id/text_company_turnover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/tv_item_company_turnover_management"
+                android:layout_alignTop="@+id/tv_company_turnover_management"
                 android:text="@string/company_turnover" />
 
             <TextView
-                android:id="@+id/tv_item_crops_deal_management"
+                android:id="@+id/tv_crops_deal_management"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rice, wheat, potatoes, more"
@@ -129,19 +129,19 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="64dp"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/text_item_crops_deal"
-                android:layout_below="@id/tv_item_company_turnover_management"
+                android:layout_toEndOf="@id/text_crops_deal"
+                android:layout_below="@id/tv_company_turnover_management"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/text_item_crops_deal"
+                android:id="@+id/text_crops_deal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/tv_item_crops_deal_management"
+                android:layout_alignTop="@+id/tv_crops_deal_management"
                 android:text="@string/crops_deal_in" />
 
 

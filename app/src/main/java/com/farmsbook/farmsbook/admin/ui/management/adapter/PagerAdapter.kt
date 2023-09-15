@@ -1,9 +1,11 @@
-package com.farmsbook.farmsbook.admin.ui.management
+package com.farmsbook.farmsbook.admin.ui.management.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.farmsbook.farmsbook.admin.ui.management.BuyersManagementFragment
+import com.farmsbook.farmsbook.admin.ui.management.SellersManagementFragment
 
 private const val FRAGMENT_NUM = 2
 
