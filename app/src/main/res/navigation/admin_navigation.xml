@@ -11,7 +11,11 @@
     <fragment
         android:id="@+id/adminCropListingsFragment"
         android:name="com.farmsbook.farmsbook.admin.ui.cropslistings.AdminCropListingsFragment"
-        android:label="" />
+        android:label="" >
+        <action
+            android:id="@+id/action_adminCropListingsFragment_to_cropListingDetail"
+            app:destination="@id/cropListingDetail" />
+    </fragment>
     <fragment
         android:id="@+id/adminOffersFragment"
         android:name="com.farmsbook.farmsbook.admin.ui.offers.AdminOffersFragment"
@@ -33,5 +37,9 @@
     <fragment
         android:id="@+id/userManagementDetailFragment"
         android:name="com.farmsbook.farmsbook.admin.ui.management.UserManagementDetailFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/cropListingDetail"
+        android:name="com.farmsbook.farmsbook.admin.ui.cropslistings.CropListingDetail"
         android:label="" />
 </navigation>

@@ -214,6 +214,12 @@
     <string name="fruits">Fruits</string>
     <string name="add_crop">Add Crop</string>
     <string name="listed_by">Listed by</string>
+    <string name="crop_posted_by">Crop posted by</string>
+    <string name="details">Details</string>
+    <string name="commission">Commission</string>
+    <string name="type_of_sale">Type of Sale</string>
+    <string name="farming_type">Farming Type</string>
+    <string name="sowing_month">Sowing Month</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
