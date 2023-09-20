@@ -10,7 +10,7 @@
         android:label="" />
     <fragment
         android:id="@+id/adminCropListingsFragment"
-        android:name="com.farmsbook.farmsbook.admin.ui.listings.AdminCropListingsFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.cropslistings.AdminCropListingsFragment"
         android:label="" />
     <fragment
         android:id="@+id/adminOffersFragment"

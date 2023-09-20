@@ -208,6 +208,12 @@
     <string name="company_turnover">Company Turnover</string>
     <string name="crops_deal_in">Crops Deal in</string>
     <string name="registered">Registered</string>
+    <string name="crop_listing">Crop Listing</string>
+    <string name="listed_crops">Listed Crops</string>
+    <string name="grains">Grains</string>
+    <string name="fruits">Fruits</string>
+    <string name="add_crop">Add Crop</string>
+    <string name="listed_by">Listed by</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>

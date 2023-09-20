@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_item_listed_crops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/white"
+        style="@style/Widget.Material3.CardView.Outlined"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iv_crop"
+                android:layout_width="90dp"
+                android:layout_height="75dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tv_crop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Wheat"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/iv_crop"
+                android:layout_toStartOf="@id/tv_date"/>
+
+            <TextView
+                android:id="@+id/tv_crop_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="40-60/kg"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_crop_name"
+                android:layout_toEndOf="@id/iv_crop"/>
+
+            <TextView
+                android:id="@+id/tv_crop_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="80 Ton"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_crop_rate"
+                android:layout_toEndOf="@id/iv_crop"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="15 May 2023"
+                android:layout_marginStart="16dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/green"
+                android:layout_below="@id/tv_date"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:id="@+id/text_listed_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/listed_by"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_below="@id/iv_crop"
+                android:layout_marginTop="16dp"/>
+
+            <ImageView
+                android:id="@+id/iv_seller"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/text_listed_by"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:clipToOutline="true"
+                android:background="@drawable/button_background_rounded" />
+
+            <TextView
+                android:id="@+id/tv_seller_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Akash Sharma"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_alignTop="@id/iv_seller"
+                android:layout_toEndOf="@id/iv_seller"/>
+
+            <TextView
+                android:id="@+id/tv_group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Group name"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_seller_name"
+                android:layout_toEndOf="@id/iv_seller"/>
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

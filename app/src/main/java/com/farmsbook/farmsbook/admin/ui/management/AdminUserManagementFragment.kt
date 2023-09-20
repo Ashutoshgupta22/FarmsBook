@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.admin.ui.management.adapter.PagerAdapter
+import com.farmsbook.farmsbook.admin.ui.management.adapter.ManagementPagerAdapter
 import com.farmsbook.farmsbook.databinding.FragmentAdminUserManagementBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -29,7 +29,7 @@ class AdminUserManagementFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.vpUserManagement.adapter = PagerAdapter(childFragmentManager, lifecycle)
+        binding.vpUserManagement.adapter = ManagementPagerAdapter(childFragmentManager, lifecycle)
 
         val tabNames = arrayListOf( getString(R.string.buyers), getString(R.string.sellers))
 
