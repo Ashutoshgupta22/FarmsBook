@@ -23,7 +23,6 @@ class CropListingDetail: Fragment() {
             container, false)
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,8 +34,8 @@ class CropListingDetail: Fragment() {
             .centerCrop()
             .into(binding.ivCrop)
 
+        binding.btnCall.setOnClickListener {
 
-
-
+        }
     }
 }

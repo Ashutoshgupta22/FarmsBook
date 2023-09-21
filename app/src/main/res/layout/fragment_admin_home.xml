@@ -246,6 +246,11 @@
         android:layout_height="match_parent"
         android:padding="24dp">
 
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="ic_crops_listed"/>-->
+
         <TextView
             android:id="@+id/text_crops_listed"
             android:layout_width="wrap_content"
