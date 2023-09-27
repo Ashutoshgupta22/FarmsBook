@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.farmsbook.farmsbook.admin.ui.management.BuyersManagementFragment
-import com.farmsbook.farmsbook.admin.ui.management.SellersManagementFragment
+import com.farmsbook.farmsbook.admin.ui.management.buyer.BuyersManagementFragment
+import com.farmsbook.farmsbook.admin.ui.management.seller.SellersManagementFragment
 
 private const val FRAGMENT_NUM = 2
 

@@ -1,20 +1,24 @@
-package com.farmsbook.farmsbook.admin.ui.management
+package com.farmsbook.farmsbook.admin.ui.management.buyer
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.admin.ui.management.adapter.UserManagementAdapter
 import com.farmsbook.farmsbook.databinding.FragmentBuyersManagementBinding
 
 class BuyersManagementFragment: Fragment() {
 
     private lateinit var binding: FragmentBuyersManagementBinding
+    private val viewModel: BuyerManagementViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,17 +37,29 @@ class BuyersManagementFragment: Fragment() {
 
         val navController = findNavController()
 
-        binding.rvBuyersManagement.apply {
+        viewModel.getAllBuyer(requireContext())
 
-            layoutManager = LinearLayoutManager(requireContext(),
-                RecyclerView.VERTICAL, false)
+        viewModel.allBuyers.observe(viewLifecycleOwner) {
+            it?.let {
 
-            adapter = UserManagementAdapter{
+                binding.rvBuyersManagement.apply {
 
-                navController.navigate(R.id.userManagementDetailFragment)
+                    layoutManager = LinearLayoutManager(requireContext(),
+                        RecyclerView.VERTICAL, false)
 
+                    adapter = BuyerManagementAdapter(it, {
+                        phone ->
+
+                        val intent = Intent(Intent.ACTION_DIAL)
+                        intent.data = Uri.parse("tel:$phone")
+                        startActivity(intent)
+                    }){
+
+                        navController.navigate(R.id.userManagementDetailFragment)
+
+                    }
+                }
             }
         }
-
     }
 }

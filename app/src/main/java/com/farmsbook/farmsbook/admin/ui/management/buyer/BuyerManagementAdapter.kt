@@ -1,4 +1,4 @@
-package com.farmsbook.farmsbook.admin.ui.management.adapter
+package com.farmsbook.farmsbook.admin.ui.management.buyer
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ItemAdminUserManagementBinding
 
-class UserManagementAdapter(private val callback: (pos: Int) -> Unit):
-    RecyclerView.Adapter<UserManagementAdapter.ViewHolder>() {
+class BuyerManagementAdapter(private val buyers: ArrayList<AdminBuyerData>,
+                                private val onCallClick: (String) -> Unit,
+                             private val callback: (pos: Int) -> Unit):
+    RecyclerView.Adapter<BuyerManagementAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
@@ -19,6 +21,7 @@ class UserManagementAdapter(private val callback: (pos: Int) -> Unit):
         val ivImage = binding.ivUserManagement
         val tvName = binding.tvNameManagement
         val tvLocation = binding.tvLocationManagement
+        val btnCall = binding.btnCallManagement
         val textCompanyName = binding.textCompanyName
         val textCompanyTurnover = binding.textCompanyTurnover
         val textCropsDeal = binding.textCropsDeal
@@ -47,14 +50,21 @@ class UserManagementAdapter(private val callback: (pos: Int) -> Unit):
             .centerCrop()
             .into(holder.ivImage)
 
-        holder.cvItem.setOnClickListener {
+        holder.tvName.text = buyers[position].name
+        holder.tvLocation.text = buyers[position].location
+        holder.tvCompanyName.text = buyers[position].companyName
+        holder.tvCompanyTurnover.text = buyers[position].companyTurnover.toString()
+        holder.tvCropsDeal.text = buyers[position].crops
 
-            callback(position)
+        holder.btnCall.setOnClickListener {
+            buyers[position].phone?.let { phone -> onCallClick(phone) }
         }
+
+        holder.cvItem.setOnClickListener { callback(position) }
 
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return buyers.size
     }
 }

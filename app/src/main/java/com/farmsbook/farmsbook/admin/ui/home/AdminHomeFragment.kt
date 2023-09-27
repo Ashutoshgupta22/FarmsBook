@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.farmsbook.farmsbook.databinding.FragmentAdminHomeBinding
 
 class AdminHomeFragment: Fragment() {
@@ -15,7 +16,7 @@ class AdminHomeFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentAdminHomeBinding.inflate(LayoutInflater.from(requireContext()),
             container, false)
@@ -25,6 +26,7 @@ class AdminHomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
 
     }

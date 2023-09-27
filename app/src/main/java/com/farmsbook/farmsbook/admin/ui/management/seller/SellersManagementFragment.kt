@@ -1,26 +1,30 @@
-package com.farmsbook.farmsbook.admin.ui.management
+package com.farmsbook.farmsbook.admin.ui.management.seller
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.admin.ui.management.adapter.UserManagementAdapter
 import com.farmsbook.farmsbook.databinding.FragmentSellersManagementBinding
 
 class SellersManagementFragment: Fragment() {
 
     private lateinit var binding: FragmentSellersManagementBinding
+    private val viewModel: SellerManagementViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentSellersManagementBinding.inflate(layoutInflater,
             container, false)
@@ -33,13 +37,28 @@ class SellersManagementFragment: Fragment() {
 
         val navController = findNavController()
 
-        binding.rvSellersManagement.apply {
+        viewModel.getAllSellers(requireContext())
 
-            layoutManager = LinearLayoutManager(requireContext(),
-                RecyclerView.VERTICAL, false)
+        viewModel.allSellers.observe(viewLifecycleOwner) {
+            it?.let {
 
-            adapter = UserManagementAdapter{
-                navController.navigate(R.id.userManagementDetailFragment)
+                binding.rvSellersManagement.apply {
+
+                    layoutManager = LinearLayoutManager(requireContext(),
+                        RecyclerView.VERTICAL, false)
+
+                    adapter = SellerManagementAdapter(it, {
+                        phone ->
+
+                        val intent = Intent(Intent.ACTION_DIAL)
+                        intent.data = Uri.parse("tel:$phone")
+                        startActivity(intent)
+                    }){
+
+                        navController.navigate(R.id.userManagementDetailFragment)
+
+                    }
+                }
             }
         }
 

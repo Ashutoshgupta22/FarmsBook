@@ -221,6 +221,8 @@
     <string name="farming_type">Farming Type</string>
     <string name="sowing_month">Sowing Month</string>
     <string name="choose_image">Choose Image</string>
+    <string name="group_name">Group Name</string>
+    <string name="group_turnover">Group Turnover</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>
