@@ -10,6 +10,8 @@ import com.farmsbook.farmsbook.databinding.FragmentAdminHomeBinding
 
 class AdminHomeFragment: Fragment() {
 
+    private val viewModel: AdminHomeViewModel by viewModels()
+
     private lateinit var binding: FragmentAdminHomeBinding
 
     override fun onCreateView(
@@ -27,7 +29,24 @@ class AdminHomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getHomeStats(requireContext())
 
+        viewModel.stats.observe(viewLifecycleOwner) {
 
+            it?.let {
+                binding.tvBuyerRegisteredToday.text = it.todaySizeBuyer.toString()
+                binding.tvBuyerRegisteredTotal.text = it.totalSizeBuyer.toString()
+                binding.tvSellerRegisteredToday.text = it.todaySizeFarmer.toString()
+                binding.tvSellerRegisteredTotal.text = it.totalSizeFarmer.toString()
+                binding.tvOffersPostedToday.text = it.offerToday.toString()
+                binding.tvOffersPostedTotal.text = it.offerTotal.toString()
+                binding.tvCropsListedToday.text = it.cropListedToday.toString()
+                binding.tvCropsListedTotal.text = it.cropListedTotal.toString()
+                binding.tvRequirementsToday.text = it.requirementsToday.toString()
+                binding.tvRequirementsTotal.text = it.requirementsTotal.toString()
+                binding.tvUserRegisteredToday.text = it.todaySize.toString()
+                binding.tvUserRegisteredTotal.text = it.totalSize.toString()
+            }
+        }
     }
 }
