@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.admin.AdminMainActivity
+import com.farmsbook.farmsbook.admin.ui.login.AdminLoginActivity
 import com.farmsbook.farmsbook.databinding.ActivityLoginBinding
 import java.util.*
 
@@ -31,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnAdminLogin.setOnClickListener {
-            val intent = Intent(this, AdminMainActivity::class.java)
+            val intent = Intent(this, AdminLoginActivity::class.java)
             startActivity(intent)
 
         }

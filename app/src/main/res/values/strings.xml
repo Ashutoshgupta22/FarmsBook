@@ -223,6 +223,10 @@
     <string name="choose_image">Choose Image</string>
     <string name="group_name">Group Name</string>
     <string name="group_turnover">Group Turnover</string>
+    <string name="admin_username">Admin Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="otp">OTP</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>

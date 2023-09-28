@@ -24,9 +24,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".admin.AdminMainActivity"
+            android:name=".admin.ui.login.AdminOtpActivity"
             android:exported="false"
             android:theme="@style/Theme.Farmsbook.AdminMainActivity"/>
+        <activity
+            android:name=".admin.ui.login.AdminLoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.AdminMainActivity"/>
+        <activity
+            android:name=".admin.AdminMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Farmsbook.AdminMainActivity" />
         <activity
             android:name=".buyer.ui.profile.BuyerEditPicturesActivity"
             android:exported="false"
