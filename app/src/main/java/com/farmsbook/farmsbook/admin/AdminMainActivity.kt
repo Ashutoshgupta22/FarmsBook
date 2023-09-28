@@ -2,6 +2,8 @@ package com.farmsbook.farmsbook.admin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,7 +14,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.admin.AdminData.Companion.currentAdmin
 import com.farmsbook.farmsbook.databinding.ActivityAdminMainBinding
 
 class AdminMainActivity : AppCompatActivity() {
@@ -49,6 +53,31 @@ class AdminMainActivity : AppCompatActivity() {
 
         binding.adminToolbar.setupWithNavController(navController, appBarConfiguration)
 
+        viewModel.setAdminData.observe(this) {
+            it?.let {
+                if (it) {
+                    val tvName = binding.adminNavView
+                        .getHeaderView(0)
+                        .findViewById<TextView>(R.id.tv_name_nav)
+                    tvName.text = currentAdmin.name
+
+                    val tvEmail = binding.adminNavView
+                        .getHeaderView(0)
+                        .findViewById<TextView>(R.id.tv_email_nav)
+                    tvEmail.text = currentAdmin.email
+
+                    val ivImage = binding.adminNavView
+                        .getHeaderView(0)
+                        .findViewById<ImageView>(R.id.iv_profile_image_nav)
+                    val imagePath = currentAdmin.imagePath
+
+                    Glide.with(this)
+                        .load(imagePath)
+                        .centerCrop()
+                        .into(ivImage)
+                }
+            }
+        }
 
     }
 

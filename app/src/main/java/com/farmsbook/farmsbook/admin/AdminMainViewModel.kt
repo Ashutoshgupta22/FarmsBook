@@ -2,6 +2,8 @@ package com.farmsbook.farmsbook.admin
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.Request
 import com.android.volley.VolleyError
@@ -14,6 +16,8 @@ import org.json.JSONArray
 class AdminMainViewModel: ViewModel() {
 
     private val baseUrl = BaseAddressUrl().baseAddressUrl
+    private var _setAdminData = MutableLiveData<Boolean>()
+    val setAdminData: LiveData<Boolean> = _setAdminData
 
     fun getAdminData(context: Context, phone: String) {
 
@@ -36,7 +40,8 @@ class AdminMainViewModel: ViewModel() {
                         currentAdmin.phone = admin.getString("phone")
                         currentAdmin.location = admin.getString("location")
                         currentAdmin.imagePath = admin.getString("imagePath")
-                        // currentAdmin.crops = admin.get("crops")
+
+                        _setAdminData.postValue(true)
                         break
 
                     }
