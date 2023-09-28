@@ -11,7 +11,7 @@ import com.farmsbook.farmsbook.databinding.ActivityAdminLoginBinding
 class AdminLoginActivity : AppCompatActivity() {
 
     private val adminPhone = hashMapOf(
-        "ashutoshgupta1422@gmail.com" to "9369771101",
+        "ashutoshgupta1422@gmail.com" to "7800303348",
         "ankitsharma97194@gmail.com" to "7740869648"
     )
 
@@ -61,11 +61,11 @@ class AdminLoginActivity : AppCompatActivity() {
 
         if (username.isBlank()) {
             check = false
-            binding.etLoginUsername.error = "Enter valid username"
+            binding.etLoginUsername.error = "Username can not be empty"
         }
         if (password.isBlank()){
             check = false
-            binding.etLoginUsername.error = "Password can not be empty"
+            binding.etPassword.error = "Password can not be empty"
         }
         return check
     }

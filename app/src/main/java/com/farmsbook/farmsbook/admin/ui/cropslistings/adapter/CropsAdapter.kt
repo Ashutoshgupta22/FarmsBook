@@ -2,16 +2,17 @@ package com.farmsbook.farmsbook.admin.ui.cropslistings.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.databinding.FragmentListedCropsBinding
+import com.farmsbook.farmsbook.admin.ui.cropslistings.CropData
 import com.farmsbook.farmsbook.databinding.ItemCropsBinding
 
-class CropsAdapter(val onEditClick: (Int)-> Unit,
-                   val onDeleteClick: (Int) -> Unit
+class CropsAdapter(
+    val cropList: ArrayList<CropData>,
+    val onEditClick: (Int, String) -> Unit,
+    val onDeleteClick: (Int) -> Unit
 ): RecyclerView.Adapter<CropsAdapter.ViewHolder>() {
 
     lateinit var context: Context
@@ -37,16 +38,19 @@ class CropsAdapter(val onEditClick: (Int)-> Unit,
 
         Glide
             .with(context)
-            .load(R.drawable.coffee)
+            .load(cropList[position].imagePath)
             .centerCrop()
             .into(holder.ivCrop)
 
-        holder.btnEdit.setOnClickListener { onEditClick(position) }
+        holder.tvCropName.text = cropList[position].cropName
+
+        holder.btnEdit.setOnClickListener { onEditClick(position,
+            cropList[position].cropName!!) }
         holder.btnDelete.setOnClickListener { onDeleteClick(position) }
 
     }
 
     override fun getItemCount(): Int {
-        return 13
+        return cropList.size
     }
 }

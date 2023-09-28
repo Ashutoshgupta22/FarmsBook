@@ -36,6 +36,11 @@ class AdminOtpActivity : AppCompatActivity() {
         }
 
         viewModel.valid.observe(this) {
+
+            val edit = getSharedPreferences(packageName, MODE_PRIVATE).edit()
+            edit.putString("adminPhone", phone)
+            edit.apply()
+
             val intent = Intent(this, AdminMainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

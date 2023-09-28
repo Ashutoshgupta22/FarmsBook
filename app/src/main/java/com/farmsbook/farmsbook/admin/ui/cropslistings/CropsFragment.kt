@@ -1,13 +1,17 @@
 package com.farmsbook.farmsbook.admin.ui.cropslistings
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.admin.AdminData.Companion.currentAdmin
 import com.farmsbook.farmsbook.admin.ui.cropslistings.adapter.CropsAdapter
 import com.farmsbook.farmsbook.databinding.FragmentCropsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,6 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class CropsFragment: Fragment() {
 
     private lateinit var binding: FragmentCropsBinding
+    private val viewModel: CropsFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,34 +37,64 @@ class CropsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvGrains.apply {
-            layoutManager = LinearLayoutManager(requireContext(),
-                RecyclerView.VERTICAL, false)
+        viewModel.getMyCrops(requireContext(), currentAdmin.id!!)
+        viewModel.getAllCrops(requireContext())
 
-            isNestedScrollingEnabled = false
-            adapter = CropsAdapter({ editPos -> editCropDialog(this.adapter, editPos)
+        viewModel.myCrops.observe(viewLifecycleOwner) {
+            binding.rvMyCrops.apply {
+                layoutManager = LinearLayoutManager(requireContext(),
+                    RecyclerView.VERTICAL, false)
 
-            }) { deletePos -> deleteCropDialog(this.adapter, deletePos) }
+                isNestedScrollingEnabled = false
+                adapter = CropsAdapter(it!!, { editPos, cropName ->
+                    editCropDialog(this.adapter, editPos, cropName)
+
+                }) { deletePos -> deleteCropDialog(this.adapter, deletePos) }
+            }
         }
 
-        binding.rvFruits.apply {
-            layoutManager = LinearLayoutManager(requireContext(),
-                RecyclerView.VERTICAL, false)
+        viewModel.allCrops.observe(viewLifecycleOwner) {
 
-            isNestedScrollingEnabled = false
-            adapter = CropsAdapter({ editPos -> editCropDialog(this.adapter, editPos)
+            binding.rvAllCrops.apply {
+                layoutManager = LinearLayoutManager(requireContext(),
+                    RecyclerView.VERTICAL, false)
 
-            }) { deletePos -> deleteCropDialog(this.adapter, deletePos) }
+                isNestedScrollingEnabled = false
+                adapter = CropsAdapter(it!!, { editPos, cropName ->
+                    editCropDialog(this.adapter, editPos, cropName)
+
+                }) { deletePos -> deleteCropDialog(this.adapter, deletePos) }
+            }
+
+        }
+
+        viewModel.cropAdded.observe(viewLifecycleOwner) {
+            it?.let { if (it) {
+                viewModel.getMyCrops(requireContext(), currentAdmin.id!!)
+                viewModel.getAllCrops(requireContext())
+            } }
         }
 
         binding.fabAddCrop.setOnClickListener{
 
+            val dialogView = LayoutInflater.from(requireContext()).inflate(
+                R.layout.dialog_add_edit_crop_listing, null )
+
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Add Crop")
-                .setView(R.layout.edit_crop_listing)
+                .setView(dialogView)
 
                 .setPositiveButton("Add") {
                         _,_ ->
+
+                    val etCropName = dialogView.findViewById<EditText>(R.id.et_crop_name)
+                    val name = etCropName.text.toString()
+
+                    if (name.isBlank()) etCropName.error = "Name can not be empty"
+                    else {
+                        viewModel.addCrop(requireContext(), name, currentAdmin.id!!)
+                    }
+
                 }
                 .setNegativeButton("Cancel") { _,_ ->
                 }.show()
@@ -68,15 +103,24 @@ class CropsFragment: Fragment() {
     }
 
     private fun editCropDialog(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?,
-                               editPos: Int) {
+                               editPos: Int, cropName: String) {
+
+        val dialogView = LayoutInflater.from(requireContext()).inflate(
+            R.layout.dialog_add_edit_crop_listing, null )
+
+        val etCropName = dialogView.findViewById<EditText>(R.id.et_crop_name)
+        etCropName.text = Editable.Factory.getInstance().newEditable(cropName)
 
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Edit Crop")
             .setIcon(R.drawable.ic_edit_outline)
-            .setView(R.layout.edit_crop_listing)
+            .setView(dialogView)
 
             .setPositiveButton("Save") {
-                    _,_ ->  adapter?.notifyItemChanged(editPos)
+                    _,_ ->
+
+               // val changedName = etCropName.text.toString()
+              //  adapter?.notifyItemChanged(editPos)
             }
             .setNegativeButton("Cancel") { _,_ ->
             }.show()
@@ -92,7 +136,8 @@ class CropsFragment: Fragment() {
             .setMessage("You are going to remove this crop from your record.\n" +
                     "Do you still want to continue?")
             .setPositiveButton("Delete") {
-                    _,_ -> adapter?.notifyItemRemoved(deletePos)
+                    _,_ ->
+                adapter?.notifyItemRemoved(deletePos)
             }
             .setNegativeButton("Cancel") { _,_ ->
             }.show()
