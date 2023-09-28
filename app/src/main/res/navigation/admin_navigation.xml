@@ -42,4 +42,8 @@
         android:id="@+id/cropListingDetail"
         android:name="com.farmsbook.farmsbook.admin.ui.cropslistings.CropListingDetail"
         android:label="" />
+
+    <dialog android:id="@+id/admin_logout"
+        android:name="com.farmsbook.farmsbook.admin.ui.AdminLogoutDialogFragment"
+        android:label=""/>
 </navigation>

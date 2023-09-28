@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import com.farmsbook.farmsbook.admin.AdminMainActivity
 import com.farmsbook.farmsbook.buyer.MainActivity
 import com.farmsbook.farmsbook.databinding.ActivitySplashBinding
 import com.farmsbook.farmsbook.seller.SellerMainActivity
@@ -26,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
         val sharedPreference =  getSharedPreferences("pref", Context.MODE_PRIVATE)
        val userId =  sharedPreference.getInt("USER_ID",0)
         val userROLE = sharedPreference.getBoolean("USER_ROLE",false)
-        //Toast.makeText(this, "USER ID = ${EnterDetailsFragment.USER_ID}", Toast.LENGTH_SHORT).show()
+
         if(userId != 0)
         {
             if(userROLE){
@@ -45,12 +46,19 @@ class SplashActivity : AppCompatActivity() {
         }
         else
         {
-            Handler().postDelayed({
-                startActivity(Intent(this, LoginActivity::class.java))
+            val preferences = getSharedPreferences(packageName, MODE_PRIVATE)
+            val adminPhone = preferences.getString("adminPhone", "")
+
+            if (adminPhone?.isNotBlank() == true) {
+                startActivity( Intent(this, AdminMainActivity::class.java))
                 finish()
-            },2500)
+            }
+            else {
+                Handler().postDelayed({
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }, 2500)
+            }
         }
-
-
     }
 }
