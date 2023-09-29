@@ -3,6 +3,7 @@ package com.farmsbook.farmsbook.admin.ui.cropslistings
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import androidx.core.net.toFile
@@ -140,6 +141,11 @@ class CropsFragmentViewModel: ViewModel() {
         val url = "$baseUrl/admin/$adminId/crop/${lastCrop?.id}/image"
 
         UploadManager(context).uploadFormData(url, tempFile)
+
+        Handler().postDelayed({
+            getAllCrops(context)
+            getMyCrops(context, adminId)
+        }, 1200)
 
 //        val request = JsonObjectRequest(
 //            Request.Method.POST,

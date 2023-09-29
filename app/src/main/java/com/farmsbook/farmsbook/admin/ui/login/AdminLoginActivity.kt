@@ -33,9 +33,16 @@ class AdminLoginActivity : AppCompatActivity() {
 //            val preferences = getSharedPreferences(packageName, MODE_PRIVATE)
 //            val editor = preferences.edit()
 
-            if (validate(username, password))
-                viewModel.authenticate(username, password,
-                    adminPhone[username]!!, this)
+            if (validate(username, password) ) {
+
+                if (adminPhone.containsKey(username))
+                    viewModel.authenticate(username, password,
+                        adminPhone[username]!!, this)
+                else
+                    Toast.makeText(this, "Invalid username",
+                        Toast.LENGTH_SHORT).show()
+            }
+
 
             viewModel.sessionId.observe(this) {
 

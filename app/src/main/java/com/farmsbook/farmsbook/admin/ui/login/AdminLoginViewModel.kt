@@ -51,6 +51,8 @@ class AdminLoginViewModel: ViewModel() {
 
     private fun sendOtp(context: Context, phone: String) {
 
+        Log.i("AdminLoginViewModel", "sendOtp: $phone")
+
         val queue = Volley.newRequestQueue(context)
         val url = "$baseUrl/otp"
 
