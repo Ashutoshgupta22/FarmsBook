@@ -1,7 +1,11 @@
 package com.farmsbook.farmsbook.admin.ui.cropslistings
 
+import android.content.ContentResolver
 import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
+import androidx.core.net.toFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,14 +14,16 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.farmsbook.farmsbook.admin.ui.home.Stat
+import com.farmsbook.farmsbook.login.UploadManager
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
 
 class CropsFragmentViewModel: ViewModel() {
 
-    private var _cropAdded = MutableLiveData<Boolean>()
+     var _cropAdded = MutableLiveData<Boolean>()
     val cropAdded: LiveData<Boolean> = _cropAdded
     private var _myCrops = MutableLiveData<ArrayList<CropData>>()
     val myCrops: LiveData<ArrayList<CropData>> = _myCrops
@@ -111,4 +117,38 @@ class CropsFragmentViewModel: ViewModel() {
 
     }
 
+    fun addCropImage(context: Context, adminId: Int, imageUri: Uri) {
+
+        val lastCrop = _myCrops.value?.last()
+
+        Log.i("CropsFragmentViewModel", "addCropImage: " +
+                "addImage id: ${lastCrop?.id}")
+
+       val inputStream = context.contentResolver.openInputStream(imageUri)
+        val tempFile = File.createTempFile("imageFile",
+            null, context.cacheDir)
+        val outputStream = FileOutputStream(tempFile)
+
+        inputStream.use {input ->
+            outputStream.use {output ->
+
+                input?.copyTo(output)
+            }
+        }
+
+      //  val queue = Volley.newRequestQueue(context)
+        val url = "$baseUrl/admin/$adminId/crop/${lastCrop?.id}/image"
+
+        UploadManager(context).uploadFormData(url, tempFile)
+
+//        val request = JsonObjectRequest(
+//            Request.Method.POST,
+//            url, null, { response: JSONObject ->
+//
+//
+//            } ) {error: VolleyError ->
+//            Log.e("CropsFragmentViewModel", "addCropImage: FAILED",error )
+//        }
+//        queue.add(request)
+    }
 }

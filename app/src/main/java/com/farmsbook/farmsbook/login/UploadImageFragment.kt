@@ -163,7 +163,8 @@ class UploadImageFragment : Fragment() {
         var imagePath: String? = null
         val projection = arrayOf(MediaStore.Images.Media.DATA)
         val cursor: Cursor? =
-            activity?.getContentResolver()?.query(uri, projection, null, null, null)
+            activity?.getContentResolver()?.query(uri, projection,
+                null, null, null)
         if (cursor != null) {
             val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
             if (cursor.moveToFirst()) {
