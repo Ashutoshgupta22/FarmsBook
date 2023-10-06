@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_item_listed_crops"
+        android:id="@+id/cv_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -78,22 +78,10 @@
                 android:layout_alignParentEnd="true"/>
 
             <TextView
-                android:id="@+id/tv_status"
+                android:id="@+id/text_posted_by"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Active"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/green"
-                android:layout_below="@id/tv_date"
-                android:layout_alignParentEnd="true"/>
-
-            <TextView
-                android:id="@+id/text_listed_by"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/listed_by"
+                android:text="@string/posted_by"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -101,38 +89,50 @@
                 android:layout_marginTop="16dp"/>
 
             <ImageView
-                android:id="@+id/iv_seller"
+                android:id="@+id/iv_buyer"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_below="@id/text_listed_by"
+                android:layout_below="@id/text_posted_by"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="8dp"
                 android:clipToOutline="true"
                 android:background="@drawable/button_background_rounded" />
 
             <TextView
-                android:id="@+id/tv_seller_name"
+                android:id="@+id/tv_buyer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="Akash Sharma"
                 android:textColor="@color/black"
                 android:layout_marginStart="16dp"
-                android:layout_alignTop="@id/iv_seller"
-                android:layout_toEndOf="@id/iv_seller"/>
+                android:layout_alignTop="@id/iv_buyer"
+                android:layout_toEndOf="@id/iv_buyer"/>
 
             <TextView
-                android:id="@+id/tv_group_name"
+                android:id="@+id/tv_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="Group name"
+                android:text="Company name"
                 android:textColor="@color/black"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/tv_seller_name"
-                android:layout_toEndOf="@id/iv_seller"/>
+                android:layout_below="@id/tv_buyer_name"
+                android:layout_toEndOf="@id/iv_buyer"/>
 
+            <Button
+                android:id="@+id/btn_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:text="@string/call"
+                app:icon="@drawable/baseline_call_24"
+                app:iconGravity="end"
+                android:layout_marginStart="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@id/iv_buyer"
+                android:layout_alignTop="@id/iv_buyer"/>
 
         </RelativeLayout>
 

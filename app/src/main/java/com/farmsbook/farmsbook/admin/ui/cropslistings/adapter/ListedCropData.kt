@@ -1,0 +1,56 @@
+package com.farmsbook.farmsbook.admin.ui.cropslistings.adapter
+
+data class ListedCropData(
+    var listId: Int?,
+    var parentId: Int?,
+    var cropName: String?,
+    var variety: String?,
+    var typeOfSale: Boolean?,
+    var rate: Int?,
+    var minPrice: Int?,
+    var maxPrice: Int?,
+    var quantity: Int?,
+    var quantityUnit: String?,
+    var location: String?,
+    var transportation: Boolean?,
+    var typeOfFarming: Boolean?,
+    var timeOfSowing: String?,
+    var timestamp: String?,
+    var receiveBuyerId: Int?,
+    var receiveOfferStatus: Boolean?,
+    var listedStatus: Boolean?,
+    var imageUrl0: String?,
+    var imageUrls: List<String>?,
+    var images: List<String>?,
+    var user: Any?,
+    var listedOffer: List<ListedOffer>?
+)
+
+data class ListedOffer(
+    var listedOfferId: Int?,
+    var listedOfferById: Int?,
+    var listedOfferToCropId: Int?,
+    var listedOfferToFarmerId: Int?,
+    var listedOfferCropName: String?,
+    var purchasedOn: Boolean?,
+    var rateOfCommission: Int?,
+    var listedOfferCompanyName: String?,
+    var listedOfferingPrice: Int?,
+    var listedOfferingQuantityUnit: String?,
+    var listedOfferingQuantity: Int?,
+    var timestamp: String?,
+    var transportation: Boolean?,
+    var deliveryPlace: String?,
+    var listedOfferStatus: Boolean?,
+    var reply: Boolean?,
+    var phone: String?,
+    var buyerName: String?,
+    var farmerName: String?,
+    var farmerCompany: String?,
+    var imageUrl0: String?,
+    var buyerImage: String?,
+    var farmerImage: String?,
+    var listings: Any?,
+    var counterOffer: List<Any>?
+)
+

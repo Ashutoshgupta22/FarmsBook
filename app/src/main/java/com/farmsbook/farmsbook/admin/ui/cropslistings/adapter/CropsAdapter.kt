@@ -2,6 +2,7 @@ package com.farmsbook.farmsbook.admin.ui.cropslistings.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,6 +25,7 @@ class CropsAdapter(
         val btnEdit = binding.btnEdit
         val btnDelete = binding.btnDelete
 
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,9 +46,12 @@ class CropsAdapter(
 
         holder.tvCropName.text = cropList[position].cropName
 
-        holder.btnEdit.setOnClickListener { onEditClick(position,
-            cropList[position].cropName!!) }
-        holder.btnDelete.setOnClickListener { onDeleteClick(position) }
+        holder.btnEdit.visibility = View.INVISIBLE
+        holder.btnDelete.visibility = View.INVISIBLE
+
+//        holder.btnEdit.setOnClickListener { onEditClick(position,
+//            cropList[position].cropName!!) }
+//        holder.btnDelete.setOnClickListener { onDeleteClick(position) }
 
     }
 
