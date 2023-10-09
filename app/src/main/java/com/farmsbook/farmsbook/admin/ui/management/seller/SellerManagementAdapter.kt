@@ -2,6 +2,7 @@ package com.farmsbook.farmsbook.admin.ui.management.seller
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -22,11 +23,11 @@ class SellerManagementAdapter(private val sellers: ArrayList<AdminSellerData>,
         val tvName = binding.tvNameManagement
         val tvLocation = binding.tvLocationManagement
         val btnCall = binding.btnCallManagement
-        val textCompanyName = binding.textCompanyName
-        val textCompanyTurnover = binding.textCompanyTurnover
+        val textGroupName = binding.textCompanyName
+        val textGroupTurnover = binding.textCompanyTurnover
         val textCropsDeal = binding.textCropsDeal
-        val tvCompanyName = binding.tvCompanyNameManagement
-        val tvCompanyTurnover = binding.tvCompanyTurnoverManagement
+        val tvGroupName = binding.tvCompanyNameManagement
+        val tvGroupTurnover = binding.tvCompanyTurnoverManagement
         val tvCropsDeal = binding.tvCropsDealManagement
         val cvItem = binding.cvItemManagement
 
@@ -50,15 +51,17 @@ class SellerManagementAdapter(private val sellers: ArrayList<AdminSellerData>,
             .centerCrop()
             .into(holder.ivImage)
 
-        holder.textCompanyName.text = context.getString(R.string.group_name)
-        holder.textCompanyTurnover.text = context.getString(R.string.group_turnover)
-        holder.textCropsDeal.text = context.getString(R.string.crops_listed)
+        holder.textGroupName.text = context.getString(R.string.group_name)
+        holder.textGroupTurnover.text = context.getString(R.string.group_turnover)
+       // holder.textCropsDeal.text = context.getString(R.string.crops_listed)
+        holder.textCropsDeal.visibility = View.GONE
 
         holder.tvName.text = sellers[position].name
         holder.tvLocation.text = sellers[position].location
-        holder.tvCompanyName.text = sellers[position].companyName
-        holder.tvCompanyTurnover.text = sellers[position].companyTurnover.toString()
-        holder.tvCropsDeal.text = sellers[position].crops
+        holder.tvGroupName.text = sellers[position].groupName
+        holder.tvGroupTurnover.text = sellers[position].groupTurnover.toString()
+        //holder.tvCropsDeal.text = sellers[position].crops
+        holder.tvCropsDeal.visibility = View.GONE
 
         holder.btnCall.setOnClickListener {
             sellers[position].phone?.let { phone -> onCallClick(phone) }

@@ -54,6 +54,8 @@ class ListedCropViewModel: ViewModel() {
                     val receiveOfferStatus = cropObj.optBoolean("receive_offer_status", false)
                     val listedStatus = cropObj.optBoolean("listed_status", false)
                     val imageUrl0 = cropObj.optString("imageUrl0", null)
+                    val userDp = cropObj.optString("userDp",
+                        "https://displaypic.s3.ap-south-1.amazonaws.com/noimage.png")
                     val imageUrls = cropObj.optJSONArray("imageUrls")
                         ?.let { 0.until(it.length()).map { i -> it.optString(i) } }
                     val images = cropObj.optJSONArray("images")
@@ -73,7 +75,7 @@ class ListedCropViewModel: ViewModel() {
                         listId, parentId, cropName, variety, typeOfSale, rate, minPrice, maxPrice,
                         quantity, quantityUnit, location, transportation, typeOfFarming, timeOfSowing,
                         timestamp, receiveBuyerId, receiveOfferStatus, listedStatus, imageUrl0,
-                        imageUrls, images, user, listedOfferList
+                        userDp, imageUrls, images, user, listedOfferList
                     )
 
                     cropList.add(listedCropData)
@@ -86,6 +88,5 @@ class ListedCropViewModel: ViewModel() {
             Log.e("ListedCropViewModel", "getAllCrops: FAILED",error )
         }
         queue.add(request)
-
     }
 }

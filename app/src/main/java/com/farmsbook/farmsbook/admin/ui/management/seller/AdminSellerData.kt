@@ -5,7 +5,7 @@ data class AdminSellerData (
     var name: String? = null,
     var location: String? = null,
     var phone: String? = null,
-    var companyName: String? = null,
-    var companyTurnover: Int? = null,
+    var groupName: String? = null,
+    var groupTurnover: Int? = null,
     var crops: String? = null
 )

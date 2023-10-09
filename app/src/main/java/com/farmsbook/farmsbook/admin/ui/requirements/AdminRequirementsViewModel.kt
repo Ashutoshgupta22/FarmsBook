@@ -90,6 +90,7 @@ class AdminRequirementsViewModel : ViewModel() {
                         receiveOfferStatus,
                         listedStatus,
                         imageUrl0,
+                        "",
                         imageUrls,
                         images,
                         user,

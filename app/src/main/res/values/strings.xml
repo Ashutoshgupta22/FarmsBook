@@ -230,6 +230,8 @@
     <string name="posted_by">Posted by</string>
     <string name="crop_requirement_posted_by">Crop requirement posted by</string>
     <string name="interested_sellers">Interested Sellers</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
 
     <string-array name="States">
         <item>Andaman and Nicobar Islands</item>

@@ -49,7 +49,7 @@ class ListedCropsAdapter(
             .into(holder.ivCrop)
 
         Glide.with(context)
-            .load(listedCropsList[position].imageUrls?.get(0))
+            .load(listedCropsList[position].userDp)
             .fitCenter()
             .into(holder.ivSeller)
 
@@ -59,11 +59,11 @@ class ListedCropsAdapter(
             "${listedCropsList[position].quantity.toString()} ${listedCropsList[position].quantityUnit}"
 
         if(listedCropsList[position].listedStatus == true) {
-            holder.tvStatus.text = "Active"
+            holder.tvStatus.text = context.getString(R.string.active)
             holder.tvStatus.setTextColor(Color.GREEN)
         }
         else {
-            holder.tvStatus.text = "Inactive"
+            holder.tvStatus.text = context.getString(R.string.inactive)
             holder.tvStatus.setTextColor(Color.RED)
         }
 
