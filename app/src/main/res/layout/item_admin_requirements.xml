@@ -107,7 +107,8 @@
                 android:textColor="@color/black"
                 android:layout_marginStart="16dp"
                 android:layout_alignTop="@id/iv_buyer"
-                android:layout_toEndOf="@id/iv_buyer"/>
+                android:layout_toEndOf="@id/iv_buyer"
+                android:layout_toStartOf="@id/btn_call"/>
 
             <TextView
                 android:id="@+id/tv_company_name"
@@ -119,7 +120,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_below="@id/tv_buyer_name"
-                android:layout_toEndOf="@id/iv_buyer"/>
+                android:layout_toEndOf="@id/iv_buyer"
+                android:layout_toStartOf="@id/btn_call"/>
 
             <Button
                 android:id="@+id/btn_call"

@@ -34,4 +34,13 @@ class TimeFormatter {
 
         return outputFormatter.format(date)
     }
+
+    fun getFullDate(time: String): String {
+
+        val inputFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val outputFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+        val date = inputFormatter.parse(time)
+
+        return outputFormatter.format(date)
+    }
 }

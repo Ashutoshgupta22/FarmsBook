@@ -1,27 +1,36 @@
 package com.farmsbook.farmsbook.admin.ui.requirements
 
-import com.farmsbook.farmsbook.admin.ui.cropslistings.adapter.ListedOffer
-
 data class RequirementData(
-var listId: Int?,
-var parentId: Int?,
-var cropName: String?,
-var variety: String?,
-var typeOfSale: Boolean?,
-var rate: Int?,
-var minPrice: Int?,
-var maxPrice: Int?,
-var quantity: Int?,
-var quantityUnit: String?,
-var location: String?,
-var transportation: Boolean?,
-var timestamp: String?,
-var receiveBuyerId: Int?,
-var receiveOfferStatus: Boolean?,
-var listedStatus: Boolean?,
-var imageUrl0: String?,
-var imageUrls: List<String>?,
-var images: List<String>?,
-var user: Any?,
-var listedOffer: List<ListedOffer>?
+    val id: Int? = null,
+    val cropName: String? = null,
+    val variety: String? = null,
+    val typeOfBuy: Boolean? = null,
+    val minRange: Int? = null,
+    val maxRange: Int? = null,
+    val quantity: Int? = null,
+    val quantityUnit: String? = null,
+    val location: String? = null,
+    val transportation: Boolean? = null,
+    val interestedSupplier: Int? = null,
+    val requirementStatus: Boolean? = null,
+    val timestamp: String? = null,
+    val manageCropId: Int? = null,
+    val cropBy: String? = null,
+    val phone: String? = null,
+    val companyName: String? = null,
+    val imageCrop: String?= null,
+    val imageUser: String? = null,
+    val user: Any? = null,
+    val reqInterestedUser: ArrayList<InterestedUser> = arrayListOf()
+)
+
+data class InterestedUser(
+    val id: Int? = null,
+    val imagePath: String? = null,
+    val name: String? = null,
+    val phone: String? = null,
+    val companyName: String? = null,
+    val parentId: Int? = null,
+    val timestamp: String? = null,
+    val requirements: Any? = null
 )

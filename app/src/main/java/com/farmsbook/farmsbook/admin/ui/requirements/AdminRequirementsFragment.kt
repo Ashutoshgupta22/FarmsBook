@@ -1,6 +1,9 @@
 package com.farmsbook.farmsbook.admin.ui.requirements
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,23 +34,29 @@ class AdminRequirementsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvAdminRequirements.apply {
-            layoutManager = LinearLayoutManager(requireContext(),
-                LinearLayoutManager.VERTICAL, false)
-
-            adapter = AdminRequirementAdapter(arrayListOf())
-        }
+        viewModel.getAllRequirements(requireContext())
 
         viewModel.requirements.observe(viewLifecycleOwner) {
 
-            binding.rvAdminRequirements.apply {
-                layoutManager = LinearLayoutManager(requireContext(),
-                    LinearLayoutManager.VERTICAL, false)
+            it?.let {
+                binding.rvAdminRequirements.apply {
+                    layoutManager = LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.VERTICAL, false)
 
-                adapter = AdminRequirementAdapter(arrayListOf())
+                    adapter = AdminRequirementAdapter(it, {
+                        phone ->
+
+                        if (phone != "null") {
+                            val intent = Intent(Intent.ACTION_DIAL)
+                            intent.data = Uri.parse("tel:$phone")
+                            startActivity(intent)
+                        }
+
+                    }){
+                        itemPos ->
+                    }
+                }
             }
-
-
         }
     }
 }

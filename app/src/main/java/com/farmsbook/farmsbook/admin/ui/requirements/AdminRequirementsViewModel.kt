@@ -16,91 +16,71 @@ import org.json.JSONArray
 
 class AdminRequirementsViewModel : ViewModel() {
 
-    private var _requirements = MutableLiveData<RequirementData>()
-    val requirements: LiveData<RequirementData> = _requirements
+    private var _requirements = MutableLiveData<ArrayList<RequirementData>>()
+    val requirements: LiveData<ArrayList<RequirementData>> = _requirements
 
     private val baseUrl = BaseAddressUrl().baseAddressUrl
 
     fun getAllRequirements(context: Context) {
 
         val queue = Volley.newRequestQueue(context)
-        val url = "$baseUrl/admin/allListedCrops"
+        val url = "$baseUrl/admin/requirements"
 
         val request = JsonArrayRequest(
             Request.Method.GET,
             url, null, { response: JSONArray ->
-
-                val cropList = arrayListOf<ListedCropData>()
+                val cropList = arrayListOf<RequirementData>()
 
                 for (i in 0 until response.length()) {
                     val cropObj = response.getJSONObject(i)
 
-                    val listId = cropObj.optInt("list_id", 0)
-                    val parentId = cropObj.optInt("parent_id")
-                    val cropName = cropObj.optString("crop_name", null)
-                    val variety = cropObj.optString("variety", null)
-                    val typeOfSale = cropObj.optBoolean("type_of_sale", false)
-                    val rate = cropObj.optInt("rate", 0)
-                    val minPrice = cropObj.optInt("min_price", 0)
-                    val maxPrice = cropObj.optInt("max_price", 0)
-                    val quantity = cropObj.optInt("quantity", 0)
-                    val quantityUnit = cropObj.optString("quantity_unit", null)
-                    val location = cropObj.optString("location", null)
-                    val transportation = cropObj.optBoolean("transportation", false)
-                    val typeOfFarming = cropObj.optBoolean("type_of_farming", false)
-                    val timeOfSowing = cropObj.optString("time_of_sowing", null)
-                    val timestamp = cropObj.optString("timestamp", null)
-                    val receiveBuyerId = cropObj.optInt("receive_buyer_id")
-                    val receiveOfferStatus = cropObj.optBoolean("receive_offer_status", false)
-                    val listedStatus = cropObj.optBoolean("listed_status", false)
-                    val imageUrl0 = cropObj.optString("imageUrl0", null)
-                    val imageUrls = cropObj.optJSONArray("imageUrls")
-                        ?.let { 0.until(it.length()).map { i -> it.optString(i) } }
-                    val images = cropObj.optJSONArray("images")
-                        ?.let { 0.until(it.length()).map { i -> it.optString(i) } }
-                    val user =
-                        cropObj.opt("user") // The type of "user" is not clear from the provided JSON
-
-                    val listedOfferArray = cropObj.optJSONArray("listedOffer")
-                    val listedOfferList = ArrayList<ListedOffer>()
-                    if (listedOfferArray != null) {
-                        for (j in 0 until listedOfferArray.length()) {
-                            val listedOfferObj = listedOfferArray.getJSONObject(j)
-                            // Parse ListedOffer objects similarly to ListedCropData and add them to the listedOfferList
+                    val interestedUsersArray = cropObj.optJSONArray("reqInterestedUser")
+                    val interestedUsersList = ArrayList<InterestedUser>()
+                    if (interestedUsersArray != null) {
+                        for (j in 0 until interestedUsersArray.length()) {
+                            val interestedUserObj = interestedUsersArray.getJSONObject(j)
+                            val interestedUser = InterestedUser(
+                                id = interestedUserObj.optInt("id"),
+                                imagePath = interestedUserObj.optString("imagePath"),
+                                name = interestedUserObj.optString("name"),
+                                phone = interestedUserObj.optString("phone"),
+                                companyName = interestedUserObj.optString("companyName"),
+                                parentId = interestedUserObj.optInt("parent_id"),
+                                timestamp = interestedUserObj.optString("timestamp"),
+                                requirements = interestedUserObj.opt("requirements")
+                            )
+                            interestedUsersList.add(interestedUser)
                         }
                     }
 
-                    val listedCropData = ListedCropData(
-                        listId,
-                        parentId,
-                        cropName,
-                        variety,
-                        typeOfSale,
-                        rate,
-                        minPrice,
-                        maxPrice,
-                        quantity,
-                        quantityUnit,
-                        location,
-                        transportation,
-                        typeOfFarming,
-                        timeOfSowing,
-                        timestamp,
-                        receiveBuyerId,
-                        receiveOfferStatus,
-                        listedStatus,
-                        imageUrl0,
-                        "",
-                        imageUrls,
-                        images,
-                        user,
-                        listedOfferList
+                    val requirementData = RequirementData(
+                        id = cropObj.optInt("req_id"),
+                        cropName = cropObj.optString("crop_name"),
+                        variety = cropObj.optString("variety"),
+                        typeOfBuy = cropObj.optBoolean("type_of_buy"),
+                        minRange = cropObj.optInt("min_range"),
+                        maxRange = cropObj.optInt("max_range"),
+                        quantity = cropObj.optInt("quantity"),
+                        quantityUnit = cropObj.optString("quantity_unit"),
+                        location = cropObj.optString("location"),
+                        transportation = cropObj.optBoolean("transportation"),
+                        interestedSupplier = cropObj.optInt("interested_supplier"),
+                        requirementStatus = cropObj.optBoolean("requirement_status"),
+                        timestamp = cropObj.optString("timestamp"),
+                        manageCropId = cropObj.optInt("manageCropId"),
+                        cropBy = cropObj.optString("cropBy"),
+                        phone = cropObj.optString("phone"),
+                        companyName = cropObj.optString("companyName"),
+                        imageCrop = cropObj.optString("imageCrop"),
+                        imageUser = cropObj.optString("imageUser"),
+                        user = cropObj.opt("user"),
+                        reqInterestedUser = interestedUsersList
                     )
 
-                    cropList.add(listedCropData)
+                    cropList.add(requirementData)
                 }
 
-
+                _requirements.postValue(cropList)
 
             }) { error: VolleyError ->
             Log.e("ListedCropViewModel", "getAllCrops: FAILED", error)
