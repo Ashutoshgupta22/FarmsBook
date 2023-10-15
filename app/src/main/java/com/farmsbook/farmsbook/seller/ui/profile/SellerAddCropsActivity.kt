@@ -3,10 +3,12 @@ package com.farmsbook.farmsbook.seller.ui.profile
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -25,6 +27,8 @@ class SellerAddCropsActivity : AppCompatActivity() {
     private lateinit var cropImages: ArrayList<Int>
     private lateinit var cropId: ArrayList<String>
     private lateinit var binding: ActivitySellerAddCropsBinding
+    val baseUrl = BaseAddressUrl().baseAddressUrl
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySellerAddCropsBinding.inflate(layoutInflater)
@@ -75,13 +79,11 @@ class SellerAddCropsActivity : AppCompatActivity() {
             finish()
         }
 
-        addData()
+        getManageCrops()
+        getAdminManageCrops()
 
     }
-    private fun addData() {
-//        for (i in cropNames.indices) {
-//            cropList.add(i, ManageCropData(cropNames[i], cropImages[i], cropId[i]))
-//        }
+    private fun getManageCrops() {
 
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -92,16 +94,12 @@ class SellerAddCropsActivity : AppCompatActivity() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
             for (i in 0 until response.length()) {
                 try {
-                    var cropObject = response.getJSONObject(i)
-                    var crop = ManageCropData()
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("cropId")
                     crop.image = cropImages[crop.id - 1]
@@ -115,31 +113,94 @@ class SellerAddCropsActivity : AppCompatActivity() {
             binding.cropsRV.layoutManager = GridLayoutManager(this, 4)
             val adapter = ManageCropAdapter(cropList, this)
             binding.cropsRV.adapter = adapter
+            binding.cropsRV.isNestedScrollingEnabled = false
 
             adapter.setOnItemClickListener(object : ManageCropAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
 
                     addCrop(cropList[position].id.toString())
                     cropList.removeAt(position)
-                    adapter.notifyDataSetChanged()
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-//                startActivity(
-//                    Intent(
-//                        this,
-//                        ViewSupplierActivity::class.java
-//                    ).putExtra("FARMER_ID", followList[position].FarmerID))
-
+                    adapter.notifyItemRemoved(position)
                 }
             })
 
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
         }, { error -> // method to handle errors.
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
+    }
+
+    private fun getAdminManageCrops() {
+
+        val queue = Volley.newRequestQueue(this)
+        val url = "$baseUrl/admin/allCrops"
+
+        val request = JsonArrayRequest(
+            Request.Method.GET,
+            url, null, { response: JSONArray ->
+
+                val cropList = arrayListOf<ManageCropData>()
+
+                for (i in 0 until response.length()) {
+
+                    val cropObj = response.getJSONObject(i)
+                    val id = cropObj.getInt("cropId")
+                    // val parentId = cropObj.getInt("parentId")
+                    val name = cropObj.getString("cropName")
+                    //  val status = cropObj.getString("status")
+                    val imagePath = cropObj.getString("imagePath")
+
+                    cropList.add(ManageCropData(name, 0, 0, id, imagePath))
+                }
+
+                binding.rvAdminCrops.apply {
+
+                    isNestedScrollingEnabled = false
+                    layoutManager = GridLayoutManager(this@SellerAddCropsActivity, 4)
+                    val myAdapter = ManageCropAdapter(cropList, this@SellerAddCropsActivity)
+                    adapter = myAdapter
+
+                    myAdapter.setOnItemClickListener(object : ManageCropAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+
+                            addAdminCrop(cropList[position].id.toString())
+                            cropList.removeAt(position)
+                            myAdapter.notifyItemRemoved(position)
+                        }
+                    })
+
+//                        Toast.makeText(this@SellerAddCropsActivity, "$position", Toast.LENGTH_SHORT).show()
+//                        addAdminCrop(cropList[position].id.toString())
+//                        cropList.removeAt(position)
+//                        adapter?.notifyItemRemoved(position)
+
+                }
+
+            }) { error: VolleyError ->
+            Log.e("AddCropActivity", "getAllAdminCrops: FAILED", error)
+        }
+        queue.add(request)
+    }
+
+    private fun addAdminCrop(cropId: String) {
+
+        val baseAddressUrl = BaseAddressUrl().baseAddressUrl
+        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference.getInt("USER_ID", 0)
+
+        val url = "$baseAddressUrl/user/${userId}/adminManageCrops/${cropId}"
+
+        // creating a new variable for our request queue
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+        val respObj = JSONObject()
+
+        val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
 
+        }, { error -> // method to handle errors.
+            Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        })
+        queue.add(request)
     }
 
     private fun addCrop(cropId: String) {
@@ -153,17 +214,8 @@ class SellerAddCropsActivity : AppCompatActivity() {
         val queue: RequestQueue = Volley.newRequestQueue(this)
         val respObj = JSONObject()
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.POST, url, respObj, {
 
-
-            //finish()
-
-
-            //Toast.makeText(this, "Added Crop", Toast.LENGTH_SHORT).show()
         }, { error -> // method to handle errors.
             Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })

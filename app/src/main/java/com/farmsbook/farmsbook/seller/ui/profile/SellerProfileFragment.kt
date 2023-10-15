@@ -52,7 +52,7 @@ class SellerProfileFragment : Fragment() {
     private val binding get() = _binding!!
     override fun onResume() {
         super.onResume()
-        getDataUsingVolley()
+        getUserData()
         addData()
     }
     override fun onCreateView(
@@ -259,12 +259,16 @@ class SellerProfileFragment : Fragment() {
 
             for (i in 0 until response.length()) {
                 try {
-                    var cropObject = response.getJSONObject(i)
-                    var crop = ManageCropData()
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
                     crop.cropId = cropObject.getInt("cropId")
-                    crop.image = cropImages[crop.cropId - 1]
+
+                    if( crop.cropId < cropImages.size)
+                        crop.image = cropImages[crop.cropId - 1]
+                    else
+                        crop.imageUrl = cropObject.optString("img", "")
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -284,20 +288,9 @@ class SellerProfileFragment : Fragment() {
                     {
                         startActivity(Intent(context, SellerAddCropsActivity::class.java))
                     }
-//                    cropList.removeAt(position)
-//                    adapter.notifyDataSetChanged()
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-//                startActivity(
-//                    Intent(
-//                        this,
-//                        ViewSupplierActivity::class.java
-//                    ).putExtra("FARMER_ID", followList[position].FarmerID))
-
                 }
             })
 
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
         }, { error -> // method to handle errors.
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
@@ -345,7 +338,7 @@ class SellerProfileFragment : Fragment() {
 //        editor.apply()
     }
 
-    private fun getDataUsingVolley() {
+    private fun getUserData() {
 
         // url to post our data
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl

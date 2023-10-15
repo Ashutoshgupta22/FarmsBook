@@ -28,7 +28,7 @@ class SellerManageCropsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySellerManageCropsBinding
     override fun onResume() {
         super.onResume()
-        addData()
+        addCrops()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,20 +85,20 @@ class SellerManageCropsActivity : AppCompatActivity() {
         }
 
         binding.manageCropBtn.setOnClickListener {
-            addData2()
+            manageCrops()
             binding.manageCropBtn.visibility = View.GONE
             binding.doneBtn.visibility = View.VISIBLE
 
         }
 
         binding.doneBtn.setOnClickListener {
-            addData()
+            addCrops()
             binding.manageCropBtn.visibility = View.VISIBLE
             binding.doneBtn.visibility = View.GONE
         }
     }
 
-    private fun addData2() {
+    private fun manageCrops() {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -108,20 +108,20 @@ class SellerManageCropsActivity : AppCompatActivity() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
             for (i in 0 until response.length()) {
                 try {
-                    var cropObject = response.getJSONObject(i)
-                    var crop = ManageCropData()
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
                     crop.cropId = cropObject.getInt("cropId")
-                    crop.image = cropImages[crop.cropId - 1]
+
+                    if( crop.cropId < cropImages.size)
+                        crop.image = cropImages[crop.cropId - 1]
+                    else
+                        crop.imageUrl = cropObject.optString("img", "")
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -137,24 +137,14 @@ class SellerManageCropsActivity : AppCompatActivity() {
 
                     deleteCrop(cropList[position].id.toString())
                     cropList.removeAt(position)
-                    adapter.notifyDataSetChanged()
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-//                startActivity(
-//                    Intent(
-//                        this,
-//                        ViewSupplierActivity::class.java
-//                    ).putExtra("FARMER_ID", followList[position].FarmerID))
-
+                    adapter.notifyItemRemoved(position)
                 }
             })
 
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
         }, { error -> // method to handle errors.
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
-
     }
 
     private fun deleteCrop(id: String) {
@@ -166,10 +156,6 @@ class SellerManageCropsActivity : AppCompatActivity() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
 
             //Toast.makeText(this, "Deleted Crop", Toast.LENGTH_SHORT).show()
@@ -182,10 +168,7 @@ class SellerManageCropsActivity : AppCompatActivity() {
         queue.add(request)
     }
 
-    private fun addData() {
-//        for (i in cropNames.indices) {
-//            cropList.add(i, ManageCropData(cropNames[i], cropImages[i], cropId[i]))
-//        }
+    private fun addCrops() {
 
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -196,20 +179,20 @@ class SellerManageCropsActivity : AppCompatActivity() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
             for (i in 0 until response.length()) {
                 try {
-                    var cropObject = response.getJSONObject(i)
-                    var crop = ManageCropData()
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
                     crop.cropId = cropObject.getInt("cropId")
-                    crop.image = cropImages[crop.cropId - 1]
+
+                    if( crop.cropId < cropImages.size)
+                        crop.image = cropImages[crop.cropId - 1]
+                    else
+                        crop.imageUrl = cropObject.optString("img", "")
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -227,28 +210,15 @@ class SellerManageCropsActivity : AppCompatActivity() {
 
                     if(position == cropList.size-1)
                     {
-                        startActivity(Intent(this@SellerManageCropsActivity, SellerAddCropsActivity::class.java))
+                        startActivity(Intent(this@SellerManageCropsActivity,
+                            SellerAddCropsActivity::class.java))
                     }
-//                    cropList.removeAt(position)
-//                    adapter.notifyDataSetChanged()
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-//                startActivity(
-//                    Intent(
-//                        this,
-//                        ViewSupplierActivity::class.java
-//                    ).putExtra("FARMER_ID", followList[position].FarmerID))
-
                 }
             })
 
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
         }, { error -> // method to handle errors.
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
-
     }
-
-
 }

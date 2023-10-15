@@ -14,7 +14,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.admin.ui.cropslistings.CropData
-import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageAdminCropAdapter
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropAdapter
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropData
 import com.farmsbook.farmsbook.databinding.ActivityAddCropBinding
@@ -36,48 +35,6 @@ class AddCropActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-//        cropNames = arrayListOf()
-//        cropImages = arrayListOf()
-//        cropId = arrayListOf()
-//        cropList = arrayListOf()
-//        cropNames.add("Bajara")
-//        cropNames.add("Barley")
-//        cropNames.add("Basmati Paddy")
-//        cropNames.add("Black Pepper")
-//        cropNames.add("Cashew")
-//        cropNames.add("Caster Seeds")
-//        cropNames.add("Chana")
-//        cropNames.add("Chili")
-//        cropNames.add("Coffee")
-//        cropNames.add("Coriander Leaves")
-//        cropNames.add("Cotton")
-//        cropNames.add("Ground Nuts")
-//        cropNames.add("Guar Gum Refind Splits")
-//        cropNames.add("Guar seeds")
-//        cropNames.add("Jaggery")
-//        cropNames.add("Jeera")
-//        cropNames.add("Jowar White")
-//        cropNames.add("Jower Yellow")
-//        cropNames.add("Jower")
-//        cropNames.add("Kapas")
-//        cropNames.add("Maize Kharif")
-//        cropNames.add("Masoor Bold")
-//        cropNames.add("Maize")
-//        cropNames.add("Moong Dal")
-//        cropNames.add("Mustard Oil")
-//        cropNames.add("Mustard Seed")
-//        cropNames.add("Basmati Paddy 1121")
-//        cropNames.add("Polished Turmeric")
-//        cropNames.add("Refined Soy Oil")
-//        cropNames.add("Rice")
-//        cropNames.add("Sesameseeds")
-//        cropNames.add("Soyabean Meal")
-//        cropNames.add("Soyabean")
-//        cropNames.add("Toor Daal")
-//        cropNames.add("Turmarice Farmer Unpolished")
-//        cropNames.add("Turmaric")
-//        cropNames.add("Wheat")
-//        cropNames.add("Yellow Peas")
 
         cropImages = arrayListOf()
         cropImages.add(R.drawable.bajra)
@@ -119,44 +76,6 @@ class AddCropActivity : AppCompatActivity() {
         cropImages.add(R.drawable.wheat)
         cropImages.add(R.drawable.yellow_peas)
 
-//        cropId.add("1")
-//        cropId.add("2")
-//        cropId.add("2")
-//        cropId.add("4")
-//        cropId.add("5")
-//        cropId.add("6")
-//        cropId.add("7")
-//        cropId.add("8")
-//        cropId.add("9")
-//        cropId.add("10")
-//        cropId.add("11")
-//        cropId.add("12")
-//        cropId.add("13")
-//        cropId.add("14")
-//        cropId.add("15")
-//        cropId.add("16")
-//        cropId.add("17")
-//        cropId.add("18")
-//        cropId.add("19")
-//        cropId.add("20")
-//        cropId.add("21")
-//        cropId.add("22")
-//        cropId.add("23")
-//        cropId.add("24")
-//        cropId.add("25")
-//        cropId.add("26")
-//        cropId.add("27")
-//        cropId.add("28")
-//        cropId.add("29")
-//        cropId.add("30")
-//        cropId.add("31")
-//        cropId.add("32")
-//        cropId.add("33")
-//        cropId.add("34")
-//        cropId.add("35")
-//        cropId.add("36")
-//        cropId.add("37")
-//        cropId.add("38")
         binding.backBtn.setOnClickListener {
             finish()
         }
@@ -175,10 +94,6 @@ class AddCropActivity : AppCompatActivity() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
             for (i in 0 until response.length()) {
@@ -213,8 +128,6 @@ class AddCropActivity : AppCompatActivity() {
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
-
-
     }
 
     private fun getAllAdminCrops() {
@@ -226,7 +139,7 @@ class AddCropActivity : AppCompatActivity() {
             Request.Method.GET,
             url, null, { response: JSONArray ->
 
-                val cropList = arrayListOf<CropData>()
+                val cropList = arrayListOf<ManageCropData>()
 
                 for (i in 0 until response.length()) {
 
@@ -237,19 +150,25 @@ class AddCropActivity : AppCompatActivity() {
                     //  val status = cropObj.getString("status")
                     val imagePath = cropObj.getString("imagePath")
 
-                    cropList.add(CropData(id, null, name, null, imagePath))
+                    cropList.add(ManageCropData(name, 0, 0, id, imagePath))
+
                 }
 
                 binding.rvAdminCrops.apply {
 
                     isNestedScrollingEnabled = false
                     layoutManager = GridLayoutManager(this@AddCropActivity, 4)
-                    adapter = ManageAdminCropAdapter(cropList) { position ->
+                    val myAdapter = ManageCropAdapter(cropList, this@AddCropActivity)
+                    adapter = myAdapter
 
-                        addAdminCrop(cropList[position].id.toString())
-                        //cropList.removeAt(position)
-                        adapter?.notifyItemRemoved(position)
-                    }
+                    myAdapter.setOnItemClickListener(object : ManageCropAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+
+                            addAdminCrop(cropList[position].id.toString())
+                            cropList.removeAt(position)
+                            myAdapter.notifyItemRemoved(position)
+                        }
+                    })
                 }
 
             }) { error: VolleyError ->
