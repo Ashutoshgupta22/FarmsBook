@@ -41,10 +41,10 @@ class ManageCropAdapter (
 
         val currentItem =plantList[position]
 
-        if (plantList[position].imageUrl != null)
-            Glide.with(context).load(plantList[position].imageUrl).into(holder.cropImage)
+        if (currentItem.imageUrl != null)
+            Glide.with(context).load(currentItem.imageUrl).into(holder.cropImage)
         else
-            Glide.with(context).load(plantList[position].image).into(holder.cropImage)
+            Glide.with(context).load(currentItem.image).into(holder.cropImage)
 
         holder.cropName.text = currentItem.cropName
     }

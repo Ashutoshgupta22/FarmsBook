@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getDataUsingVolley()
-        addData()
+        getManageCrops()
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -328,10 +328,7 @@ class ProfileFragment : Fragment() {
         queue.add(request)
     }
 
-    private fun addData() {
-//        for (i in cropNames.indices) {
-//            cropList.add(i, ManageCropData(cropNames[i], cropImages[i], cropId[i]))
-//        }
+    private fun getManageCrops() {
 
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -350,12 +347,16 @@ class ProfileFragment : Fragment() {
 
             for (i in 0 until response.length()) {
                 try {
-                    var cropObject = response.getJSONObject(i)
-                    var crop = ManageCropData()
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
                     crop.cropId = cropObject.getInt("cropId")
-                    crop.image = cropImages[crop.cropId - 1]
+
+                    if( crop.cropId < cropImages.size)
+                        crop.image = cropImages[crop.cropId - 1]
+                    else
+                        crop.imageUrl = cropObject.optString("img", "")
 
                     cropList.add(crop)
                 } catch (e: Exception) {

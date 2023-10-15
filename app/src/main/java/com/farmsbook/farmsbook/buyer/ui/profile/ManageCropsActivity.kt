@@ -86,7 +86,7 @@ class ManageCropsActivity : AppCompatActivity() {
         }
 
         binding.manageCropBtn.setOnClickListener {
-           addData2()
+           manageCrops()
             binding.manageCropBtn.visibility = GONE
             binding.doneBtn.visibility = VISIBLE
 
@@ -99,7 +99,7 @@ class ManageCropsActivity : AppCompatActivity() {
         }
     }
 
-    private fun addData2() {
+    private fun manageCrops() {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
@@ -109,20 +109,20 @@ class ManageCropsActivity : AppCompatActivity() {
         // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
             for (i in 0 until response.length()) {
                 try {
-                    var cropObject = response.getJSONObject(i)
-                    var crop = ManageCropData()
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
                     crop.cropId = cropObject.getInt("cropId")
-                    crop.image = cropImages[crop.cropId - 1]
+
+                    if( crop.cropId < cropImages.size)
+                        crop.image = cropImages[crop.cropId - 1]
+                    else
+                        crop.imageUrl = cropObject.optString("img", "")
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -154,29 +154,20 @@ class ManageCropsActivity : AppCompatActivity() {
         val userId = sharedPreference?.getInt("USER_ID", 0)
         val url = "$baseAddressUrl/user/$userId/manageCrops/$id"
 
-        // creating a new variable for our request queue
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
-
-        // on below line we are calling a string
-        // request method to post the data to our API
-        // in this we are calling a post method.
         val request = JsonObjectRequest(Request.Method.DELETE, url, null, { response: JSONObject ->
 
-            //Toast.makeText(this, "Deleted Crop", Toast.LENGTH_SHORT).show()
 
         }, { error -> // method to handle errors.
 
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
-            Log.d("Profile Data", "Fail to get response = $error")
+            Log.e("Profile Data", "Fail to get response", error)
         })
         queue.add(request)
     }
 
     private fun addData() {
-//        for (i in cropNames.indices) {
-//            cropList.add(i, ManageCropData(cropNames[i], cropImages[i], cropId[i]))
-//        }
 
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -195,10 +186,9 @@ class ManageCropsActivity : AppCompatActivity() {
 
             for (i in 0 until response.length()) {
                 try {
-                    var cropObject = response.getJSONObject(i)
-                    var crop = ManageCropData()
+                    val cropObject = response.getJSONObject(i)
+                    val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
-                    Log.i("ManageCropsActivity", "addData: ${crop.cropName}")
                     crop.id = cropObject.getInt("id")
                     crop.cropId = cropObject.getInt("cropId")
 
