@@ -2,6 +2,7 @@ package com.farmsbook.farmsbook.admin.ui.management.buyer
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -54,7 +55,9 @@ class BuyerManagementAdapter(private val buyers: ArrayList<AdminBuyerData>,
         holder.tvLocation.text = buyers[position].location
         holder.tvCompanyName.text = buyers[position].companyName
         holder.tvCompanyTurnover.text = buyers[position].companyTurnover.toString()
-        holder.tvCropsDeal.text = buyers[position].crops
+        //holder.tvCropsDeal.text = buyers[position].crops
+        holder.tvCropsDeal.visibility = View.GONE
+        holder.textCropsDeal.visibility =  View.GONE
 
         holder.btnCall.setOnClickListener {
             buyers[position].phone?.let { phone -> onCallClick(phone) }

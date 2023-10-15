@@ -10,7 +10,10 @@ import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.google.android.material.imageview.ShapeableImageView
 
-class ManageCropAdapter (private val plantList : ArrayList<ManageCropData>, val context: Context):RecyclerView.Adapter<ManageCropAdapter.Myviewholder> () {
+class ManageCropAdapter (
+    private val plantList : ArrayList<ManageCropData>,
+    val context: Context
+):RecyclerView.Adapter<ManageCropAdapter.Myviewholder> () {
 
     private lateinit var mListener: onItemClickListener
 
@@ -27,7 +30,8 @@ class ManageCropAdapter (private val plantList : ArrayList<ManageCropData>, val 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Myviewholder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.manage_crop_list_item,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.manage_crop_list_item,
+            parent,false)
 
         return Myviewholder(itemView,mListener)//,mListener
     }
@@ -36,16 +40,13 @@ class ManageCropAdapter (private val plantList : ArrayList<ManageCropData>, val 
 
 
         val currentItem =plantList[position]
-        Glide.with(context).load(plantList[position].Image).into(holder.cropImage)
-        //holder.plantImage.setImageResource(currentItem.Image)
 
-        holder.cropName.text = currentItem.Name
-        //holder.cropPrice.text= currentItem.id
+        if (plantList[position].imageUrl != null)
+            Glide.with(context).load(plantList[position].imageUrl).into(holder.cropImage)
+        else
+            Glide.with(context).load(plantList[position].image).into(holder.cropImage)
 
-
-//        holder.itemView.setOnClickListener {
-//            onItemClickListener?.invoke(currentItem)
-//        }
+        holder.cropName.text = currentItem.cropName
     }
 
     override fun getItemCount(): Int {

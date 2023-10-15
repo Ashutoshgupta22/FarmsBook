@@ -12,7 +12,7 @@ class AdminLoginActivity : AppCompatActivity() {
 
     private val adminPhone = hashMapOf(
         "ashutoshgupta1422@gmail.com" to "7800303348",
-        "ankitsharma97194@gmail.com" to "7740869648",
+        "adminankit@gmail.com" to "7740869648",
         "pankaj.farmsbook@gmail.com" to "7740869648"
     )
 

@@ -36,10 +36,10 @@ class ManageCropAdapter2 (private val plantList : ArrayList<ManageCropData>, val
 
 
         val currentItem =plantList[position]
-        Glide.with(context).load(plantList[position].Image).into(holder.cropImage)
+        Glide.with(context).load(plantList[position].image).into(holder.cropImage)
         //holder.plantImage.setImageResource(currentItem.Image)
 
-        holder.cropName.text = currentItem.Name
+        holder.cropName.text = currentItem.cropName
         //holder.cropPrice.text= currentItem.id
 
 

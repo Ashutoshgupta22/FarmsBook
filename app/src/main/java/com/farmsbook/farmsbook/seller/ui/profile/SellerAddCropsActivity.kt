@@ -102,9 +102,9 @@ class SellerAddCropsActivity : AppCompatActivity() {
                 try {
                     var cropObject = response.getJSONObject(i)
                     var crop = ManageCropData()
-                    crop.Name = cropObject.getString("cropName")
+                    crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("cropId")
-                    crop.Image = cropImages[crop.id - 1]
+                    crop.image = cropImages[crop.id - 1]
 
                     cropList.add(crop)
                 } catch (e: Exception) {

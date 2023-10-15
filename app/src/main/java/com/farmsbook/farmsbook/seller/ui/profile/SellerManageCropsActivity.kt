@@ -118,10 +118,10 @@ class SellerManageCropsActivity : AppCompatActivity() {
                 try {
                     var cropObject = response.getJSONObject(i)
                     var crop = ManageCropData()
-                    crop.Name = cropObject.getString("cropName")
+                    crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
-                    crop.crop_id = cropObject.getInt("cropId")
-                    crop.Image = cropImages[crop.crop_id - 1]
+                    crop.cropId = cropObject.getInt("cropId")
+                    crop.image = cropImages[crop.cropId - 1]
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -206,10 +206,10 @@ class SellerManageCropsActivity : AppCompatActivity() {
                 try {
                     var cropObject = response.getJSONObject(i)
                     var crop = ManageCropData()
-                    crop.Name = cropObject.getString("cropName")
+                    crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
-                    crop.crop_id = cropObject.getInt("cropId")
-                    crop.Image = cropImages[crop.crop_id - 1]
+                    crop.cropId = cropObject.getInt("cropId")
+                    crop.image = cropImages[crop.cropId - 1]
 
                     cropList.add(crop)
                 } catch (e: Exception) {

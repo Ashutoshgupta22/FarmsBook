@@ -2,12 +2,10 @@ package com.farmsbook.farmsbook.buyer.ui.profile
 
 import android.content.Context
 import android.content.Intent
-import android.content.LocusId
 import android.os.Bundle
 import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
@@ -121,10 +119,10 @@ class ManageCropsActivity : AppCompatActivity() {
                 try {
                     var cropObject = response.getJSONObject(i)
                     var crop = ManageCropData()
-                    crop.Name = cropObject.getString("cropName")
+                    crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
-                    crop.crop_id = cropObject.getInt("cropId")
-                    crop.Image = cropImages[crop.crop_id - 1]
+                    crop.cropId = cropObject.getInt("cropId")
+                    crop.image = cropImages[crop.cropId - 1]
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -139,25 +137,15 @@ class ManageCropsActivity : AppCompatActivity() {
                 override fun onItemClick(position: Int) {
 
                     deleteCrop(cropList[position].id.toString())
-                   cropList.removeAt(position)
-                    adapter.notifyDataSetChanged()
-                    //Toast.makeText(context, "You Clicked on item no. $position", Toast.LENGTH_SHORT) .show()
-//                startActivity(
-//                    Intent(
-//                        this,
-//                        ViewSupplierActivity::class.java
-//                    ).putExtra("FARMER_ID", followList[position].FarmerID))
-
+                    cropList.removeAt(position)
+                    adapter.notifyItemRemoved(position)
                 }
             })
 
-//            Toast.makeText(context, "Profile Created", Toast.LENGTH_SHORT)
-//                .show()
-        }, { error -> // method to handle errors.
-            //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
+        }, { error ->
+            Log.e("ManageCropsActivity", "addData2: Failed",error )
         })
         queue.add(request)
-
     }
 
     private fun deleteCrop(id: String) {
@@ -209,10 +197,15 @@ class ManageCropsActivity : AppCompatActivity() {
                 try {
                     var cropObject = response.getJSONObject(i)
                     var crop = ManageCropData()
-                    crop.Name = cropObject.getString("cropName")
+                    crop.cropName = cropObject.getString("cropName")
+                    Log.i("ManageCropsActivity", "addData: ${crop.cropName}")
                     crop.id = cropObject.getInt("id")
-                    crop.crop_id = cropObject.getInt("cropId")
-                    crop.Image = cropImages[crop.crop_id - 1]
+                    crop.cropId = cropObject.getInt("cropId")
+
+                    if( crop.cropId < cropImages.size)
+                        crop.image = cropImages[crop.cropId - 1]
+                    else
+                        crop.imageUrl = cropObject.optString("img", "")
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -250,8 +243,5 @@ class ManageCropsActivity : AppCompatActivity() {
             //Toast.makeText(this, "Fail to get response = $error", Toast.LENGTH_LONG).show()
         })
         queue.add(request)
-
     }
-
-
 }

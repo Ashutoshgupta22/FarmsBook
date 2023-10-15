@@ -16,10 +16,7 @@ import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.ui.profile.ManageCropsActivity
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropData
 import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.RequirementConfirmationActivity
-import com.farmsbook.farmsbook.buyer.ui.requirements.fragments.requirements_child.adapters.CropData
 import com.farmsbook.farmsbook.databinding.ActivityAddRequirementBinding
-import com.farmsbook.farmsbook.login.EnterDetailsFragment
-import com.farmsbook.farmsbook.seller.ui.listings.fragments.ListingConfirmationActivity
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
 import org.json.JSONObject
@@ -186,11 +183,11 @@ class AddRequirementActivity : AppCompatActivity() {
         respObj.put("crop_name", name)
         for(i in cropList.indices)
         {
-            if(cropList[i].Name == name.toString())
+            if(cropList[i].cropName == name.toString())
             {
                 //Log.d("Crop List","${cropList}")
                 //Log.d("Crop List","$i")
-                cropId = cropList[i].crop_id
+                cropId = cropList[i].cropId
             }
         }
         Log.d("Crop List","$cropId")
@@ -248,9 +245,9 @@ class AddRequirementActivity : AppCompatActivity() {
                 try {
                     val cropObject = response.getJSONObject(i)
                     val crop = ManageCropData()
-                    crop.Name = cropObject.getString("cropName")
+                    crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
-                    crop.crop_id = cropObject.getInt("cropId")
+                    crop.cropId = cropObject.getInt("cropId")
                     cropName.add(cropObject.getString("cropName"))
 
                     cropList.add(crop)

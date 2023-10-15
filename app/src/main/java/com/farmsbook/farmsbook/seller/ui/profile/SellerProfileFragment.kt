@@ -3,7 +3,6 @@ package com.farmsbook.farmsbook.seller.ui.profile
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.finishAffinity
-import androidx.core.app.ActivityCompat.recreate
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -27,7 +25,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.buyer.ui.profile.AddCropActivity
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropAdapter3
 import com.farmsbook.farmsbook.buyer.ui.profile.adapters.ManageCropData
 import com.farmsbook.farmsbook.databinding.FragmentSellerProfileBinding
@@ -264,10 +261,10 @@ class SellerProfileFragment : Fragment() {
                 try {
                     var cropObject = response.getJSONObject(i)
                     var crop = ManageCropData()
-                    crop.Name = cropObject.getString("cropName")
+                    crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("id")
-                    crop.crop_id = cropObject.getInt("cropId")
-                    crop.Image = cropImages[crop.crop_id - 1]
+                    crop.cropId = cropObject.getInt("cropId")
+                    crop.image = cropImages[crop.cropId - 1]
 
                     cropList.add(crop)
                 } catch (e: Exception) {

@@ -24,7 +24,8 @@ import java.io.FileOutputStream
 
 class CropsFragmentViewModel: ViewModel() {
 
-     var _cropAdded = MutableLiveData<Boolean>()
+    //do not make it private
+    var _cropAdded = MutableLiveData<Boolean>()
     val cropAdded: LiveData<Boolean> = _cropAdded
     private var _myCrops = MutableLiveData<ArrayList<CropData>>()
     val myCrops: LiveData<ArrayList<CropData>> = _myCrops
