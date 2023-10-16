@@ -30,6 +30,8 @@ class AdminOffersFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getAllOffers(requireContext())
+
         binding.rvAdminOffers.apply {
             layoutManager = LinearLayoutManager(requireContext(),
                 LinearLayoutManager.VERTICAL, false)

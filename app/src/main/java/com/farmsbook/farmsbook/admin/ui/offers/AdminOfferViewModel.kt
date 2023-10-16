@@ -25,7 +25,7 @@ class AdminOfferViewModel : ViewModel() {
     fun getAllOffers(context: Context) {
 
         val queue = Volley.newRequestQueue(context)
-        val url = "$baseUrl/admin/allListedCrops"
+        val url = "$baseUrl/admin/offers"
 
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 

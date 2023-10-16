@@ -80,7 +80,7 @@ class AddCropActivity : AppCompatActivity() {
             finish()
         }
         getAllCrops()
-        getAllAdminCrops()
+        //getAllAdminCrops()
     }
 
     private fun getAllCrops() {
@@ -88,7 +88,9 @@ class AddCropActivity : AppCompatActivity() {
         val baseAddressUrl = BaseAddressUrl().baseAddressUrl
         val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userId = sharedPreference?.getInt("USER_ID", 0)
-        val url = "$baseAddressUrl/user/$userId/manageAllCrops"
+//        val url = "$baseAddressUrl/user/$userId/manageAllCrops"
+        val url = "$baseUrl/user/$userId/manageAllUnselectedCrops"
+
 
         cropList = arrayListOf<ManageCropData>()
         // creating a new variable for our request queue
@@ -102,7 +104,8 @@ class AddCropActivity : AppCompatActivity() {
                     val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("cropId")
-                    crop.image = cropImages[crop.id - 1]
+                    crop.imageUrl = cropObject.getString("img")
+                    //crop.image = cropImages[crop.id - 1]
 
                     cropList.add(crop)
                 } catch (e: Exception) {
@@ -113,12 +116,16 @@ class AddCropActivity : AppCompatActivity() {
             binding.cropsRV.layoutManager = GridLayoutManager(this, 4)
             val adapter = ManageCropAdapter(cropList, this)
             binding.cropsRV.adapter = adapter
-            binding.cropsRV.isNestedScrollingEnabled = false
+            //binding.cropsRV.isNestedScrollingEnabled = false
 
             adapter.setOnItemClickListener(object : ManageCropAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
 
-                    addCrop(cropList[position].id.toString())
+                    val id = cropList[position].id
+
+                    if (id < cropList.size) addCrop(id.toString())
+                    else addAdminCrop(id.toString())
+
                     cropList.removeAt(position)
                     adapter.notifyItemRemoved(position)
                 }
@@ -130,52 +137,54 @@ class AddCropActivity : AppCompatActivity() {
         queue.add(request)
     }
 
-    private fun getAllAdminCrops() {
-
-        val queue = Volley.newRequestQueue(this)
-        val url = "$baseUrl/admin/allCrops"
-
-        val request = JsonArrayRequest(
-            Request.Method.GET,
-            url, null, { response: JSONArray ->
-
-                val cropList = arrayListOf<ManageCropData>()
-
-                for (i in 0 until response.length()) {
-
-                    val cropObj = response.getJSONObject(i)
-                    val id = cropObj.getInt("cropId")
-                    // val parentId = cropObj.getInt("parentId")
-                    val name = cropObj.getString("cropName")
-                    //  val status = cropObj.getString("status")
-                    val imagePath = cropObj.getString("imagePath")
-
-                    cropList.add(ManageCropData(name, 0, 0, id, imagePath))
-
-                }
-
-                binding.rvAdminCrops.apply {
-
-                    isNestedScrollingEnabled = false
-                    layoutManager = GridLayoutManager(this@AddCropActivity, 4)
-                    val myAdapter = ManageCropAdapter(cropList, this@AddCropActivity)
-                    adapter = myAdapter
-
-                    myAdapter.setOnItemClickListener(object : ManageCropAdapter.onItemClickListener {
-                        override fun onItemClick(position: Int) {
-
-                            addAdminCrop(cropList[position].id.toString())
-                            cropList.removeAt(position)
-                            myAdapter.notifyItemRemoved(position)
-                        }
-                    })
-                }
-
-            }) { error: VolleyError ->
-            Log.e("AddCropActivity", "getAllAdminCrops: FAILED", error)
-        }
-        queue.add(request)
-    }
+//    private fun getAllAdminCrops() {
+//
+//        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+//        val userId = sharedPreference?.getInt("USER_ID", 0)
+//        val queue = Volley.newRequestQueue(this)
+//        Log.i("AddCropActivity", "getAllAdminCrops: userID-$userId")
+//        val url = "$baseUrl/user/$userId/manageAllUnselectedCrops"
+//        //val url = "$baseUrl/admin/allCrops"
+//
+//        val request = JsonArrayRequest(
+//            Request.Method.GET,
+//            url, null, { response: JSONArray ->
+//
+//                val cropList = arrayListOf<ManageCropData>()
+//
+//                for (i in 0 until response.length()) {
+//
+//                    val cropObj = response.getJSONObject(i)
+//                    val id = cropObj.getInt("cropId")
+//                    val name = cropObj.getString("cropName")
+//                    val imagePath = cropObj.getString("img")
+//
+//                    cropList.add(ManageCropData(name, 0, 0, id, imagePath))
+//
+//                }
+//
+//                binding.rvAdminCrops.apply {
+//
+//                    isNestedScrollingEnabled = false
+//                    layoutManager = GridLayoutManager(this@AddCropActivity, 4)
+//                    val myAdapter = ManageCropAdapter(cropList, this@AddCropActivity)
+//                    adapter = myAdapter
+//
+//                    myAdapter.setOnItemClickListener(object : ManageCropAdapter.onItemClickListener {
+//                        override fun onItemClick(position: Int) {
+//
+//                            addAdminCrop(cropList[position].id.toString())
+//                            cropList.removeAt(position)
+//                            myAdapter.notifyItemRemoved(position)
+//                        }
+//                    })
+//                }
+//
+//            }) { error: VolleyError ->
+//            Log.e("AddCropActivity", "getAllAdminCrops: FAILED", error)
+//        }
+//        queue.add(request)
+//    }
 
     private fun addAdminCrop(cropId: String) {
 
