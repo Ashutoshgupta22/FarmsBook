@@ -50,8 +50,8 @@ class AdminOffersAdapter(
             .into(holder.ivCrop)
 
         holder.tvCropName.text = currentItem.offerCropName
-        val rate = "${currentItem.minPrice}-${currentItem.maxPrice}/kg"
-        holder.tvCropRate.text = rate
+       // val rate = "${currentItem.minPrice}-${currentItem.maxPrice}/kg"
+        holder.tvCropRate.text = "Rs. ${currentItem.offeringPrice.toString()}"
         holder.tvCropQuantity.text =
             "${currentItem.offeringQuantity.toString()} ${currentItem.offeringQuantityUnit}"
 

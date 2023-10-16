@@ -1,13 +1,11 @@
 package com.farmsbook.farmsbook.admin.ui.cropslistings.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.farmsbook.farmsbook.R
-import com.farmsbook.farmsbook.databinding.ItemCropsBinding
 import com.farmsbook.farmsbook.databinding.ItemListedCropsBinding
 
 class ListedCropsAdapter(
@@ -42,6 +40,7 @@ class ListedCropsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        val currentItem = listedCropsList[position]
         Glide
             .with(context)
             .load(listedCropsList[position].imageUrl0)
@@ -49,28 +48,29 @@ class ListedCropsAdapter(
             .into(holder.ivCrop)
 
         Glide.with(context)
-            .load(listedCropsList[position].userDp)
+            .load(listedCropsList[position].userImage)
             .fitCenter()
             .into(holder.ivSeller)
 
         holder.tvCropName.text = listedCropsList[position].cropName
-        holder.tvCropRate.text = listedCropsList[position].rate.toString()
+        val rate = "${currentItem.minPrice}-${currentItem.maxPrice}/kg"
+        holder.tvCropRate.text = rate
         holder.tvCropQuantity.text =
             "${listedCropsList[position].quantity.toString()} ${listedCropsList[position].quantityUnit}"
 
-        if(listedCropsList[position].listedStatus == true) {
-            holder.tvStatus.text = context.getString(R.string.active)
-            holder.tvStatus.setTextColor(Color.GREEN)
-        }
-        else {
-            holder.tvStatus.text = context.getString(R.string.inactive)
-            holder.tvStatus.setTextColor(Color.RED)
-        }
+        holder.tvStatus.visibility = View.GONE
+
+//        if(listedCropsList[position].listedStatus == true) {
+//            holder.tvStatus.text = context.getString(R.string.active)
+//            holder.tvStatus.setTextColor(Color.GREEN)
+//        }
+//        else {
+//            holder.tvStatus.text = context.getString(R.string.inactive)
+//            holder.tvStatus.setTextColor(Color.RED)
+//        }
 
         holder.tvSellerName.text = listedCropsList[position].user.toString()
-        //holder.tvGroupName.text = listedCropsList[position].listedOffer!![0].farmerCompany
-
-
+        holder.tvGroupName.text = listedCropsList[position].companyName
 
        // holder.cvItem.setOnClickListener { onItemClick(position) }
 
