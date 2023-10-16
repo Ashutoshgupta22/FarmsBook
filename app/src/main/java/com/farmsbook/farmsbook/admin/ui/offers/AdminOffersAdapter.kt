@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.databinding.ItemAdminOffersBinding
 import com.farmsbook.farmsbook.databinding.ItemAdminRequirementsBinding
+import com.farmsbook.farmsbook.utility.TimeFormatter
 
 class AdminOffersAdapter(
     private val offerList: ArrayList<AdminOfferData>
@@ -40,26 +41,33 @@ class AdminOffersAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-//        Glide
-//            .with(context)
-//            .load(offerList[position].imageUrl0)
-//            .fitCenter()
-//            .into(holder.ivCrop)
-//
-//        holder.tvCropName.text = offerList[position].cropName
-//        holder.tvCropRate.text = offerList[position].rate.toString()
-//        holder.tvCropQuantity.text =
-//            "${offerList[position].quantity.toString()} ${offerList[position].quantityUnit}"
-//
-//
-//        holder.tvBuyerName.text = offerList[position].user.toString()
-        //holder.tvGroupName.text = offerList[position].listedOffer!![0].farmerCompany
+        val currentItem = offerList[position]
+
+        Glide
+            .with(context)
+            .load(currentItem.imageUrl0)
+            .fitCenter()
+            .into(holder.ivCrop)
+
+        holder.tvCropName.text = currentItem.offerCropName
+        val rate = "${currentItem.minPrice}-${currentItem.maxPrice}/kg"
+        holder.tvCropRate.text = rate
+        holder.tvCropQuantity.text =
+            "${currentItem.offeringQuantity.toString()} ${currentItem.offeringQuantityUnit}"
+
+
+        holder.tvBuyerName.text = currentItem.buyerName
+        holder.tvBuyerCompanyName.text = currentItem.companyName
+        holder.tvSellerName.text = currentItem.farmerName
+        holder.tvSellerCompanyName.text = currentItem.farmerCompanyName
+
+        holder.tvDate.text = currentItem.timestamp?.let { TimeFormatter().getFullDate(it) }
 
         // holder.cvItem.setOnClickListener { onItemClick(position) }
 
     }
 
     override fun getItemCount(): Int {
-        return offerList.size.coerceAtLeast(10)
+        return offerList.size
     }
 }

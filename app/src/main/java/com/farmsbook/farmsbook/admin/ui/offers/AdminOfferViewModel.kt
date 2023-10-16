@@ -17,8 +17,8 @@ import org.json.JSONArray
 
 class AdminOfferViewModel : ViewModel() {
 
-    private var _offers = MutableLiveData<RequirementData>()
-    val offers: LiveData<RequirementData> = _offers
+    private var _offers = MutableLiveData<ArrayList<AdminOfferData>>()
+    val offers: LiveData<ArrayList<AdminOfferData>> = _offers
 
     private val baseUrl = BaseAddressUrl().baseAddressUrl
 
@@ -29,75 +29,54 @@ class AdminOfferViewModel : ViewModel() {
 
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response: JSONArray ->
 
-            val cropList = arrayListOf<ListedCropData>()
+            val offerList = arrayListOf<AdminOfferData>()
 
             for (i in 0 until response.length()) {
-                val cropObj = response.getJSONObject(i)
+                val offerObj = response.getJSONObject(i)
 
-                val listId = cropObj.optInt("list_id", 0)
-                val parentId = cropObj.optInt("parent_id")
-                val cropName = cropObj.optString("crop_name", null)
-                val variety = cropObj.optString("variety", null)
-                val typeOfSale = cropObj.optBoolean("type_of_sale", false)
-                val rate = cropObj.optInt("rate", 0)
-                val minPrice = cropObj.optInt("min_price", 0)
-                val maxPrice = cropObj.optInt("max_price", 0)
-                val quantity = cropObj.optInt("quantity", 0)
-                val quantityUnit = cropObj.optString("quantity_unit", null)
-                val location = cropObj.optString("location", null)
-                val transportation = cropObj.optBoolean("transportation", false)
-                val typeOfFarming = cropObj.optBoolean("type_of_farming", false)
-                val timeOfSowing = cropObj.optString("time_of_sowing", null)
-                val timestamp = cropObj.optString("timestamp", null)
-                val receiveBuyerId = cropObj.optInt("receive_buyer_id")
-                val receiveOfferStatus = cropObj.optBoolean("receive_offer_status", false)
-                val listedStatus = cropObj.optBoolean("listed_status", false)
-                val imageUrl0 = cropObj.optString("imageUrl0", null)
-                val imageUrls = cropObj.optJSONArray("imageUrls")
-                    ?.let { 0.until(it.length()).map { i -> it.optString(i) } }
-                val images = cropObj.optJSONArray("images")
-                    ?.let { 0.until(it.length()).map { i -> it.optString(i) } }
-                val user =
-                    cropObj.opt("user") // The type of "user" is not clear from the provided JSON
+                val interestedUsersArray = offerObj.optJSONArray("counterStatus")
+                val interestedUsersList = ArrayList<Any>()
 
-                val listedOfferArray = cropObj.optJSONArray("listedOffer")
-                val listedOfferList = ArrayList<ListedOffer>()
-                if (listedOfferArray != null) {
-                    for (j in 0 until listedOfferArray.length()) {
-                        val listedOfferObj = listedOfferArray.getJSONObject(j)
-                        // Parse ListedOffer objects similarly to ListedCropData and add them to the listedOfferList
+                if (interestedUsersArray != null) {
+                    for (j in 0 until interestedUsersArray.length()) {
+                        // Parse interested users objects similarly to OfferData and add them to interestedUsersList
+                        // You might need to create a separate data class for the interested users' structure
                     }
                 }
 
-                val listedCropData = ListedCropData(
-                    listId,
-                    parentId,
-                    cropName,
-                    variety,
-                    typeOfSale,
-                    rate,
-                    minPrice,
-                    maxPrice,
-                    quantity,
-                    quantityUnit,
-                    location,
-                    transportation,
-                    typeOfFarming,
-                    timeOfSowing,
-                    timestamp,
-                    receiveBuyerId,
-                    receiveOfferStatus,
-                    listedStatus,
-                    imageUrl0,
-                    "",
-                    imageUrls,
-                    images,
-                    user,
-                    listedOfferList
+                val offerData = AdminOfferData(
+                    offerId = offerObj.optInt("offerId"),
+                    offerById = offerObj.optInt("offer_by_id"),
+                    offerCropName = offerObj.optString("offer_cropName"),
+                    offerToCropId = offerObj.optInt("offer_to_crop_id"),
+                    offerToFarmerId = offerObj.optInt("offer_to_farmer_id"),
+                    purchasedOn = offerObj.optBoolean("purchased_on"),
+                    rateOfCommission = offerObj.optInt("rate_of_commission"),
+                    offeringPrice = offerObj.optInt("offering_price"),
+                    offeringQuantityUnit = offerObj.optString("offering_quantity_unit"),
+                    offeringQuantity = offerObj.optInt("offering_quantity"),
+                    transportation = offerObj.optBoolean("transportation"),
+                    deliveryPlace = offerObj.optString("delivery_place"),
+                    imageUrl0 = offerObj.optString("imageUrl0"),
+                    buyerImage = offerObj.optString("buyerImage"),
+                    farmerImage = offerObj.optString("farmerImage"),
+                    offerStatus = offerObj.optBoolean("offer_status"),
+                    phone = offerObj.optString("phone"),
+                    phone2 = offerObj.optString("phone2"),
+                    companyName = offerObj.optString("companyName"),
+                    farmerCompanyName = offerObj.optString("farmer_companyName"),
+                    timestamp = offerObj.optString("timestamp"),
+                    buyerName = offerObj.optString("buyer_name"),
+                    farmerName = offerObj.optString("farmer_name"),
+                    replied = offerObj.optBoolean("replied"),
+                    user = offerObj.opt("user"),
+                    listings = offerObj.opt("listings"),
+                    counterStatus = interestedUsersList
                 )
 
-                cropList.add(listedCropData)
+                offerList.add(offerData)
             }
+            _offers.postValue(offerList)
         }) { error: VolleyError ->
             Log.e("ListedCropViewModel", "getAllCrops: FAILED", error)
         }

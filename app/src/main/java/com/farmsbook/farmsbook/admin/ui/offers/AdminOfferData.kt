@@ -1,29 +1,36 @@
 package com.farmsbook.farmsbook.admin.ui.offers
 
-import com.farmsbook.farmsbook.admin.ui.cropslistings.adapter.ListedOffer
-
 data class AdminOfferData(
 
-    var listId: Int?,
-    var parentId: Int?,
-    var cropName: String?,
-    var variety: String?,
-    var typeOfSale: Boolean?,
-    var rate: Int?,
-    var minPrice: Int?,
-    var maxPrice: Int?,
-    var quantity: Int?,
-    var quantityUnit: String?,
-    var location: String?,
-    var transportation: Boolean?,
-    var timestamp: String?,
-    var receiveBuyerId: Int?,
-    var receiveOfferStatus: Boolean?,
-    var listedStatus: Boolean?,
-    var imageUrl0: String?,
-    var imageUrls: List<String>?,
-    var images: List<String>?,
-    var user: Any?,
-    var listedOffer: List<ListedOffer>?
-
+    val offerId: Int? = null,
+    val offerById: Int? = null,
+    val offerCropName: String? = null,
+    val offerToCropId: Int? = null,
+    val offerToFarmerId: Int? = null,
+    val purchasedOn: Boolean? = null,
+    val rateOfCommission: Int? = null,
+    val minPrice: Int = 0,
+    val maxPrice: Int = 0,
+    val offeringPrice: Int? = null,
+    val offeringQuantityUnit: String? = null,
+    val offeringQuantity: Int? = null,
+    val transportation: Boolean? = null,
+    val deliveryPlace: String? = null,
+    val imageUrl0: String? = null,
+    val buyerImage: String? = null,
+    val farmerImage: String? = null,
+    val offerStatus: Boolean? = null,
+    val phone: String? = null,
+    val phone2: String? = null,
+    val companyName: String? = null,
+    val farmerCompanyName: String? = null,
+    val timestamp: String? = null,
+    val buyerName: String? = null,
+    val farmerName: String? = null,
+    val replied: Boolean? = null,
+    val user: Any? = null,
+    val listings: Any? = null,
+    val counterStatus: List<Any>? = null
 )
+
+

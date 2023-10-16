@@ -32,20 +32,15 @@ class AdminOffersFragment: Fragment() {
 
         viewModel.getAllOffers(requireContext())
 
-        binding.rvAdminOffers.apply {
-            layoutManager = LinearLayoutManager(requireContext(),
-                LinearLayoutManager.VERTICAL, false)
-
-            adapter = AdminOffersAdapter(arrayListOf())
-        }
-
         viewModel.offers.observe(viewLifecycleOwner) {
 
-            binding.rvAdminOffers.apply {
-                layoutManager = LinearLayoutManager(requireContext(),
-                    LinearLayoutManager.VERTICAL, false)
+            it?.let {
+                binding.rvAdminOffers.apply {
+                    layoutManager = LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.VERTICAL, false)
 
-                adapter = AdminOffersAdapter(arrayListOf())
+                    adapter = AdminOffersAdapter(it)
+                }
             }
         }
     }
