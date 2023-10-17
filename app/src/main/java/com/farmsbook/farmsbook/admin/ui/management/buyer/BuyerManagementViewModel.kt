@@ -14,8 +14,8 @@ import org.json.JSONArray
 
 class BuyerManagementViewModel: ViewModel() {
 
-    private var _allBuyers = MutableLiveData<ArrayList<AdminBuyerData>>()
-    val allBuyers: LiveData<ArrayList<AdminBuyerData>> = _allBuyers
+    private var _allBuyers = MutableLiveData<ArrayList<AdminUserData>>()
+    val allBuyers: LiveData<ArrayList<AdminUserData>> = _allBuyers
 
     private val baseUrl = BaseAddressUrl().baseAddressUrl
 
@@ -28,7 +28,7 @@ class BuyerManagementViewModel: ViewModel() {
         val request = JsonArrayRequest(Request.Method.GET,
             url, null, { response: JSONArray ->
 
-                val buyerList = arrayListOf<AdminBuyerData>()
+                val buyerList = arrayListOf<AdminUserData>()
                 for (i in 0 until  response.length()) {
                     val buyer = response.getJSONObject(i)
                     val id = buyer.getInt("id")
@@ -40,7 +40,7 @@ class BuyerManagementViewModel: ViewModel() {
                     val crops = buyer.getString("crops")
                     val userImage = buyer.getString("userImage")
 
-                    buyerList.add( AdminBuyerData(id, name, location, phone,
+                    buyerList.add( AdminUserData(id, name, location, phone,
                         companyName, companyTurnover, crops, userImage)
                     )
                 }

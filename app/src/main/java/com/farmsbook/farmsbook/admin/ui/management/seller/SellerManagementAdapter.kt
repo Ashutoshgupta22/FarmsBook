@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminUserData
 import com.farmsbook.farmsbook.databinding.ItemAdminUserManagementBinding
 
-class SellerManagementAdapter(private val sellers: ArrayList<AdminSellerData>,
+class SellerManagementAdapter(private val sellers: ArrayList<AdminUserData>,
                             private val onCallClick: (String) -> Unit,
-                            private val callback: (pos: Int) -> Unit):
+                            private val callback: ( Int) -> Unit):
     RecyclerView.Adapter<SellerManagementAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -47,7 +48,7 @@ class SellerManagementAdapter(private val sellers: ArrayList<AdminSellerData>,
 
         Glide
             .with(context)
-            .load(R.drawable.coffee)
+            .load(sellers[position].userImage)
             .centerCrop()
             .into(holder.ivImage)
 
@@ -58,15 +59,15 @@ class SellerManagementAdapter(private val sellers: ArrayList<AdminSellerData>,
 
         holder.tvName.text = sellers[position].name
         holder.tvLocation.text = sellers[position].location
-        holder.tvGroupName.text = sellers[position].groupName
-        holder.tvGroupTurnover.text = sellers[position].groupTurnover.toString()
+        holder.tvGroupName.text = sellers[position].companyName
+        holder.tvGroupTurnover.text = sellers[position].companyTurnover.toString()
         //holder.tvCropsDeal.text = sellers[position].crops
         holder.tvCropsDeal.visibility = View.GONE
 
         holder.btnCall.setOnClickListener {
             sellers[position].phone?.let { phone -> onCallClick(phone) }
         }
-        holder.cvItem.setOnClickListener { callback(position) }
+        holder.cvItem.setOnClickListener { callback(sellers[position].id) }
 
     }
 

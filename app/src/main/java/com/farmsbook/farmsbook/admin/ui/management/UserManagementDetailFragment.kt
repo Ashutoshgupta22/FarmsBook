@@ -11,11 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.admin.ui.management.adapter.UserDetailAdapter
-import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminBuyerData
+import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminUserData
 import com.farmsbook.farmsbook.databinding.FragmentUserManagementDetailBinding
-import com.farmsbook.farmsbook.utility.TimeFormatter
 
 class UserManagementDetailFragment: Fragment() {
 
@@ -49,7 +47,7 @@ class UserManagementDetailFragment: Fragment() {
         }
     }
 
-    private fun setUi(it: AdminBuyerData) {
+    private fun setUi(it: AdminUserData) {
 
         Glide
             .with(requireContext())

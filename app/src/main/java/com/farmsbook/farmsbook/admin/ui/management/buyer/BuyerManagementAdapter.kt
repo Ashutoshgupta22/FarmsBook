@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.ItemAdminUserManagementBinding
 
-class BuyerManagementAdapter(private val buyers: ArrayList<AdminBuyerData>,
-                                private val onCallClick: (String) -> Unit,
+class BuyerManagementAdapter(private val buyers: ArrayList<AdminUserData>,
+                             private val onCallClick: (String) -> Unit,
                              private val callback: (pos: Int) -> Unit):
     RecyclerView.Adapter<BuyerManagementAdapter.ViewHolder>() {
 
@@ -55,7 +54,6 @@ class BuyerManagementAdapter(private val buyers: ArrayList<AdminBuyerData>,
         holder.tvLocation.text = buyers[position].location
         holder.tvCompanyName.text = buyers[position].companyName
         holder.tvCompanyTurnover.text = buyers[position].companyTurnover.toString()
-        //holder.tvCropsDeal.text = buyers[position].crops
         holder.tvCropsDeal.visibility = View.GONE
         holder.textCropsDeal.visibility =  View.GONE
 

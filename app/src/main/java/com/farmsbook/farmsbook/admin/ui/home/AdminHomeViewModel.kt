@@ -7,12 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.Request
 import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminBuyerData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
-import org.json.JSONArray
 import org.json.JSONObject
 
 data class Stat(

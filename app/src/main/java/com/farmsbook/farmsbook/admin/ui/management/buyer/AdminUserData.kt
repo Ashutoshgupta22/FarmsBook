@@ -1,6 +1,6 @@
 package com.farmsbook.farmsbook.admin.ui.management.buyer
 
-data class AdminBuyerData(
+data class AdminUserData(
     var id: Int = 0,
     var name: String? = null,
     var location: String? = null,

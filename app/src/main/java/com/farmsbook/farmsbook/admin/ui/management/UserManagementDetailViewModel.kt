@@ -7,19 +7,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.Request
 import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminBuyerData
-import com.farmsbook.farmsbook.seller.ui.buyers.adapters.BuyersData
+import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminUserData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
-import org.json.JSONArray
 import org.json.JSONObject
 
 class UserManagementDetailViewModel : ViewModel() {
 
-    private val _user = MutableLiveData<AdminBuyerData>()
-    val user: LiveData<AdminBuyerData> = _user
+    private val _user = MutableLiveData<AdminUserData>()
+    val user: LiveData<AdminUserData> = _user
 
     private val baseUrl = BaseAddressUrl().baseAddressUrl
 
@@ -59,7 +56,7 @@ class UserManagementDetailViewModel : ViewModel() {
                 }
 
                 _user.postValue(
-                    AdminBuyerData(
+                    AdminUserData(
                         userId, name, location,
                         phone, companyName, companyTurnover, "", userImage,
                         foundationData, requirementList, offerList

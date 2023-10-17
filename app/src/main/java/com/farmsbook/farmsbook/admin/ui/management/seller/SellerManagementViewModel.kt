@@ -9,13 +9,14 @@ import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminUserData
 import com.farmsbook.farmsbook.utility.BaseAddressUrl
 import org.json.JSONArray
 
 class SellerManagementViewModel: ViewModel() {
 
-    private var _allSellers = MutableLiveData<ArrayList<AdminSellerData>>()
-    val allSellers: LiveData<ArrayList<AdminSellerData>> = _allSellers
+    private var _allSellers = MutableLiveData<ArrayList<AdminUserData>>()
+    val allSellers: LiveData<ArrayList<AdminUserData>> = _allSellers
 
     private val baseUrl = BaseAddressUrl().baseAddressUrl
 
@@ -29,7 +30,7 @@ class SellerManagementViewModel: ViewModel() {
             Request.Method.GET,
             url, null, { response: JSONArray ->
 
-                val sellerList = arrayListOf<AdminSellerData>()
+                val sellerList = arrayListOf<AdminUserData>()
                 for (i in 0 until  response.length()) {
                     val seller = response.getJSONObject(i)
                     val id = seller.getInt("id")
@@ -39,9 +40,10 @@ class SellerManagementViewModel: ViewModel() {
                     val companyName = seller.getString("companyName")
                     val companyTurnover = seller.getInt("companyTurnover")
                     val crops = seller.getString("crops")
+                    val userImage = seller.getString("userImage")
 
-                    sellerList.add( AdminSellerData(id, name, location, phone,
-                        companyName, companyTurnover, crops)
+                    sellerList.add( AdminUserData(id, name, location, phone,
+                        companyName, companyTurnover, crops, userImage)
                     )
                 }
                 _allSellers.postValue(sellerList)
