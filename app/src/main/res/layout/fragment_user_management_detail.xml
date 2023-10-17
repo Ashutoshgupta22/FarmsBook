@@ -114,33 +114,6 @@
             android:text="@string/company_turnover" />
 
         <TextView
-            android:id="@+id/tv_crops_deal_management"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rice, wheat, potatoes, more"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textAlignment="textEnd"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="64dp"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/text_crops_deal"
-            android:layout_below="@id/tv_company_turnover_management"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/text_crops_deal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/tv_crops_deal_management"
-            android:text="@string/crops_deal_in" />
-
-
-        <TextView
             android:id="@+id/tv_registered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,7 +125,7 @@
             android:layout_marginStart="64dp"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@id/text_registered"
-            android:layout_below="@id/tv_crops_deal_management"
+            android:layout_below="@id/tv_company_turnover_management"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

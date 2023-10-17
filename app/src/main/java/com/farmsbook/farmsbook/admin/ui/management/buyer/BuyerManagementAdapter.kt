@@ -47,7 +47,7 @@ class BuyerManagementAdapter(private val buyers: ArrayList<AdminBuyerData>,
 
         Glide
             .with(context)
-            .load(R.drawable.coffee)
+            .load(buyers[position].userImage)
             .centerCrop()
             .into(holder.ivImage)
 
@@ -63,7 +63,7 @@ class BuyerManagementAdapter(private val buyers: ArrayList<AdminBuyerData>,
             buyers[position].phone?.let { phone -> onCallClick(phone) }
         }
 
-        holder.cvItem.setOnClickListener { callback(position) }
+        holder.cvItem.setOnClickListener { callback(buyers[position].id) }
 
     }
 

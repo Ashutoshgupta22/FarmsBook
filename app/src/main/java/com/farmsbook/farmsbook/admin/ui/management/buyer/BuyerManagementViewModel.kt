@@ -38,9 +38,10 @@ class BuyerManagementViewModel: ViewModel() {
                     val companyName = buyer.getString("companyName")
                     val companyTurnover = buyer.getInt("companyTurnover")
                     val crops = buyer.getString("crops")
+                    val userImage = buyer.getString("userImage")
 
                     buyerList.add( AdminBuyerData(id, name, location, phone,
-                        companyName, companyTurnover, crops)
+                        companyName, companyTurnover, crops, userImage)
                     )
                 }
                 _allBuyers.postValue(buyerList)

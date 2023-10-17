@@ -1,5 +1,7 @@
 package com.farmsbook.farmsbook.admin.ui.management
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.admin.ui.management.adapter.UserDetailAdapter
+import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminBuyerData
 import com.farmsbook.farmsbook.databinding.FragmentUserManagementDetailBinding
+import com.farmsbook.farmsbook.utility.TimeFormatter
 
 class UserManagementDetailFragment: Fragment() {
 
@@ -33,15 +37,36 @@ class UserManagementDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getUserDetail(requireContext())
+        val id = arguments?.getInt("id") ?: 0
+
+        viewModel.getUserDetail(requireContext(), id)
 
         viewModel.user.observe(viewLifecycleOwner) {
 
             it?.let {
-                setUi()
+                setUi(it)
             }
         }
+    }
 
+    private fun setUi(it: AdminBuyerData) {
+
+        Glide
+            .with(requireContext())
+            .load(it.userImage)
+            .into(binding.ivUserManagement)
+
+        binding.tvNameManagement.text = it.name
+        binding.tvLocationManagement.text = it.location
+        binding.tvCompanyNameManagement.text = it.companyName
+        binding.tvCompanyTurnoverManagement.text = it.companyTurnover.toString()
+        binding.tvRegistered.text = it.foundationDate
+        binding.btnCallManagement.setOnClickListener {_ ->
+
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${it.phone}")
+            startActivity(intent)
+        }
 
         binding.rvFirst.apply {
             layoutManager = LinearLayoutManager(requireContext(),
@@ -57,15 +82,6 @@ class UserManagementDetailFragment: Fragment() {
             adapter = UserDetailAdapter()
         }
 
-
-    }
-
-    private fun setUi() {
-
-        Glide
-            .with(requireContext())
-            .load(R.drawable.jowar)
-            .into(binding.ivUserManagement)
 
     }
 }
