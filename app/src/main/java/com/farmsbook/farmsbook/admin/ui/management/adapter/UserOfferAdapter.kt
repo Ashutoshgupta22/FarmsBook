@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
+import com.farmsbook.farmsbook.admin.ui.management.buyer.OfferData
+import com.farmsbook.farmsbook.admin.ui.management.buyer.RequirementData
 import com.farmsbook.farmsbook.databinding.ItemUserDetailBinding
 
-class UserDetailAdapter: RecyclerView.Adapter<UserDetailAdapter.ViewHolder>() {
+class UserOfferAdapter(private val offerList: ArrayList<OfferData>)
+    : RecyclerView.Adapter<UserOfferAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
@@ -16,7 +19,7 @@ class UserDetailAdapter: RecyclerView.Adapter<UserDetailAdapter.ViewHolder>() {
 
         val ivCrop = binding.ivItemUserDetail
         val tvCropName = binding.tvItemCropName
-        val tvCropAmount = binding.tvItemCropAmount
+        val tvCropQuantity = binding.tvItemCropQuantity
         val tvCropRate = binding.tvItemCropRate
     }
 
@@ -34,13 +37,17 @@ class UserDetailAdapter: RecyclerView.Adapter<UserDetailAdapter.ViewHolder>() {
 
         Glide
             .with(context)
-            .load(R.drawable.barley)
+            .load(offerList[position].imageUrl0)
             .centerCrop()
             .into(holder.ivCrop)
+
+        holder.tvCropName.text = offerList[position].offerCropName
+        holder.tvCropQuantity.text = "${offerList[position].offeringQuantity} ${offerList[position].offeringQuantityUnit}"
+        holder.tvCropRate.text = "${offerList[position].offeringPrice}/kg"
 
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return offerList.size
     }
 }

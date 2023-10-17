@@ -20,6 +20,7 @@ data class ListedCropData(
     var receiveOfferStatus: Boolean?,
     var listedStatus: Boolean?,
     var imageUrl0: String?,
+    var userName: String?,
     var userImage: String?,
     var companyName: String?,
     var imageUrls: List<String>?,

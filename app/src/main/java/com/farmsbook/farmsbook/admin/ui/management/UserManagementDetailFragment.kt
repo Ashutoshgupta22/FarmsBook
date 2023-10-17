@@ -11,7 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.farmsbook.farmsbook.admin.ui.management.adapter.UserDetailAdapter
+import com.farmsbook.farmsbook.admin.ui.management.adapter.UserOfferAdapter
+import com.farmsbook.farmsbook.admin.ui.management.adapter.UserRequirementAdapter
 import com.farmsbook.farmsbook.admin.ui.management.buyer.AdminUserData
 import com.farmsbook.farmsbook.databinding.FragmentUserManagementDetailBinding
 
@@ -66,18 +67,23 @@ class UserManagementDetailFragment: Fragment() {
             startActivity(intent)
         }
 
-        binding.rvFirst.apply {
+        binding.rvRequirement.apply {
             layoutManager = LinearLayoutManager(requireContext(),
                 RecyclerView.VERTICAL, false)
 
-            adapter = UserDetailAdapter()
+            if(it.requirementList.isEmpty())
+                binding.textNoRequirementsPosted.visibility = View.VISIBLE
+
+            adapter = UserRequirementAdapter(it.requirementList)
         }
 
-        binding.rvSecond.apply {
+        binding.rvOffer.apply {
             layoutManager = LinearLayoutManager(requireContext(),
                 RecyclerView.VERTICAL, false)
 
-            adapter = UserDetailAdapter()
+            if(it.offerPostedList.isEmpty())
+                binding.textNoOffersPosted.visibility = View.VISIBLE
+            adapter = UserOfferAdapter(it.offerPostedList)
         }
 
 

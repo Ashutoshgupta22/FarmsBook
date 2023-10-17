@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.FragmentCropListingDetailBinding
 
-class CropListingDetail: Fragment() {
+class ListedCropDetail: Fragment() {
 
     lateinit var binding: FragmentCropListingDetailBinding
 

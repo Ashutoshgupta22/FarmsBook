@@ -54,6 +54,7 @@ class ListedCropViewModel: ViewModel() {
                     val receiveOfferStatus = cropObj.optBoolean("receive_offer_status", false)
                     val listedStatus = cropObj.optBoolean("listed_status", false)
                     val imageUrl0 = cropObj.optString("imageUrl0", null)
+                    val userName = cropObj.optString("userName")
                     val userImage = cropObj.optString("userImage",
                         "https://displaypic.s3.ap-south-1.amazonaws.com/noimage.png")
                     val companyName = cropObj.optString("companyName")
@@ -76,6 +77,7 @@ class ListedCropViewModel: ViewModel() {
                         listId, parentId, cropName, variety, typeOfSale, rate, minPrice, maxPrice,
                         quantity, quantityUnit, location, transportation, typeOfFarming, timeOfSowing,
                         timestamp, receiveBuyerId, receiveOfferStatus, listedStatus, imageUrl0,
+                        userName,
                         userImage,companyName, imageUrls, images, user, listedOfferList
                     )
 

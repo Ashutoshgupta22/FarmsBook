@@ -40,7 +40,7 @@
         android:label="" />
     <fragment
         android:id="@+id/cropListingDetail"
-        android:name="com.farmsbook.farmsbook.admin.ui.cropslistings.CropListingDetail"
+        android:name="com.farmsbook.farmsbook.admin.ui.cropslistings.ListedCropDetail"
         android:label="" />
 
     <dialog android:id="@+id/admin_logout"

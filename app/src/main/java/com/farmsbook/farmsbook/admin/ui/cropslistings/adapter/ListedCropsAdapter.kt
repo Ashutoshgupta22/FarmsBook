@@ -69,7 +69,7 @@ class ListedCropsAdapter(
 //            holder.tvStatus.setTextColor(Color.RED)
 //        }
 
-        holder.tvSellerName.text = listedCropsList[position].user.toString()
+        holder.tvSellerName.text = listedCropsList[position].userName
         holder.tvGroupName.text = listedCropsList[position].companyName
 
         holder.cvItem.setOnClickListener { onItemClick(position) }
