@@ -10,7 +10,8 @@ import com.farmsbook.farmsbook.databinding.ItemAdminRequirementsBinding
 import com.farmsbook.farmsbook.utility.TimeFormatter
 
 class AdminOffersAdapter(
-    private val offerList: ArrayList<AdminOfferData>
+    private val offerList: ArrayList<AdminOfferData>,
+    val onItemClick: (Int) -> Unit
 ): RecyclerView.Adapter<AdminOffersAdapter.ViewHolder>() {
 
     lateinit var context: Context
@@ -63,7 +64,7 @@ class AdminOffersAdapter(
 
         holder.tvDate.text = currentItem.timestamp?.let { TimeFormatter().getFullDate(it) }
 
-        // holder.cvItem.setOnClickListener { onItemClick(position) }
+         holder.cvItem.setOnClickListener { onItemClick(currentItem.offerId) }
 
     }
 

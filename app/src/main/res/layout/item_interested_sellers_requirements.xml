@@ -28,6 +28,7 @@
             android:text="Akash Sharma"
             android:textColor="@color/black"
             android:layout_marginStart="16dp"
+            android:layout_toStartOf="@id/btn_call"
             android:layout_alignTop="@id/iv_user"
             android:layout_toEndOf="@id/iv_user"/>
 
@@ -40,6 +41,7 @@
             android:textColor="@color/black"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_toStartOf="@id/btn_call"
             android:layout_below="@id/tv_user_name"
             android:layout_toEndOf="@id/iv_user"/>
 

@@ -69,7 +69,7 @@ class AdminRequirementAdapter(
 
             holder.btnCall.setOnClickListener { currentItem.phone?.let { it1 -> onCallClick(it1) } }
 
-    // holder.cvItem.setOnClickListener { onItemClick() }
+        holder.cvItem.setOnClickListener { onItemClick(currentItem.id) }
 
     }
 

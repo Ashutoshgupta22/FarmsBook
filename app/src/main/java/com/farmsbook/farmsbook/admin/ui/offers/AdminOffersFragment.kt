@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.FragmentAdminOffersBinding
 
 class AdminOffersFragment: Fragment() {
@@ -30,6 +32,7 @@ class AdminOffersFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
         viewModel.getAllOffers(requireContext())
 
         viewModel.offers.observe(viewLifecycleOwner) {
@@ -39,7 +42,12 @@ class AdminOffersFragment: Fragment() {
                     layoutManager = LinearLayoutManager(requireContext(),
                         LinearLayoutManager.VERTICAL, false)
 
-                    adapter = AdminOffersAdapter(it)
+                    adapter = AdminOffersAdapter(it) {
+                        id->
+                        navController.navigate(R.id.adminOfferDetailFragment)
+
+
+                    }
                 }
             }
         }

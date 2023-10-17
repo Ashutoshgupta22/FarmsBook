@@ -7,9 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.buyer.ui.requirements.RequirementsViewModel
 import com.farmsbook.farmsbook.databinding.FragmentAdminRequirementsBinding
 
@@ -34,6 +37,8 @@ class AdminRequirementsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
+
         viewModel.getAllRequirements(requireContext())
 
         viewModel.requirements.observe(viewLifecycleOwner) {
@@ -53,7 +58,10 @@ class AdminRequirementsFragment: Fragment() {
                         }
 
                     }){
-                        itemPos ->
+                        id ->
+
+                        val bundle = bundleOf("id" to id)
+                        navController.navigate(R.id.adminRequirementDetailFragment, bundle)
                     }
                 }
             }

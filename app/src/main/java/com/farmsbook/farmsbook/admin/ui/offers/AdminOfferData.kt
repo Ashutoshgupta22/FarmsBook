@@ -2,7 +2,7 @@ package com.farmsbook.farmsbook.admin.ui.offers
 
 data class AdminOfferData(
 
-    val offerId: Int? = null,
+    val offerId: Int = 0,
     val offerById: Int? = null,
     val offerCropName: String? = null,
     val offerToCropId: Int? = null,

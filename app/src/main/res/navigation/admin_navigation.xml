@@ -46,4 +46,12 @@
     <dialog android:id="@+id/admin_logout"
         android:name="com.farmsbook.farmsbook.admin.ui.AdminLogoutDialogFragment"
         android:label=""/>
+    <fragment
+        android:id="@+id/adminOfferDetailFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.offers.AdminOfferDetailFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/adminRequirementDetailFragment"
+        android:name="com.farmsbook.farmsbook.admin.ui.requirements.AdminRequirementDetailFragment"
+        android:label="" />
 </navigation>

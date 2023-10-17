@@ -1,7 +1,7 @@
 package com.farmsbook.farmsbook.admin.ui.requirements
 
 data class RequirementData(
-    val id: Int? = null,
+    val id: Int = 0,
     val cropName: String? = null,
     val variety: String? = null,
     val typeOfBuy: Boolean? = null,
