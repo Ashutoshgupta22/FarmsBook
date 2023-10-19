@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.R
 import com.farmsbook.farmsbook.databinding.FragmentCropListingDetailBinding
 
-class ListedCropDetail: Fragment() {
+class ListedCropDetailFragment : Fragment() {
 
     lateinit var binding: FragmentCropListingDetailBinding
 
@@ -19,8 +19,10 @@ class ListedCropDetail: Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentCropListingDetailBinding.inflate(layoutInflater,
-            container, false)
+        binding = FragmentCropListingDetailBinding.inflate(
+            layoutInflater,
+            container, false
+        )
 
         return binding.root
     }
