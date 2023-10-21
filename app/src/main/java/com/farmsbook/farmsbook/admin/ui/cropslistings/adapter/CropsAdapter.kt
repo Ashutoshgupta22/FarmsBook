@@ -13,7 +13,7 @@ import com.farmsbook.farmsbook.databinding.ItemCropsBinding
 class CropsAdapter(
     val cropList: ArrayList<CropData>,
     val onEditClick: (Int, String) -> Unit,
-    val onDeleteClick: (Int) -> Unit
+    val onDeleteClick: (Int, Int, Int) -> Unit
 ): RecyclerView.Adapter<CropsAdapter.ViewHolder>() {
 
     lateinit var context: Context
@@ -47,11 +47,11 @@ class CropsAdapter(
         holder.tvCropName.text = cropList[position].cropName
 
         holder.btnEdit.visibility = View.INVISIBLE
-        holder.btnDelete.visibility = View.INVISIBLE
 
 //        holder.btnEdit.setOnClickListener { onEditClick(position,
 //            cropList[position].cropName!!) }
-//        holder.btnDelete.setOnClickListener { onDeleteClick(position) }
+        holder.btnDelete.setOnClickListener { onDeleteClick(position, cropList[position].id,
+            cropList[position].parentId) }
 
     }
 

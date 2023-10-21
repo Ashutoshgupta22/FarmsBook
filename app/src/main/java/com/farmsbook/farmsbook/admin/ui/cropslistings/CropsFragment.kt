@@ -82,7 +82,7 @@ class CropsFragment: Fragment() {
                     editCropDialog(this.adapter, editPos, cropName)
                    // layoutParams.height = 3000
 
-                }) { deletePos -> deleteCropDialog(this.adapter, deletePos) }
+                }) { pos, cropId, parentId -> deleteCropDialog(this.adapter, pos, cropId, parentId) }
             }
         }
 
@@ -96,7 +96,7 @@ class CropsFragment: Fragment() {
                 adapter = CropsAdapter(it!!, { editPos, cropName ->
                     editCropDialog(this.adapter, editPos, cropName)
 
-                }) { deletePos -> deleteCropDialog(this.adapter, deletePos) }
+                }) { pos, cropId, parentId -> deleteCropDialog(this.adapter, pos, cropId, parentId) }
             }
 
         }
@@ -215,8 +215,12 @@ class CropsFragment: Fragment() {
 
     }
 
-    private fun deleteCropDialog(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?,
-                                 deletePos: Int) {
+    private fun deleteCropDialog(
+        adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?,
+        deletePos: Int,
+        cropId: Int,
+        parentId: Int
+    ) {
 
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Delete Crop")
@@ -225,6 +229,7 @@ class CropsFragment: Fragment() {
                     "Do you still want to continue?")
             .setPositiveButton("Delete") {
                     _,_ ->
+                viewModel.deleteCrop(requireContext(), cropId, parentId)
                 adapter?.notifyItemRemoved(deletePos)
             }
             .setNegativeButton("Cancel") { _,_ ->

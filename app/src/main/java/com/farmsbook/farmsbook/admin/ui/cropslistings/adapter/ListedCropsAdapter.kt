@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farmsbook.farmsbook.databinding.ItemListedCropsBinding
+import com.farmsbook.farmsbook.utility.TimeFormatter
 
 class ListedCropsAdapter(
     private val listedCropsList: ArrayList<ListedCropData>,
@@ -57,6 +58,9 @@ class ListedCropsAdapter(
         holder.tvCropRate.text = rate
         holder.tvCropQuantity.text =
             "${listedCropsList[position].quantity.toString()} ${listedCropsList[position].quantityUnit}"
+        holder.tvDate.text = listedCropsList[position].timestamp?.let {
+            TimeFormatter().getFullDate(it)
+        }
 
         holder.tvStatus.visibility = View.GONE
 

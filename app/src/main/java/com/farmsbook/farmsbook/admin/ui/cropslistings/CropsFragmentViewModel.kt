@@ -158,4 +158,21 @@ class CropsFragmentViewModel: ViewModel() {
 //        }
 //        queue.add(request)
     }
+
+    fun deleteCrop(context: Context, cropId: Int, parentId: Int) {
+
+        val queue = Volley.newRequestQueue(context)
+        val url = "$baseUrl/admin/$parentId/currentCrop/$cropId/delete"
+
+        val request = JsonObjectRequest(
+            Request.Method.DELETE,
+            url, null, { response: JSONObject ->
+
+                Log.i("CropsFragmentViewModel", "deleteCrop: SUCCESS")
+
+            } ) {error: VolleyError ->
+            Log.e("CropsFragmentViewModel", "deleteCrop: FAILED",error )
+        }
+        queue.add(request)
+    }
 }

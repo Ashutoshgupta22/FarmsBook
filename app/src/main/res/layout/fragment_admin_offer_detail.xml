@@ -207,53 +207,53 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"/>
 
-        <TextView
-            android:id="@+id/tv_variety"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="BS-10"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_crop_name"
-            app:layout_constraintStart_toStartOf="@id/tv_crop_name"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_variety"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="BS-10"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_crop_name"-->
+<!--            app:layout_constraintStart_toStartOf="@id/tv_crop_name"/>-->
 
-        <TextView
-            android:id="@+id/text_variety"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/variety"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toTopOf="@id/tv_variety"
-            app:layout_constraintBottom_toBottomOf="@id/tv_variety"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/text_variety"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/variety"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_variety"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/tv_variety"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <TextView
-            android:id="@+id/tv_type_of_sale"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Commission"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_variety"
-            app:layout_constraintStart_toStartOf="@id/tv_variety"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_type_of_sale"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Commission"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_variety"-->
+<!--            app:layout_constraintStart_toStartOf="@id/tv_variety"/>-->
 
-        <TextView
-            android:id="@+id/text_type_of_sale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/type_of_sale"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toTopOf="@id/tv_type_of_sale"
-            app:layout_constraintBottom_toBottomOf="@id/tv_type_of_sale"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/text_type_of_sale"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/type_of_sale"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_type_of_sale"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/tv_type_of_sale"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
         <TextView
             android:id="@+id/tv_rate"
@@ -264,8 +264,8 @@
             android:textColor="@color/black"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_type_of_sale"
-            app:layout_constraintStart_toStartOf="@id/tv_type_of_sale"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_crop_name"
+            app:layout_constraintStart_toStartOf="@id/tv_crop_name"/>
 
         <TextView
             android:id="@+id/text_rate"

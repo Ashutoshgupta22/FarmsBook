@@ -63,8 +63,6 @@ class AdminOfferDetailFragment: Fragment() {
         binding.tvSellerLocation.text = ""
         binding.tvSellerPhone.text = it.phone2
         binding.tvCropName.text = it.offerCropName
-        binding.tvVariety.text = ""
-        binding.tvTypeOfSale.text = ""
         binding.tvRate.text = it.rateOfCommission.toString()
         binding.tvPriceRange.text = "${it.minPrice}-${it.maxPrice}/kg"
         binding.tvQuantity.text = "${it.offeringQuantity} ${it.offeringQuantityUnit}"
