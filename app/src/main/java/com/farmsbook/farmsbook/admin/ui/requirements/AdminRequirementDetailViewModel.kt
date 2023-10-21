@@ -55,6 +55,7 @@ class AdminRequirementDetailViewModel: ViewModel() {
                         cropName = response.optString("crop_name"),
                         variety = response.optString("variety"),
                         typeOfBuy = response.optBoolean("type_of_buy"),
+                        rate = response.optInt("rate"),
                         minRange = response.optInt("min_range"),
                         maxRange = response.optInt("max_range"),
                         quantity = response.optInt("quantity"),

@@ -5,6 +5,7 @@ data class RequirementData(
     val cropName: String? = null,
     val variety: String? = null,
     val typeOfBuy: Boolean? = null,
+    val rate: Int = 0,
     val minRange: Int? = null,
     val maxRange: Int? = null,
     val quantity: Int? = null,
