@@ -1,12 +1,9 @@
 package com.farmsbook.farmsbook.admin.ui.cropslistings
 
-import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.os.Handler
-import android.provider.MediaStore
 import android.util.Log
-import androidx.core.net.toFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,13 +21,12 @@ import java.io.FileOutputStream
 
 class CropsFragmentViewModel: ViewModel() {
 
-    //do not make it private
-    var _cropAdded = MutableLiveData<Boolean>()
-    val cropAdded: LiveData<Boolean> = _cropAdded
-    private var _myCrops = MutableLiveData<ArrayList<CropData>>()
-    val myCrops: LiveData<ArrayList<CropData>> = _myCrops
+    private var _cropAdded = MutableLiveData<Int>()
+    val cropAdded: LiveData<Int> = _cropAdded
     private var _allCrops = MutableLiveData<ArrayList<CropData>>()
     val allCrops: LiveData<ArrayList<CropData>> = _allCrops
+    private var _cropDeleted = MutableLiveData<Boolean>()
+    val cropDeleted : LiveData<Boolean> = _cropDeleted
 
     private val baseUrl = BaseAddressUrl().baseAddressUrl
 
@@ -48,7 +44,8 @@ class CropsFragmentViewModel: ViewModel() {
                 Request.Method.POST,
                 url, cropObj, { response: JSONObject ->
 
-                    _cropAdded.postValue(true)
+                    Log.i("CropsFragmentViewModel", "addCrop: $response")
+                    _cropAdded.postValue(response.optInt("cropId"))
 
                 } ) {error: VolleyError ->
                 Log.e("CropsFragmentViewModel", "addCrop: FAILED",error )
@@ -56,36 +53,36 @@ class CropsFragmentViewModel: ViewModel() {
         queue.add(request)
     }
 
-    fun getMyCrops(context: Context, adminId: Int) {
-
-        val queue = Volley.newRequestQueue(context)
-        val url = "$baseUrl/admin/$adminId/adminCropList"
-
-        val request = JsonArrayRequest(
-            Request.Method.GET,
-            url, null, { response: JSONArray ->
-
-                val cropList = arrayListOf<CropData>()
-
-                for (i in 0 until response.length()) {
-
-                    val cropObj = response.getJSONObject(i)
-                    val id = cropObj.getInt("cropId")
-                    val parentId = cropObj.getInt("parentId")
-                    val name = cropObj.getString("cropName")
-                    val status = cropObj.getString("status")
-                    val imagePath = cropObj.getString("imagePath")
-
-                    cropList.add( CropData(id, parentId, name, status, imagePath))
-                }
-
-                _myCrops.postValue(cropList)
-
-            } ) {error: VolleyError ->
-            Log.e("CropsFragmentViewModel", "getMyCrops: FAILED",error )
-        }
-        queue.add(request)
-    }
+//    fun getMyCrops(context: Context, adminId: Int) {
+//
+//        val queue = Volley.newRequestQueue(context)
+//        val url = "$baseUrl/admin/$adminId/adminCropList"
+//
+//        val request = JsonArrayRequest(
+//            Request.Method.GET,
+//            url, null, { response: JSONArray ->
+//
+//                val cropList = arrayListOf<CropData>()
+//
+//                for (i in 0 until response.length()) {
+//
+//                    val cropObj = response.getJSONObject(i)
+//                    val id = cropObj.getInt("cropId")
+//                    val parentId = cropObj.getInt("parentId")
+//                    val name = cropObj.getString("cropName")
+//                    val status = cropObj.getString("status")
+//                    val imagePath = cropObj.getString("imagePath")
+//
+//                    cropList.add( CropData(id, parentId, name, status, imagePath))
+//                }
+//
+//                _myCrops.postValue(cropList)
+//
+//            } ) {error: VolleyError ->
+//            Log.e("CropsFragmentViewModel", "getMyCrops: FAILED",error )
+//        }
+//        queue.add(request)
+//    }
 
     fun getAllCrops(context: Context?) {
 
@@ -119,12 +116,12 @@ class CropsFragmentViewModel: ViewModel() {
 
     }
 
-    fun addCropImage(context: Context, adminId: Int, imageUri: Uri) {
+    fun addCropImage(context: Context, adminId: Int, imageUri: Uri, id: Int) {
 
-        val lastCrop = _myCrops.value?.last()
+       // val lastCrop = _myCrops.value?.last()
 
         Log.i("CropsFragmentViewModel", "addCropImage: " +
-                "addImage id: ${lastCrop?.id}")
+                "addImage id: $id")
 
        val inputStream = context.contentResolver.openInputStream(imageUri)
         val tempFile = File.createTempFile("imageFile",
@@ -139,13 +136,13 @@ class CropsFragmentViewModel: ViewModel() {
         }
 
       //  val queue = Volley.newRequestQueue(context)
-        val url = "$baseUrl/admin/$adminId/crop/${lastCrop?.id}/image"
+        val url = "$baseUrl/admin/$adminId/crop/${id}/image"
 
         UploadManager(context).uploadFormData(url, tempFile)
 
         Handler().postDelayed({
             getAllCrops(context)
-            getMyCrops(context, adminId)
+            //getMyCrops(context, adminId)
         }, 1200)
 
 //        val request = JsonObjectRequest(
@@ -169,10 +166,17 @@ class CropsFragmentViewModel: ViewModel() {
             url, null, { response: JSONObject ->
 
                 Log.i("CropsFragmentViewModel", "deleteCrop: SUCCESS")
+                _cropDeleted.postValue(true)
 
             } ) {error: VolleyError ->
             Log.e("CropsFragmentViewModel", "deleteCrop: FAILED",error )
         }
         queue.add(request)
     }
+
+    fun resetCropAdded() {
+
+        _cropAdded.postValue(-1)
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.farmsbook.farmsbook.admin.ui.cropslistings.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +25,6 @@ class CropsAdapter(
         val tvCropName = binding.tvCropName
         val btnEdit = binding.btnEdit
         val btnDelete = binding.btnDelete
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,12 +49,16 @@ class CropsAdapter(
 
 //        holder.btnEdit.setOnClickListener { onEditClick(position,
 //            cropList[position].cropName!!) }
-        holder.btnDelete.setOnClickListener { onDeleteClick(position, cropList[position].id,
-            cropList[position].parentId) }
+        holder.btnDelete.setOnClickListener {
+
+            onDeleteClick(holder.layoutPosition, cropList[holder.layoutPosition].id,
+            cropList[holder.layoutPosition].parentId)
+        }
 
     }
 
     override fun getItemCount(): Int {
         return cropList.size
     }
+
 }
