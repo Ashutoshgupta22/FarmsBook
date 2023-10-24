@@ -1,6 +1,7 @@
 package com.farmsbook.farmsbook.buyer.ui.profile.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,7 @@ class ManageCropAdapter (
 
         val currentItem =plantList[position]
 
+        Log.i("ManageCropAdapter", "onBindViewHolder: image-${currentItem.imageUrl}")
         if (currentItem.imageUrl != null)
             Glide.with(context).load(currentItem.imageUrl).into(holder.cropImage)
         else

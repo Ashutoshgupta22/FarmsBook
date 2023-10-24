@@ -103,7 +103,7 @@ class SellerAddCropsActivity : AppCompatActivity() {
                     val crop = ManageCropData()
                     crop.cropName = cropObject.getString("cropName")
                     crop.id = cropObject.getInt("cropId")
-                    crop.imageUrl = cropObject.getString("img")
+                    crop.imageUrl = cropObject.getString("imagePath")
                     //crop.image = cropImages[crop.id - 1]
 
                     cropList.add(crop)
