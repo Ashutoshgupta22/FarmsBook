@@ -234,6 +234,39 @@
     <string name="crops_listed">फसलें सूचीबद्ध</string>
     <string name="offers_posted">प्रस्ताव पोस्ट किए गए</string>
     <string name="admin">एडमिन</string>
+    <string name="company_name">कंपनी का नाम</string>
+    <string name="company_turnover">कंपनी की मान्यता</string>
+    <string name="crops_deal_in">व्यापार में शामिल किए गए फसलें</string>
+    <string name="registered">रजिस्टर्ड</string>
+    <string name="crop_listing">फसल सूची</string>
+    <string name="listed_crops">सूचीबद्ध फसलें</string>
+    <string name="grains">अनाज</string>
+    <string name="fruits">फल</string>
+    <string name="add_crop">फसल जोड़ें</string>
+    <string name="listed_by">सूचीबद्ध करने वाला</string>
+    <string name="crop_posted_by">फसल पोस्ट करने वाला</string>
+    <string name="details">विवरण</string>
+    <string name="commission">कमीशन</string>
+    <string name="type_of_sale">विपणि प्रकार</string>
+    <string name="farming_type">खेती के प्रकार</string>
+    <string name="sowing_month">बोने जाने वाले महीने</string>
+    <string name="choose_image">छवि चुनें</string>
+    <string name="group_name">समूह का नाम</string>
+    <string name="group_turnover">समूह की मान्यता</string>
+    <string name="admin_username">व्यवस्थापक उपयोगकर्ता नाम</string>
+    <string name="password">पासवर्ड</string>
+    <string name="login">लॉगिन</string>
+    <string name="otp">ओटीपी</string>
+    <string name="posted_by">द्वारा पोस्ट किया गया</string>
+    <string name="crop_requirement_posted_by">फसल आवश्यकता द्वारा पोस्ट किया गया</string>
+    <string name="interested_sellers">रुचाने वाले विक्रेता</string>
+    <string name="active">सक्रिय</string>
+    <string name="inactive">निष्क्रिय</string>
+    <string name="other_crops">अन्य फसलें</string>
+    <string name="seller">विक्रेता</string>
+    <string name="other_offers">अन्य प्रस्ताव</string>
+    <string name="offer_posted_by">प्रस्ताव द्वारा पोस्ट किया गया</string>
+
 
     <string-array name="States">
         <item>अंडमान और निकोबार द्वीपसमूह</item>
