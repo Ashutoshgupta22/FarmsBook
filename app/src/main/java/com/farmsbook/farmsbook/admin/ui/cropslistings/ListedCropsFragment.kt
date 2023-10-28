@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -45,9 +46,11 @@ class ListedCropsFragment: Fragment() {
                     layoutManager = LinearLayoutManager(requireContext(),
                         RecyclerView.VERTICAL, false)
 
-                    adapter = ListedCropsAdapter(it) {
+                    adapter = ListedCropsAdapter(it) {cropId ->
                         val navController = findNavController()
-                        navController.navigate(R.id.cropListingDetail)
+
+                        val id = bundleOf("id" to cropId)
+                        navController.navigate(R.id.cropListingDetail, id)
 
                     }
                 }

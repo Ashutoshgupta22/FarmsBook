@@ -22,6 +22,7 @@ data class ListedCropData(
     var imageUrl0: String?,
     var userName: String?,
     var userImage: String?,
+    var phoneNum: String = "",
     var companyName: String?,
     var imageUrls: List<String>?,
     var images: List<String>?,

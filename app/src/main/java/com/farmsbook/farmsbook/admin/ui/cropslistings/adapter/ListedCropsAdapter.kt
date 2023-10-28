@@ -76,7 +76,7 @@ class ListedCropsAdapter(
         holder.tvSellerName.text = listedCropsList[position].userName
         holder.tvGroupName.text = listedCropsList[position].companyName
 
-        holder.cvItem.setOnClickListener { onItemClick(position) }
+        holder.cvItem.setOnClickListener { onItemClick(listedCropsList[position].listId ?: -1) }
 
     }
 

@@ -54,7 +54,7 @@ class AdminRequirementDetailFragment: Fragment() {
         binding.tvBuyerLocation.text = it.location
         binding.tvCropName.text = it.cropName
         binding.tvVariety.text = it.variety
-        binding.tvTypeOfSale.text = it.typeOfBuy.toString()
+        binding.tvTypeOfSale.text = if(it.typeOfBuy == true) "Commission" else "Fixed"
         binding.tvRate.text = it.rate.toString()
         binding.tvPriceRange.text = "${it.minRange}-${it.maxRange}/kg"
         binding.tvQuantity.text = "${it.quantity} ${it.quantityUnit}"
