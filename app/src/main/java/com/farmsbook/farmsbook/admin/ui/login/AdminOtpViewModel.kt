@@ -40,7 +40,7 @@ class AdminOtpViewModel: ViewModel() {
 
                 val isValid = response.getBoolean("valid")
 
-                if (true) {
+                if (isValid) {
                     _valid.postValue(true)
                 }
                 else _error.postValue("Invalid OTP")
