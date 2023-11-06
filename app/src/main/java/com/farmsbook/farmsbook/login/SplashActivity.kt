@@ -5,8 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.farmsbook.farmsbook.admin.AdminMainActivity
 import com.farmsbook.farmsbook.buyer.MainActivity
 import com.farmsbook.farmsbook.databinding.ActivitySplashBinding
@@ -24,36 +26,39 @@ class SplashActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
 
-        val sharedPreference =  getSharedPreferences("pref", Context.MODE_PRIVATE)
-       val userId =  sharedPreference.getInt("USER_ID",0)
-        val userROLE = sharedPreference.getBoolean("USER_ROLE",false)
+        val storedLocale = AppCompatDelegate.getApplicationLocales()
+        if (storedLocale.isEmpty) {
+            Log.i("SplashActivity", "onCreate: storedLocale-$storedLocale")
+            val appLocale = LocaleListCompat.forLanguageTags("hi")
+            AppCompatDelegate.setApplicationLocales(appLocale)
+        }
 
-        if(userId != 0)
-        {
-            if(userROLE){
+
+        val sharedPreference = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userId = sharedPreference.getInt("USER_ID", 0)
+        val userROLE = sharedPreference.getBoolean("USER_ROLE", false)
+
+        if (userId != 0) {
+            if (userROLE) {
                 Handler().postDelayed({
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
-                },1500)
-            }
-            else{
+                }, 1500)
+            } else {
                 Handler().postDelayed({
                     startActivity(Intent(this, SellerMainActivity::class.java))
                     finish()
-                },1500)
+                }, 1500)
             }
 
-        }
-        else
-        {
+        } else {
             val preferences = getSharedPreferences(packageName, MODE_PRIVATE)
             val adminPhone = preferences.getString("adminPhone", "")
 
             if (adminPhone?.isNotBlank() == true) {
-                startActivity( Intent(this, AdminMainActivity::class.java))
+                startActivity(Intent(this, AdminMainActivity::class.java))
                 finish()
-            }
-            else {
+            } else {
                 Handler().postDelayed({
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
